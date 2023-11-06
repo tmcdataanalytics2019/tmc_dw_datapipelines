@@ -1714,7 +1714,7 @@
       <column comment="" key="false" length="-1" name="is_anonymous" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_similar_name_patient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
     <metadata connector="FLOW" label="StoreCounter" name="StoreCounter">
       <column comment="" key="true" length="-1" name="patient_oid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1776,7 +1776,7 @@
         <mapperTableEntries expression="out7.isanonymous" name="is_anonymous" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out7.issimilarnamepatient" name="is_similar_name_patient" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="StringHandling.UPCASE(out7.notes) " name="notes" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out7.ispatientmerged == null ? true : false" name="is_patient_merged" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out7.ispatientmerged == null ? 0 : 1" name="is_patient_merged" nullable="true" type="id_Integer"/>
       </outputTables>
       <outputTables name="StoreCounter" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(out7.transaction_external_id) " name="patient_oid" nullable="true" type="id_String"/>
@@ -2057,7 +2057,7 @@
       <column comment="" key="false" length="-1" name="is_anonymous" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_similar_name_patient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlOutputBulkExec" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="608">
@@ -2134,7 +2134,7 @@
       <column comment="" key="false" length="-1" name="is_anonymous" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_similar_name_patient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tWarn" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="32">
@@ -2604,13 +2604,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_b70f4b0c-5efb-4778-abd1-3f35c877440b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>WZhhwwPwxxkLCGN0Cb0/B1qN9yTkKbAC1jYRMVkKr03S9CfxcsLopOY9iCHnodiT2pie5/ZuX/Vx&#13;
-6oeRZfiT0w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f44de895-7ef3-4b4e-ab83-ce210f5f9fc1"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>DH+IQe4IXGMhrtPtn/dGDtcRcB5446WLLE4DmGdidsMZLzfngqnU+JAdITMJWSiRajgDzr3ZOgpn&#13;
-qn6l/8fvKw==</DigestValue></Reference></SignedInfo><SignatureValue>W9bglgrKEaez5lbBT1/2lGyJKwPfzgYSifTJezYwmc28Gzs9V8t9mhT3qQrHBvG0FhY8yzT0UUUQ&#13;
-MNTE0KbI0TqHR+ABU8IIlOQ2K+3/GjCQQ4Lrfvzd2QeNoKrQJRuESurHQLROLNcYwn9mCv/o1Ncp&#13;
-73Ln4BoeTt/TkNBwvN6nBgDeQVlR3ztUXQnMJO9uCeJ+Ak12rmOcj8R6P7T9M4l09i39Hiw2SyNe&#13;
-VZb4+7ozxAd8WU4RXsltxiS1HsCb64qoIqVnskCEApTBdgmrYdD8XUdftOBZ3/sO6quh2N+3sfx2&#13;
-vZ3CelRjTbS+TaGhNwVhcUEu+aivgRq/8m7DVA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a12c3372-1729-49cb-813b-cb1f9dd1c2e1"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2vxpGgvNfYJlSY8S5eeYjKr0T2DOOuyuMR4Vb4aOfFyndNcwaTQJgq+hYe+hOTTMm9cpB5zyOsa3&#13;
+LtUfAAmNaQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_97815eda-ba61-4651-a8ad-0697cc8bf096"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>MDT0iazmD3dIrU4rrurJyUbIv/N6SoMfOy6kGse3ZF29moMMwJHU1uDmUOSdd2JcjPobGqG8XS5B&#13;
+vAI7qsjtag==</DigestValue></Reference></SignedInfo><SignatureValue>i15bn76xfnWb+gqcNoXewgJOfHMY4xYsqOrC3beSL/vPDPOSdeX7bq67boA5dvvcNtfiDez7dV0I&#13;
+SkCV0z10MXxBFcO5oJ3KKX4ZyGANlnQ0sQomT86Yvo1V5s3Z333CFNRwJIi9Wa0d9PPdOWAI/vyg&#13;
+kJ2E+Ug06Vz9v9kt8l8FjmlPwvOMRb8hgHPybNOkKHKSlkD+cmdYgNAEKEnETBrgYJwid1E1zTV0&#13;
+fnnVdzxLfDlSpHOEjJk5h574fal7THczFoDtrCHHLNQ+Z5/Z8Q9SNvGeyR+NMk2szUoA7jfk7PX1&#13;
+SRDLqQoz1KGJSRsVblcpVkykm2XoNSTVdJYk+Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2632,4 +2632,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f44de895-7ef3-4b4e-ab83-ce210f5f9fc1" Target="#_b70f4b0c-5efb-4778-abd1-3f35c877440b"><Timestamp>2023-11-06 07:49:46</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_97815eda-ba61-4651-a8ad-0697cc8bf096" Target="#_a12c3372-1729-49cb-813b-cb1f9dd1c2e1"><Timestamp>2023-11-06 07:56:13</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
