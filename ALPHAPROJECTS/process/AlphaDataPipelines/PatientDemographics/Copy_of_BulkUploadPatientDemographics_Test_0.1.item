@@ -1714,6 +1714,7 @@
       <column comment="" key="false" length="-1" name="is_anonymous" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_similar_name_patient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
     <metadata connector="FLOW" label="StoreCounter" name="StoreCounter">
       <column comment="" key="true" length="-1" name="patient_oid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1774,7 +1775,8 @@
         <mapperTableEntries expression="StringHandling.UPCASE(out7.blacklistreason)" name="blacklist_reason" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out7.isanonymous" name="is_anonymous" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out7.issimilarnamepatient" name="is_similar_name_patient" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(StringHandling.UPCASE(StringHandling.EREPLACE(out7.notes,&quot;]&quot;,&quot; &quot;)) ) " name="notes" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(StringHandling.UPCASE(StringHandling.EREPLACE(out7.notes,&quot;]&quot;,&quot; &quot;))) " name="notes" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.ispatientmerged.equalsIgnoreCase(&quot;TRUE&quot;)?1:0 " name="is_patient_merged" nullable="true" type="id_Integer"/>
       </outputTables>
       <outputTables name="StoreCounter" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(out7.transaction_external_id) " name="patient_oid" nullable="true" type="id_String"/>
@@ -2035,7 +2037,10 @@
       <column comment="" key="false" length="0" name="religion_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="race_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="registration_date_time" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_blacklisted" nullable="true" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_vip" nullable="true" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="email" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_employee" nullable="true" originalLength="-1" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="createdby" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="modified_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
@@ -2052,6 +2057,7 @@
       <column comment="" key="false" length="-1" name="is_anonymous" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_similar_name_patient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tWarn" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="32">
@@ -2328,9 +2334,9 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;TMC_DW_DB_UAT&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:jm2JE5Tjm5K5PTmbC9G++9Jjw5IeFoyQI06Gut0HJw68mIrk60+/pWU="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;uat_ort_aa_patients_v2&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;uat_ort_aa_patients&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;\\10.10.103.86\C:\Users\jsjavier\Desktop\New folder\talendout2.csv&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;C:\Users\jsjavier\Desktop\New folder\bulkpatientupload.txt&quot;"/>
     <elementParameter field="CHECK" name="APPEND" value="false"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
@@ -2347,7 +2353,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBOutputBulkExec_1">
       <column comment="" key="false" length="-1" name="mpi_pin" nullable="false" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patient_pin" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="0" name="patient_pin" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="hospital_origin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="first_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="middle_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -2369,7 +2375,10 @@
       <column comment="" key="false" length="0" name="religion_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="race_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="registration_date_time" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_blacklisted" nullable="true" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_vip" nullable="true" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="email" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_employee" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="createdby" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="modified_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
@@ -2386,6 +2395,7 @@
       <column comment="" key="false" length="-1" name="is_anonymous" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_similar_name_patient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_patient_merged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="getMongoDBdata" lineStyle="0" metaname="tMongoDBInput_9" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_9" target="tMap_1">
@@ -2518,6 +2528,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="resident_status_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="is_patient_merged"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="outputFormatting"/>
@@ -2601,13 +2614,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_49fc39db-3cbe-4e60-98fd-5c73c01d3120"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>8lA0/PAjlQcMInvt/IDrMT6kv+bQU+M5ebIFPW3LNmhxZm/MpqZiFSwabsYGEkdUG6Mvuvl63tSd&#13;
-UpAHQ2o5bQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_dc110336-3b4e-407f-9997-a4a519ccc340"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>W52Lb44GfjjNDbujcsQrBszQW2vmT1D9ak+yuY6j3dgv0TeXcEVt3wmfrH5pV1Y0VIFx2GMcKCnA&#13;
-k7OKJB5Hnw==</DigestValue></Reference></SignedInfo><SignatureValue>ShXlMvnWgywsBAiFAUtXKl+rTmNEbcT+brcOrf2YVa+ouPcIem5ZU52SepgqlBY0669/rbMtoDOz&#13;
-sHXNtHxpMPwyT+QyxUyPbTl3RF+tKKeUI5I9UiqQSlhiCosH6Jw6vpT2l212uEXa3TDR5T6FFgJi&#13;
-RQCplvi/WJuNfqWfa0YJ6asBigxkt9rMFCVXYVawyJylIUgx/eOuffI/tfyPHV7xtGth//P0oV4b&#13;
-/Df9xXd0iSUfPz0pzyLTngh0FfaNQENPqu/bUrHRufnh+SntoqNDS58uUu/tqTLIhu/jVls3EsD6&#13;
-qjFl/cOQLCO2HcW3raWY67z7FeJa2O95MYb3yQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c7df91c5-eceb-460c-a3e9-397326efce0b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>VFYZ4jU17jU+uH87HejGt3X/q7uy00/DKKm5rRh64rZ+0nfjp0kvJFSSlcT877D9RGQH+cmccNx8&#13;
+uOm4TEYIDg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3579ad11-b6ff-42ee-a288-8302e9513222"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Bv23KKKadPOpz+9R1+hX+WUoy7IDoINv+Xc2dK1MWQv3W8hDe6HX1GCWU4YfwjS093AoAAh5X2so&#13;
+7ruIebNM4Q==</DigestValue></Reference></SignedInfo><SignatureValue>SUq7BFJikWeZyAsLsz3ZHQdvyItMwFQYXdcdZtHBEBeKSLjwZx6RFLSn0J457AHSL67C56x4j3f9&#13;
+9qBWi71MEtkbvA/Gp+gdoP+RUUzQDUHGCWsqRt90H+JOTkL46K0b9ja3MY6rIk53afQ4HNVafszF&#13;
+ICxl50lYe4xRh+hYQv17A3GDzNVKQsGl1gTHkrffrV+VhOX9q46pAgtxeGK6invkQbgVY8+aoteb&#13;
+vukM8fY18MHvIEDTmkY6IynoDcpMUGKl237iflD3D4B9lZNua2fa+I1jTNsgZ3DzYjRjJVeN8UIA&#13;
+ePBUAlSytKcMieQV96bW5R6LVgwGjRKmeRpzvQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2629,4 +2642,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_dc110336-3b4e-407f-9997-a4a519ccc340" Target="#_49fc39db-3cbe-4e60-98fd-5c73c01d3120"><Timestamp>2023-11-07 03:07:56</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3579ad11-b6ff-42ee-a288-8302e9513222" Target="#_c7df91c5-eceb-460c-a3e9-397326efce0b"><Timestamp>2023-11-07 06:35:35</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
