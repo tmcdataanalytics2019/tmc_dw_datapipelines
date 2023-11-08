@@ -2469,6 +2469,8 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="mrn"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registereddate"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT"/>
     <elementParameter field="TEXT" name="LIMIT" value=""/>
@@ -2482,6 +2484,7 @@
     <metadata connector="FLOW" label="patients" name="tMongoDBInput_2">
       <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="true" length="0" name="mrn" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="864">
@@ -2502,19 +2505,22 @@
     <metadata connector="FLOW" name="out1A">
       <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="true" length="0" name="patient_pin" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="StringHandling.LEFT(getMongoDBdata.mrn,3)" name="RemoveTempMRN" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.LEFT(row6.mrn,3)" name="RemoveTempMRN" type="id_String"/>
       </varTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(getMongoDBdata.registereddate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2014-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp;&#10;TalendDate.compareDate(getMongoDBdata.registereddate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2017-12-31 23:59:59&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt; 1 &amp;&amp; !Var.RemoveTempMRN.equals(&quot;TMP&quot;) &amp;&amp;&#10;!getMongoDBdata._id.equals(&quot;62b6645a6372a52f1cb6a1c0&quot;) &amp;&amp;&#10;!getMongoDBdata._id.equals(&quot;62b66460dccc9f590274f7ca&quot;) &amp;&amp;&#10;!getMongoDBdata._id.equals(&quot;62b663ca6c750372aff3d980&quot;) &amp;&amp;&#10;!getMongoDBdata._id.equals(&quot;62b66758bad1b472b511ae9a&quot;) &amp;&amp;&#10;!getMongoDBdata._id.equals(&quot;62b666fdb493512ef909035a&quot;)" name="out1A" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row6.registereddate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2014-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp;&#10;TalendDate.compareDate(row6.registereddate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2017-12-31 23:59:59&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt; 1 &amp;&amp; !Var.RemoveTempMRN.equals(&quot;TMP&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b6645a6372a52f1cb6a1c0&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b66460dccc9f590274f7ca&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b663ca6c750372aff3d980&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b66758bad1b472b511ae9a&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b666fdb493512ef909035a&quot;)" name="out1A" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row6._id " name="transaction_external_id" type="id_String"/>
         <mapperTableEntries expression="row6.mrn " name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row6.registereddate " name="registereddate" nullable="true" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row6" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
         <mapperTableEntries name="mrn" type="id_String"/>
+        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -2559,6 +2565,7 @@
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1A" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" type="id_String"/>
         <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row7" sizeState="INTERMEDIATE">
         <mapperTableEntries name="patient_internal_id" nullable="true" type="id_Integer"/>
@@ -2886,10 +2893,20 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk4"/>
   </connection>
   <connection connectorName="FLOW" label="row6" lineStyle="0" metaname="tMongoDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_2" target="tMap_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="registereddate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row6"/>
   </connection>
   <connection connectorName="FLOW" label="out1A" lineStyle="0" metaname="out1A" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_3">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="registereddate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1A"/>
   </connection>
@@ -2945,13 +2962,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_4d4f6ecd-cb94-476a-9db4-440ca32164f9"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>e4KGqwiyXcYGA8ArrF7dmF70qvP3dWPUkcqKPD6GJ+2Uc9sODOetRaSAvuNmfgWg69FTn+6uGfzv&#13;
-8yUylPRaVw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_45d1d975-5d73-439a-b8ad-46edfa466fc8"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UMD7rnPGjD2XYL9XvT2OYbX3yoZk7+JfLP8ml8GLsk12DFkhbOKjjg+uNGTsaG3eK2Z8L5KkILHt&#13;
-y2RTOMb6mA==</DigestValue></Reference></SignedInfo><SignatureValue>Pdm2yvbYfCMkKOd12f7vV3Ukz4IS71n2uk83Tv7Td8BRgJWuiEav/aLiOTsyxf4s78HQ9c0qAR4n&#13;
-Yj0unP2tVnZ4MmW97z3JlLMMCzZkcng8BjSWd7nESc+z/lWFp/3Hl8uovSFyEClYsAb4TscwXoid&#13;
-xOsbPwfTSDcS2EVaW7G4ICMBSOKfwVuZZl0kfyWoj9Mq9jstFVJYRAfrYcMlQg0Gu8XCKr7HNIbY&#13;
-yWHkI5e9jXaasfdfo33OpkJzzGq29GYgtomyftqnWY5q27gVY36VqVQ7qqcgJG1Nt/Hp+PzWtj2D&#13;
-ahInwh+qnohCGuepPn3OtYTcKMI3FveWvK4iyg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_01dc2ed9-3f1a-49eb-bdd9-b16ffb520617"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>jPQ0Oqr+Vv/wW513zqFnlnSb25dzA3sRvp72MhHeUTJjL4dfsojVBHGdRWw3Xf/DgtSB/qIxVv+n&#13;
+U4qWmgrGcQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_aa152ada-7834-4663-92b8-02b8e7ce29ef"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>us1wcR898I2e9hMZQo37QVbPqOV+cQ2CqLGVNBb+gfFmMnSFetCakJc0YkeDw0al0nsZYiBXlvM9&#13;
++JbBwDCtPA==</DigestValue></Reference></SignedInfo><SignatureValue>aM5KUyyaGsdaZvlwKqUiz/PaVR27oqWq+so8JYdnXx78LYvytIFvu8tUHyuvR93keX/5CPZNXvmp&#13;
++GZpf0QyZB1nIEWOG5Xqq4rKwVdzHzCWA2IM/ucZ3H0jA7IEFG8Tdyw45POPR/J+c6OCsYRni5Ci&#13;
+P9ZMqsmslZw0dipV+KOaSt6chuHlXbuDd99dgAan5qhR6G/MBFHKSHaYlDVphgVA05MYDNMJARIH&#13;
+o9nz5HPop60X06kLLgYbI60CzuvNtlzHFDxj/aHGuoaXKDnO9+GhPZZpA6to/Y4ge+ySTqC9GjhV&#13;
+DGMC+OsNzB49qVqmw1H9xWxurY4floz4JI0dNw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2973,4 +2990,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_45d1d975-5d73-439a-b8ad-46edfa466fc8" Target="#_4d4f6ecd-cb94-476a-9db4-440ca32164f9"><Timestamp>2023-11-08 01:44:21</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_aa152ada-7834-4663-92b8-02b8e7ce29ef" Target="#_01dc2ed9-3f1a-49eb-bdd9-b16ffb520617"><Timestamp>2023-11-08 01:47:14</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
