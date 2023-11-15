@@ -412,7 +412,7 @@
       <column comment="" key="false" length="-1" name="mergedpatientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.LEFT(getMongoDBdata.mrn,3)" name="RemoveTempMRN" type="id_String"/>
       </varTables>
@@ -1719,7 +1719,7 @@
       <column comment="" key="false" length="-1" name="uuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="Numeric.sequence(&quot;s1&quot;,1,1) " name="var1" type="id_Integer"/>
         <mapperTableEntries expression="Var.var1&lt;10?&quot;0000000&quot;+String.valueOf(Var.var1):(Var.var1&lt;100?&quot;000000&quot;+String.valueOf(Var.var1):(Var.var1&lt;1000?&quot;00000&quot;+String.valueOf(Var.var1):(Var.var1&lt;10000?&quot;0000&quot;+String.valueOf(Var.var1):(Var.var1&lt;100000?&quot;000&quot;+String.valueOf(Var.var1):(Var.var1&lt;1000000?&quot;00&quot;+String.valueOf(Var.var1):(Var.var1&lt;10000000?&quot;0&quot;+String.valueOf(Var.var1):String.valueOf(Var.var1))))))) " name="var2" type="id_String"/>
@@ -1920,7 +1920,7 @@
   </node>
   <node componentName="tMSSqlOutputBulk" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="992" posY="608">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutputBulk_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;//10.10.103.86/BulkLoadFolder/bulkpatientupload.txt&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;//10.10.103.86/Users/jsjavier/Desktop/BulkLoadFolder/bulkpatientupload.txt&quot;"/>
     <elementParameter field="CHECK" name="APPEND" value="false"/>
     <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;]&quot;"/>
@@ -1991,7 +1991,7 @@
     <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:xwSwD4Gq9xDKl6+oPNsLUppp1rIyM//1RsrcXR06bCAT3J7SJ3wf18M="/>
     <elementParameter field="DBTABLE" name="TABLE" value="context.TableName +&quot;rt_aa_patients&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="CLEAR"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;//10.10.103.86/BulkLoadFolder/bulkpatientupload.txt&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;//10.10.103.86/Users/jsjavier/Desktop/BulkLoadFolder/bulkpatientupload.txt&quot;"/>
     <elementParameter field="CHECK" name="APPEND" value="false"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
@@ -2510,7 +2510,7 @@
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.LEFT(row6.mrn,3)" name="RemoveTempMRN_mpivar" type="id_String"/>
       </varTables>
@@ -2982,7 +2982,12 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1A"/>
   </connection>
-  <connection connectorName="FLOW" label="qweqwe" lineStyle="0" metaname="qweqwe" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_3" target="tDBOutputBulk_2">
+  <connection connectorName="FLOW" label="StoretoMPI" lineStyle="0" metaname="StoretoMPI" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_3" target="tDBOutput_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="StoretoMPI"/>
+  </connection>
+  <connection connectorName="FLOW" label="qweqwe" lineStyle="0" metaname="qweqwe" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_3" target="tDBOutputBulk_2">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="patient_mpi_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -2999,11 +3004,6 @@
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="qweqwe"/>
-  </connection>
-  <connection connectorName="FLOW" label="StoretoMPI" lineStyle="0" metaname="StoretoMPI" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_3" target="tDBOutput_1">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="StoretoMPI"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tSortRow_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -3066,13 +3066,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_7e302ea3-dabc-424f-927e-88b6acd082ed"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9Mrn8JW+ReDwlQFUO5dkSsc5uGcD+w8TWaVu/CtzMb/gGEVTgDsS9/7yYn785Xp9c+oVMPf9fAsV&#13;
-WIZYsXZCGw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e5a9d13d-fc22-4584-ac09-a6a9ef086e56"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>3lnDaANf6PIfiX26EvH8D/iM4vpI1FaE59vf/iWmZPoi/bpIGAQOxFK29HoIjbHgIU/JKuvJ2bvx&#13;
-dBOHrCnSTw==</DigestValue></Reference></SignedInfo><SignatureValue>AB1u+kLsdMZpNNp2AH1pZjAHxZiVVg1eMoss/MATLmrbaXP9RAKH7plGEKw71qBDcteDXTg8ITk5&#13;
-lKEvmzOW3vBrDKGLJOaBSsBv7B4KBM2bEPdYhuVottix+LyepTtVRofWO401QQxf9HdEeVujfGcH&#13;
-dluL30/I9YEcGKp4vov/SaEJrrgodZ8oJbKjzkOoceAbdEuwmW9dpPNSMEl8YdhsP4uFXBvwVg51&#13;
-IXu7TI8+kcy1vrAjHBeEGnId/ut2IX13oErd6wbKo/sosgA9DIkuymWslVRa5/83dhDgtmcDiHpk&#13;
-5ZOrJPmWtH3BGX9AkBJQxXQnNTkhS1IU1uzMWw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_aec01572-41a0-4d3d-bf80-b318b1c0cb2d"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>umZft32qEPCA6pzdF0pQHJ19F/eThGvqqLQLJahLVKzAZaSetre92j0njm9BBGa9/VXnKHKwoJgN&#13;
+TSFJEiE38A==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_9fba18c9-4faf-4ca4-9795-67555fa16e12"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9Ni+ko9bdtYREXGPqFNwnP+D+2vVzUlhx/TDf+SaDLiRO1B+Hq+7IujL/ytCvjU59tyVnsx3dApd&#13;
+xqj7Mwc6GA==</DigestValue></Reference></SignedInfo><SignatureValue>iElQkyGRt7FeAS5OFjtDi5J4k6dAB7l49dfkogwQABfnpGLx7+fFpDrJexfIkL1ss2H7pBi4Su5j&#13;
+Mm8Ltf70NtPbDer+OJj5N5hfklr9LcWLO8zJedBjFgwEStpEKcQ9OZwSpaDelhRBL6RcNOBfcMH3&#13;
+7IQCn5I/lTnpBsKhDgoezOrEv9xYm+68CJmWfks3jm2QQWviVC1S9Ijhe0ofdGosYQplxekOLjJd&#13;
+4fNY8o9jmWoGP/Ua806pRpE1iJPa0ItzNWBh0JyD/bg543hTiOrLtN7BeNo8CLdyTKSe6ef1kQO9&#13;
+GN+SrPyYqkaqwz/pAdU1Khs36rUlL5JjJPS6Zg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -3094,4 +3094,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e5a9d13d-fc22-4584-ac09-a6a9ef086e56" Target="#_7e302ea3-dabc-424f-927e-88b6acd082ed"><Timestamp>2023-11-14 03:23:13</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_9fba18c9-4faf-4ca4-9795-67555fa16e12" Target="#_aec01572-41a0-4d3d-bf80-b318b1c0cb2d"><Timestamp>2023-11-15 02:12:45</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
