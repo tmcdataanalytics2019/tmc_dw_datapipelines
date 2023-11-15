@@ -148,7 +148,7 @@
     <elementParameter field="TABLE" name="AGGREGATION_STAGES">
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$unwind:{path : '$bedoccupancy',preserveNullAndEmptyArrays : true}}&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'bedoccupancy._id':{$exists:true}}}&quot;"/>
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $project : {patientvisitid:'$visitid',patientid:'$patientuid',transaction_external_id:'$_id',bed_occupancy_transaction_external_id:'$bedoccupancy._id',bed:'$bedoccupancy.beduid',ward:'$bedoccupancy.warduid',startdate:'$bedoccupancy.startdate',enddate:'$bedoccupancy.enddate',istemporarybed: '$bedoccupancy.istemporarybed',parentbeduid:'$bedoccupancy.parentbeduid',bedcategoryuid:'$bedoccupancy.bedcategoryuid',bedpackageuid: '$bedoccupancy.bedpackageuid',useruid:'$bedoccupancy.useruid',isactive:'$bedoccupancy.isactive',islodgerbed:'$bedoccupancy.islodgerbed',isolatedbed: '$bedoccupancy.isolatedbed',comments:'$bedoccupancycomments',chargeablebedcategoryuid:'$bedoccupancy.chargeablebedcategoryuid',price: '$bedoccupancy.price',swappingreason:'$bedoccupancy.swappingreason',transferrequestuid:'$bedoccupancy.transferrequestuid',orguid:'$orguid' } }&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $project : {patientvisitid:'$visitid',patientid:'$patientuid',transaction_external_id:'$_id',bed_occupancy_transaction_external_id:'$bedoccupancy._id',bed:'$bedoccupancy.beduid',ward:'$bedoccupancy.warduid',startdate:'$bedoccupancy.startdate',enddate:'$bedoccupancy.enddate',istemporarybed: '$bedoccupancy.istemporarybed',parentbeduid:'$bedoccupancy.parentbeduid',bedcategoryuid:'$bedoccupancy.bedcategoryuid',bedpackageuid: '$bedoccupancy.bedpackageuid',useruid:'$bedoccupancy.useruid',isactive:'$bedoccupancy.isactive',islodgerbed:'$bedoccupancy.islodgerbed',isolatedbed: '$bedoccupancy.isolatedbed',comments:'$bedoccupancycomments',chargeablebedcategoryuid:'$bedoccupancy.chargeablebedcategoryuid',price: '$bedoccupancy.price',swappingreason:'$bedoccupancy.swappingreason',transferrequestuid:'$bedoccupancy.transferrequestuid',orguid:'$orguid',visitstartdate:'$startdate' } }&quot;"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
     <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
@@ -197,6 +197,8 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="orguid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="visitstartdate"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT" show="false"/>
     <elementParameter field="TEXT" name="LIMIT" show="false" value=""/>
@@ -232,6 +234,7 @@
       <column comment="" key="false" length="-1" name="swappingreason" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transferrequestuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="orguid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visitstartdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <metadata connector="VALIDATION_REJECT" name="VALIDATION_REJECT">
       <column comment="" defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
@@ -282,9 +285,12 @@
       <column comment="" key="true" length="-1" name="bed_occupancy_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="out2" sizeState="INTERMEDIATE">
+      <uiProperties shellMaximized="true"/>
+      <varTables name="Var" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;))" name="getdate" type="id_Date"/>
+        <mapperTableEntries expression="TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 02:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 05:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 08:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 11:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 14:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 17:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 20:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 23:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)):&#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;) " name="todate" type="id_Date"/>
+      </varTables>
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row1.visitstartdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; -1 &amp;&amp;&#13;&#10;TalendDate.compareDate(row1.visitstartdate,Var.todate,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt; 1" name="out2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row1.patientvisitid)" name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.patientid)" name="patient_pin" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.transaction_external_id)" name="transaction_external_id" nullable="true" type="id_String"/>
@@ -336,6 +342,7 @@
         <mapperTableEntries name="swappingreason" nullable="true" type="id_String"/>
         <mapperTableEntries name="transferrequestuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="visitstartdate" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -872,6 +879,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="orguid"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visitstartdate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
@@ -999,13 +1009,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_98510831-9355-4258-ada0-eda73a11a170"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>IJNS/ozOZKFA0Ke8Ub2e749mi3FSztrMgAFPe7rh9sHpAaF7vdVzIcSAGAsQdMDmVfj7uSOGLSBr&#13;
-NsuxTumAgg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_2dd44014-29ba-45b2-9a96-522210d7cf41"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>L/IlUFOCI4WpHbIDN4tTd34YPM7d/OcBHmJOr7ODcr0sp9Up5wsPJcmIhe0DEijm/dTHwpRK4PWa&#13;
-1ZGht6ZHLQ==</DigestValue></Reference></SignedInfo><SignatureValue>bflwA+RPjgWKDa8TC7Z8mXY4WgqsovIJeJB7oa8LYTkpk//y5w35Rrx7QHnqtkovmbUJhduaNB/C&#13;
-FQXHRn9zvoguW375zknkZrYwQ6JzXFfsqiYr/Oo46sSPxDMxXj/A7gcaSaT08GiF4GvWCFeW7RII&#13;
-qP/F0S8QcqrHF3KOR4MhT3FQ9IG8auWf5L+76USyGAtG57jua76LgiwC0JRtmWvNumZvpPqOfdhh&#13;
-zr4+xBURsnElHaGzSdOffzJ6ZAn9BYSaCNuATiWPqpjPY1QM2vC+oiEmidp+QUWTzKeDbBmjGi+F&#13;
-VT9NFq9TwadeGlXGD8FwaxxA+MLi7JBcFoKUfA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_9351343b-3968-493e-a02a-4af594244ccd"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>GtSE4MGMdbvrjBkwqnqyQnqXXkIjD2MqWSiJWCKiCCea4U6yPsO9yH1qiZqWbVxrGu+GdnDBM1x/&#13;
+WyGuxR+4lA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_56438927-b2cc-4213-b82c-e5583eb5a9c3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>PfGt2pgjSc3JlZNM+ZFhlP2xm/9ZlGsAm2VihoTiRjQM7Vt5q1JQdTRRpwYf1hhIbn/z2izSjb83&#13;
+dKJ9WJcsBQ==</DigestValue></Reference></SignedInfo><SignatureValue>MTLPkwMCOlHgS2KcVDdGjPSvriBPAC+WkwMx1Nq7sQrvddRKxj1+M7JMQVs8T4OaZDh0zzXsEdrr&#13;
+AxWpGxuUKfYGokykwelKHSxLn9rk66wIJo6CZvo1k5hnuOm26uNcz0KVUt4gNgUBlyMI9KmJ0otW&#13;
+kIw/ZsOGB625gqZOYnp+nVh8BhXSXlBD+Ug5nVQP1M91ulySWDVDrHhPILBcJDerJ59kGch4HhTy&#13;
+K230SPbmKFMIgtF86AQbMs+qYPNh6eTQVG8xSDtTa+Cfx7Zt1rqedGaNdJWu0kZPoC69APxW3b7f&#13;
+/oCBeotG9stcCgRj42R2RJneZsH1HIPNsTCahA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1027,4 +1037,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_2dd44014-29ba-45b2-9a96-522210d7cf41" Target="#_98510831-9355-4258-ada0-eda73a11a170"><Timestamp>2023-11-14 22:53:18</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_56438927-b2cc-4213-b82c-e5583eb5a9c3" Target="#_9351343b-3968-493e-a02a-4af594244ccd"><Timestamp>2023-11-15 07:57:17</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
