@@ -241,7 +241,7 @@
       <column comment="" key="false" length="-1" name="freetextcc" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admissionno" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admissionrequestno" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="expecteddateofdischarge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="expecteddateofdischarge" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="expectedlos" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="referralformuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="createdat" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -289,7 +289,7 @@
       <column comment="" key="false" length="-1" name="free_text_cc" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_request_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="expected_date_of_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="expected_date_of_discharge" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="expected_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="referral_form_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="created_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -310,26 +310,26 @@
         <mapperTableEntries expression="StringHandling.UPCASE(row1._id) " name="_id" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.patientuid) " name="patient_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.patientvisituid) " name="patient_visit_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="null" name="referral_datetime" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.referraldate" name="referral_datetime" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.referringdepartmentuid) " name="referring_department_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.referringcareprovideruid) " name="referring_careprovider_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.referredto) " name="referred_to_department_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.referredtoward) " name="referred_to_ward_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.admittingcareprovider) " name="admitting_careprovider_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="null" name="admission_datetime" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.admissiondate" name="admission_datetime" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.comments) " name="comments" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.isactive " name="is_active" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row1.isadmitted " name="is_admitted" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.replycomments) " name="reply_comments" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.cancelledby) " name="cancelled_by_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="null" name="cancel_datetime" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.canceldate" name="cancel_datetime" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.cancelreasonuid) " name="cancel_reason_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.cancelcomments) " name="cancel_comments" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.statusflag) " name="status_flag" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.freetextcc) " name="free_text_cc" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.admissionno) " name="admission_number" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.admissionrequestno) " name="admission_request_number" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.expecteddateofdischarge) " name="expected_date_of_discharge" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.expecteddateofdischarge" name="expected_date_of_discharge" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.expectedlos " name="expected_los" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.referralformuid) " name="referral_form_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.createdat " name="created_timestamp" nullable="true" type="id_Date"/>
@@ -366,7 +366,7 @@
         <mapperTableEntries name="freetextcc" nullable="true" type="id_String"/>
         <mapperTableEntries name="admissionno" nullable="true" type="id_String"/>
         <mapperTableEntries name="admissionrequestno" nullable="true" type="id_String"/>
-        <mapperTableEntries name="expecteddateofdischarge" nullable="true" type="id_String"/>
+        <mapperTableEntries name="expecteddateofdischarge" nullable="true" type="id_Date"/>
         <mapperTableEntries name="expectedlos" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="referralformuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="createdat" nullable="true" type="id_Date"/>
@@ -606,7 +606,7 @@
       <column comment="" key="false" length="-1" name="free_text_cc" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_request_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="expected_date_of_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="expected_date_of_discharge" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATE" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="expected_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="referral_form_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="created_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATE" type="id_Date" usefulColumn="true"/>
@@ -640,7 +640,7 @@
       <column comment="" key="false" length="-1" name="free_text_cc" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_request_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="expected_date_of_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="expected_date_of_discharge" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATE" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="expected_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="referral_form_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="created_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATE" type="id_Date" usefulColumn="true"/>
@@ -1211,13 +1211,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a500f4dd-32f9-4b19-a9a3-98b9bbc27610"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Je0YEJfTGgopiHlFxR5WvAkrGCm05Ohm1R423HNacaWUIVLletde+/P43MxeZeCQOMgzJp5sC23f&#13;
-fDPEx9cyaQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_c12cebb9-38e5-4d7c-b4de-90c5e7056a6d"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+HYK5UqhPHPQy3zrkE2lBYRpa8RqO6Hq6sf2CiiR0gzWbO0MQm0wjLbN+zpsYvYkNLYJ6S7uU8gF&#13;
-BxEA+zRrfQ==</DigestValue></Reference></SignedInfo><SignatureValue>eLCh3YVofEy5OePaIkwlbSWC5txD9EpJw0JpX/As5GrCdLOAJMi92Q6Em3CoQVvUgxJxyMRlVjtX&#13;
-vPqFND1SalUeWLaO2lrGsGdOx1t2eXbS665dIgLIV7iN484jTsIu74/fFxA9AVNkWRy7e4nO69+Q&#13;
-ECYtITBv/l2UdSqa0LmHGfQAtMuWsfKf+XniGByatJfsfISGYViMPoRtRprvlvvaDHagmSNjPE4L&#13;
-JiICkGrjgylAP++8aoAzK0m5wgdcOa/FAIlgLoJZgL2P5NUVnB//cdJB6+4w8SR6hJTNivtpk8vY&#13;
-CcQsDUuMwEs8jtJvElieuoc3HRy8I26CHzyrOQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_9aabc72d-ff90-4ebc-a859-f06e8ea3f9fd"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>YoloZrrMTHkWgi62F6syalSjkOgJIy62g681281d8Y16WCoWtGyVB+XPebd0cUJvZ7qkW8YUhP9v&#13;
+vIXr+mQP+A==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_42ce6af7-e746-4fca-a1e7-72926d84bffd"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>1oM1+a8NvIX+mkjUgkF61N1hRgSBWABp+IEIFlRLoDg95PW/MXsA4KR7x014AkmNRN7jeKQypTWZ&#13;
+XRwYNJqYPA==</DigestValue></Reference></SignedInfo><SignatureValue>RIT9EqTbA9vjdiavbp158hLlwP9QsauVrNtVVX/O5kK0UfSZVZqwrvvPY9sEwo0Gwa64FuRQHeIF&#13;
+JgVlVPqWQ5PvB4g+JhsDijpE7UJ90UnvCj3q4yaluETtFfhKNVRRsqK/yNUqA4AeA2BYqtx6up06&#13;
+l/R/NR8ZW2oA/QsRlTRtFKwCaRaN0zhJTRYeYD8sWhI0xHLfOHQ0ktc7zLiTcy3zXsg4svCPdc/e&#13;
+KymIRYVFEnMCJILwgg/JaUoJi6OUpfJ/xDQUUk+t0SXBylGbaLkB41TWOJfFGIE3v0Hc9idu+GMt&#13;
+LhkyJ4GMtWczAYVLV5V5UTJAuc7UuRmpZLGDaQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1239,4 +1239,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_c12cebb9-38e5-4d7c-b4de-90c5e7056a6d" Target="#_a500f4dd-32f9-4b19-a9a3-98b9bbc27610"><Timestamp>2023-11-15 00:15:20</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_42ce6af7-e746-4fca-a1e7-72926d84bffd" Target="#_9aabc72d-ff90-4ebc-a859-f06e8ea3f9fd"><Timestamp>2023-11-15 00:17:10</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
