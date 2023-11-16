@@ -549,6 +549,14 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="patientfinancialstatusuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="isconvertedfromopd"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="opstartdate"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="visitidbeforeconvert"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="medicaldischargedatebeforeconverttoipd"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT"/>
     <elementParameter field="TEXT" name="LIMIT" value=""/>
@@ -623,6 +631,10 @@
       <column comment="" key="false" length="0" name="admissioncancelreasonuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isadmissioncancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="patientfinancialstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isconvertedfromopd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opstartdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visitidbeforeconvert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medicaldischargedatebeforeconverttoipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="192">
@@ -669,12 +681,17 @@
       <column comment="" key="false" length="0" name="isadmissioncancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="patientfinancialstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="orguid" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isconvertedfromopd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isnutritionrisk" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date_before_convert_to_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <metadata connector="FLOW" label="LogRow" name="LogRow">
       <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;)) " name="getdate" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 02:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 05:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 08:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 11:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 14:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 17:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 20:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 23:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)):&#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;) " name="todate" type="id_Date"/>
@@ -708,6 +725,11 @@
         <mapperTableEntries expression="GetMongoDBData.isadmissioncancelled " name="isadmissioncancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="GetMongoDBData.patientfinancialstatusuid " name="patientfinancialstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="GetMongoDBData.orguid " name="orguid" type="id_String"/>
+        <mapperTableEntries expression="GetMongoDBData.isconvertedfromopd" name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="GetMongoDBData.isnutritionrisk" name="isnutritionrisk" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="GetMongoDBData.opstartdate" name="outpatient_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="GetMongoDBData.visitidbeforeconvert" name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="GetMongoDBData.medicaldischargedatebeforeconverttoipd" name="medical_discharge_date_before_convert_to_ipd" nullable="true" type="id_Date"/>
       </outputTables>
       <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(GetMongoDBData.startdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2021-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp;&#13;&#10;TalendDate.compareDate(GetMongoDBData.startdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2023-11-08 23:59:59&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt; 1" name="LogRow" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="GetMongoDBData._id" name="_id" type="id_String"/>
@@ -776,6 +798,10 @@
         <mapperTableEntries name="admissioncancelreasonuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="isadmissioncancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="patientfinancialstatusuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="opstartdate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="visitidbeforeconvert" nullable="true" type="id_String"/>
+        <mapperTableEntries name="medicaldischargedatebeforeconverttoipd" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -822,9 +848,14 @@
       <column comment="" key="false" length="0" name="isadmissioncancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="patientfinancialstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="orguid" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isconvertedfromopd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isnutritionrisk" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date_before_convert_to_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf294a7eacf22d3d825375&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf2d3228afbe51b421dad0&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf2e8b2cfc2a51aeb29531&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf2f429d3fca51f7e688a7&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf31596e712b2d37647e3b&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf37fc2cfc2a51aeb29b55&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf37fed3559c51de666366&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf390b1c94784ac951779c&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf3ed2a36e684ae7c11170&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf2b40dea69e4aa535a5e1&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf2b5fcd1cf12f50f1c93b&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf2b89cda1c32d017f9804&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf2c06cda1c32d017f981c&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf33a6a36e684ae7c0cffa&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf33c82cfc2a51aeb29835&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf33e1a36e684ae7c0d02c&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf340fcd1cf12f50f1ceae&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf343e6e712b2d37648922&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf346f2cfc2a51aeb2989b&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf3491cd1cf12f50f1ced7&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf34e66e712b2d37648958&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf35161c94784ac9516831&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf353f1c94784ac951684b&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;61cf38660781502d20fbf2e5&quot;))?out1.visitid + &quot;A&quot; : &#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beaec9a429dd1e0abcfb4a&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beb021a429dd1e0abd0f84&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beb04028a75a1e23e76975&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beb093fa16cd72ad731616&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beb1247eb8441e5fa8e338&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beb259c33cde1e65635455&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beb42073e01c1e25933323&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62beb9aae1eae172c0dd1732&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62bebf022c3cf77c379e5261&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40d296814f418d566314e&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40d412849ad58b5383988&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40d5ec82ceb6c8113c932&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40d6e34550d191e89eb83&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40db513f9f36c7b99cc23&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40dbb16cc680a2d3be287&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40dca78391f0a526b6785&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40dda16cc680a2d3be2ab&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40df504dfac4cd4032df4&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40df742b1c52e7360a008&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40dfcb0e6330a4bce9104&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40e1548c93e6cba54450e&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40e4642b1c52e7360a04b&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40e4c16cc680a2d3be2e3&quot;))||&#13;&#10;StringHandling.UPCASE(out1._id).equals(StringHandling.UPCASE(&quot;62a40e70adde6a18dbe4c894&quot;))?out1.visitid + &quot;B&quot; : out1.visitid " name="var1" type="id_String"/>
       </varTables>
@@ -857,6 +888,11 @@
         <mapperTableEntries expression="out1.isadmissioncancelled " name="isadmissioncancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out1.patientfinancialstatusuid" name="patientfinancialstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.orguid " name="orguid" type="id_String"/>
+        <mapperTableEntries expression="out1.isconvertedfromopd " name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out1.isnutritionrisk " name="isnutritionrisk" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out1.outpatient_start_date " name="outpatient_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out1.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1.medical_discharge_date_before_convert_to_ipd " name="medical_discharge_date_before_convert_to_ipd" nullable="true" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -887,6 +923,11 @@
         <mapperTableEntries name="isadmissioncancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="patientfinancialstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" type="id_String"/>
+        <mapperTableEntries name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="isnutritionrisk" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="outpatient_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries name="medical_discharge_date_before_convert_to_ipd" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -933,9 +974,14 @@
       <column comment="" key="false" length="0" name="isadmissioncancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="patientfinancialstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="orguid" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isconvertedfromopd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isnutritionrisk" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date_before_convert_to_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out2._id " name="_id" type="id_String"/>
@@ -966,6 +1012,11 @@
         <mapperTableEntries expression="out2.isadmissioncancelled " name="isadmissioncancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out2.patientfinancialstatusuid " name="patientfinancialstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out2.orguid " name="orguid" type="id_String"/>
+        <mapperTableEntries expression="out2.isconvertedfromopd " name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out2.isnutritionrisk " name="isnutritionrisk" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out2.outpatient_start_date " name="outpatient_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out2.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out2.medical_discharge_date_before_convert_to_ipd " name="medical_discharge_date_before_convert_to_ipd" nullable="true" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out2" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -996,6 +1047,11 @@
         <mapperTableEntries name="isadmissioncancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="patientfinancialstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" type="id_String"/>
+        <mapperTableEntries name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="isnutritionrisk" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="outpatient_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries name="medical_discharge_date_before_convert_to_ipd" nullable="true" type="id_Date"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="LookupCreatedBy" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out2.createdby" name="_id" type="id_String"/>
@@ -1340,9 +1396,14 @@
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="organization_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_nutrition_risk" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date_before_convert_to_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(out3._id)" name="transaction_external_id" type="id_String"/>
@@ -1375,6 +1436,11 @@
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="timestamp" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.UPCASE(out3.orguid) " name="organization_id" type="id_String"/>
+        <mapperTableEntries expression="out3.isconvertedfromopd " name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out3.isnutritionrisk " name="is_nutrition_risk" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out3.outpatient_start_date " name="outpatient_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out3.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.medical_discharge_date_before_convert_to_ipd " name="medical_discharge_date_before_convert_to_ipd" nullable="true" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -1405,6 +1471,11 @@
         <mapperTableEntries name="isadmissioncancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="patientfinancialstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" type="id_String"/>
+        <mapperTableEntries name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="isnutritionrisk" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="outpatient_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries name="medical_discharge_date_before_convert_to_ipd" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1618,6 +1689,31 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_converted_from_opd"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_nutrition_risk"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="outpatient_start_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="medical_discharge_date_before_convert_to_ipd"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -1629,68 +1725,78 @@
     <elementParameter field="TEXT" name="LABEL" value="Store to Patient Visits"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBOutput_1">
-      <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="0" name="visit_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patient_pin" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="visit_type_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="visit_status_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="is_readmission" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="created_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="created_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modified_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modified_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="status_flag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admitted_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admitted_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_type" nullable="true" originalDbColumnName="admission_type_id" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="reason_for_admission" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="medical_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="expected_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="medical_discharge_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="is_discharge_cancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="enddate_before_reopen" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_cancelled_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_cancelled_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_cancel_reason_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="is_admission_cancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patient_financial_status" nullable="true" originalDbColumnName="patient_financial_status_id" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="organization_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="0" name="visit_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="patient_pin" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="visit_type_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="visit_status_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_readmission" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="created_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="created_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="modified_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="modified_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="status_flag" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admitted_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admitted_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_type" nullable="true" originalDbColumnName="admission_type_id" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="reason_for_admission" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="medical_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="expected_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="medical_discharge_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_discharge_cancelled" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="enddate_before_reopen" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_cancelled_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_cancelled_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_cancel_reason_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_admission_cancelled" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="patient_financial_status" nullable="true" originalDbColumnName="patient_financial_status_id" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="organization_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_nutrition_risk" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date_before_convert_to_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="0" name="visit_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patient_pin" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="visit_type_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="visit_status_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="is_readmission" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="created_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="created_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modified_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modified_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="status_flag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admitted_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admitted_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_type" nullable="true" originalDbColumnName="admission_type_id" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="reason_for_admission" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="medical_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="expected_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="medical_discharge_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="is_discharge_cancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="enddate_before_reopen" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_cancelled_by" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_cancelled_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="admission_cancel_reason_id" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="is_admission_cancelled" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patient_financial_status" nullable="true" originalDbColumnName="patient_financial_status_id" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="organization_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="0" name="visit_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="patient_pin" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="visit_type_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="visit_status_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_readmission" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="created_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="created_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="modified_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="modified_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="status_flag" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admitted_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admitted_timestamp" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_type" nullable="true" originalDbColumnName="admission_type_id" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="reason_for_admission" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="medical_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="expected_discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="medical_discharge_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="discharge_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_discharge_cancelled" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="enddate_before_reopen" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_cancelled_by" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_cancelled_date" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="admission_cancel_reason_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="is_admission_cancelled" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="patient_financial_status" nullable="true" originalDbColumnName="patient_financial_status_id" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="organization_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_nutrition_risk" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date_before_convert_to_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -1721,12 +1827,41 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="log1"/>
   </connection>
   <connection connectorName="FLOW" label="GetMongoDBData" lineStyle="0" metaname="tMongoDBInput_3" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_3" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="opstartdate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visitidbeforeconvert"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isconvertedfromopd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="medicaldischargedatebeforeconverttoipd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="GetMongoDBData"/>
   </connection>
   <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_1" target="tMap_2">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="orguid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="outpatient_start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isnutritionrisk"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="medical_discharge_date_before_convert_to_ipd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isconvertedfromopd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1742,6 +1877,21 @@
       <elementValue elementRef="TRACE_COLUMN" value="orguid"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="outpatient_start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isnutritionrisk"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="medical_discharge_date_before_convert_to_ipd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isconvertedfromopd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out2"/>
@@ -1749,6 +1899,21 @@
   <connection connectorName="FLOW" label="out3" lineStyle="0" metaname="out3" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="orguid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="outpatient_start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isnutritionrisk"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="medical_discharge_date_before_convert_to_ipd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isconvertedfromopd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1776,6 +1941,26 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="LookupAdmissionCancelledBy"/>
   </connection>
   <connection connectorName="FLOW" label="out4" lineStyle="0" metaname="out4" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tDBOutput_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="outpatient_start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="is_nutrition_risk"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="medical_discharge_date_before_convert_to_ipd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isconvertedfromopd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="is_converted_from_opd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out4"/>
   </connection>
@@ -1810,13 +1995,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_69380c3b-bdfb-48c3-8d56-a6e88f288f25"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>jQTkD5FIR1srByLvScGz1UxE9qVoygWrltGgV9cT4KjhiNuKIfp6MDmkrMHvYxvLVzpWoqdQn8oJ&#13;
-YEumBD+Wfw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_9948ff4f-9eca-404b-a71e-ae88f6ef98ed"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>a2tSWnhqZOd0o5YCbJdBqx2+PVQr+XkMlBN67jNYk/waoYfIcUIUMT35FKZUJPCmy5xR7UbsA+7S&#13;
-4vT5d4sCbQ==</DigestValue></Reference></SignedInfo><SignatureValue>dwpr3wH1T37QzEcY8N7B2VSrTsfZ0MCuKRVvV+zpMJaBt6AZdr26XtjGsjU2Xpj7JsFbQ/tvXtNI&#13;
-JQ5C2DKM2L/mmfgEsqt7R/gIjoq+DWzv3i2/2XiZxGKm1iWPGhTUsW+zqFO1rlCTp3eP0SXeSfmb&#13;
-xzFAKgALcxq40sDFMBaVxDCkb1fv6qpzWrVO/+jq3WqGGKnv4ET5rzdLR0tpGvfpwoGG3JAdhKEZ&#13;
-GwXymQne/quQ5j6T9jlof3+CCLpjJTbzu0yF52diy/DYL6VYNkEk+XMSqa7OhbBdYkZQ4YmHrx2d&#13;
-K+mQVqVpdOi58iS9xN19w8UmdXSH53lnbiwgeg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_dc3bbddf-0229-4b05-81b7-78182a5ca486"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>gegg/LG+80HAhqQJERIpmuGl/lur7GF1B5h6TNSDdhO0G2Fml0n4AXTbgv4laLuuIM+PyMUJ/6Gk&#13;
+LfhnswiiMw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e54b7cd3-abc9-4f9c-9504-7e70546747d1"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+NE5GfCPyXTplbhXVllSL7SZhVfHrqEEDZMKFuQED57ExsYh3Ol+GMHpQj/6ua4L1ui05+oM4J/E&#13;
+ujCdU1Jabw==</DigestValue></Reference></SignedInfo><SignatureValue>Q1JkIyml3jJUjG8DWT52W8KtCt+pT2+6JyBK49XwZEvLMr6zxF0oe6NGbmZJAdYn1Skue1Ve1sGm&#13;
+c1xep5dAho+ryHDnqb9QJ3pcIctOfmra7fvcravBhZOMTiBaisgvU0OgAEy7DqxdB7VlmMhgLnBk&#13;
+U+Rhzw8i6N/CiFxCJ4l5nYr5dYqbZDvVjpu/vIEVydO0hdQUv+IlaJFcC/70pIWzrX4xRcROc+eB&#13;
+Sz3Az0BPGG0k/Cjd52RoZVdc0Emzsm/xsGulYXrTGa3q35m3g9iotgyGXlG6n+7Pzagc5EF8VDye&#13;
+K3lbrUhiYg41mkDaWs16oAZUMDc4VerL+NYgqQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1838,4 +2023,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_9948ff4f-9eca-404b-a71e-ae88f6ef98ed" Target="#_69380c3b-bdfb-48c3-8d56-a6e88f288f25"><Timestamp>2023-11-15 07:45:44</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e54b7cd3-abc9-4f9c-9504-7e70546747d1" Target="#_dc3bbddf-0229-4b05-81b7-78182a5ca486"><Timestamp>2023-11-16 02:45:47</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
