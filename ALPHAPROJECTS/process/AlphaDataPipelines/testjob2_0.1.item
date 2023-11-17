@@ -125,7 +125,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select bed_occupancy_transaction_external_id, patient_pin, visit_id, bed_id, ward_id, room_start_date, room_end_date,organization_id from ort_aa_bed_management &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select  *  from ort_aa_bed_management &quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -136,19 +136,53 @@
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bed_occupancy_transaction_external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="visit_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bed_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ward_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="room_start_date"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="room_end_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ward_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_temporary_bed"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="bed_occupancy_transaction_external_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="parent_bed_id"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bed_category_id"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="bed_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bed_package_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="user_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_active"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_lodger_bed"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="isolated_bed"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="comments"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="chargeable_bed_category_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="price"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="swapping_reason"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transfer_request_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="batch_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="uuid"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="organization_id"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -157,14 +191,31 @@
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_2">
-      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="room_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="room_end_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="ward_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="bed_occupancy_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="bed_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="organization_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="transaction_external_id" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="bed_occupancy_transaction_external_id" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="bed_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="ward_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="23" name="room_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="3" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="23" name="room_end_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="3" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="1" name="is_temporary_bed" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="parent_bed_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="bed_category_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="bed_package_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="user_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="1" name="is_lodger_bed" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="1" name="isolated_bed" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="2147483647" name="comments" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="chargeable_bed_category_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="price" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="swapping_reason" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="transfer_request_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="23" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="3" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="23" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="3" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="36" name="uuid" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="UNIQUEIDENTIFIER" type="id_Object" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="organization_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="224">
@@ -205,13 +256,30 @@
         <mapperTableEntries expression="row1.organization_id " name="organization_id" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="transaction_external_id" type="id_String"/>
+        <mapperTableEntries name="bed_occupancy_transaction_external_id" type="id_String"/>
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="room_start_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="room_end_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="ward_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="bed_occupancy_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
         <mapperTableEntries name="bed_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="ward_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="room_start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="room_end_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="is_temporary_bed" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="parent_bed_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="bed_category_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="bed_package_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="user_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="is_active" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="is_lodger_bed" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="isolated_bed" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="comments" nullable="true" type="id_String"/>
+        <mapperTableEntries name="chargeable_bed_category_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="price" nullable="true" type="id_String"/>
+        <mapperTableEntries name="swapping_reason" nullable="true" type="id_String"/>
+        <mapperTableEntries name="transfer_request_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="batch_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="timestamp" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="uuid" type="id_Object"/>
         <mapperTableEntries name="organization_id" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
@@ -461,6 +529,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="organization_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="room_start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
@@ -520,13 +591,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_39448c74-c703-40c8-b28d-b353490d5dcb"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>iJv26KUQgXt6+8M/iVbSB1qEEDGSu1w1Nu+ysm5myYEtcQ87Gh0vtGjPq5u/oC6XPgO/fdyXebN0&#13;
-zIgczYq9xQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_dd339772-7781-4cd8-90b5-2567fab97519"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>BguRL3s8RnrqkRKN6nqxgcb5WEmxhc/jsI4VPyrUQbJ39vrA4IowpCKs9lwRaIsoMnusqpVuk2Id&#13;
-0Bdw8O5mQw==</DigestValue></Reference></SignedInfo><SignatureValue>kN2siEeeDO7UE8JYavuJ32SdcON0cIOkNoXR8v2nH0cmFXEu8TSUqymjyNtno8bEjmQWfz6Ajjvw&#13;
-s0cftJ1zXFzI4hBAcgq+FeL2jZDhm7Fo0SjQuOh/sJBR/kjQLgM3G0lFC+EzvXFqe30VivXfBLn0&#13;
-m74JHsecmoj8mXecw4kz6ULRgsCrnZ1tlw8AfsncmrTYBb5aBMFc1tn3j+yEXtzozSYmfryqb66g&#13;
-D96UoP9BqInY9hZuUgatrv/f4BdWHcm082ZQ93qJi0P4IsCcIf2/GfWy10PLQBA2YITt9feJdkLm&#13;
-Ih/yCGJrbLUECocXiQ7zz6UazlqrlJIdMNmlrA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2b856374-08a7-4832-bbb3-4911a3938b0a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5k6RU00IVrea+Jb8p3zZD/v7Kqf2Lza/OITE7TUMhzYcChDsR5bzJ4fhs/YFrDxN7J7A5IU9lKSe&#13;
+GS1zJJC1Hw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_1c9fa03c-ef95-4998-ae03-8ef8b07d2ded"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>nm/3Im3Kwpj6u4dkNi+lvh5MpJmBCHiFYLEFBqyUCXpNBvHn+O6fuyGoPCctKYKsBOd2CFu/fBGb&#13;
+EvEMU+HBQg==</DigestValue></Reference></SignedInfo><SignatureValue>JlQriIzNNEkH865oOFc8zJuDXbb+ltghWHRZNO496uhFvgejBHexvaDl4oAKMEfaOQsZ7kBLC9lb&#13;
+dxhVF5A0wKaM85kple+O45ZB8yLrZv+FIQeLMlSaWsB1gVM1YOI/fvA1E1C50qRdlHHUL4hXcAnb&#13;
+vhJI0iEKSOC+c6MBlGZ14fyZMsRsH0Z8sywLAWGS2V3yf+x4EFOLLSbv2r9eC4MTpmfu4UmCucg4&#13;
+l4DwvhlWIKtGGxcVHSoTTuXJgOXsdKVGvcj2xt8OXt7sC78cAOxrCPCxcqV9h31rjFkFJLW4xXW1&#13;
+KRastZHRVK6Y+l/qJ+l8jX365WxgEm6GWK5sMQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -548,4 +619,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_dd339772-7781-4cd8-90b5-2567fab97519" Target="#_39448c74-c703-40c8-b28d-b353490d5dcb"><Timestamp>2023-11-17 02:47:58</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_1c9fa03c-ef95-4998-ae03-8ef8b07d2ded" Target="#_2b856374-08a7-4832-bbb3-4911a3938b0a"><Timestamp>2023-11-17 02:52:49</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
