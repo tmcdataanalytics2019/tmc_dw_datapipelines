@@ -125,7 +125,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select visit_id, room_start_date, room_end_date from ort_aa_bed_management&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select visit_id, room_start_date, room_end_date, ward_id from ort_aa_bed_management where &quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -142,6 +142,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="room_end_date"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ward_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -150,6 +152,7 @@
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="room_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="room_end_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ward_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="224">
@@ -170,19 +173,22 @@
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="room_start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="room_end_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ward_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="asdasd" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="!row1.ward_id.equals(&quot;5FF7040B92D0962AB4032143&quot;) &amp;&amp;&#10;!row1.ward_id.equals(&quot;5FF7040C92D0962AB4032163&quot;) &amp;&amp;&#10;!row1.ward_id.equals(&quot;5FF7040C92D0962AB4032165&quot;) &amp;&amp;&#10;!row1.ward_id.equals(&quot;5FF7040C92D0962AB4032167&quot;) &amp;&amp;&#10;!row1.ward_id.equals(&quot;5FF7040C92D0962AB403215F&quot;) &amp;&amp;&#10;!row1.ward_id.equals(&quot;5FF7040C92D0962AB4032161&quot;) &amp;&amp;" name="asdasd" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.visit_id " name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.room_start_date " name="room_start_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.room_end_date == null?TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2200-01-01 00:00:00&quot;):row1.room_end_date " name="room_end_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.ward_id " name="ward_id" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="room_start_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="room_end_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="ward_id" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -219,6 +225,7 @@
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="room_start_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="room_end_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="ward_id" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries name="filterdate" nullable="true" type="id_Date"/>
@@ -334,10 +341,20 @@
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tMap_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="ward_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
   <connection connectorName="FLOW" label="asdasd" lineStyle="0" metaname="asdasd" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="ward_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="asdasd"/>
   </connection>
@@ -358,13 +375,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_95e3fb99-9678-4b78-b986-7ff95fdd968d"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>fa4qCoBpWA392yFDdJwmnlssK0ikOyRAKXfR2ccmx2xQS0qhuBvhM4S1+AZ1e9N+fs0+08ondoFC&#13;
-VeTrtW5lvw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f3d8f878-f1c4-45b9-8c59-cfe0add6b2ee"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>k7GM89cJ/Qe88Heeph1d/z0LjzvCjCP+924CsnwTON4m08TE/oX1kBci0S+xDoqCXE52UJNGzoV+&#13;
-gLTmaFCAOw==</DigestValue></Reference></SignedInfo><SignatureValue>cXno+PQuaX8vN2bpei+Hqiu1KzFsQNCPMtHDiEJjeqH+lA+8ANNhssIjor3mzwzhC6h18cHnaXFF&#13;
-H9MiBrqas/gKn/t0WuhjxqrpluVmHepAKYZshlE75ac/HKeyI7yPR8QKtqmzYWapAAkDDxeUjhfB&#13;
-Jm0GJwr4AqMIqnmeU0hjUQEK4LtxTivLIZ+0tstK8a/M9INBaxuStuBDpxDB0N2t4Y+vce8SKGpf&#13;
-zV84HnNh6apTGMAflliPsniDbsIqEvIxsrGf10ACgw3IwwnGVWibiB4VEzVyvGB7PkxU9H2fl2Hg&#13;
-y29QmG2KD3MnhWbQYrvOffACZbAI3BLi3Vk5nA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6ff26ada-a092-4fa7-98c8-a99f3f515ff4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FRbOKrAeaTuQm8dI6uZaCyJB2nI9tRYhjHTH61owdM0sp7ABu4SqBR3owM1GR0XnwZENIzMFzA9K&#13;
+0K9dmjeWCg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8ea07289-4911-4a49-8245-a42bdb5b5d32"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UsSz42HcQxmTJvVoG654bnWtyvemQ2k56CDdNR8QqUjPg1UUd51M0kytW1gHnY2d1AgKTRVVdo8e&#13;
+NkX5dKPMQA==</DigestValue></Reference></SignedInfo><SignatureValue>aMyLPxPPxi4RgU2IpHAq7fLmTGYZ6KlOqJ35xnL8Mvsho8fZ5F3M+NQ/HRJSTL7b49VKwPGjRkjY&#13;
+Jolsg4ijb4p4b5syFDI4kiJToDZEFMV7vf3/SDREnzvwitFhNylovaY46XjYNKxRdPLTXj+VUrNT&#13;
+KC30TI/B5I/yB5isc+GCFzxMB0xaRzro5AjMS+ffGw2VyZQjURdqJ2Ceyk8pUGBPfWMyrLjUxT77&#13;
+prijX4e+Jf1773jVAQQQpt/zoynmCL1/So5BUSB3uKG7ZVDegd+eX+mR5VsCU5J1ElLb5lFrkeuU&#13;
+hGh/W+0n+vNuGbGeCwr6X+h5F5Ut62VvTOHbLw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -386,4 +403,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f3d8f878-f1c4-45b9-8c59-cfe0add6b2ee" Target="#_95e3fb99-9678-4b78-b986-7ff95fdd968d"><Timestamp>2023-11-17 00:59:46</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8ea07289-4911-4a49-8245-a42bdb5b5d32" Target="#_6ff26ada-a092-4fa7-98c8-a99f3f515ff4"><Timestamp>2023-11-17 01:10:28</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
