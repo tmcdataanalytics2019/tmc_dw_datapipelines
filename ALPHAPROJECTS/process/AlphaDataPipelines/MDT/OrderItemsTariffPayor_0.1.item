@@ -2040,6 +2040,8 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="statusflag"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="parentcategoryuid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT"/>
     <elementParameter field="TEXT" name="LIMIT" value=""/>
@@ -2084,6 +2086,7 @@
       <column comment="" key="false" length="-1" name="modifiedby" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="orguid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="statusflag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="parentcategoryuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="672">
@@ -2137,12 +2140,13 @@
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="status_flag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="parent_category_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out4" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row4._id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4._id)" name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row4.activefrom " name="active_from" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row4.activeto " name="active_to" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row4.alertforduplicate " name="alert_for_duplicate" nullable="true" type="id_Boolean"/>
@@ -2152,11 +2156,11 @@
         <mapperTableEntries expression="row4.allowmodifiers " name="allow_modifiers" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row4.allowmultiplequantity " name="allow_multiple_quantity" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row4.allowofforder " name="allow_off_order" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row4.billingtype " name="billing_type" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row4.code " name="code" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row4.description " name="description" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.billingtype) " name="billing_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.code) " name="code" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.description) " name="description" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row4.excludeacknowledgement " name="exclude_acknowledgement" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row4.externaluid " name="external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.externaluid) " name="external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row4.includemedreview " name="include_med_review" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row4.iscareprovidermandatory " name="is_careprovider_mandatory" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row4.isclinicalinfomandatory " name="is_clinical_info_mandatory" nullable="true" type="id_Boolean"/>
@@ -2168,16 +2172,17 @@
         <mapperTableEntries expression="row4.ispathologycategory " name="is_pathology_category" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row4.isreferral " name="is_referral" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row4.issubcategory " name="is_sub_category" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row4.name " name="name" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.name) " name="name" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row4.ordercattype " name="order_category_type" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row4.createdat " name="created_timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row4.createdby " name="created_by" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.createdby)" name="created_by" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row4.modifiedat " name="modified_timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row4.modifiedby " name="modified_by" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row4.orguid " name="organization_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.modifiedby) " name="modified_by" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.orguid) " name="organization_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;)) " name="timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row4.statusflag " name="status_flag" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.statusflag) " name="status_flag" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row4.parentcategoryuid) " name="parent_category_id" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row4" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" nullable="true" type="id_String"/>
@@ -2214,6 +2219,7 @@
         <mapperTableEntries name="modifiedby" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
         <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
+        <mapperTableEntries name="parentcategoryuid" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -2433,6 +2439,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="parent_category_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -2479,6 +2490,7 @@
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="status_flag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="parent_category_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -2517,6 +2529,7 @@
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="status_flag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="parent_category_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -2572,11 +2585,19 @@
       <elementValue elementRef="TRACE_COLUMN" value="statusflag"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="parentcategoryuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
   </connection>
   <connection connectorName="FLOW" label="out4" lineStyle="0" metaname="out4" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tDBOutput_4">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="parent_category_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out4"/>
   </connection>
@@ -2606,13 +2627,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_8c884ec9-4674-4d9e-b5e4-3436250cef98"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>unrF83E/XXotST9CjRlJjD4oWR/Lj6igPjcGGr0bCFDQPRb1sQxv93nKDDPJgRTdQ5Fq1UjOZUPV&#13;
-u4b9eAWnfA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_80302739-b570-4e81-a830-225710d7254c"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>K9++/QuQcBPnSn4dtx7XsLEXyCrI7kDhxHVZ3DEb6z16a+wAfVsQ1fQTex/EiqN2krBvLsOM77fo&#13;
-m4LmViJROg==</DigestValue></Reference></SignedInfo><SignatureValue>XIVh8DzI5Sc0IptcN89bqTHmomt0ZlAJWYuP5LDWM8xBQAwxccpNTk87CxMxNVMWrFa6lzB7xyQ6&#13;
-VFZnXd+6/pQlYctsOfR9Leyk1cYSGUjusVZpZd172SQGMge+ChTmNKey+VPjxG+2BRRSaUrMF4rq&#13;
-yijsmNdZ8zbooQ5oj0R1mYpvFnPTLZczzk1hJoTVw/51fcTjoXGk6CE9RReO5B5IwYpLgP46nq1k&#13;
-XS+XAP8CPxc/VZUnizNMtCmdXS7O46NZtj4yc1WsmUArjw5IKr/xiRhqkqoLf/l/gt7pJ9J2WSse&#13;
-MkVfLHMIOxOhKr382T2gzCHkaPYcFZ7gog0qog==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_689fe2d1-f167-4bd3-8df2-a969b468c7f8"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5hamdeaSYlbOBufqdQv40DBvUW/Lzik3fmmEtTldlXiAOYC+2ZC6U2y5ugiXMwmm/X15YUVNJF3e&#13;
+h35ABmP+HA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e505c084-cfe0-4455-9abb-4ba6caaa39b8"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>wixGCIm+aCgQv5qDXFvrPDudFtO73helAAhoHQv9rW5FBv2VxYSoRccoZV4ryJyU4mqEzQvlt+9D&#13;
+rXeCe0jYIQ==</DigestValue></Reference></SignedInfo><SignatureValue>pbtqq7/n8PHSQKdP9Baa0nht6xK4ffos7/wQdMEEis2yE0C8lqO6c/PNAH0pUVIU+0WLbV9PvFDx&#13;
+yjZ1EIELhNdLqnkh2fMd0zckWvUjpDVs1E92ZDgKKx7aDfBgjA64gRX0sZkBE7AOzF/ITevPA+bs&#13;
+dqy8ldj0OfNpRIzNOPAA79dq13THXq6Z7HUHYkpb+tgunLyVdqzXgjxjVgkRdkwh3enP7JSiRQl6&#13;
+UiBZUnbNC9d6NpGqiQap11/9Ja+uWXj9GYHlHcsA0E3fQcPeOrKqSjsPfCHSayBxozkRLbknfrpA&#13;
+rYXl32Ko8/MiBAGgU1PkbrtyOrNVZw2pe65M9w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2634,4 +2655,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_80302739-b570-4e81-a830-225710d7254c" Target="#_8c884ec9-4674-4d9e-b5e4-3436250cef98"><Timestamp>2023-11-22 07:25:42</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e505c084-cfe0-4455-9abb-4ba6caaa39b8" Target="#_689fe2d1-f167-4bd3-8df2-a969b468c7f8"><Timestamp>2023-11-22 07:31:33</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
