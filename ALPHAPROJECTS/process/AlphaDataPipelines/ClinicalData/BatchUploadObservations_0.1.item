@@ -150,6 +150,7 @@
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'observationdate':{'$gte' : {$date:'2023-12-01T16:00:00.000Z'}, '$lte' : {$date:'2023-12-05T15:59:59.999Z'}}}}&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $unwind: { path: '$observationvalues', preserveNullAndEmptyArrays: true } }&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $project : { 'transaction_external_id' : '$_id', 'careprovideruid' : '$careprovideruid', 'isline' : '$isline', 'isreusedfromothermodules' : '$isreusedfromothermodules', 'istpn' : '$istpn', 'lengthofstay' : '$lengthofstay', 'mewsscorevalue' : '$mewsscorevalue', 'observationdate' : '$observationdate', 'orderitemuid' : '$orderitemuid', 'patientuid' : '$patientuid', 'patientvisituid' : '$patientvisituid', 'statusflag' : '$statusflag', 'userdepartmentuid' : '$userdepartmentuid', 'createdat' : '$createdat', 'createdby' : '$createdby', 'modifiedat' : '$modifiedat', 'modifiedby' : '$modifiedby', 'orguid' : '$orguid', 'orderresultitemuid' : '$observationvalues.orderresultitemuid', 'name' : '$observationvalues.name', 'shorttext' : '$observationvalues.shorttext', 'resulttype' : '$observationvalues.resulttype', 'uomuid' : '$observationvalues.uomuid', 'resultvalue' : '$observationvalues.resultvalue', 'HLN' : '$observationvalues.HLN', 'normalrange' : '$observationvalues.normalrange', 'ispanicrange' : '$observationvalues.ispanicrange', 'panicrange' : '$observationvalues.panicrange', 'displayorder' : '$observationvalues.displayorder', 'displaytext' : '$observationvalues.displaytext', 'lastmodifiedby' : '$observationvalues.lastmodifiedby' } }&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$addFields:{'name' : '$observationvalues.name','resultvalue' : '$observationvalues.resultvalue'}}&quot;"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
     <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
@@ -190,10 +191,6 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="orguid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;observationvalues&quot;"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="resultvalue"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;observationvalues&quot;"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="orderresultitemuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="shorttext"/>
@@ -243,8 +240,6 @@
       <column comment="" key="false" length="-1" name="modifiedat" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="modifiedby" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="orguid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="resultvalue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="orderresultitemuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="shorttext" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="resulttype" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -363,8 +358,6 @@
         <mapperTableEntries name="modifiedat" nullable="true" type="id_Date"/>
         <mapperTableEntries name="modifiedby" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="name" nullable="true" type="id_String"/>
-        <mapperTableEntries name="resultvalue" nullable="true" type="id_String"/>
         <mapperTableEntries name="orderresultitemuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="shorttext" nullable="true" type="id_String"/>
         <mapperTableEntries name="resulttype" nullable="true" type="id_String"/>
@@ -1182,13 +1175,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_4fe7e8ee-1877-4c57-ac6f-1fba3cefa611"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FgI93I5DO2QDSsQn7jbdSJ1fr7f3MNhm8XEQAaT5uy9UQStxaoOdPfdtz7X3vYsqNA3A8JqDN8vP&#13;
-/3l3VeZH3w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e03bd158-5a7f-4cff-a242-4829855a914f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>bepZDbCIuN/5L2KlrdbgrqmUp0z2JGKHb2UbL1RA/A3mWr4jYhFJjLrug2X3jaNQLvQmf/tGRRSI&#13;
-1DzRgNcQAw==</DigestValue></Reference></SignedInfo><SignatureValue>oUiD1Ogr5A42eKuLJNrpBeOafpx2v531SNjHXEVYzi21cssuJtiPLQi1WUIj9Cy2rVE7B95fZbEJ&#13;
-n+JYXRtp7fNPSpGDnLh/veCAupCCsWqP3OhPYTalRG0Fs/BSSiiYu5oV28Aech0p1gARFNiUYlbC&#13;
-LD4vq5cPSnlYyZsslq3uLPqJnsBCbRD1RNXlzpbi8xPGCVV3ohbewRytbyD1nJlGKD+2uOxkq72B&#13;
-GPaXPrun0RNnkFTQxHEtzJqBoAsMPGsTh27Yxqv0wIZaToyk1m3asSAZMwtR6iOPdl5u3T2TjYy9&#13;
-1oa166GsGktjYufEzv+ND/kfjbPkmrdO9v8jmw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2e7b061d-80c7-4628-afa2-3c1d5879c924"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>QB5QSisdDcFEjZ5YHmu78Tg73GPeicwDINniN4CSTrgKDW4zqq3byrl1hCHMX5VkKJi2nVbQ2oam&#13;
+MvFPj+jciw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8005ebf4-3e9c-4594-8e4f-b2e79c0bd1d1"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>CYpbB52/TCzUaL6kmw0gwZugZrThOKm96zAyk4+InHfIZ3sgvNFh4snFrI1H19n6dr30PlKYkN/m&#13;
+DTm+P/jBdA==</DigestValue></Reference></SignedInfo><SignatureValue>KshQzz5hPzaCh5RZXU4P1SNnp1f+H2+InqyBwUN21sJomjxYdyB1m6OGv1NFoBXZsaj+d7uU2Sgm&#13;
+NNnJuw46cVgi+MEnD5bsZyZZp7aH0bQ+kehnDVO+DMu34FzxYrRZHnDpy4FM/LcXYqv2qLTXgR6J&#13;
+kC6lTerDcj0BS2uVDUEArLZIyBqDC+O50kcDu/0cj0jPcEnC74IPVEKrXunxqlBtzT4JEGNw+Crn&#13;
+V7C+nfnjHgmECkFzfcT/vse+QTT17FZsMV2qA75mwd7sU1MQzdu7KfW4W8YIg9KBigYgBNnz0AGf&#13;
+zksoH8GGwNLdmYYJKXghDvg2b+xrMENvkLsxyQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1210,4 +1203,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e03bd158-5a7f-4cff-a242-4829855a914f" Target="#_4fe7e8ee-1877-4c57-ac6f-1fba3cefa611"><Timestamp>2023-12-12 05:18:15</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8005ebf4-3e9c-4594-8e4f-b2e79c0bd1d1" Target="#_2e7b061d-80c7-4628-afa2-3c1d5879c924"><Timestamp>2023-12-12 05:42:49</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
