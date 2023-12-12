@@ -115,7 +115,7 @@
     <routinesParameter id="_MgtCSXRtEe6OwdqFUALVEg" name="TalendStringUtil"/>
     <routinesParameter id="_Mgj4WnRtEe6OwdqFUALVEg" name="TalendString"/>
   </parameters>
-  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="224">
+  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -229,7 +229,7 @@
       <column comment="" key="false" length="-1" name="resultvalue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="224">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_1"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -269,7 +269,7 @@
       <column comment="" key="false" length="-1" name="result_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="obs" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1._id " name="transaction_external_id" type="id_String"/>
@@ -320,7 +320,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="128">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="544" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_2"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -333,6 +333,7 @@
     <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Formatting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="getuniq" name="getuniq">
       <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -358,24 +359,24 @@
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="getuniq" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="obs.transaction_external_id " name="transaction_external_id" type="id_String"/>
-        <mapperTableEntries expression="obs.careprovider_id " name="careprovider_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="obs.is_line " name="is_line" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="obs.is_reused_from_other_modules " name="is_reused_from_other_modules" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="obs.is_tpn " name="is_tpn" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="obs.length_of_stay " name="length_of_stay" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="obs.mews_score_values" name="mews_score_values" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.transaction_external_id) " name="transaction_external_id" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.careprovider_id) " name="careprovider_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.is_line) " name="is_line" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.is_reused_from_other_modules) " name="is_reused_from_other_modules" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.is_tpn)" name="is_tpn" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.length_of_stay) " name="length_of_stay" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.mews_score_values)" name="mews_score_values" nullable="true" type="id_String"/>
         <mapperTableEntries expression="obs.observation_date " name="observation_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="obs.order_item_id " name="order_item_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="obs.patient_id " name="patient_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="obs.patient_visit_id " name="patient_visit_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="obs.status_flag " name="status_flag" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="obs.user_department_id " name="user_department_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.order_item_id) " name="order_item_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.patient_id) " name="patient_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.patient_visit_id) " name="patient_visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.status_flag) " name="status_flag" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.user_department_id)" name="user_department_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="obs.created_timestamp " name="created_timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="obs.created_by " name="created_by" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.created_by) " name="created_by" nullable="true" type="id_String"/>
         <mapperTableEntries expression="obs.modified_timestamp " name="modified_timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="obs.modified_by " name="modified_by" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="obs.organization_id " name="organization_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.modified_by) " name="modified_by" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(obs.organization_id) " name="organization_id" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="obs" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" type="id_String"/>
@@ -399,7 +400,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="288">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="544" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_3"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -412,6 +413,7 @@
     <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Formatting"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="out1" name="out1">
       <column comment="" key="true" length="0" name="observation_transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -419,7 +421,7 @@
       <column comment="" key="false" length="-1" name="result_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="obsval.observation_transaction_external_id " name="observation_transaction_external_id" type="id_String"/>
@@ -433,7 +435,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tUniqRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="640" posY="128">
+  <node componentName="tUniqRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tUniqRow_1"/>
     <elementParameter field="TABLE" name="UNIQUE_KEY">
       <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
@@ -558,7 +560,7 @@
       <column comment="" key="false" length="-1" name="organization_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="800" posY="288">
+  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -631,7 +633,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="800" posY="128">
+  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -838,13 +840,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_f58ad5a2-6086-492e-a924-9c004c058733"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>l4+aF1TKyOGVmZthhMH0ncCizqLgJ789T7W+Goj7zAdJfAHtcISxDw2yeSn2SrmJ3E75p4Y/iVHr&#13;
-Ra0jUNR/hQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_4e725631-b342-478b-8096-a7d82ca25334"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>le5GqKge3MdfO04AeQkVgnHZIFA0TgCniATjruXd9oLuTvr8ApyPGmHth2erfQTFpSzgSpEfcG4o&#13;
-bgQbWkt1gg==</DigestValue></Reference></SignedInfo><SignatureValue>NDr5V9MLUHJgkKks63ipbaMpAQB8hmxUnqO8+cbRxSGWtQ/7YeYCfhdBxsYtXYqsoSbp/qjAKnNw&#13;
-HgwJDSxbRdF9zCjVxvIhI1fWA047kypfMz36A+nE/+EvOQyQI3HO/l3dSChMxxyo2I3Pzn+yfYl3&#13;
-EhtAfLrjhefi5RygrO+4W/HiZ6S3tUQ+5VA8Xf2V7cOJ599GGaEdEkDfvDCiv+YdPHuFF9r2/Z1m&#13;
-Md/9gFhaJEqUrCJWSxBn0pE/Nl5/spmgZa2oIuFwLX7mcHrOtfvjparMNSk05j6jXUnGQGZi3JWi&#13;
-WEZhfJfESghS4zsY5FYd4XvtMDRbukTCeAZqUw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_1410d4af-c443-4513-97ef-fbf8466c88cb"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>/6eWafUVLVEC6RZf9qvWKTPcLLivqpp5CfyOfnI2PWKPq3QQs9UQk0mMt+FhEJJBEyqmgxRb8eFc&#13;
+uny6qLTZ/A==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_27a9b790-c625-41ce-a883-e4ee6bd8a2fd"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>uIQWgj3HVS5OCwHM6RWJDsaUK+9KE1eWRWnMMm8o/+52Inm2k0Knyq7bY0rQFD/aCBpjtR7QeZy7&#13;
+uN1qJtv3Pw==</DigestValue></Reference></SignedInfo><SignatureValue>n4e9Q9BWavqf9paXXsDE8PvK+tn83DjaJrdd1CVDSztvMB+f+262bT7IAtdaH6tDbcbbTd3fKc07&#13;
+orl/Zw/Bj41Yxsb+cPV12XjRyTxwrL2Ch++kcLQOSPke9YtHlMVkIZ6JRdy3JM/VNmCE7ZXeHhEi&#13;
+uuYYWWsav94VcTdD6cCsWjO3DDheKuB66BrhEYGZqmpft9fpA4uyaXjiorGYbe3cAX2EsB/h+moi&#13;
+db5ubbTmByUrsojSAn9aif7xpmETkufKkJD/REgTn9azee4XWb7x/4S0eOBhYJq+GDgSdo2BiIbu&#13;
+IAojFU2CANdmVtCX6FSb2iggnCjfZq4SeRhXog==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -866,4 +868,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_4e725631-b342-478b-8096-a7d82ca25334" Target="#_f58ad5a2-6086-492e-a924-9c004c058733"><Timestamp>2023-12-05 05:39:31</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_27a9b790-c625-41ce-a883-e4ee6bd8a2fd" Target="#_1410d4af-c443-4513-97ef-fbf8466c88cb"><Timestamp>2023-12-12 02:55:31</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
