@@ -115,65 +115,43 @@
     <routinesParameter id="_MgtCSXRtEe6OwdqFUALVEg" name="TalendStringUtil"/>
     <routinesParameter id="_Mgj4WnRtEe6OwdqFUALVEg" name="TalendString"/>
   </parameters>
-  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="224">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_1"/>
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="MONGODB_4_4_X"/>
-    <elementParameter field="CHECK" name="USE_CONNECTION_STRING" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_STRING" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="USE_REPLICA_SET" value="false"/>
-    <elementParameter field="TABLE" name="REPLICA_SET" show="false"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.201&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="45431"/>
-    <elementParameter field="TEXT" name="DATABASE" value="&quot;arcusairdb&quot;"/>
-    <elementParameter field="CHECK" name="USE_SSL" value="false"/>
-    <elementParameter field="CHECK" name="SET_READ_PREFERENCE" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="READ_PREFERENCE" show="false" value="PRIMARY"/>
-    <elementParameter field="LABEL" name="READ_PREFERENCE_NOTE" show="false" value="Note : Use Connection component to set Read Preference"/>
-    <elementParameter field="CHECK" name="REQUIRED_AUTHENTICATION" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="AUTHENTICATION_MECHANISM" value="SCRAMSHA256_MEC"/>
-    <elementParameter field="CHECK" name="SET_AUTHENTICATION_DATABASE" value="false"/>
-    <elementParameter field="TEXT" name="AUTHENTICATION_DATABASE" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="SET_X509_USERNAME" show="false" value="false"/>
-    <elementParameter field="TEXT" name="USERNAME" value="&quot;incusdba&quot;"/>
-    <elementParameter field="PASSWORD" name="PASSWORD" value="enc:system.encryption.key.v1:dIHylYqScox0hYN+jzQImpEW60QRVUmmFoo+08O6kPvhdO7bEX+WGg=="/>
-    <elementParameter field="TEXT" name="KRB_USER_PRINCIPAL" show="false" value="&quot;mongouser@EXAMPLE.COM&quot;"/>
-    <elementParameter field="TEXT" name="KRB_REALM" show="false" value="&quot;EXAMPLE.COM&quot;"/>
-    <elementParameter field="TEXT" name="KRB_KDC" show="false" value="&quot;kdc.example.com&quot;"/>
-    <elementParameter field="TEXT" name="COLLECTION" value="&quot;observations&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="QUERY_TYPE" value="AGGREGATION_QUERY"/>
-    <elementParameter field="LABEL" name="NOTE_ISOLATION" value="Note : Surround String values in your query with single quotes&#10;Note : If you are running on a Sharded Cluster, please make sure to include the shard key in the query."/>
-    <elementParameter field="MEMO" name="QUERY" show="false" value="&quot;{}&quot;"/>
-    <elementParameter field="TABLE" name="AGGREGATION_STAGES">
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'orderitemuid':{$in:[{'$oid': '606495c30dc8447ab46a7849'},{'$oid': '606495c30dc8447ab46a784f'},{'$oid': '606495c30dc8447ab46a784c'}] }}}&quot;"/>
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'observationdate':{'$gte' : {$date:'2023-12-01T16:00:00.000Z'}, '$lte' : {$date:'2023-12-05T15:59:59.999Z'}}}}&quot;"/>
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $unwind: { path: '$observationvalues', preserveNullAndEmptyArrays: true } }&quot;"/>
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'name':'$observationvalues.name','resultvalue':'$observationvalues.resultvalue'}}&quot;"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:ltjEgH2cG3mZDTHH/UahZUOwXH15LNxZ+f9YsyLv5stxwWP1U3aaubI="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="context.TableName + &quot;rt_aa_observations&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select max(observation_date) as observation_date from dbo.ort_aa_observations&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="observation_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
-    <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
-    <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
-    <elementParameter field="TABLE" name="MAPPING">
-      <elementValue elementRef="SCHEMA_COLUMN" value="_id"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="resultvalue"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-    </elementParameter>
-    <elementParameter field="TABLE" name="SORT" show="false"/>
-    <elementParameter field="TEXT" name="LIMIT" show="false" value=""/>
-    <elementParameter field="TEXT" name="SKIP" show="false" value=""/>
-    <elementParameter field="TEXT" name="BATCHSIZE" show="false" value=""/>
-    <elementParameter field="CHECK" name="QUERYOPTION_NOTIMEOUT" show="false" value="false"/>
-    <elementParameter field="CHECK" name="EXTERNAL_SORT_AGGREGATION" value="false"/>
-    <elementParameter field="CHECK" name="CONVERT_BSON_TO_STRING" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="MongoDBInput"/>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="Get Max Observation Date"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="patients" name="tMongoDBInput_1">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="resultvalue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    <metadata connector="FLOW" name="tDBInput_1">
+      <column comment="" key="false" length="-1" name="observation_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="320" posY="224">
@@ -206,22 +184,22 @@
       <column comment="" key="false" length="-1" name="resultvalue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tMongoDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_1" target="tLogRow_1">
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tLogRow_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_45d0ce50-7cf6-4e60-a01e-6ff60a6776af"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kgADaDt0Nm0Y7Q/0ED6rQ4wPAoe/sOULT73MSq0NbmOnlilH/EkbSsff4XRhA497kCnIFh/6aN7J&#13;
-LOw8CBmjaQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_c1e39bb4-38f1-4e02-9a0d-c9544b84edb3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>q0RQ7fMpQAy8HytXxtu8zakcpfd/l/wESKI1JeW1EBmDK8py+UM+YxqN1CDxYKlcBqZTxRzf7nEB&#13;
-BKuMamYwOQ==</DigestValue></Reference></SignedInfo><SignatureValue>Tmp28gbKfKPANtroznyJAgIbWXW5fnXuXTpO5nh49TvvsECki97rWsIq3FWSTrshUdj09vcKn6Tn&#13;
-50Y0XrDh6ouIqRBU2VWgFgbH5E1WDdPhlrqAvTWuwV2+wDLhq5mD0KA8gyLWI1VaEbDjeH7jr4eQ&#13;
-DFTpF1P2LddLR7nw3BT/PZ6L2h1Q4wsLQ0zra1zFDD6qKj8+RHrxBuC7LhoQ92dst2SZnmeZI8rI&#13;
-i3s3ietEfnuJlyTwkCRojg059ZREE6dV/6+Rhr43WMymnGkakCnrcUiF+wN23bp5WKGUv7WmmFTl&#13;
-z7rfYQXZ1OFgssjEcDNgkEQTgWSdVA/xe9ADAQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_940466ee-55fb-49dc-9adb-d5c2c01b0dc6"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>XL9V2ljlFemiqrd8gZb6hY/o1rSmPEdF4cqYBUCKY7q3rBtoRC0IXGNgcRIYgYm758eSzYFRDHKS&#13;
+p9qCHF41xg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_0cd18861-acc8-47a2-9958-f65c32a165a2"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>lZc/bJdVk+CCCOeE1j3MILKAJfAIgVW/6lOYzB6QAPz2DEUlcZMVYpnZ3bPeffeij+0Z/5x0szbm&#13;
+kaOZJEy0jg==</DigestValue></Reference></SignedInfo><SignatureValue>gTdRy/i9/S8sWIgOGI4n8mrOoXa22CR+4N57uosQ4dg7JQv6O28ZjlP6VMIY0W/GBvqNyQc8ApTT&#13;
+z3aOmqEzXTCxQU0H6UpC4m4AyTHvKUoeuLr3OGZvwq6HbDCCsznaspaIGgzm77CimxI9135RTYhb&#13;
+LgsLXvQ/p/AFYRTTa+BHUANjyHJXGXAngsWxmyJE+YqR3HMD0hYK4IvMxij+7HOyzBmcS1Sr/Z/M&#13;
+vQ1CiY9IDnLWHRUglkQdaYprw2G8hMnFdYScxtcdrSH26SsIHeEwsiWisPCgWtjwFoc8+g7GWnoK&#13;
+BfDOWHG+K/AHeCZujx0xTxUDtsec5Xc+or4mvQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -243,4 +221,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_c1e39bb4-38f1-4e02-9a0d-c9544b84edb3" Target="#_45d0ce50-7cf6-4e60-a01e-6ff60a6776af"><Timestamp>2023-12-12 05:46:11</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_0cd18861-acc8-47a2-9958-f65c32a165a2" Target="#_940466ee-55fb-49dc-9adb-d5c2c01b0dc6"><Timestamp>2023-12-13 00:45:25</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
