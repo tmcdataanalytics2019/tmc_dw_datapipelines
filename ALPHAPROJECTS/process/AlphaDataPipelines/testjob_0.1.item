@@ -1,5 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="Default" jobType="Standard" xmi:version="2.0">
-  <context confirmationNeeded="false" hide="false" name="Default"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="Testing" jobType="Standard" xmi:version="2.0">
+  <context confirmationNeeded="false" hide="false" name="Production">
+    <contextParameter comment="ForDatabase Name" internalId="_3K51MKrZEe6FYPv_1OUA4Q" name="DatabaseName" prompt="DatabaseName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;TMC_DW_DB&quot;"/>
+    <contextParameter comment="ForTableName" internalId="_3K51MarZEe6FYPv_1OUA4Q" name="TableName" prompt="TableName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;o&quot;"/>
+  </context>
+  <context confirmationNeeded="false" hide="false" name="Testing">
+    <contextParameter comment="ForDatabase Name" internalId="_3K51MqrZEe6FYPv_1OUA4Q" name="DatabaseName" prompt="DatabaseName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;TMC_DW_DB_UAT&quot;"/>
+    <contextParameter comment="ForTableName" internalId="_3K51M6rZEe6FYPv_1OUA4Q" name="TableName" prompt="TableName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;uat_o&quot;"/>
+  </context>
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
@@ -108,596 +115,7 @@
     <routinesParameter id="_Mgj4WnRtEe6OwdqFUALVEg" name="TalendString"/>
     <routinesParameter id="_MgtCSXRtEe6OwdqFUALVEg" name="TalendStringUtil"/>
   </parameters>
-  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="160">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_0KQXkDDbEe6bSJC9TP3ygw"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="MONGODB_4_4_X"/>
-    <elementParameter field="CHECK" name="USE_CONNECTION_STRING" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_STRING" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="USE_REPLICA_SET" value="false"/>
-    <elementParameter field="TABLE" name="REPLICA_SET" show="false"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.201&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="45431"/>
-    <elementParameter field="TEXT" name="DATABASE" value="&quot;arcusairdb&quot;"/>
-    <elementParameter field="CHECK" name="USE_SSL" value="false"/>
-    <elementParameter field="CHECK" name="SET_READ_PREFERENCE" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="READ_PREFERENCE" show="false" value="PRIMARY"/>
-    <elementParameter field="LABEL" name="READ_PREFERENCE_NOTE" show="false" value="Note : Use Connection component to set Read Preference"/>
-    <elementParameter field="CHECK" name="REQUIRED_AUTHENTICATION" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="AUTHENTICATION_MECHANISM" value="SCRAMSHA256_MEC"/>
-    <elementParameter field="CHECK" name="SET_AUTHENTICATION_DATABASE" value="false"/>
-    <elementParameter field="TEXT" name="AUTHENTICATION_DATABASE" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="SET_X509_USERNAME" show="false" value="false"/>
-    <elementParameter field="TEXT" name="USERNAME" value="&quot;incusdba&quot;"/>
-    <elementParameter field="PASSWORD" name="PASSWORD" value="enc:system.encryption.key.v1:kVH/F1cguYvb2zb6dDaSf/a0Zt8qkXqcxnm5JjoVl/eWMlBD68ApVQ=="/>
-    <elementParameter field="TEXT" name="KRB_USER_PRINCIPAL" show="false" value="&quot;mongouser@EXAMPLE.COM&quot;"/>
-    <elementParameter field="TEXT" name="KRB_REALM" show="false" value="&quot;EXAMPLE.COM&quot;"/>
-    <elementParameter field="TEXT" name="KRB_KDC" show="false" value="&quot;kdc.example.com&quot;"/>
-    <elementParameter field="TEXT" name="COLLECTION" value="&quot;patients&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="QUERY_TYPE" value="FIND_QUERY"/>
-    <elementParameter field="LABEL" name="NOTE_ISOLATION" value="Note : Surround String values in your query with single quotes&#10;Note : If you are running on a Sharded Cluster, please make sure to include the shard key in the query."/>
-    <elementParameter field="MEMO" name="QUERY" value="&quot;{}&quot;"/>
-    <elementParameter field="TABLE" name="AGGREGATION_STAGES" show="false"/>
-    <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
-    <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
-    <elementParameter field="TABLE" name="MAPPING">
-      <elementValue elementRef="SCHEMA_COLUMN" value="_id"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="mrn"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="notes"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="title_code"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="titleuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="firstname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="middlename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="thirdname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LastName"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="registereddate"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="genderuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="dateofbirth"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isdobestimated"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="internalmrn"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="occupationuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="maritalstatusuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="nationalityuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isanonymous"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isvip"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="religionuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="raceuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isinterpreterreqd"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="contact"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isemployee"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isblacklisted"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="blacklistreason"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="createdby"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="createdat"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="modifiedby"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="modifiedat"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="statusflag"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="orguid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="externaltablename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="__v"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_firstname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_lastname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_localfirstname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_locallastname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_localmiddlename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_localthirdname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_middlename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_thirdname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="allowedusersafteremrlocked"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="bloodgroupuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="careproviderteamuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="enterprisemrn"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="issimilarnamepatient"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="lastname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localfirstname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="locallastname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localmiddlename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localnametitleuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localthirdname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="nationalid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patientdemochanges"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="residentstatusuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="rhfactoruid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="tawafahofficeuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="tawafahofficeunumber"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patienttypeuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="preflanguid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ispatientmerged"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="mergedpatientuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-    </elementParameter>
-    <elementParameter field="TABLE" name="SORT"/>
-    <elementParameter field="TEXT" name="LIMIT" value=""/>
-    <elementParameter field="TEXT" name="SKIP" value=""/>
-    <elementParameter field="TEXT" name="BATCHSIZE" value=""/>
-    <elementParameter field="CHECK" name="QUERYOPTION_NOTIMEOUT" show="false" value="false"/>
-    <elementParameter field="CHECK" name="EXTERNAL_SORT_AGGREGATION" show="false" value="false"/>
-    <elementParameter field="CHECK" name="CONVERT_BSON_TO_STRING" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="MongoDBInput"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="patients" name="tMongoDBInput_1">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="0" name="mrn" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="notes" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="title_code" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="titleuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="firstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="middlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="thirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="LastName" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="registereddate" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="genderuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="dateofbirth" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isdobestimated" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="internalmrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="occupationuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="maritalstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="nationalityuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isanonymous" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isvip" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="religionuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="raceuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isinterpreterreqd" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="address" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="contact" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isemployee" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isblacklisted" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="blacklistreason" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="createdby" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="createdat" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modifiedby" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modifiedat" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="statusflag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="orguid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="externaltablename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="__v" nullable="true" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_firstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_lastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localfirstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_locallastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localmiddlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localthirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_middlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_thirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="allowedusersafteremrlocked" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="bloodgroupuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="careproviderteamuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="enterprisemrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="issimilarnamepatient" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="lastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localfirstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="locallastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localmiddlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localnametitleuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localthirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="nationalid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patientdemochanges" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="residentstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="rhfactoruid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="tawafahofficeuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="tawafahofficeunumber" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patienttypeuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="preflanguid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="ispatientmerged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="mergedpatientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="160">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_1"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_26aZ0HRtEe6OwdqFUALVEg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
-    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
-    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="out1" name="out1">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="0" name="mrn" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="notes" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="title_code" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="titleuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="firstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="middlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="thirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="LastName" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="registereddate" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="genderuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="dateofbirth" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isdobestimated" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="internalmrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="occupationuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="maritalstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="nationalityuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isanonymous" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isvip" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="religionuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="raceuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isinterpreterreqd" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="address" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="contact" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isemployee" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isblacklisted" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="blacklistreason" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="createdby" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="createdat" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modifiedby" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="modifiedat" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="statusflag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="orguid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="externaltablename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="__v" nullable="true" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_firstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_lastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localfirstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_locallastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localmiddlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localthirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_middlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_thirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="allowedusersafteremrlocked" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="bloodgroupuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="careproviderteamuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="enterprisemrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="issimilarnamepatient" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="lastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localfirstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="locallastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localmiddlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localnametitleuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localthirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="nationalid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patientdemochanges" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="residentstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="rhfactoruid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="tawafahofficeuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="tawafahofficeunumber" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patienttypeuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="preflanguid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="ispatientmerged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="mergedpatientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-    <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="out1" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="StringHandling.UPCASE(row1._id) " name="_id" type="id_String"/>
-        <mapperTableEntries expression="row1.mrn " name="mrn" type="id_String"/>
-        <mapperTableEntries expression="row1.notes " name="notes" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.title_code " name="title_code" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.titleuid " name="titleuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.firstname " name="firstname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.middlename " name="middlename" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.thirdname " name="thirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.LastName " name="LastName" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.registereddate " name="registereddate" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row1.genderuid " name="genderuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.dateofbirth " name="dateofbirth" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row1.isdobestimated " name="isdobestimated" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.internalmrn " name="internalmrn" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.occupationuid " name="occupationuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.maritalstatusuid " name="maritalstatusuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.nationalityuid " name="nationalityuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.isanonymous " name="isanonymous" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.isvip " name="isvip" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.religionuid " name="religionuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.raceuid " name="raceuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.isinterpreterreqd " name="isinterpreterreqd" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.address " name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries expression="row1.contact " name="contact" nullable="true" type="id_Object"/>
-        <mapperTableEntries expression="row1.isemployee " name="isemployee" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.isblacklisted " name="isblacklisted" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.blacklistreason " name="blacklistreason" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.createdby " name="createdby" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.createdat " name="createdat" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row1.modifiedby " name="modifiedby" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.modifiedat " name="modifiedat" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row1.statusflag " name="statusflag" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.orguid " name="orguid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.externaltablename " name="externaltablename" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.__v " name="__v" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="row1._firstname " name="_firstname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1._lastname " name="_lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1._localfirstname " name="_localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1._locallastname " name="_locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1._localmiddlename " name="_localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1._localthirdname " name="_localthirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1._middlename " name="_middlename" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1._thirdname " name="_thirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.allowedusersafteremrlocked " name="allowedusersafteremrlocked" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.bloodgroupuid " name="bloodgroupuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.careproviderteamuid " name="careproviderteamuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.enterprisemrn " name="enterprisemrn" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.issimilarnamepatient " name="issimilarnamepatient" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.lastname " name="lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.localfirstname " name="localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.locallastname " name="locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.localmiddlename " name="localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.localnametitleuid " name="localnametitleuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.localthirdname " name="localthirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.nationalid " name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.patientdemochanges " name="patientdemochanges" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.residentstatusuid " name="residentstatusuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.rhfactoruid " name="rhfactoruid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.tawafahofficeuid " name="tawafahofficeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.tawafahofficeunumber " name="tawafahofficeunumber" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.patienttypeuid " name="patienttypeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.preflanguid " name="preflanguid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.ispatientmerged " name="ispatientmerged" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="row1.mergedpatientuid " name="mergedpatientuid" nullable="true" type="id_String"/>
-      </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="_id" type="id_String"/>
-        <mapperTableEntries name="mrn" type="id_String"/>
-        <mapperTableEntries name="notes" nullable="true" type="id_String"/>
-        <mapperTableEntries name="title_code" nullable="true" type="id_String"/>
-        <mapperTableEntries name="titleuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="firstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="middlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="thirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="LastName" nullable="true" type="id_String"/>
-        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="genderuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="dateofbirth" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="isdobestimated" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="internalmrn" nullable="true" type="id_String"/>
-        <mapperTableEntries name="occupationuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="maritalstatusuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="nationalityuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="isanonymous" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="isvip" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="religionuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="raceuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="isinterpreterreqd" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="contact" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="isemployee" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="isblacklisted" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="blacklistreason" nullable="true" type="id_String"/>
-        <mapperTableEntries name="createdby" nullable="true" type="id_String"/>
-        <mapperTableEntries name="createdat" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="modifiedby" nullable="true" type="id_String"/>
-        <mapperTableEntries name="modifiedat" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
-        <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="externaltablename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="__v" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="_firstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localthirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_middlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_thirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="allowedusersafteremrlocked" nullable="true" type="id_String"/>
-        <mapperTableEntries name="bloodgroupuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="careproviderteamuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="enterprisemrn" nullable="true" type="id_String"/>
-        <mapperTableEntries name="issimilarnamepatient" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localnametitleuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localthirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patientdemochanges" nullable="true" type="id_String"/>
-        <mapperTableEntries name="residentstatusuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="rhfactoruid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="tawafahofficeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="tawafahofficeunumber" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patienttypeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="preflanguid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="ispatientmerged" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="mergedpatientuid" nullable="true" type="id_String"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="608" posY="160">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_2"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_26aZ0HRtEe6OwdqFUALVEg-tMap_2-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
-    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
-    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="out2">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="test" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-    <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables name="Var" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="out1.firstname == row2.first_name" name="var1" type="id_Boolean"/>
-      </varTables>
-      <outputTables name="out2" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="out1._id " name="_id" type="id_String"/>
-        <mapperTableEntries expression="out1.firstname" name="test" nullable="true" type="id_String"/>
-      </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="out1" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="_id" type="id_String"/>
-        <mapperTableEntries name="mrn" type="id_String"/>
-        <mapperTableEntries name="notes" nullable="true" type="id_String"/>
-        <mapperTableEntries name="title_code" nullable="true" type="id_String"/>
-        <mapperTableEntries name="titleuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="firstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="middlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="thirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="LastName" nullable="true" type="id_String"/>
-        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="genderuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="dateofbirth" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="isdobestimated" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="internalmrn" nullable="true" type="id_String"/>
-        <mapperTableEntries name="occupationuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="maritalstatusuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="nationalityuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="isanonymous" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="isvip" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="religionuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="raceuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="isinterpreterreqd" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="contact" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="isemployee" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="isblacklisted" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="blacklistreason" nullable="true" type="id_String"/>
-        <mapperTableEntries name="createdby" nullable="true" type="id_String"/>
-        <mapperTableEntries name="createdat" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="modifiedby" nullable="true" type="id_String"/>
-        <mapperTableEntries name="modifiedat" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
-        <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="externaltablename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="__v" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="_firstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localthirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_middlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_thirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="allowedusersafteremrlocked" nullable="true" type="id_String"/>
-        <mapperTableEntries name="bloodgroupuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="careproviderteamuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="enterprisemrn" nullable="true" type="id_String"/>
-        <mapperTableEntries name="issimilarnamepatient" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localnametitleuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localthirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patientdemochanges" nullable="true" type="id_String"/>
-        <mapperTableEntries name="residentstatusuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="rhfactoruid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="tawafahofficeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="tawafahofficeunumber" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patienttypeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="preflanguid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="ispatientmerged" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="mergedpatientuid" nullable="true" type="id_String"/>
-      </inputTables>
-      <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="" name="mpi_pin" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patient_pin" type="id_String"/>
-        <mapperTableEntries name="hospital_origin" nullable="true" type="id_String"/>
-        <mapperTableEntries name="first_name" nullable="true" type="id_String"/>
-        <mapperTableEntries name="middle_name" nullable="true" type="id_String"/>
-        <mapperTableEntries name="last_name" nullable="true" type="id_String"/>
-        <mapperTableEntries name="suffix" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="" name="date_of_birth" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="gender" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address_area" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address_city" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address_state" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address_country" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address_zipcode" nullable="true" type="id_String"/>
-        <mapperTableEntries name="contact_number_mobile" nullable="true" type="id_String"/>
-        <mapperTableEntries name="contact_number_phone" nullable="true" type="id_String"/>
-        <mapperTableEntries name="marital_status" nullable="true" type="id_String"/>
-        <mapperTableEntries name="occupation" nullable="true" type="id_String"/>
-        <mapperTableEntries name="nationality" nullable="true" type="id_String"/>
-        <mapperTableEntries name="religion" nullable="true" type="id_String"/>
-        <mapperTableEntries name="race" nullable="true" type="id_String"/>
-        <mapperTableEntries name="registration_date_time" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="is_blacklisted" nullable="true" type="id_String"/>
-        <mapperTableEntries name="is_vip" nullable="true" type="id_String"/>
-        <mapperTableEntries name="email" nullable="true" type="id_String"/>
-        <mapperTableEntries name="is_employee" nullable="true" type="id_String"/>
-        <mapperTableEntries name="timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="createdby" nullable="true" type="id_String"/>
-        <mapperTableEntries name="createdbydept" nullable="true" type="id_String"/>
-        <mapperTableEntries name="modified_timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="batch_date" nullable="true" type="id_String"/>
-        <mapperTableEntries name="uuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1._id" name="transaction_external_id" nullable="true" type="id_String"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="608" posY="320">
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -708,13 +126,13 @@
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;TMC_DW_DB&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;jsjavier&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:1Te9RcVX3ut0uvr/9zyA32qArdNcI56Mr/eY6Ijk6539jdZFDMY="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;ort_aa_patients&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:fg8FzprhK+C8oImOlFb4k56i5Dkw1VMiO1ezm6Viaj6HzRBM6zI="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;ort_aa_dm_bed_occupancy&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select * from dbo.ort_aa_patients&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select * from ort_aa_dm_bed_occupancy&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -725,172 +143,285 @@
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="mpi_pin"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="filter_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bed"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="hospital_origin"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="audit_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="first_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="yesterday_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="middle_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="from_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="last_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="to_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="suffix"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="active_from"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="date_of_birth"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="active_to"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="gender"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_bed_under_maintenance"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_census_bed"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address_area"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_bed_maintenance_major"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address_city"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_bed_maintenance_minor"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address_state"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address_country"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address_zipcode"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="contact_number_mobile"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="contact_number_phone"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="marital_status"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="occupation"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="nationality"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="religion"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="race"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="registration_date_time"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="is_blacklisted"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="is_vip"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="email"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="is_employee"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="createdby"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="createdbydept"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="modified_timestamp"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="batch_date"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="uuid"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="comments"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value=".124 dm_bedoccupancy"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_1">
-      <column comment="" key="false" length="50" name="mpi_pin" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="patient_pin" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="hospital_origin" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="2147483647" name="first_name" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="2147483647" name="middle_name" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="2147483647" name="last_name" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="suffix" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="23" name="date_of_birth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="3" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="gender" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="2147483647" name="address" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="address_area" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="2147483647" name="address_city" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="address_state" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="2147483647" name="address_country" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="address_zipcode" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="contact_number_mobile" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="contact_number_phone" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="marital_status" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="occupation" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="nationality" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="religion" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="race" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="23" name="registration_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="3" sourceType="VARCHAR" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="is_blacklisted" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="BIT" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="is_vip" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="BIT" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="100" name="email" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="is_employee" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="BIT" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="23" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="3" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="255" name="createdby" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="255" name="createdbydept" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="23" name="modified_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="3" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="255" name="batch_date" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="255" name="uuid" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="255" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="filter_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="audit_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="yesterday_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="from_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="to_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_from" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_to" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_under_maintenance" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_census_bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_major" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_minor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="160">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
-    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
-    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
-    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
-    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
-    <elementParameter field="CHECK" name="PRINT_HEADER" value="true"/>
-    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
-    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
-    <elementParameter field="TABLE" name="LENGTHS" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="_id"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="test"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
-    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="416" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_1"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_X7ziIIUMEe6uhsGrlqL3JQ-tMap_6-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tLogRow_1">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="test" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    <metadata connector="FLOW" name="out3">
+      <column comment="" key="false" length="-1" name="filter_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="audit_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="yesterday_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="from_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="to_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_from" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_to" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_under_maintenance" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_census_bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_major" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_minor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="out3" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row7.filter_date " name="filter_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.bed " name="bed" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.audit_date " name="audit_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.yesterday_date " name="yesterday_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.from_date " name="from_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.to_date " name="to_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.active_from " name="active_from" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.active_to " name="active_to" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.is_bed_under_maintenance " name="is_bed_under_maintenance" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.is_census_bed " name="is_census_bed" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.is_bed_maintenance_major " name="is_bed_maintenance_major" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.is_bed_maintenance_minor " name="is_bed_maintenance_minor" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.comments " name="comments" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row7" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="filter_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="bed" nullable="true" type="id_String"/>
+        <mapperTableEntries name="audit_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="yesterday_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="from_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="to_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="active_from" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="active_to" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="is_bed_under_maintenance" nullable="true" type="id_String"/>
+        <mapperTableEntries name="is_census_bed" nullable="true" type="id_String"/>
+        <mapperTableEntries name="is_bed_maintenance_major" nullable="true" type="id_String"/>
+        <mapperTableEntries name="is_bed_maintenance_minor" nullable="true" type="id_String"/>
+        <mapperTableEntries name="comments" nullable="true" type="id_String"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="608" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:ZDCVULjsGjUsqEviOCYCVIyPPtbm6GJZpdlx9gF1dsm7G1vJL1rKGtk="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;ort_aa_dm_bed_occupancy&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="CLEAR"/>
+    <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="LABEL" name="NOTE" show="false" value="NOTE: batch size must be less than or equal to total number of parameter markers divided by number of columns"/>
+    <elementParameter field="CHECK" name="SPECIFY_IDENTITY_FIELD" show="false" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="IDENTITY_FIELD" show="false" value="filter_date"/>
+    <elementParameter field="TEXT" name="START_VALUE" show="false" value="1"/>
+    <elementParameter field="TEXT" name="STEP" show="false" value="1"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="CHECK" name="USE_ALTERNATE_SCHEMA" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ALTERNATE_SCHEMA" show="false" value="&quot;&quot;"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="filter_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bed"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="audit_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="yesterday_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="from_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="to_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="active_from"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="active_to"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_bed_under_maintenance"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_census_bed"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_bed_maintenance_major"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_bed_maintenance_minor"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="comments"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="Store to DW dm_bedoccupancy"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDBOutput_1">
+      <column comment="" key="false" length="-1" name="filter_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="audit_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="yesterday_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="from_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="to_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_from" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_to" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_under_maintenance" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_census_bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_major" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_minor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" length="-1" name="filter_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="audit_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="yesterday_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="from_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="to_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_from" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="active_to" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_under_maintenance" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_census_bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_major" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_bed_maintenance_minor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tMongoDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_1" target="tMap_1">
+  <connection connectorName="FLOW" label="row7" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row7"/>
   </connection>
-  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tMap_2">
+  <connection connectorName="FLOW" label="out3" lineStyle="0" metaname="out3" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tDBOutput_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
-  </connection>
-  <connection connectorName="FLOW" label="out2" lineStyle="0" metaname="out2" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tLogRow_1">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out2"/>
-  </connection>
-  <connection connectorName="FLOW" label="row2" lineStyle="8" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_2">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
   <note opaque="true" posX="0" posY="64" sizeHeight="64" sizeWidth="289" text="720,000 Rows with 46 column to compare"/>
   <note opaque="true" posX="480" posY="384" sizeHeight="64" sizeWidth="289" text="720,000 Rows with 46 column to compare"/>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="192;192;192"/>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Mirror from Old Database"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_af097d18-092e-49be-83d1-b79fde589a52"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5MkQJg1hj6SvR/7hqrCik0fl3xIkXl3TeiYktBqh4bIdb5cRV7W4yNl61Lyplx17NoGu5aLvMCVH&#13;
-ZviEJicQYg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a7651ebb-c2b6-4897-aff0-4c6e00e256e0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>oN8EAz5ftc0o0iSAFLLQ4y9r7tqpvlsmG4FOlx7owQOsK/wO8zQNcfqzgaga7OiJmnn91iOoYbgq&#13;
-tQy8X1UN6w==</DigestValue></Reference></SignedInfo><SignatureValue>mqcQfE0t3UQTyhtv43FaE9XQCdmuUtFrhDHLVKbxiiMHDURAz1K7nEEMllURhiKLWxahi5UV9SsD&#13;
-PPQ8DjDmcD+PqJUiie7PBcUilPi8pWIwVkDmA6fqf0gLPOLaYAhG9jtVTrgPdhc7bgeakxjeSTZM&#13;
-ZkfFE6fdFNPfGYKQFZwOaP28oaAeAv/Zv1izwIkO7+JKlMhbipIG9Eaz0hFJAKh7AglF+fTfJTfO&#13;
-Or7Kf3GdEybBgTwea9y4xE25uYPA5d5RWw6mC8L9HOcCcc306TntFlL+JWmg5jzgHLBf+mzlU3k7&#13;
-mXHhV+3/3a5toGe7a/QG8i2ggBseaMZJcKvWEQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_eab6b3e8-76e5-4529-8b42-d174c2223b15"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>QP+T4uogLK7uWE21GdDROPVb9y9PsUGmkTsgIaulnhAFprhOPaRhn1EDBcAK3VcgvnSYUpjsrK2R&#13;
+ZapVItKm3Q==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_d54b78a9-5658-4be3-8b3e-b008cbdbbf95"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>MpYuOiKNeItJ1tbLY994HopRRxBXppHeYIWOwvoHcJt87vQ2equyl5CYOAXfYnLxpp6JpBaK9d7S&#13;
+t4FGC7Ipuw==</DigestValue></Reference></SignedInfo><SignatureValue>fPZtgqpOXGes9yeX40ZUzhj+b7l+0h3htzbfwT7l6WBdXNtgRYY2OdXzOFHEIviMFgbOaGDgEzHS&#13;
+1IY1Hdz+5mX1gvgeBrnzNQP3fd47Z+VBwGYtiZxd0Tpx1Rk1YSCtEht3q0ZmQvkffSnx7BsGK2yH&#13;
+SMu+3Kh/lqHkWLeLipowH3Jg4701fdzDP5eGNrn5fq/VZqqj/2cavz7xwGgVrIRuk3LfR8K74ltP&#13;
+4SMixDqsWFMG0lcey/MTsyHwrWnqsDLutKBvRXwneiA641eRohQdVH17n3Gm3mx1HLoXdbf+g7mJ&#13;
+6+WsAE2SifJcsMn2l9PvVnBIFM6dy96aa2crqw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -912,4 +443,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a7651ebb-c2b6-4897-aff0-4c6e00e256e0" Target="#_af097d18-092e-49be-83d1-b79fde589a52"><Timestamp>2023-11-16 05:07:30</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_d54b78a9-5658-4be3-8b3e-b008cbdbbf95" Target="#_eab6b3e8-76e5-4529-8b42-d174c2223b15"><Timestamp>2024-01-04 07:48:38</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
