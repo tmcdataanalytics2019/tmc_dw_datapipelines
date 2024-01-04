@@ -262,7 +262,7 @@
     <elementParameter field="TEXT" name="LABEL" value="Check Missing Date"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_2">
-      <column comment="" key="false" length="-1" name="occupancy_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="occupancy_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="-192">
@@ -282,7 +282,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select DATEADD(second,86399,filterdate) as filterdate from ort_day_filter where filterdate between '2021-01-01 00:00:00' and FORMAT(GETDATE(), 'yyyy-MM-dd 00:00:00 ') &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select DATEADD(second,86399,filterdate) as filterdate, cast(filterdate as date) as lookupdate from ort_day_filter where filterdate between '2021-01-01 00:00:00' and FORMAT(GETDATE(), 'yyyy-MM-dd 00:00:00 ') &quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -295,6 +295,8 @@
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="filterdate"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="lookupdate"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -302,6 +304,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_3">
       <column comment="" key="false" length="-1" name="filterdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lookupdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="416" posY="32">
@@ -384,7 +387,7 @@
     <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tAggregateRow_1">
-      <column comment="" key="false" length="-1" name="occupancy_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="occupancy_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="544" posY="-192">
@@ -406,7 +409,7 @@
       <column comment="" key="false" length="-1" name="ifnull" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row2.filterdate " name="filterdate" nullable="true" type="id_Date"/>
@@ -414,9 +417,10 @@
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries name="filterdate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="lookupdate" nullable="true" type="id_Date"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row4" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row2.filterdate " name="occupancy_timestamp" nullable="true" operator="=" type="id_Date"/>
+        <mapperTableEntries expression="row2.lookupdate " name="occupancy_timestamp" nullable="true" operator="=" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -793,6 +797,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
   </connection>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tDBInput_3" offsetLabelX="0" offsetLabelY="0" source="tDBInput_3" target="tMap_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="lookupdate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
@@ -877,13 +886,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_dc69781c-1a25-45ae-b7b7-5e81b0a75702"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>57cexPejFO2Wn3/A5+hPjh3baAJuxo72eCAq3imVA61fDN4fJkXwZhcrJfAx5CukQUAl3mwamEFs&#13;
-G6x0aZ4P0w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_0d81180e-652d-4ffb-8d49-14f78e9927bd"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Pm1PDEARP4l6p1LS8OHwPLPv4Czzxp0piD0El2SbkG/3qxCL3q4iJaojFDpGBP8hiF7jmfLRRDd0&#13;
-YcBJrrN0/Q==</DigestValue></Reference></SignedInfo><SignatureValue>mjhX5OFKNoJQb71GlMh9Ugn57AynNZ+nTHnCRCa9XxmuFy6sKBhSZYHMDY4rqZR2wEAHsJme9YYW&#13;
-nqxBGWx5GCCiOnR20pGED3QPK7t4ixwpjUhUK4n1nD3GOJG5sEMrYSJQj03BF7mYX0WA4ZlHcTbz&#13;
-WxSWD3wg1kycX68VGTEgAgB6SGn29+UMuAXMMOeTRhwNAGbFbH9zrGEgKPM0URG3lIVOxnKh6qZk&#13;
-QqXSYXiYcAFOB4kCIcKw/kvhmh3wyRwI2BpHGGlnFnv0aK7RV2xVQkH36kTPZQIknpRTG57+uxIC&#13;
-GM7DhhQeFsPC99E0wy8GPHVuzCJGSkZnvAdnlg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_94a98ca9-d9bd-4c6b-a2cf-35b59b19702f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>8lSvIpv4YIDPVpVs3bSRcQzeyS7Lqj0pY8quoUOYC95gLA5qvhPi08ON8H6RriqRPYkOriQYVc/F&#13;
+PDnd+34ixQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_0e5cbadf-0f7a-4b40-9ffe-8a96467c8417"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5x3AquL3DHci9/oFCqT+xFXQQSy9NRFAEjN6Vmjfjz5nXM7OCJ5i0NSigQ72Uu2+k7mmyR556RuH&#13;
+qbzPWVkUXQ==</DigestValue></Reference></SignedInfo><SignatureValue>PY2T+ngmCBEjK6ztTV7qEb5FgaN1IfxTjsUeqweTF4X+GUgA55WtzaWvf2SxsHQkRtTWdQIyRYcA&#13;
+2w4faMzHtwxS+5NWChe0wsDkCRIPPO9z39PG/JI79VwQFPX3AeGtEsFL19VkaQoG91RcaE+2iwpq&#13;
+e9WBAlvjU8tIfMxblGRlOqpCdvZ2J7gDSWi7cTvizHGXnpTqCLnJyR/pQ/kKsx6B6OyEwf+9L+gE&#13;
+ODGQ6IC9wzmWUQBLwO42h7QZLueXt9e68HkO8j9dx6fUpL0rykThi6qbuoodfTzHu017Btdv4uDD&#13;
+NPW+579JuZfIH46V2+MJFMrd4zBUNjvoTkddRw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -905,4 +914,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_0d81180e-652d-4ffb-8d49-14f78e9927bd" Target="#_dc69781c-1a25-45ae-b7b7-5e81b0a75702"><Timestamp>2024-01-04 04:09:19</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_0e5cbadf-0f7a-4b40-9ffe-8a96467c8417" Target="#_94a98ca9-d9bd-4c6b-a2cf-35b59b19702f"><Timestamp>2024-01-04 04:21:31</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
