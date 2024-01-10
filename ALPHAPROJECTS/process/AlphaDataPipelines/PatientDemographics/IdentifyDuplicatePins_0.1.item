@@ -236,13 +236,26 @@
       <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="FLOW" label="out3" name="out3">
+      <column comment="" key="false" length="-1" name="_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1._id " name="_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.mrn) " name="mrn" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.mrn " name="mrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.firstname.replaceAll(&quot; &quot;,&quot;&quot;)) " name="firstname" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.middlename) " name="middlename" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.thirdname) " name="thirdname" nullable="true" type="id_String"/>
@@ -250,6 +263,19 @@
         <mapperTableEntries expression="StringHandling.UPCASE(row1.gender) " name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries expression="TalendDate.formatDate(&quot;yyyy-MM-dd&quot;, row1.dateofbirth) " name="dateofbirth" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.registereddate " name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.mrn.substring(0, 2)==&quot;ORT&quot;?&quot;A&quot;:row1.mrn.substring(0, 2)==&quot;100&quot;?&quot;B&quot;:row1.mrn.substring(0, 2)==&quot;MRN&quot;?&quot;C&quot;:&quot;D&quot; " name="mrnposition" nullable="true" type="id_String"/>
+      </outputTables>
+      <outputTables name="out3" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row1._id " name="_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.mrn " name="mrn" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.firstname.replaceAll(&quot; &quot;,&quot;&quot;)) " name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.middlename) " name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.thirdname) " name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.lastname)==null?&quot;&quot;:row1.lastname " name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.gender) " name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="TalendDate.formatDate(&quot;yyyy-MM-dd&quot;, row1.dateofbirth) " name="dateofbirth" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.registereddate " name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.mrn.substring(0, 2)==&quot;ORT&quot;?&quot;A&quot;:row1.mrn.substring(0, 2)==&quot;100&quot;?&quot;B&quot;:row1.mrn.substring(0, 2)==&quot;MRN&quot;?&quot;C&quot;:&quot;D&quot; " name="mrnposition" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" nullable="true" type="id_String"/>
@@ -277,6 +303,7 @@
     <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Contenation"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="out2">
       <column comment="" key="false" length="-1" name="_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -292,7 +319,7 @@
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1._id " name="_id" nullable="true" type="id_String"/>
@@ -317,6 +344,7 @@
         <mapperTableEntries name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries name="dateofbirth" nullable="true" type="id_String"/>
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="mrnposition" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -377,8 +405,115 @@
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_3"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_YZCT0K9VEe6YVbMuv51bIg-tMap_3-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out4" name="out4">
+      <column comment="" key="false" length="-1" name="_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="out4" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out3._id " name="_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.mrn " name="mrn" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.firstname " name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.middlename " name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.thirdname " name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.lastname " name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.gender " name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.dateofbirth " name="dateofbirth" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.registereddate " name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out3.mrnposition " name="mrnposition" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out3" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="mrn" nullable="true" type="id_String"/>
+        <mapperTableEntries name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries name="dateofbirth" nullable="true" type="id_String"/>
+        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="mrnposition" nullable="true" type="id_String"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_2"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="mrn"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="firstname"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="middlename"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="thirdname"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="lastname"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gender"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dateofbirth"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registereddate"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="mrnposition"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out4" name="tLogRow_2">
+      <column comment="" key="false" length="-1" name="_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
   <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="992" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="RADIO" name="BASIC_MODE" value="false"/>
     <elementParameter field="RADIO" name="TABLE_PRINT" value="true"/>
     <elementParameter field="RADIO" name="VERTICAL" value="false"/>
@@ -435,9 +570,18 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
-  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tMap_2">
+  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_1" target="tMap_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="mrnposition"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
+  </connection>
+  <connection connectorName="FLOW" label="out3" lineStyle="0" metaname="out3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_1" target="tMap_3">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
   <connection connectorName="FLOW" label="out2" lineStyle="0" metaname="out2" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tAggregateRow_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -454,20 +598,30 @@
   </connection>
   <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tSortRow_1" offsetLabelX="0" offsetLabelY="0" source="tSortRow_1" target="tLogRow_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" show="false" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
+  </connection>
+  <connection connectorName="FLOW" label="out4" lineStyle="0" metaname="out4" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tLogRow_2">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out4"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileInputExcel_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_fbd17f4d-8413-4a27-9b46-2aebb99ae166"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KPOn+Dm99sHQHwPxk6sPjXPd3bj+o5PDPLnWU+FiYAaRgnoC3qwJIprr98YVQl8+Y9BhTUXAnInY&#13;
-JYS+J4O2oA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_2436ff58-7707-4165-ac1e-8b9c3eb9e092"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Nw6wGvv9+yN6NoBe1P10z5gGcMIeqdPsMiuUp8LV6CwGj1NeBgN4m2LIdiOqa5gN0O87snCeEXcW&#13;
-WqXvMu5cdw==</DigestValue></Reference></SignedInfo><SignatureValue>SR72rQgYvhJbNDDKXERmb3EEijTPFliV/wzvxyVz2e/OA2EsSvf95hh4r7jJSB+TWYZHT9D7oK5X&#13;
-XgrAVIXUz3eS6uSqwOVfrEcQkfftMVYRwqEXIMX8r3azwgwe56XF/DMlA+tCXxN/27r2pvVcf4Wr&#13;
-lnMRy5QFE1mh6VqnvIFaicO7evaTjt+Xi+DtOESBLFA2kaBy2hzFIRxXF79Gd9IbTN9JFwqgjsIm&#13;
-uj99lSFnYXkoldqXS3Fqs5sv1BKxnjmn8nRiX79sfFs4LeMKBxjq4K6jb81m7Z6FQcgez0CIPwz8&#13;
-nZDfil7Jp3p9g2egB6SOnqQsvE6zQr+p6Al9aQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_e2b9d686-e67b-44e5-9792-e360d599fccb"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ec7TwCZ19ElW2ob8d3P49zmI2L7OcWD91TnLzVaKrsUTP2ZEBN0aOOk4EPZ7voaAf8GEvsb9aDYv&#13;
+q8tVtBcPRA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_6bfb0543-d791-42c4-93e7-deed36f54d07"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>V4i5MGHyrbNle866s0N/UJrP1/f5hYQkNTvTPRVUvkW7TQXH2CGoDDbKssK3t6kILBs/N95SbTa+&#13;
+Vynry+YXqw==</DigestValue></Reference></SignedInfo><SignatureValue>ETw84ECtaO/q2WH26GMGU8X0/DPgOmQzRUiAQ9P9+0Bl/LngneQpTdj3lgiPCSE41TnI1Vfy9Jc6&#13;
+Xy9IPCvLSfknpDUn4zw2gX6YeiNp1NT0mWDxEVXZVnE9eIkcgWfvPfWSlc6CRRhblwOFdP1uWxM5&#13;
++qxv3t4mq6FGhKmG3XBCbMxAvccgL6OmvRHSrj4nhn/PgBpb6/2E8wFA41CXQ5hRrYEXEm3qjOHK&#13;
+2Jw43nVBN3QNMCukAmNFrZg6p2d4aqotk/J0nhThG2qRjr63zEgKUgzzhXLI5SHDnyd1Czn7/v+7&#13;
+duZKjrD97mEfWDyHtq9cEWmDcSXjnWa+K1EdnA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -489,4 +643,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_2436ff58-7707-4165-ac1e-8b9c3eb9e092" Target="#_fbd17f4d-8413-4a27-9b46-2aebb99ae166"><Timestamp>2024-01-10 02:30:38</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_6bfb0543-d791-42c4-93e7-deed36f54d07" Target="#_e2b9d686-e67b-44e5-9792-e360d599fccb"><Timestamp>2024-01-10 02:45:22</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
