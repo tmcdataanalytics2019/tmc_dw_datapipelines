@@ -479,7 +479,8 @@
       <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="substring" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -497,7 +498,8 @@
         <mapperTableEntries expression="out4.dateofbirth " name="dateofbirth" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out4.registereddate " name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="Var.var1.equals(&quot;MRN&quot;)?&quot;A&quot;:Var.var1.equals(&quot;100&quot;)?&quot;B&quot;:Var.var1.equals(&quot;ORT&quot;)?&quot;C&quot;:&quot;D&quot; " name="mrnposition" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out4.mrn.substring(0, 3) " name="newColumn" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out4.mrn.substring(0, 3) " name="substring" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row4.visit_id " name="visit_id" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out4" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" nullable="true" type="id_String"/>
@@ -510,10 +512,10 @@
         <mapperTableEntries name="dateofbirth" nullable="true" type="id_Date"/>
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row4" sizeState="INTERMEDIATE">
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row4" sizeState="INTERMEDIATE">
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
-        <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out4._id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -551,7 +553,9 @@
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="mrnposition"/>
       <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="newColumn"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="substring"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="visit_id"/>
       <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
@@ -568,7 +572,8 @@
       <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="substring" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="416">
@@ -654,6 +659,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="newColumn"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="substring"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
@@ -672,13 +683,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_12caa54d-9c7f-4edf-ad66-d0f056fb277a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>YjOHIOAf2x7kk5/NySDz9QcNV65Wq3/cHUzb1fG/wG+k+A9uMYJWBn8OhI7ssxeP3BAKgSpi3ORN&#13;
-aPFYY7fzYw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_d5342ce2-99ff-43e2-ad25-7682d7baea60"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>jsGOQT8TnE8fd6F9jc2ZwO0gX+4nHXUyxknDdfousjju5Ir1StMgiAMmMlTZSHCb3Lb8HiOJAcBV&#13;
-A2lim3MMDg==</DigestValue></Reference></SignedInfo><SignatureValue>eaenvG90mISpXMpo7bKNSVtEVbrFckqnv00VEC+RtERa7944bYLsKlVK3JfpKBI9rplHAvqcvHGl&#13;
-pw/sFBrWh1MySQvTRLn9RLvhB7yF8t0Afq32K/faVJI/gcLeDz6uQA3RkuiuHb77DhOYnoHCa1g1&#13;
-dJfZRtg05gdEmeO6PrWbEmDeocb393iNiAndJUaSIOWqkSHSAFSRwi3/lu2fI5pided4olryNSfT&#13;
-WOPH0lyg0R8xK1HnnyVJZJWKVBE6Tue6C56JbIaCfimg9tNwZNsqaNPtCZsI38RcyBpPhvafzXr4&#13;
-9iQLSr6+ToSktFshz6IVqdu1dZ2QiBW/ySzgGw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_89c2aacb-6988-4052-a6f5-a03731f95ca0"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Qm/vHXAcC5HrIjEh8j2U2MreQWfME9EVeNBfnAuVbAZvgqBLWarGUnILRHpRWaj7q3HKItaUT0uT&#13;
+MLfyDeRroQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_0297d718-5896-4909-a096-a262f9cbe471"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>zMMnGRBkCJ0u5xyHE83rtpFXWJjVEX4x+/uFENJopklkc5uN6iRdR50DF7pWu3h+TUgLXh/Rmpbl&#13;
+r/HfaHlD8A==</DigestValue></Reference></SignedInfo><SignatureValue>d9fZpIIREpel3Miq3W9tXviIRu4URUvMwO405IsAaBtXFv+4gGwHczq/AWfiVydj2dx4siziTtFf&#13;
+gFLA7iCciTYuOQqaCsG3TWWp7fHUM+8VA+GoEcdfwxjfhOKKjTM9BObTLgbtPnkTQt6i3g6y7Hti&#13;
+IZAcCacVS4ydBrTABj9N4H1cKxMhhupJFM2phDiGZXq6ZrCuQtlYI9YPe7MMhCnNlmyhL+BKaQm2&#13;
+soDAygq8JSDcZnIPs/AcYnxIs75HrWKILEi1ZLxrMq8ksgJ52J2NmHMe+Kqe1UfBjq7IiYvyNC/Y&#13;
+B/SuYOKKT0Z6yPCBlVwrz6AhPa/+vMZa6cxbBQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -700,4 +711,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_d5342ce2-99ff-43e2-ad25-7682d7baea60" Target="#_12caa54d-9c7f-4edf-ad66-d0f056fb277a"><Timestamp>2024-01-10 06:59:16</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_0297d718-5896-4909-a096-a262f9cbe471" Target="#_89c2aacb-6988-4052-a6f5-a03731f95ca0"><Timestamp>2024-01-10 07:00:22</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
