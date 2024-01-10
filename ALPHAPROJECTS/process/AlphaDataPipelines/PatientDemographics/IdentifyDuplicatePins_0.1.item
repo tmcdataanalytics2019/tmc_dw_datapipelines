@@ -480,7 +480,7 @@
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="substring" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="totalcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -499,7 +499,7 @@
         <mapperTableEntries expression="out4.registereddate " name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="Var.var1.equals(&quot;MRN&quot;)?&quot;A&quot;:Var.var1.equals(&quot;100&quot;)?&quot;B&quot;:Var.var1.equals(&quot;ORT&quot;)?&quot;C&quot;:&quot;D&quot; " name="mrnposition" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out4.mrn.substring(0, 3) " name="substring" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row4.visit_id " name="visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row4.totalcount " name="totalcount" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out4" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" nullable="true" type="id_String"/>
@@ -513,7 +513,9 @@
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
       </inputTables>
       <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="ALL_MATCHES" name="row4" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="totalcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="ipvisit" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="opvisit" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out4._id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
       </inputTables>
@@ -536,7 +538,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select a.visit_id, b.patient_pin, b.transaction_external_id from dbo.ort_aa_patient_visits as a left join dbo.ort_aa_patients as b on b.transaction_external_id = a.patient_pin&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;\&quot;  SELECT b.transaction_external_id,b.patient_pin, COUNT(a.visit_id) as totalcount,&#13;&#10;  COUNT(CASE WHEN c.value_description = 'INPATIENT' THEN a.visit_id ELSE null END) as ipvisit,&#13;&#10;  COUNT(CASE WHEN c.value_description in ('EMERGENCY','OUTPATIENT') THEN a.visit_id ELSE null END) as opvisit&#13;&#10;  FROM [TMC_DW_DB].[dbo].[ort_aa_patient_visits] as a&#13;&#10;  LEFT JOIN [TMC_DW_DB].[dbo].[ort_aa_patients] as b on b.transaction_external_id = a.patient_pin&#13;&#10;  LEFT JOIN [TMC_DW_DB].[dbo].[ort_aa_mdt_reference_values] c on c.transaction_external_id = a.visit_type_id&#13;&#10;  GROUP BY b.transaction_external_id, b.patient_pin&#13;&#10;\&quot;&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -547,7 +549,11 @@
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="visit_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="totalcount"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ipvisit"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="opvisit"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -558,7 +564,9 @@
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_2">
-      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="totalcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipvisit" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opvisit" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -587,7 +595,7 @@
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="substring" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="totalcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="288">
@@ -626,7 +634,7 @@
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="substring"/>
       <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="visit_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="totalcount"/>
       <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
@@ -644,7 +652,7 @@
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrnposition" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="substring" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="totalcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputExcel_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputExcel_1" target="tMap_1">
@@ -686,7 +694,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="newColumn"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="visit_id"/>
+      <elementValue elementRef="TRACE_COLUMN" value="totalcount"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="substring"/>
@@ -699,6 +707,12 @@
   <connection connectorName="FLOW" label="row4" lineStyle="8" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tMap_3">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="opvisit"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ipvisit"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -714,13 +728,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_24724294-3a93-462b-8f0b-ccffd94bde18"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>bFJAPvV6DHeIrvQ+a4tzzb/e+UhFm0hx8QJGjmu4xJ75vk4+bp9tGfpnsR2Gz4dV4t4cPt3Jx3Jr&#13;
-sAFQAkobdg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_cac40412-54a0-4973-aa72-fe02594218aa"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>RUP61L1jDO3QeX5qdshU9c5eiax0DtGXjLfbAoP1qV5bkzKgAN0TQeYfXME8SUQkkfQ7wI+CML4P&#13;
-Izf7TGrXVw==</DigestValue></Reference></SignedInfo><SignatureValue>pkr8a/ua1f1MKxx1RuUOMNQnwZPUKH0FKPWguAIZiPZk1J67ixGtTYq2sTCAZlqBaI7Y3TJ6RG3L&#13;
-8krlxffM8k5sNRvtcPRpsWxJpU6Ff6j0lPxee9QWY77QDcghWRwJVr8gjgom7hFoNg5xLgbdiWAf&#13;
-6ophGHekQf+GgM5rZxdoyHUCT8eUPHAIf3Q9/jeSAPgSQ9Icncn108E2AcrCs8DEU6J4wKPPjwGN&#13;
-AcLKDjNj4OWY9mgkqIffB47NTbtRT4FY00cVZ+Ohflrs+n53HWjkMl3I2y+9tcvjRrKtx05EUFHl&#13;
-dS7iNSmNZJNvkRsMmgw8JvdH4rEc5d5tIifvOg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_34ee4222-f404-4a74-9594-4686e792e8f4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ZOimEN8TAc7l9UHgAYUx7Qe2kWWL17hhXYQJKGdJzEHdmBOlEdSTxo4P1Q2Wzs5pNUEWLnhgKFFQ&#13;
+mk40AcZndA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e22a8c18-04ea-42e8-93e2-9c6816d7b0bc"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5OQKfCmHBHRkP9bZAobIxW0HfHTpfebZiDJzvNJJBfPEY8Bh2qwG0DvozcMQGNoe8ikV9HMDLYQN&#13;
++/2y50b9Jg==</DigestValue></Reference></SignedInfo><SignatureValue>aDKFlilF7eZzHsYV12oCSwcqOGncK8rHLYxQrgQtEn6s83gd7SZWBQ/Gr2E2bVrHzo5hDAqP+On0&#13;
+VcDNQxZ1f5JaNDSQ5H2LfjdyoXy3qCnNe4ZoK5ic29MyanzzgiDUG9JTiLLjTmh4r9ukC8VlXYkF&#13;
+MRgyCWJ+1HCmZd4d4ts7TTa2Yh4vtbBbVqJk446yavGgaf8MJadRVkVAwB6N7cv+3PVlrhpwX4GE&#13;
+JeqN1zp8t9F1RmWfm4kB+mfZYJUcr5azTdyyfvh1kO5ZjQUpXuj7RHcizFj2ja75ashxg8DxTCDf&#13;
+JRRZzbCeCRgfeUoMvrC+UDCYdcwjT6X+uufocA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -742,4 +756,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_cac40412-54a0-4973-aa72-fe02594218aa" Target="#_24724294-3a93-462b-8f0b-ccffd94bde18"><Timestamp>2024-01-10 07:18:57</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e22a8c18-04ea-42e8-93e2-9c6816d7b0bc" Target="#_34ee4222-f404-4a74-9594-4686e792e8f4"><Timestamp>2024-01-10 07:33:52</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
