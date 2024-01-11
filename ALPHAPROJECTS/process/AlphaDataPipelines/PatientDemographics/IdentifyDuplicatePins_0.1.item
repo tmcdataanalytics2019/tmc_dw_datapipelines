@@ -415,8 +415,7 @@
         <mapperTableEntries name="ipdcount" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="opdcount" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="counter" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="inpatient_admission" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="outpatient_admission" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="admission_date" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -619,6 +618,10 @@
       <elementValue elementRef="FUNCTION" value="sum"/>
       <elementValue elementRef="INPUT_COLUMN" value="opdcount"/>
       <elementValue elementRef="IGNORE_NULL" value="false"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="admission_date"/>
+      <elementValue elementRef="FUNCTION" value="max"/>
+      <elementValue elementRef="INPUT_COLUMN" value="admission_date"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
     <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
@@ -631,8 +634,7 @@
       <column comment="" key="false" length="-1" name="ipdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="opdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inpatient_admission" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="outpatient_admission" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="288">
@@ -1022,13 +1024,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_24804f34-e621-475a-84f4-1c09398ddbd4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>8XG9nKuYXAGY5F35Dxz7VXUB4PXVKG2PygZFK1nVnAB+ZgPoYko6DU4zUdIymB+92kR5DWZzKsVb&#13;
-j6eZ5yOrHQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_4a91870b-2396-470f-9e21-4c4d26cbd5b2"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ubantBbn8TZnnV/JFUXj5t5FsEaGBieeOOLCYGmZwEQJXWeznKwf1mpPr4jH/4TaClGzZA7meB6M&#13;
-lUr26Xm/DA==</DigestValue></Reference></SignedInfo><SignatureValue>DVxDU8BEi7Ii24zCuxXcCvIbIzZVYtf5aBxb3QRrvQNqOwmfs5zIULT2hNHt0/to16bGanAJE9pU&#13;
-fxt1PVlnFY/y6MXdjFEZMiXu14twIOZ6PhYhvEh9d5XwISIuKPE1evvLxSJGEkIvbEs5m9LUeW2s&#13;
-Ul/8FgWM2n5krcH7uzUHzW4B8jZG0NsZEjtQsSIEvrD5+nf6cpoqWjQ9XSyATVNTXKDi4crMMhxV&#13;
-dGO60jw4Nxh/mz2TlbQ+cPyDtibJ7hSWt2MfKtHbE22pALVYC4Jio/cjjnv8lT2ObrdlmLU3N5HI&#13;
-zFdeYtLziatmOnwcYbgOWi13HSQkVy0noF9/2g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_30d2501e-1106-4285-988e-a50622ff9e50"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>NgdyA6kAfSLcMzW7TfzdT9QDq3UsdJ+ysd97NFTxt0xYvZihghFme4EGfxpJ5Ce8yh7qC3GeWPV1&#13;
+UK7pOX6qDw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_ee119455-e14a-4535-bc75-23f3fcfa82e0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>VZ8bLnLeTDQLhnF7Wz9XZdO2WyNiUEMbAHh3HpzTzsReg2jTyM9PjyBGA9k8vImG5cENrQSWz+1A&#13;
+09aKcSTtUA==</DigestValue></Reference></SignedInfo><SignatureValue>VM7/Y+YM0jhqzCCwRIQ52DLarVBNQRTqcJmRwt0N4j0UX7U9ykuioEq6kXt7T1pWClIrcT80RlDH&#13;
+LTZ7EgvW/nAkO9LgOodpyYs9xTg3NBr2R/qGVWLxhnE0koSB0Vj24oXvGiVQJaafgj+N2f3zrS1F&#13;
+sT0lsuDyhMFsLPDF/BhuKHz7yyphjKGZCtehImqbh91JhMVYz4hWtoJ8w4rvNkMa0mQFcb1tUHkE&#13;
+EIYPVNhp8jCh6hhTJOtQTHBUymICAZuWLI4rzRE0ffdVAjuKorTs59epBo3ge42NN8kHX16boTOO&#13;
+kP2+Pzk2UXH3xwKPHWyiK9C1nJskTLNXkt5XTQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1050,4 +1052,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_4a91870b-2396-470f-9e21-4c4d26cbd5b2" Target="#_24804f34-e621-475a-84f4-1c09398ddbd4"><Timestamp>2024-01-11 02:33:03</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_ee119455-e14a-4535-bc75-23f3fcfa82e0" Target="#_30d2501e-1106-4285-988e-a50622ff9e50"><Timestamp>2024-01-11 02:33:39</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
