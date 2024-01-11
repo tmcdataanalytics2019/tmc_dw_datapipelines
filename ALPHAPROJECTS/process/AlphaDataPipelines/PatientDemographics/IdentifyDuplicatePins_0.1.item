@@ -375,7 +375,7 @@
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -396,7 +396,7 @@
         <mapperTableEntries expression="row5.counter " name="counter" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row5.inpatient_admission " name="latest_ipd" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row5.outpatient_admission " name="latest_opd" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row5.ipd_los " name="ipd_los" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row5.ipd_los " name="ipd_los" nullable="true" type="id_Long"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" nullable="true" type="id_String"/>
@@ -419,7 +419,7 @@
         <mapperTableEntries name="counter" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="inpatient_admission" nullable="true" type="id_Date"/>
         <mapperTableEntries name="outpatient_admission" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="ipd_los" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="ipd_los" nullable="true" type="id_Long"/>
       </inputTables>
     </nodeData>
   </node>
@@ -583,7 +583,7 @@
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_admission" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient_admission" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -596,7 +596,7 @@
         <mapperTableEntries expression="1" name="counter" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="Relational.ISNULL(pvlookup.value_description)==false?pvlookup.value_description.equals(&quot;INPATIENT&quot;)?pvlookup.admission_date:TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;):TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;) " name="inpatient_admission" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="Relational.ISNULL(pvlookup.value_description)==false?pvlookup.value_description.equals(&quot;OUTPATIENT&quot;)||&#13;&#10;pvlookup.value_description.equals(&quot;EMERGENCY&quot;)?pvlookup.admission_date:TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;):TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;) " name="outpatient_admission" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="Relational.ISNULL(pvlookup.value_description)==false?pvlookup.value_description.equals(&quot;INPATIENT&quot;)?TalendDate.diffDate(pvlookup.admission_date,pvlookup.discharge_date,&quot;dd&quot;):0:0 " name="ipd_los" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="Relational.ISNULL(pvlookup.value_description)==false?pvlookup.value_description.equals(&quot;INPATIENT&quot;)?TalendDate.diffDate(pvlookup.admission_date,pvlookup.discharge_date,&quot;dd&quot;):0:0 " name="ipd_los" nullable="true" type="id_Long"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="pvlookup" sizeState="INTERMEDIATE">
         <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
@@ -652,7 +652,7 @@
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_admission" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient_admission" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="288">
@@ -721,7 +721,7 @@
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="128">
@@ -1051,13 +1051,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_05a3ce92-e9d2-4dff-81be-1e1af1783371"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UpHbIjgYIxexk1yz83fe0r/FnIBsH6OtmU9/x/Zmjrm242F0f4ivuIsqi3NF1ZvWO/Rf8hsDAyTg&#13;
-kcxG/bFPnw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_53dc3207-e4d6-476e-b271-0ed030991fe2"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>3GCZRgs8zgG2/yahwj36ZqN/W98Ey1Yucrk9PpV27OzLzfNy5WXnmOlo+YNtbThSzJYFeAtL3JGn&#13;
-9ltQQzBYOg==</DigestValue></Reference></SignedInfo><SignatureValue>gzVwv9wXaOTlica7DD4T7R4i8UJPLIW35yUjXXeJ8+MX6UAPcZ7IV07zMveW5AHtqSUofPuxv4Ph&#13;
-Lnggx42C6/pyWtseSFZa+0hE85hARJn9GJ6XZQT6Iq4/j1zwkIYg9qpJyHYnoU02z8mD7AmOonEX&#13;
-x6qEhJcie/OtDyx+/H/8jo7yI5AqCzD8ns0CKtw/U4t9sW3iHjl/aYTy6UY28roBGjPtRMOqvvDA&#13;
-yBjq0g321nKxD1qMMNhSeNSXPuayuroktA91Z6vWVJ0amfWDCd5XgjLJMU+ngSE30HFqOm4BNVoL&#13;
-PsmVJ8b1r+SRHH6n7MfpG+y7qSGDUg8eqAKgyg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a9cf6172-eba8-4e3b-a076-bb02a245b7c8"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>WdtQh5EAt7XF+DkoD1pXUp1gz2p6wj5skfkcYFOsCzfVP87SckUfHmEKYkEO/uv/8lx2lFk2Mkr0&#13;
+C2lvOdbFMQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_c7bf190a-04ee-42a5-a96e-cd2b47ad5df5"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Uh0sxw9mUJLQTNzWwfWhfO0OVinfHrdRljjbk1fmsI5xPHoJwXaODFTL0oFHWtzx5xf0XQPFm9Mp&#13;
+B97fy82dUg==</DigestValue></Reference></SignedInfo><SignatureValue>Xr3qwf0KST+HKIdxbhZ30Z0opjG3tbvsv+IQq7zksQEE1uZDWaEN81R/bEzYN6cH7Z7N/gTZI+J8&#13;
+mL73Vj340+hlZvHdfGNr7fyuV4OrZ2OiqhFT36nwuJIu/6/W5/e+rSKxfvap8Ie/QrNnpKNhoLNU&#13;
+3jQHQCpNzJCHh789iNWtTIdbT39u+gWLOCfPi8s9nmZ6vdmn8DBwZkzWy+vhBWen7efqrEBvTLgu&#13;
+SGpYe4eMzPMqwhOYj9Lz/Jq5N5+jXYs5XHrc/aFk4XjznTf2jOt1CtQu2FUKHV1hobRFy3jht+lu&#13;
+eIe6UiuhyEjWoF1/w46muIwoPWuMbDdY8bIqJw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1079,4 +1079,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_53dc3207-e4d6-476e-b271-0ed030991fe2" Target="#_05a3ce92-e9d2-4dff-81be-1e1af1783371"><Timestamp>2024-01-11 02:53:22</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_c7bf190a-04ee-42a5-a96e-cd2b47ad5df5" Target="#_a9cf6172-eba8-4e3b-a076-bb02a245b7c8"><Timestamp>2024-01-11 02:53:58</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
