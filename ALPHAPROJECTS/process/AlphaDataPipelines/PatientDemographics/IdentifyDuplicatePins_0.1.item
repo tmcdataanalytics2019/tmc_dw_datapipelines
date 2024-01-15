@@ -1190,14 +1190,13 @@
       <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="concatenate" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="Relational.ISNULL(row12.concatenate)==false?&quot;get&quot;:&quot;dont&quot; " name="var1" type="id_String"/>
+        <mapperTableEntries expression="Relational.ISNULL(row12.concatenate)==false?&quot;wvisit&quot;:&quot;novisit&quot; " name="var1" type="id_String"/>
       </varTables>
-      <outputTables name="out7" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="Var.var1.equals(&quot;novisit&quot;)" name="out7" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row11.external_id " name="external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.mrn " name="mrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.firstname " name="firstname" nullable="true" type="id_String"/>
@@ -1216,7 +1215,7 @@
         <mapperTableEntries expression="row11.ipd_los " name="ipd_los" nullable="true" type="id_Long"/>
         <mapperTableEntries expression="row11.concatenate " name="concatenate" nullable="true" type="id_String"/>
       </outputTables>
-      <outputTables activateCondensedTool="true" name="reject" sizeState="INTERMEDIATE">
+      <outputTables activateCondensedTool="true" name="reject" reject="true" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row11.external_id " name="external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.mrn " name="mrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.firstname " name="firstname" nullable="true" type="id_String"/>
@@ -1234,7 +1233,6 @@
         <mapperTableEntries expression="row11.latest_opd " name="latest_opd" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row11.ipd_los " name="ipd_los" nullable="true" type="id_Long"/>
         <mapperTableEntries expression="row11.concatenate " name="concatenate" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="Relational.ISNULL(row12.concatenate)==false?&quot;get&quot;:&quot;dont&quot; " name="newColumn" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row11" sizeState="INTERMEDIATE">
         <mapperTableEntries name="external_id" nullable="true" type="id_String"/>
@@ -1351,8 +1349,6 @@
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="concatenate"/>
       <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="newColumn"/>
-      <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
@@ -1375,7 +1371,6 @@
       <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="concatenate" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputExcel_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputExcel_1" target="tMap_1">
@@ -1659,13 +1654,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_25abd83c-d6e4-4900-b05c-2997cf28acc7"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>xBmTOtuBXEDLBfqF1D9L0t+iVzBHJbqEUub3k8p68WlhDRCOMeWoSxBRf4WI3tEw4vdYJ2ePDBqs&#13;
-gtHue7ripA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_782d7742-a049-462b-b0be-b0c91fa71498"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>pCexhWDVs4y2YpJyzCwmSEUPTJxe6R+7LN8KoKQKx80mR1yBMGk9P+iWkBi4LPLfBC5Rz3Vkma+q&#13;
-Of91BdxGBQ==</DigestValue></Reference></SignedInfo><SignatureValue>ibJqWqdRtiaSI2e+OQex4F6r9Epy6sWjX7kUe+QgaECE5vuq2AeNkRAM4pImspXQokr3SO3lk7ir&#13;
-Ww1ZNof8ji8gKYuOIUzQaZqs8m2vEeYVEPpZWB9a0JXSurjyqHtp9ct8UXl4mvyEwzHLLF/auPHb&#13;
-lVcWA8VMzSYdH5VRrSxjnU3tySdEsTcKwUKv9aN3ncw52j2o0pzI0skGxhR4sWnf1v/MOP8phVUb&#13;
-B7ROO1DtYsJlnK1gW3ImCM46CBXiGl++/U4t129G9e/Oj9o2WTXc/3aAyafLrT2xJJO3XPPP9Kaf&#13;
-FoT2cL2DOluK3EH4lxqNcqgy5G2aesrawlNTNw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_3c20a321-3c00-45d8-84b1-b5fb6d7f2da8"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>7tJxv7ToIb90B5KZA5ppTueQ0b6h7heg0NDgkAxJh106VLalvfsYlLkmF5sVus1Ih8C8RQw7Cgha&#13;
+xqA+9woTyA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_935eab51-c048-45e5-a96b-585a02818cf3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>gK8hl1yGPsZF465B/1R15i+UfV1Y028uvgjlGS1carWB7D6FjvltYXYUNbMBQ4ON7l5HOaOJFHpv&#13;
+gCrfEPyRXQ==</DigestValue></Reference></SignedInfo><SignatureValue>Ihr65059khAKOTZ/sl9vqg4keOVQKAd/mZ+UBJ90tXfxqdEutnTD3vNSy+TxZQUYZ1oXhqvOOrqg&#13;
+zt39pxPoNN5iegisbO8x3UGfj3WX0luZGd/2uR2/pzaQ0L46DW63JVrxxNToDyKF5LH4R1Gy/qY7&#13;
+x/YdZ0v8z/Chhcf04O4/fd+bbWyEugurVswT2U+uw3CSISgUfm6CMsIP10C+bjLADTTs6b9x38R8&#13;
+IKIblNpRWuHCwW47seHNahUqrMFN7MnEl52vjXwQFkR2ydo4h0FFZvY6LNLmecnUJPX6tQund4wr&#13;
+LO85IWcOpqhtI2PYKMzwAhu9cKpkbKqBq2YGrA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1687,4 +1682,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_782d7742-a049-462b-b0be-b0c91fa71498" Target="#_25abd83c-d6e4-4900-b05c-2997cf28acc7"><Timestamp>2024-01-15 07:27:15</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_935eab51-c048-45e5-a96b-585a02818cf3" Target="#_3c20a321-3c00-45d8-84b1-b5fb6d7f2da8"><Timestamp>2024-01-15 07:30:13</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
