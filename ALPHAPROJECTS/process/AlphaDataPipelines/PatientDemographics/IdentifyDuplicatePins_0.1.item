@@ -254,7 +254,7 @@
       <outputTables name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row1._id) " name="_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.mrn " name="mrn" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.firstname.replaceAll(&quot; &quot;,&quot;&quot;)) " name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.firstname.replaceAll(&quot; &quot;,&quot;&quot;).replaceAll(&quot;.&quot;, &quot;&quot;).replaceAll(&quot;,&quot;, &quot;&quot;)) " name="firstname" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.middlename) " name="middlename" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.thirdname) " name="thirdname" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.lastname)==null?&quot;&quot;:row1.lastname " name="lastname" nullable="true" type="id_String"/>
@@ -1153,7 +1153,7 @@
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="out7" name="out7">
+    <metadata connector="FLOW" label="out7" name="withvisits">
       <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1172,7 +1172,7 @@
       <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="concatenate" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" name="reject">
+    <metadata connector="FLOW" name="withoutvisits">
       <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1196,7 +1196,7 @@
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="Relational.ISNULL(row12.concatenate)==false?&quot;wvisit&quot;:&quot;novisit&quot; " name="var1" type="id_String"/>
       </varTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="Var.var1.equals(&quot;novisit&quot;)" name="out7" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="Var.var1.equals(&quot;novisit&quot;)" name="withvisits" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row11.external_id " name="external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.mrn " name="mrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.firstname " name="firstname" nullable="true" type="id_String"/>
@@ -1215,7 +1215,7 @@
         <mapperTableEntries expression="row11.ipd_los " name="ipd_los" nullable="true" type="id_Long"/>
         <mapperTableEntries expression="row11.concatenate " name="concatenate" nullable="true" type="id_String"/>
       </outputTables>
-      <outputTables activateCondensedTool="true" name="reject" reject="true" sizeState="INTERMEDIATE">
+      <outputTables activateCondensedTool="true" name="withoutvisits" reject="true" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row11.external_id " name="external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.mrn " name="mrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row11.firstname " name="firstname" nullable="true" type="id_String"/>
@@ -1301,7 +1301,7 @@
       <column comment="" key="false" length="-1" name="concatenate" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="672">
+  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="768">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileOutputExcel_1"/>
     <elementParameter field="CHECK" name="VERSION_2007" value="false"/>
     <elementParameter field="CHECK" name="USESTREAM" value="false"/>
@@ -1390,7 +1390,7 @@
       <column comment="" key="false" length="-1" name="concatenate" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="768">
+  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="640">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileOutputExcel_3"/>
     <elementParameter field="CHECK" name="VERSION_2007" value="false"/>
     <elementParameter field="CHECK" name="USESTREAM" value="false"/>
@@ -1678,13 +1678,13 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row11"/>
   </connection>
-  <connection connectorName="FLOW" label="out7" lineStyle="0" metaname="out7" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_8" target="tFileOutputExcel_1">
+  <connection connectorName="FLOW" label="withvisits" lineStyle="0" metaname="withvisits" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_8" target="tFileOutputExcel_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out7"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="withvisits"/>
   </connection>
-  <connection connectorName="FLOW" label="reject" lineStyle="0" metaname="reject" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_8" target="tFileOutputExcel_3">
+  <connection connectorName="FLOW" label="withoutvisits" lineStyle="0" metaname="withoutvisits" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_8" target="tFileOutputExcel_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="reject"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="withoutvisits"/>
   </connection>
   <connection connectorName="FLOW" label="row12" lineStyle="8" metaname="tHashInput_3" offsetLabelX="0" offsetLabelY="0" source="tHashInput_3" target="tMap_8">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -1759,13 +1759,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_403c6ef8-8fe2-4a92-8176-df6b20da391e"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UoJEBNoUIMzVcFHR+/0voXuvd7ixj2QTNtQo5IYNvORF+ah40e7Rjiye3cZUEEPqO6cr0qvvTJxl&#13;
-IbRWibmgag==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_7419f73f-fbaa-4c5b-8cf4-a8eaeea4acc0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FLIAhZ7EajeDFy8T+zLOtz1TRelWRBY+zDC78yp/mLVRcEbsB4ROb54jS6EsfKJNn1XL4sddVBkI&#13;
-zfKp4fG/Hw==</DigestValue></Reference></SignedInfo><SignatureValue>gDmmbNEnXdy9StqP3X/jFSpLHYOHXgb9P9YVBaSxJVWS17FeKwt8mH1IVyqTC6rKVnVqad6dXKaz&#13;
-7r8YyJsMyJjxbFifq4EvexP8b3OClTtVwYCYaPLK0tnkKeE0Ig4hIpDUtaRw9jhisUcsmIXqmM1k&#13;
-NKwYK8epcWDyWa141uKq4oN3HBOmRIiGCeG4oabF0El/lr/cKx9M+xepHJg3d4GpMfApkPEjM6z+&#13;
-EiQjK8BlTMwgZ2CQYTo0yiYm3MnNRpFwcAI6ssXVA2DY/c2mBTVvAP8nHySrq92CfvZ/Kkhmz3I9&#13;
-U0Pj/fs9+HYc2AN1n4d+AQLaGFJjdOGg6FJ3wg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6cc6ac2b-ec87-4335-b8c6-39a6335bb783"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2gz3pA+Fm4vbpkvszwtJuBdpr8USha4zFVNQfyg22tlEt8eAAafjVBMEBcHklrrKsmISyqkroHkG&#13;
+TM9Wd3zxmA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3be2d477-50de-4fdc-8c1a-11b993416003"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>6tBO7ij3g/ElgDB9K91YVhF8vW9xHrGVVyNB7HOvXn+7jDlJjRDQTS5FaTNxaAlo12u6lEDfiQQw&#13;
+dY1EjxiutA==</DigestValue></Reference></SignedInfo><SignatureValue>C167d84OYGTBcGK2C3KND5SQpjzIkMraasmvLJcX9RYMw5Hx144lQqaYE06D4BgJUPA0QOJdJpml&#13;
+kjPnURyXq1Ualt/JGfiLVEqnSZOGxi4+lUKhalRKF1vNqurXHK8b3EBHBSdRCKwfIaaWNOb4HymJ&#13;
+Lkm5Rg7BjBeFiaynl4xUfouNf0iU8IyLCHG8EmWrCPttY0c5uUwleaDgdNUaGjcOd2kWeDlbPxe1&#13;
+ztJl1peuNcyznf+AlkzkyndYYNG0xeJlef+xM41pKWY3RYLf2opoJaAa0ndjgRe7O0O9DD6MFQjq&#13;
+hLnTZ8M73vV4G8tIp6etVCXqLDCFXx+ABqOE2Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1787,4 +1787,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_7419f73f-fbaa-4c5b-8cf4-a8eaeea4acc0" Target="#_403c6ef8-8fe2-4a92-8176-df6b20da391e"><Timestamp>2024-01-15 07:33:45</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3be2d477-50de-4fdc-8c1a-11b993416003" Target="#_6cc6ac2b-ec87-4335-b8c6-39a6335bb783"><Timestamp>2024-01-15 08:06:28</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
