@@ -360,7 +360,7 @@
     <elementParameter field="TEXT" name="LABEL" value="LookupVisitDetails"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="out5">
-      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -378,10 +378,10 @@
       <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out5" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="out3._id " name="newColumn" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3._id " name="external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.mrn " name="mrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.firstname " name="firstname" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.middlename " name="middlename" nullable="true" type="id_String"/>
@@ -672,7 +672,7 @@
     <elementParameter field="CLOSED_LIST" name="FONT" value=""/>
     <elementParameter field="CHECK" name="IS_ALL_AUTO_SZIE" value="false"/>
     <elementParameter field="TABLE" name="AUTO_SZIE_SETTING">
-      <elementValue elementRef="SCHEMA_COLUMN" value="newColumn"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="external_id"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="mrn"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
@@ -723,7 +723,7 @@
     <elementParameter field="CHECK" name="USE_SHARED_STRINGS_TABLE" show="false" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tFileOutputExcel_1">
-      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -770,7 +770,7 @@
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1._id " name="_id" nullable="true" type="id_String"/>
@@ -893,7 +893,7 @@
   <node componentName="tFileInputExcel" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileInputExcel_2"/>
     <elementParameter field="CHECK" name="VERSION_2007" value="false"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;C:/Users/jsjavier/Desktop/IdentifyDuplicates/ConcatenateNames.xls&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;C:/Users/jsjavier/Desktop/IdentifyDuplicates/Processed_1.xls&quot;"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:wuyUqsrDIhXh7/1SPHtaidsAbYei+53Yax1JxeR7"/>
     <elementParameter field="CHECK" name="ALL_SHEETS" value="true"/>
     <elementParameter field="TABLE" name="SHEETLIST" show="false"/>
@@ -909,17 +909,82 @@
     <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" show="false" value="&quot;.&quot;"/>
     <elementParameter field="CHECK" name="TRIMALL" value="false"/>
     <elementParameter field="TABLE" name="TRIMSELECT">
-      <elementValue elementRef="SCHEMA_COLUMN" value="CONCATENATE"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="firstname"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="middlename"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="thirdname"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="lastname"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gender"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dateofbirth"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registereddate"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ipdcount"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="opdcount"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="counter"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latest_ipd"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latest_opd"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ipd_los"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="CONVERTDATETOSTRING" show="false" value="false"/>
     <elementParameter field="TABLE" name="DATESELECT" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="CONCATENATE"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="external_id"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="firstname"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="middlename"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="thirdname"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="lastname"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gender"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dateofbirth"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registereddate"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ipdcount"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="opdcount"/>
       <elementValue elementRef="CONVERTDATE" value="false"/>
       <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="counter"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latest_ipd"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latest_opd"/>
+      <elementValue elementRef="CONVERTDATE" value="false"/>
+      <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ipd_los"/>
       <elementValue elementRef="CONVERTDATE" value="false"/>
       <elementValue elementRef="PATTERN" value="&quot;MM-dd-yyyy&quot;"/>
     </elementParameter>
@@ -935,17 +1000,255 @@
     <elementParameter field="TEXT" name="INFLATION_RATIO" show="false" value=""/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tFileInputExcel_2">
-      <column comment="" key="false" length="-1" name="CONCATENATE" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" length="-1" name="CONCATENATE" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="320" posY="544">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_7"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_YZCT0K9VEe6YVbMuv51bIg-tMap_7-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out6" name="out6">
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="FLOW" name="out7">
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="out6" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row7.external_id " name="external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.firstname " name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.middlename " name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.thirdname " name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.lastname " name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.gender " name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.dateofbirth " name="dateofbirth" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.registereddate " name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.patient_pin " name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.ipdcount " name="ipdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row7.opdcount " name="opdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row7.counter " name="counter" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row7.latest_ipd " name="latest_ipd" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.latest_opd " name="latest_opd" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.ipd_los " name="ipd_los" nullable="true" type="id_Integer"/>
+      </outputTables>
+      <outputTables name="out7" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row7.external_id " name="external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.firstname " name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.middlename " name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.thirdname " name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.lastname " name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.gender " name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="TalendDate.formatDate(&quot;yyyy-MM-dd&quot;, row7.dateofbirth) " name="dateofbirth" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.registereddate " name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.patient_pin " name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.ipdcount " name="ipdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row7.opdcount " name="opdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row7.counter " name="counter" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row7.latest_ipd " name="latest_ipd" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.latest_opd " name="latest_opd" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row7.ipd_los " name="ipd_los" nullable="true" type="id_Integer"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row7" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries name="dateofbirth" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries name="ipdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="opdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="counter" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="latest_ipd" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="latest_opd" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="ipd_los" nullable="true" type="id_Integer"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="672">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_8"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_YZCT0K9VEe6YVbMuv51bIg-tMap_8-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out6" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries name="dateofbirth" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries name="ipdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="opdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="counter" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="latest_ipd" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="latest_opd" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="ipd_los" nullable="true" type="id_Integer"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_9"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_YZCT0K9VEe6YVbMuv51bIg-tMap_9-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="out8">
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="CONCATENATION" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="out8" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out7.external_id " name="external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.firstname " name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.middlename " name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.thirdname " name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.lastname " name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.gender " name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.dateofbirth " name="dateofbirth" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out7.registereddate " name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out7.patient_pin " name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.ipdcount " name="ipdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="out7.opdcount " name="opdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="out7.counter " name="counter" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="out7.latest_ipd " name="latest_ipd" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out7.latest_opd " name="latest_opd" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out7.ipd_los " name="ipd_los" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="out7.firstname + out7.middlename + out7.thirdname + out7.lastname + out7.gender + out7.dateofbirth " name="CONCATENATION" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out7" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="firstname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="middlename" nullable="true" type="id_String"/>
+        <mapperTableEntries name="thirdname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="lastname" nullable="true" type="id_String"/>
+        <mapperTableEntries name="gender" nullable="true" type="id_String"/>
+        <mapperTableEntries name="dateofbirth" nullable="true" type="id_String"/>
+        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries name="ipdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="opdcount" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="counter" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="latest_ipd" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="latest_opd" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="ipd_los" nullable="true" type="id_Integer"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="576" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
     <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
     <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
@@ -959,17 +1262,59 @@
     <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
     <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
     <elementParameter field="TABLE" name="LENGTHS" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="CONCATENATE"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="external_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="firstname"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="middlename"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="thirdname"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="lastname"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gender"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dateofbirth"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registereddate"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ipdcount"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="opdcount"/>
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="counter"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latest_ipd"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latest_opd"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ipd_los"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CONCATENATION"/>
       <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tLogRow_1">
-      <column comment="" key="false" length="-1" name="CONCATENATE" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="firstname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="middlename" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="thirdname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="lastname" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gender" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dateofbirth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="opdcount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="counter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_ipd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="latest_opd" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ipd_los" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="CONCATENATION" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputExcel_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputExcel_1" target="tMap_1">
@@ -1078,17 +1423,65 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
   </connection>
-  <connection connectorName="FLOW" label="row7" lineStyle="0" metaname="tFileInputExcel_2" offsetLabelX="0" offsetLabelY="0" source="tFileInputExcel_2" target="tLogRow_1">
+  <connection connectorName="FLOW" label="row7" lineStyle="0" metaname="tFileInputExcel_2" offsetLabelX="0" offsetLabelY="0" source="tFileInputExcel_2" target="tMap_7">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="counter"/>
+      <elementValue elementRef="TRACE_COLUMN" value="dateofbirth"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CONCATENATE"/>
+      <elementValue elementRef="TRACE_COLUMN" value="firstname"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="gender"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="opdcount"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="middlename"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="lastname"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="latest_ipd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="registereddate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ipdcount"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="thirdname"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ipd_los"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="latest_opd"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row7"/>
+  </connection>
+  <connection connectorName="FLOW" label="out6" lineStyle="0" metaname="out6" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_7" target="tMap_8">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out6"/>
+  </connection>
+  <connection connectorName="FLOW" label="out7" lineStyle="0" metaname="out7" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_7" target="tMap_9">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out7"/>
+  </connection>
+  <connection connectorName="FLOW" label="out8" lineStyle="0" metaname="out8" offsetLabelX="0" offsetLabelY="0" source="tMap_9" target="tLogRow_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out8"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileInputExcel_1"/>
@@ -1100,13 +1493,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_046257ca-8dae-4be9-a3dc-3fbdeef53aba"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>qvby8bhxkdn8zFrZHj+mjYgvcc8jOM7wyMXdSoh6IwlZsc1gXDqZIJ67hTu4dZtlciirwWqPaCPo&#13;
-wtU0OOvOuw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_78408129-a183-414c-b1b2-2227c88b1a3b"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>evQX38jH0uT9pdkIPtd4+18GYiQbor+TzemWJ0oYzeiDQRiC0HR+IeTW/b4TYP4olAX9VKM4gvMe&#13;
-2Eow9VrvVA==</DigestValue></Reference></SignedInfo><SignatureValue>S0JBjTEq15hP9AUYAT1FQq1o9ZvGVrnr3CoT8qJNKMZnof0JqWhtBhsAfyu5ndp4f1Fm9WfKHX1o&#13;
-m8Mp81hg8EowDz027BMGqWk+wH5TSBWIv15iMLb66Wy1jgf1QhcFOpjAoc00DcosfMf3BN07UDoP&#13;
-6+EGGhh0gj/W09tI2ZBLXfzMcYEy6V0FcMXgVqIzENQVgaF/yaV3WqaNV2Th9eXNjYfDOc/PmJCv&#13;
-LfzJ9yuQK5UE6nbOSzjTTDYQt/U46/jXegHQPhA0DVTKiDrot12WDKFItNStI2mlQzGBA/Wb2rr2&#13;
-k9yGWnlIoDFCuYMoGyolBeIaiG2V8xDwAY2/8g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_ae8a9e5f-3b0b-4d6c-b708-05bfaf089364"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>PG9+Knt81muaTSS6RU5/tq99T4A8QxNKUh6qnUPKmzwDtR9yqV2hIwEDJYo2qnMQXQ6Dvoq5kBWY&#13;
+S9EPApHfsg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_76d61756-826d-403e-b92f-e62ba179de93"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>T4h/cVyiiyaQUc+Qw+Z6wRb6aQqlwkCd+A5o6V5RUltXfPl4DOv5BX63vjDeHWpYTCIsmFj7JPR4&#13;
+ZGlwt/LuoQ==</DigestValue></Reference></SignedInfo><SignatureValue>kHuk+pcukAtVmOcYpyDD+xwoQASj2prU8akKORsM20mVfzcX8nO3LT1Y3w14rcSlHmHvlhYKMluo&#13;
+pFm2sYrVGZJIhJnU7sAb1YGWmZxNOvxiwWygUaIpm0qs23899ZoOtR/riWJe05zwgpHl8DzBAvUe&#13;
+2cJ8RuMF6hoDxaHdXfr1Jb+eWY45L24dE7a/+tnxFJajYXUsgYDYEAe8cRy1JBdx+p4PeELd2rHk&#13;
+MPcK4U/fgq0Gc9Dkz7V6vx4ipPRCk1C5LAmqKYsUln1oJFzlXUwmP+bJ51yfIWHEQX7aHeabptPH&#13;
+H5e7dawVNomb7ZGJFYcI9VSEkTvI7mlOsMHoOA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1128,4 +1521,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_78408129-a183-414c-b1b2-2227c88b1a3b" Target="#_046257ca-8dae-4be9-a3dc-3fbdeef53aba"><Timestamp>2024-01-15 04:21:57</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_76d61756-826d-403e-b92f-e62ba179de93" Target="#_ae8a9e5f-3b0b-4d6c-b708-05bfaf089364"><Timestamp>2024-01-15 04:46:29</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
