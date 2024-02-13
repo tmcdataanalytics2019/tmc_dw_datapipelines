@@ -143,7 +143,7 @@
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$set:{'todate':new Date() }}&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'entypeuid':{$eq:{$oid:'5fdc498251b3d77f747cd720'}}}}&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{$expr:{$or:[{$and:[{$gte:['$startdate','$fromdate']},{$lte:['$startdate','$todate']}]}, {$eq:['$enddate',null]}]}}}&quot;"/>
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'visitid':'$visitid','_id':'$_id','startdate':'$startdate','enddate':'$enddate'}}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'visitid':'$visitid','_id':'$_id','startdate':'$startdate','ogstartdate':'$startdate','enddate':'$enddate','medicaldischargedate':'$medicaldischargedate','visitstatusuid':'$visitstatusuid','isreadmission':'$isreadmission','patientuid':'$patientuid','transfermode':'$transfermode'}}&quot;"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
     <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
@@ -155,6 +155,18 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="startdate"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="enddate"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="medicaldischargedate"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="visitstatusuid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="isreadmission"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patientuid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transfermode"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ogstartdate"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT" show="false"/>
@@ -171,6 +183,12 @@
       <column comment="" key="false" length="-1" name="visitid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="startdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="enddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medicaldischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visitstatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isreadmission" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transfermode" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ogstartdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="224">
@@ -193,8 +211,12 @@
       <column comment="" key="false" length="-1" name="visitid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="startdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="enddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="current" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medicaldischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visitstatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isreadmission" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transfermode" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ogstartdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -207,14 +229,24 @@
         <mapperTableEntries expression="row1.visitid " name="visitid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.startdate " name="startdate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.enddate " name="enddate" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="Var.currentdate" name="current" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="Var.yesterdaydate" name="yesterday" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.medicaldischargedate " name="medicaldischargedate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.visitstatusuid " name="visitstatusuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.isreadmission " name="isreadmission" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="row1.patientuid " name="patientuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.transfermode " name="transfermode" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.ogstartdate " name="ogstartdate" nullable="true" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
         <mapperTableEntries name="visitid" nullable="true" type="id_String"/>
         <mapperTableEntries name="startdate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="enddate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="medicaldischargedate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="visitstatusuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="isreadmission" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="patientuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="transfermode" nullable="true" type="id_String"/>
+        <mapperTableEntries name="ogstartdate" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -240,9 +272,17 @@
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="enddate"/>
       <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="current"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="medicaldischargedate"/>
       <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="yesterday"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="visitstatusuid"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="isreadmission"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patientuid"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transfermode"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ogstartdate"/>
       <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
@@ -253,8 +293,12 @@
       <column comment="" key="false" length="-1" name="visitid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="startdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="enddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="current" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medicaldischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visitstatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="isreadmission" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transfermode" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ogstartdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tMongoDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_1" target="tMap_1">
@@ -265,11 +309,49 @@
       <elementValue elementRef="TRACE_COLUMN" value="enddate"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isreadmission"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="medicaldischargedate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visitstatusuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="transfermode"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patientuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ogstartdate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
   <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tLogRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="isreadmission"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="medicaldischargedate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visitstatusuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="transfermode"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ogstartdate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patientuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
   </connection>
@@ -278,13 +360,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_5a30c0b5-76f2-4c7e-8ae2-b8106e61bad5"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>VUgal9j0kEwR7yICl5CvfcN7LC1YBi4dm7BbliqYKJIN0oCyfsGMxDNMPObpftm8N2OJtWU5mSyD&#13;
-q2Ec3kgHUQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_ee585a98-024e-4dbd-8a7d-6d1aabac960c"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ByIYGm2KgBP735xq2XLyCd128nXvUDOPf+jTRmvqY0dEwol1rJeJAkI84wx43Kxl2dZr2DYJN2At&#13;
-+L3xUTRS+g==</DigestValue></Reference></SignedInfo><SignatureValue>ZTc4JCVSgbOR5nzLQd/qbRtDNTKBtNGdxy6vS/puECS2kym1coa7qvTxUEMe3X6UEYx5wf/uAMTM&#13;
-R948Nq30BfUgZVGxUgbD0KYt9J6GQEYr/wtYf3ZGHrPlKIIjYni/xN/sn+rhgJX2/yOiZWA9BBi6&#13;
-K0GWZZL6itfTbzVq6dr+a86imQUvXD26w/rdYH+3txB6HDaaQDtx3fnXWOMLb+7uRKOvDu1m1Zfg&#13;
-gWMrFfcPJomUSEaYjCfsFo+cxfflqOp9EL1RBLFdtkmSYVMtGiYiSLUEEAXzA7FBQUNZcsgmXF3e&#13;
-lObN2/di9V6TEMtkK2zyBoodbyGzFlrsGCyrWA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_4a6dc81e-9af9-43fd-a395-8db1dbcc752c"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>1/Qufv0TmIwF9Q3LGxLj3sjvpMh/iKDJ5OH8IABTONfBnitbREEMVMOk5IXyy0fkFXjTM3l9pKfS&#13;
+rYBb22sskA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e864e942-c8eb-40e8-8a03-a59dd663a627"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>lDxo1B2FEw5slEyWfDpwWS0peyFqBk9dnKiZMxndbBxNYgab5OgLsY57zmNJ34tDy/FDpNpw1YzQ&#13;
+NWYXqaM0iA==</DigestValue></Reference></SignedInfo><SignatureValue>Ko6vKEq1JlgykWuZqOm7BTck5iXSUI/tN7TeKPvmRXU0EZGcCGHOCpxVjE2BMD/cJyns6ZBBdNBK&#13;
+I6qkrgyFMGLYSKLenpLK8Efp5j2+dA7hPFvUxJstP261u4QMuJKld35U8QNtw1VGC+nFOBURULv6&#13;
+nzstCoVKBwKZbCqE71hkWKCXyydiyYGZ3AvMPozQRHikhHtWTsAVgvyS44UoUkmptbW583lQMdXN&#13;
+I/zFgUeKzcxFrApa77Ex4T0cKg5w3xuiYBwDYefzO0KQLSQWc67zRcI7sROepn9s2lff3ZZjfauI&#13;
+VpZcBGHmkvrZvqEcYrkQGG0ALcQNQPUVVTi3cQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -306,4 +388,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_ee585a98-024e-4dbd-8a7d-6d1aabac960c" Target="#_5a30c0b5-76f2-4c7e-8ae2-b8106e61bad5"><Timestamp>2024-02-13 01:53:44</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e864e942-c8eb-40e8-8a03-a59dd663a627" Target="#_4a6dc81e-9af9-43fd-a395-8db1dbcc752c"><Timestamp>2024-02-13 02:07:03</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
