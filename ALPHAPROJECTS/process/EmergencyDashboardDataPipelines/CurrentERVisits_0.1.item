@@ -410,6 +410,7 @@
       <column comment="" key="false" length="-1" name="enddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visitidbeforeconvert" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ogstartdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="test" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -417,13 +418,14 @@
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="currentipddate" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.LEFT(row2.visitid,2) " name="var1" type="id_String"/>
       </varTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row2.startdate,Var.currentipddate,&quot;yyyy-MM-dd&quot;) == 0 &amp;&amp;&#10;Var.var1.equals(&quot;ER&quot;)" name="out2" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row2.startdate,Var.currentipddate,&quot;yyyy-MM-dd&quot;) == 0 &#10;" name="out2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row2._id " name="_id" type="id_String"/>
         <mapperTableEntries expression="row2.visitid " name="visitid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row2.startdate " name="startdate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row2.enddate " name="enddate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row2.visitidbeforeconvert " name="visitidbeforeconvert" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row2.ogstartdate " name="ogstartdate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="Var.var1" name="test" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -461,6 +463,8 @@
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="ogstartdate"/>
       <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="test"/>
+      <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
@@ -472,6 +476,7 @@
       <column comment="" key="false" length="-1" name="enddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visitidbeforeconvert" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ogstartdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="test" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tMongoDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_1" target="tMap_1">
@@ -513,6 +518,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
   <connection connectorName="FLOW" label="out2" lineStyle="0" metaname="out2" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tLogRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="test"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out2"/>
   </connection>
@@ -526,13 +536,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_dc158ee7-702d-4808-b9ee-14c4f12c1ad6"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>u8G6qt8HilLVzjn3KQXXg5Efng+tbCZXVSMxXVp5ar9B61wcRVvnuavbjTuB08Y4T9wKYGNEC1N/&#13;
-3QqO5xqoYQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_cf178d95-f264-42ab-a77c-d1d2ccb31d8e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>hGeAEDlBi+JSq6t2VvScNm+s+NBQnSY9L3m7n4/zsB6FA2eQ0MneHkYIUZZ3wQoKj3vE75xIftO1&#13;
-6AoGsw2V+Q==</DigestValue></Reference></SignedInfo><SignatureValue>dp5sOv2xHyiSFV+28gPYFJiHV6eHM/QzCcXIJ5jfmNjxSjBVUSjzscOurcFSeC86mvIlLfE4+7lO&#13;
-imwo2idJ3DNRnYX04QSwceJTddmUfrd1Wt/uICpYUKH2tomi1Z4a2ze1oHCApxtkqGEeukkcX+6y&#13;
-wTzLNTcMzmbo+hQ9EpO9OilK7RS5LwRBVicsgUq3z/OZrCKb9xsfOfJCnD8cMxUOLBUj8EC7qpKz&#13;
-eNKftTLzKUUC348HXk0BXyov0NC/Q2g7Wlm+c/zJqX9vyanrxneEHB7xhNOvt/sM+GCMN1Sl31MW&#13;
-0uhWDW8Xx6d3nw7m2DRVQkv9ggF77VfnZHxbYw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6c415102-58cf-4b5d-986f-f7a328adbb7f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>sGFlsfbF9CHwJn0DZ8t+2/XuUDW9vHUa28SIry3G2ZhAdM1AA0Id+BrUFKhEC+x+oDsTKwZIVZ65&#13;
+0lE8pyXojQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a504479c-6926-4ab4-b3eb-ee6fb903ffe6"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>tw6tmWOoe3WqlB3dEnIKG43A8pEbWSf60JxZRbS5YgXPvrBHDlNVrQAdfxfubqdNgj0Nk4sNJQr+&#13;
+5/8QVJusLg==</DigestValue></Reference></SignedInfo><SignatureValue>VWusLb6NL/3/kVnlf7LH30iM5786QDw8f/qr9oO3wcfs+exey9srAMzyThTMw+djzYL3wA4Ze8qS&#13;
+hxTL/99cp6IJ5Uku7gWARYNArrztpzoIy7gWaKSIZ6FeGo/sBlCQMtj5RHppc99gDx1pn9uIRZp9&#13;
+SicZKrs5GnPfkUDwzKfM0cemNZUcjcPgTYjyeYrKNwZnut6j9mz94/PQc8dt7vUXjR1kD2sZlSIA&#13;
+iBPSBsP7VltFr3LVQiy/JH1W87c19zOZUfPub1T0jSP+WonZMq4W3Mm50liLDDZ6hOg8m7hfyEnE&#13;
+1oPPbaSNbchx4BgEMNGyqTtgA+Sx2G+Us1oLRg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -554,4 +564,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_cf178d95-f264-42ab-a77c-d1d2ccb31d8e" Target="#_dc158ee7-702d-4808-b9ee-14c4f12c1ad6"><Timestamp>2024-02-13 02:39:10</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a504479c-6926-4ab4-b3eb-ee6fb903ffe6" Target="#_6c415102-58cf-4b5d-986f-f7a328adbb7f"><Timestamp>2024-02-13 02:39:55</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
