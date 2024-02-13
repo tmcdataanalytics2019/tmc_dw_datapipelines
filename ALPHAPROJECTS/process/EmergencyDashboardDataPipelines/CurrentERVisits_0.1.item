@@ -520,6 +520,7 @@
       <column comment="" key="false" length="-1" name="triagedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="emergencyleveluid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="departmentuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargetypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -547,6 +548,7 @@
         <mapperTableEntries expression="row6.triagedate" name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row6.emergencyleveluid) " name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row6.traumatypeuid) " name="traumatypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row6.departmentuid)" name="departmentuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row10.dischargedate " name="dischargedate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row10.dischargetypeuid)" name="dischargetypeuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row10.dischargestatusuid) " name="dischargestatusuid" nullable="true" type="id_String"/>
@@ -570,11 +572,12 @@
         <mapperTableEntries name="isconvertedfromopd" nullable="true" type="id_Boolean"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row6" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="_id" type="id_Integer"/>
+        <mapperTableEntries name="_id" type="id_String"/>
         <mapperTableEntries expression="row3._id " name="patientvisituid" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries name="traumatypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="departmentuid" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row10" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_Integer"/>
@@ -619,7 +622,7 @@
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$set:{'fromdate':{$toDate:{ $subtract: [ new Date(), 172800000 ] }}}}&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$set:{'todate':new Date() }}&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{$expr:{$and:[{$gte:['$triagedate','$fromdate']},{$lte:['$triagedate','$todate']}]}}}&quot;"/>
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'patientvisituid':'$patientvisituid','_id':'$_id','triagedate':'$triagedate','emergencyleveluid':'$emergencyleveluid','traumatypeuid':'$traumatypeuid'}}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'patientvisituid':'$patientvisituid','_id':'$_id','triagedate':'$triagedate','emergencyleveluid':'$emergencyleveluid','traumatypeuid':'$traumatypeuid','departmentuid':'$departmentuid'}}&quot;"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
     <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
@@ -633,6 +636,8 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="emergencyleveluid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="traumatypeuid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="departmentuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT" show="false"/>
@@ -650,6 +655,7 @@
       <column comment="" key="false" length="-1" name="triagedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="emergencyleveluid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="departmentuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tSortRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="352">
@@ -674,6 +680,7 @@
       <column comment="" key="false" length="-1" name="triagedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="emergencyleveluid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="departmentuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="352">
@@ -699,6 +706,10 @@
       <elementValue elementRef="FUNCTION" value="count"/>
       <elementValue elementRef="INPUT_COLUMN" value="_id"/>
       <elementValue elementRef="IGNORE_NULL" value="false"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="departmentuid"/>
+      <elementValue elementRef="FUNCTION" value="last"/>
+      <elementValue elementRef="INPUT_COLUMN" value="departmentuid"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
     <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
@@ -707,11 +718,12 @@
     <elementParameter field="TEXT" name="LABEL" value="AggregateGetLatestTriage"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="patients" name="tAggregateRow_1">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="patientvisituid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="triagedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="emergencyleveluid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="departmentuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="896" posY="160">
@@ -749,6 +761,7 @@
       <column comment="" key="false" length="-1" name="triagedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="emergencyleveluid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="departmentuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="date_of_birth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="gender_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -768,7 +781,7 @@
         <mapperTableEntries expression="out3.medicaldischargedate " name="medicaldischargedate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out3.visitstatusuid " name="visitstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.isreadmission " name="isreadmission" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="out3.patientuid " name="patientuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row7.patient_pin" name="patientuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.ogstartdate " name="ogstartdate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out3.admittedon " name="admittedon" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out3.admissionrequestuid " name="admissionrequestuid" nullable="true" type="id_String"/>
@@ -778,6 +791,7 @@
         <mapperTableEntries expression="out3.triagedate " name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out3.emergencyleveluid " name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.traumatypeuid " name="traumatypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.departmentuid " name="departmentuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row7.date_of_birth " name="date_of_birth" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row7.gender_id " name="gender_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.dischargedate " name="dischargedate" nullable="true" type="id_Date"/>
@@ -804,6 +818,7 @@
         <mapperTableEntries name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries name="traumatypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="departmentuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="dischargedate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="dischargetypeuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="dischargestatusuid" nullable="true" type="id_String"/>
@@ -812,6 +827,7 @@
         <mapperTableEntries expression="out3.patientuid " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="date_of_birth" nullable="true" type="id_Date"/>
         <mapperTableEntries name="gender_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -832,7 +848,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, date_of_birth, gender_id from ort_aa_patients&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, date_of_birth, gender_id, patient_pin from ort_aa_patients&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -849,6 +865,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="gender_id"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -858,6 +876,7 @@
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="date_of_birth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="gender_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="0">
@@ -1030,6 +1049,7 @@
       <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargetypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -1057,8 +1077,9 @@
         <mapperTableEntries expression="out4.date_of_birth " name="date_of_birth" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="gender.value_description" name="gender_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out4.dischargedate " name="dischargedate" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="out4.dischargetypeuid " name="dischargetypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="dstype.value_description" name="dischargetypeuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="dsstat.value_description" name="dischargestatusuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="dept.name" name="newColumn" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out4" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -1080,6 +1101,7 @@
         <mapperTableEntries name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries name="traumatypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="departmentuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="date_of_birth" nullable="true" type="id_Date"/>
         <mapperTableEntries name="gender_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="dischargedate" nullable="true" type="id_Date"/>
@@ -1101,6 +1123,14 @@
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="dsstat" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out4.dischargestatusuid " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="value_description" nullable="true" type="id_String"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="dstype" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out4.dischargetypeuid " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="value_description" nullable="true" type="id_String"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="dept" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out4.departmentuid " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="" name="name" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1169,6 +1199,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="dischargestatusuid"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="newColumn"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:PhBs6fYrweS6TlCtOdewO1ZaS6jCmvm0s1A+XUoO"/>
@@ -1212,6 +1244,7 @@
       <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargetypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="352">
@@ -1298,7 +1331,7 @@
       <column comment="" key="false" length="-1" name="value_description" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="-64">
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="896" posY="-64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1340,7 +1373,7 @@
       <column comment="" key="false" length="-1" name="value_description" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="-32">
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="-64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1380,6 +1413,90 @@
     <metadata connector="FLOW" name="tDBInput_5">
       <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="value_description" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1184" posY="0">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_6"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;TMC_DW_DB&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:vDBO5xRZeIN3Lltvm2pDHoE46kqpbFZGD4Uy7+9zg312nhkcCUUyy9s="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;ort_aa_mdt_reference_values&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, value_description from ort_aa_mdt_reference_values WHERE domain_code = 'ERDTYP'&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="value_description"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="DW RefVal - DISCHARGETYPE"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="dstype"/>
+    <metadata connector="FLOW" name="tDBInput_6">
+      <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="value_description" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_7"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;TMC_DW_DB&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:ikqqz/95F7MyLIOjmC1xXPBgsX2exzw7z13+HjrgtyQJXsvfoSTCs7A="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;ort_aa_mdt_departments&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, name from ort_aa_mdt_departments"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="DW Dept"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="dept"/>
+    <metadata connector="FLOW" name="tDBInput_7">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tMongoDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_2" target="tMap_2">
@@ -1492,11 +1609,19 @@
       <elementValue elementRef="TRACE_COLUMN" value="dischargedate"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="departmentuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
   <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tMongoDBInput_3" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_3" target="tSortRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="departmentuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
   </connection>
@@ -1509,10 +1634,20 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row6"/>
   </connection>
   <connection connectorName="FLOW" label="out4" lineStyle="0" metaname="out4" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tMap_5">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="departmentuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out4"/>
   </connection>
   <connection connectorName="FLOW" label="row7" lineStyle="8" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_4">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="patient_pin"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row7"/>
   </connection>
@@ -1529,6 +1664,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row10"/>
   </connection>
   <connection connectorName="FLOW" label="out5" lineStyle="0" metaname="out5" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="newColumn"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out5"/>
   </connection>
@@ -1553,18 +1693,26 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="dsstat"/>
   </connection>
+  <connection connectorName="FLOW" label="dstype" lineStyle="8" metaname="tDBInput_6" offsetLabelX="0" offsetLabelY="0" source="tDBInput_6" target="tMap_5">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="dstype"/>
+  </connection>
+  <connection connectorName="FLOW" label="dept" lineStyle="8" metaname="tDBInput_7" offsetLabelX="0" offsetLabelY="0" source="tDBInput_7" target="tMap_5">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="dept"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_bbe01e48-83c7-4379-8158-6589117aa7bb"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>QLbjn1cP+oXoeyq8COzfmNUciBfhBYqPlttAhRJrAaVq1FGFi2SH0mh2d0ZsMoAlG5soukfrsANm&#13;
-uBLqmDmaEQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_5afa3a45-3429-4ec2-ba5a-e0b44d585886"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>LPstWLrY/tjjPZ5oqPaIA4XzVEp3Wd+l70yb77xTrj5G0KaX+P7QXuDk22mINHH/zErHZZBV5olV&#13;
-aAY+KjZ4Zg==</DigestValue></Reference></SignedInfo><SignatureValue>mjDJjrEU657m8wwbib2YKYYXq/D2fHyvfwN8IQ1cYSHFfPErwMdPqbob25S9MjMvEclR9BslVHYz&#13;
-2OByg3ReN7v1eZQjHvQEKTm0C7In0lkpgancQt03cQKYS2qsdXmaGLZQnYXjX41jb7oSsKKbgXKI&#13;
-smayYwxLnIUebqyVzNeOXvumoZ5QGwZ1pZRUR0ZasESVQmbAP2XLeN+kQWnk1Bi6WgLgcOUInnkL&#13;
-2b84gn5LIRRJ1vjm8ZlcGTAekLTQJ8xlPphKSyutHzQCiUyLDvvsCyw7MUDk8Uf3d94/76goppaa&#13;
-Riir+B8OolF55iqZdaQ3DXhhF9yZxS1y4tkpmg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_bbb590a6-b002-420e-99e8-c2c7f96c1996"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>d3Q20Gtl5CMpUgcL7Ypr4vpFYa9tMLI8hK/tuHbdfr200eFw1isvdQkh1+x3RYVdrH/gEPULDOdB&#13;
+/QODz4mJgQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e9cd08a6-dca9-454f-a807-46c438e6af46"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FlYtHaAwpnRBnLWq8WcKwYc1/xEJf6Fa+kHQI3q+2gNGRi9yhecdiWcjA9lxDcr7UPigHUvP9mX+&#13;
+rVaMg6iSkw==</DigestValue></Reference></SignedInfo><SignatureValue>mS6qUFEKc9+q+KRkCWcIxe96SoFok8WXlhvz+rsO6bSwnS/KBES9wgUBNO8sPWCxd4vZyM+nUrCz&#13;
+OOR+FsYMR/VNMINViFASK+cDgaHnUk7f+Dj1zFwfLwiTsaxFWohiYs2KjVRvBWsRg0jzzdnjGQnI&#13;
+uIhOrYgHVvnTdnVkM+EPKteUWZN85uktyURak7Shp3VavNBrVNZlRWSZyCVbNxhBDPKFnPDbhRQs&#13;
+gqzFnFTgCvJjIA3DzBkSmG5FWrLB6m60Wyt+qhtg5zjTVtugt/1g4gszD/dwshPApgyk877tgMcV&#13;
+HlXbJQMZSF7TzrCNX9GRCV2+llOMv5TllsosQQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1586,4 +1734,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_5afa3a45-3429-4ec2-ba5a-e0b44d585886" Target="#_bbe01e48-83c7-4379-8158-6589117aa7bb"><Timestamp>2024-02-13 07:09:40</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e9cd08a6-dca9-454f-a807-46c438e6af46" Target="#_bbb590a6-b002-420e-99e8-c2c7f96c1996"><Timestamp>2024-02-13 07:31:23</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
