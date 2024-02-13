@@ -3,7 +3,7 @@
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="64"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="68"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" show="false" value=""/>
@@ -520,6 +520,9 @@
       <column comment="" key="false" length="-1" name="triagedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="emergencyleveluid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargetypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -544,6 +547,9 @@
         <mapperTableEntries expression="row6.triagedate" name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row6.emergencyleveluid) " name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row6.traumatypeuid) " name="traumatypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row10.dischargedate " name="dischargedate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row10.dischargetypeuid)" name="dischargetypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row10.dischargestatusuid) " name="dischargestatusuid" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row3" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -569,6 +575,13 @@
         <mapperTableEntries name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries name="traumatypeuid" nullable="true" type="id_String"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row10" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="_id" type="id_Integer"/>
+        <mapperTableEntries expression="row3._id " name="patientvisituid" nullable="true" operator="=" type="id_String"/>
+        <mapperTableEntries name="dischargedate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="dischargetypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="dischargestatusuid" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -653,6 +666,7 @@
     <elementParameter field="DIRECTORY" name="TEMPFILE" show="false" value="&quot;C:/Users/jsjavier/Desktop/datawarehouse_workspace/temp&quot;"/>
     <elementParameter field="CHECK" name="CREATEDIR" show="false" value="true"/>
     <elementParameter field="TEXT" name="EXTERNAL_SORT_BUFFERSIZE" show="false" value="1000000"/>
+    <elementParameter field="TEXT" name="LABEL" value="sortTRIAGEdetails"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="patients" name="tSortRow_1">
       <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -690,6 +704,7 @@
     <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
     <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
     <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="AggregateGetLatestTriage"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="patients" name="tAggregateRow_1">
       <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
@@ -736,6 +751,9 @@
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="date_of_birth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="gender_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargetypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -762,6 +780,9 @@
         <mapperTableEntries expression="out3.traumatypeuid " name="traumatypeuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row7.date_of_birth " name="date_of_birth" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row7.gender_id " name="gender_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.dischargedate " name="dischargedate" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out3.dischargetypeuid " name="dischargetypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.dischargestatusuid " name="dischargestatusuid" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -783,6 +804,9 @@
         <mapperTableEntries name="triagedate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="emergencyleveluid" nullable="true" type="id_String"/>
         <mapperTableEntries name="traumatypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="dischargedate" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="dischargetypeuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="dischargestatusuid" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row7" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out3.patientuid " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
@@ -895,6 +919,12 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="gender_id"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dischargedate"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dischargetypeuid"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dischargestatusuid"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:PhBs6fYrweS6TlCtOdewO1ZaS6jCmvm0s1A+XUoO"/>
@@ -935,9 +965,12 @@
       <column comment="" key="false" length="-1" name="traumatypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="date_of_birth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="gender_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargetypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="0">
+  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1005,7 +1038,7 @@
       <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tSortRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="0">
+  <node componentName="tSortRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tSortRow_2"/>
     <elementParameter field="TABLE" name="CRITERIA">
       <elementValue elementRef="COLNAME" value="patientvisituid"/>
@@ -1019,6 +1052,7 @@
     <elementParameter field="DIRECTORY" name="TEMPFILE" show="false" value="&quot;C:/Users/jsjavier/Desktop/datawarehouse_workspace/temp&quot;"/>
     <elementParameter field="CHECK" name="CREATEDIR" show="false" value="true"/>
     <elementParameter field="TEXT" name="EXTERNAL_SORT_BUFFERSIZE" show="false" value="1000000"/>
+    <elementParameter field="TEXT" name="LABEL" value="sortERdischarges"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="patients" name="tSortRow_2">
       <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -1028,7 +1062,7 @@
       <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="0">
+  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_2"/>
     <elementParameter field="TABLE" name="GROUPBYS">
       <elementValue elementRef="OUTPUT_COLUMN" value="patientvisituid"/>
@@ -1056,44 +1090,9 @@
     <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
     <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
     <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="AggregateGetLatestStatus"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="patients" name="tAggregateRow_2">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patientvisituid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="dischargetypeuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="0">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
-    <elementParameter field="RADIO" name="BASIC_MODE" value="false"/>
-    <elementParameter field="RADIO" name="TABLE_PRINT" value="true"/>
-    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
-    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" show="false" value="&quot;|&quot;"/>
-    <elementParameter field="CHECK" name="PRINT_HEADER" show="false" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" show="false" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_COLNAMES" show="false" value="false"/>
-    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" show="false" value="false"/>
-    <elementParameter field="TABLE" name="LENGTHS" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="_id"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patientvisituid"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="dischargedate"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="dischargetypeuid"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="dischargestatusuid"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
-    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="patients" name="tLogRow_1">
       <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="patientvisituid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dischargedate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -1201,6 +1200,17 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
   </connection>
   <connection connectorName="FLOW" label="out3" lineStyle="0" metaname="out3" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="dischargetypeuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dischargestatusuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dischargedate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
@@ -1217,6 +1227,17 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row6"/>
   </connection>
   <connection connectorName="FLOW" label="out4" lineStyle="0" metaname="out4" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="dischargetypeuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dischargestatusuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dischargedate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out4"/>
   </connection>
@@ -1232,7 +1253,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row9"/>
   </connection>
-  <connection connectorName="FLOW" label="row10" lineStyle="0" metaname="tAggregateRow_2" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_2" target="tLogRow_1">
+  <connection connectorName="FLOW" label="row10" lineStyle="8" metaname="tAggregateRow_2" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_2" target="tMap_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row10"/>
   </connection>
@@ -1241,18 +1262,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_4"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
-  </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2cfb8932-79c7-4939-8743-24f3b6dfde81"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>snYf1bjUjJZpZiCrr+y7beCwjN1T0ZhjobWnHbBWRyGzB4ry3FPv15nbTFT+CXSjfC2sOsD17ZIc&#13;
-sHn6+HoL9g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_5926a6a0-97f7-46aa-af7b-9de71fc38052"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2BIXJGQXifB7Bpva2by6YFqKn5vJPL8qcBHnL7sdJv85MkADnbUKdwpJBodx7Tl+O7YDNY0yKSvf&#13;
-5isd4y4BJw==</DigestValue></Reference></SignedInfo><SignatureValue>LTSLBkVEGpMsTu4yIfQqKcWIhAgJuLDY9S8oVH9PLqCz2pCkp/OKmLicoXAAGoth3WLqzlwYTAPw&#13;
-ze6S/BkzsP3g6UXRzujSNGUUFUw2FLZUgFlswfJbworrOKtCwWcEVTOArR0FdYqDjzOft+utiihh&#13;
-lhTmVyk8enUa1MlCfm4gsUeiYoSPnve2mfRnq9UrICRi/Zq1Z1/Ef+lPd4PGmWz/C54JjKUn0Gtw&#13;
-dful9bEqV1gvFoKQP7Hbaw6uoxITrfk1GwS6ZsDSxFvG0rxu7lE2k+5N4Egjk7kP7NvkZQio8RZo&#13;
-RI1P6ssHhvbk02KTi0crQI8NLpsts7JW+dOuQA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_d4177d28-9ded-46d7-ab59-75699a8e3230"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+jMQASwZCL7op9LiEjl4REQ9AzQc0gd9EdeT0qDV5WDhXIECsUqzXG3fJbmdOrG2Nw8UQXUUfeC+&#13;
+Seut8l3+Dg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_336965fb-77fa-4d35-b298-6f8e148437a0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>8RV50pAx1VXs1GX+SVLNAhTV0amvER7PYpRZlzsnVW4pA2n80Pm6TJ2ET/7eWQSN4ZOUcuglg9eL&#13;
+83HcMiMEVw==</DigestValue></Reference></SignedInfo><SignatureValue>Vx5Mp0Y8vzWpdV8legiIQFB249uqtIJGzBtaeqxigledO8ffLyqxm4RN6FiuWyuZVSfllRM0Ygji&#13;
+8H04bpAm4vmJd0pHfKeGQIZZf48qibRQ8LJsKIIFnOFiOtyXJW5xk6pFXjNuIF97ZnRSt7S3mE7O&#13;
+zQjw1HcDdkz8jxwLktBCrLbYrgUdkR3KPzHVWzHsRbTx0xlT/ZIOLXeltQp/zro5sjMv1S4l4x9V&#13;
+i+vkXKETAFZr05NFUs6A3xRTuZxFVZVoSDxXw9YvoPWJsAmwYHKshTckRYP2RPuwLoMgF0BvtGx4&#13;
+05QtlXuX3tvIYQNjD4T/KzKnDSnsYs5fnT24hA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1274,4 +1290,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_5926a6a0-97f7-46aa-af7b-9de71fc38052" Target="#_2cfb8932-79c7-4939-8743-24f3b6dfde81"><Timestamp>2024-02-13 06:42:54</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_336965fb-77fa-4d35-b298-6f8e148437a0" Target="#_d4177d28-9ded-46d7-ab59-75699a8e3230"><Timestamp>2024-02-13 06:47:27</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
