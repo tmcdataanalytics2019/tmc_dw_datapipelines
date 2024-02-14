@@ -846,9 +846,9 @@
       <column comment="" key="false" length="-1" name="patient_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;MM/dd/yyyy HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;MM/dd/yyyy HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;MM/dd/yyyy HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -864,7 +864,7 @@
         <mapperTableEntries expression="out2.admission_date " name="admission_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out2.discharge_date " name="discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out2.medical_discharge_date " name="medical_discharge_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="out2.is_converted_from_opd " name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out2.is_converted_from_opd.equals(&quot;TRUE&quot;)?&quot;T&quot;:&quot;F&quot; " name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out2.visit_type_id.equals(&quot;INPATIENT&quot;)?out2.IPD_discharge_type_id:out2.OPD_discharge_type_id " name="discharge_type" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out2.visit_type_id.equals(&quot;INPATIENT&quot;)?out2.IPD_patient_status_id:out2.OPD_discharge_status_id " name="discharge_status" nullable="true" type="id_String"/>
       </outputTables>
@@ -944,9 +944,9 @@
       <column comment="" key="false" length="-1" name="patient_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;MM/dd/yyyy HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;MM/dd/yyyy HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;MM/dd/yyyy HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1089,13 +1089,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_98d2976c-202e-4645-9b15-1657d4807426"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>PYDbdCZ2YUP2lL4zW/UDZR59/z4FZsK1hmuIfNWwV2OoTpdM/VUUWcIrwFKGHjVqEMbGMnrB13xP&#13;
-8SRlsZ3pJw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_cd5bbfc6-ec2c-4035-a299-3efd20d8ca57"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kzSSMCYaQRsZA1u0Eoim8WVWEWWVjl04erFQypw47qkL5PDwamPa7HAbF8oJztmd6l8dar/XH3+O&#13;
-8e00L5cuaQ==</DigestValue></Reference></SignedInfo><SignatureValue>LNZnZSO/2ZDnCVRFy2NNDdu+nd2He6BJYUQm54udtnDAhmBLEr55wBFfavHCmh8yV/9AEL9lOYHt&#13;
-AdTw1JR5eauhg7loBScYL5fdSJceCgEBXYufK5mAmcoscA18z5LHZXWo0kidlp9iIPc7lKTWnUhy&#13;
-quLrv7QgKObPn8GoA9AyDtbfwg3TDm6jjbnd+wnXVivDjoRbakNwJEWwunmamGK7dL+RkuRIuwyj&#13;
-+qMI6L6NZGo1LPrVOihtrZbA/lY/KbDa3iDw4XqBin3eMPGCqhYRkcZ0U56PHGfPEOXiogxCi7/S&#13;
-LRahSGcbT/NTtpq+G/jSWTSdv5YPKT2HNwqUDA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_47385650-3fcf-4b09-8136-6b69ffb214a5"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>thAErVrrdiftO+efQZaQK7smk7No4g8YigTGxvVlawqIp2crstZ+D1UqGSuLj4WkfenUQva6d4oa&#13;
+fND2Y4JyEA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_0814566b-9cc9-43cb-8ad3-909c00c701da"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>k+1zVzhhd6qMP4WsE3Vd0WWA03KpecEvz/Sq+0jsuYd5DXfCBTrgehe8O+gI9S0XPRc6jk8hbGdv&#13;
+k+WmH9IfiQ==</DigestValue></Reference></SignedInfo><SignatureValue>B4a3rZaF9hG5PluRAQqrDyN2amjFujMZuNZKMeJJ8f1Slb+Ccfwx5S6CVXzdVAi05HQ4rJ7E57O2&#13;
+CFEclfchVAOTJB9BCFGjnA8KK4IuEKyXrxh/Lqof86NPNyA6ObJet4VNm2eUnU9agZfLMTqvKXEW&#13;
+W8yOAl6dwztvpxUeRRqC5AHYKn199ZMyBmGTT8LVRq4MPQdng2j/eDLJcEQz0Y9fT0laYUMMuWjz&#13;
+Ig/mHj8KNjCi9tCCZZ2ULYCkBCZCUd/1Zgl14wGuyZi8EFZ2vqHfccCLeRsFXiInmFKTNiZE88Z9&#13;
+CUQnk9/kf/c2zqJkRi1OZVmWM27allRPrOXedA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1117,4 +1117,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_cd5bbfc6-ec2c-4035-a299-3efd20d8ca57" Target="#_98d2976c-202e-4645-9b15-1657d4807426"><Timestamp>2024-02-14 07:19:05</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_0814566b-9cc9-43cb-8ad3-909c00c701da" Target="#_47385650-3fcf-4b09-8136-6b69ffb214a5"><Timestamp>2024-02-14 07:22:25</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
