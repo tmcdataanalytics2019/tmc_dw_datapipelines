@@ -150,6 +150,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="medical_discharge_date"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_converted_from_opd"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -163,6 +165,7 @@
       <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="320">
@@ -187,6 +190,7 @@
       <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -199,6 +203,7 @@
         <mapperTableEntries expression="row1.admission_date " name="admission_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.discharge_date " name="discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.medical_discharge_date " name="medical_discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row1.is_converted_from_opd " name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
@@ -208,6 +213,7 @@
         <mapperTableEntries name="admission_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="medical_discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.patient_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
@@ -285,6 +291,8 @@
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="medical_discharge_date"/>
       <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_converted_from_opd"/>
+      <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
@@ -297,6 +305,7 @@
       <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="480">
@@ -413,6 +422,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="medical_discharge_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="is_converted_from_opd"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
@@ -436,13 +448,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_87b3eab0-c745-40c7-8b94-e78e4dc64e1d"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>NO+OjAIHh3YoJ6s9saX5O5WiskodadgmUK7Ux4ngKqLOW73dnuyHj/Ewqe6R4k5ueGunO7WNyaGn&#13;
-KVjhRx2dvg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_078f899d-892a-45cf-bc7c-9a58957cbfc2"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>N9kyu8ziN9zHhmmadAEIEsd2KC+8Ix/mg8TTTi2sm6uKwUw3tcwyfWKd+zTYQOq1zErBuREnMxMM&#13;
-Dgq3eoTqQg==</DigestValue></Reference></SignedInfo><SignatureValue>mpgb4kqFx9ujk851KOC3EgI3ed+NZ0YHzxbpeG5fZ7+OFr3a6koqG95Bpt4nZxv87SNIisGPMXDN&#13;
-3FANyLf1uE+jHpX8lkvav3G1eHvTsDYsgOL35PD1hSdcytd2cIJWAVWx7H0vtVahQRRXQZveoFCO&#13;
-b7LZtQVK4GO9O4QtrItEn+3/GIvJBQuoR0jbHJOpMgWZNOOcpc8pPKjXTVeplckQCd0qs3OYWOqt&#13;
-G7X3E1FW2VXk2ml5jMHFOi5zHpuDaRc2afFzPIUxvYvlbZLnJd4HLAaLjWwmaYMr8YsL9AN2KZ4a&#13;
-9J1Nt2CWqwH1mvWaiaipwVqg95zS2zPs6KwzTw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_355e55e8-c76f-4f4d-a603-d119689215ef"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kQX26peTcRTjsoNpYa1NwFx39q+KUy8/qD8Faa7aUQnjwNcjbtb1hlhapQCXcihtAcfMmJHKOLhk&#13;
+1kf+H+bDfw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_07db715b-cdc8-4d43-b2cc-b01a3019fa5b"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>AYPqVcxVtGr4nh8uIhRGSltTNO12Gl1EK5nYFRtwfd/pITxqUdqJcF98CFUpFDCleGhtRqWbvHuv&#13;
+IViXBFcbDg==</DigestValue></Reference></SignedInfo><SignatureValue>UGqIP+7/zTUvNxR40YJHmtZvJBea1LAJsm61x+RwjNDV6TlHCEC3TWw759sZhhnBOBiT8zHcbuex&#13;
+rM+nir/n4N7vzdoXkRbWHdXY0b18OYVXvRXQWsZ1LbvB1UvJBW8/IXNDL8hyCVkrAptSvPox+UaA&#13;
+Y2rSvhonWiUAnhfzCRAX+On9ayRpAgmD++MMriMmwCCl7D8fveKqncGJQOB1iMEDrFhQKicjxCsF&#13;
++nmI5sLkiswI3LKs/IMTOKhMv7BhdNSMHlbKKPeezN6oL0MHqROWrtVgVGYNVdLT8xhBOt7gVP2E&#13;
+ZIQvMLC4l6XwCdtdOPR5f31L+b5GfZU9EuwXmw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -464,4 +476,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_078f899d-892a-45cf-bc7c-9a58957cbfc2" Target="#_87b3eab0-c745-40c7-8b94-e78e4dc64e1d"><Timestamp>2024-02-14 06:14:56</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_07db715b-cdc8-4d43-b2cc-b01a3019fa5b" Target="#_355e55e8-c76f-4f4d-a603-d119689215ef"><Timestamp>2024-02-14 06:16:07</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
