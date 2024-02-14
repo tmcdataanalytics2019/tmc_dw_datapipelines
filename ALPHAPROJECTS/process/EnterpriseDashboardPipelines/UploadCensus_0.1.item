@@ -125,7 +125,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select TOP 10000 transaction_external_id, visit_id, visit_type_id, patient_pin, admission_date, medical_discharge_date, discharge_date, is_converted_from_opd from ort_aa_patient_visits WHERE admission_date like '%2024%'&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT TOP 10000 transaction_external_id, visit_id, visit_type_id, patient_pin, admission_date,medical_discharge_date, discharge_date, is_converted_from_opd FROM ort_aa_patient_visits where admission-date like '%2023%'&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -654,8 +654,7 @@
         <mapperTableEntries name="value_description" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="ipdtype" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row5.IPD_discharge_type_id " name="IPD_discharge_type_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row5.IPD_discharge_type_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="value_description" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
@@ -814,8 +813,6 @@
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="IPD_discharge_type_id"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="value_description"/>
@@ -826,7 +823,6 @@
     <elementParameter field="TEXT" name="LABEL" value="refval-opd-dstype"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_9">
-      <column comment="" key="true" length="-1" name="IPD_discharge_type_id" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="value_description" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -1013,13 +1009,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_0f0ae7f2-c257-4b1e-ac11-67c2e6c82e75"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Sg7UTJyB5E+ugntr2NX0D0oyt/j2UhiOHwPZAQ2Rg/pn0PNVW9zUsU6mcZSu12gEdNFWleBdGTLD&#13;
-vbC9eeeprg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_7f4d1216-c083-43d6-91da-90b710f51e19"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>WsqBW6S+iHn4kZFIEkZ+XUDzzTki+FfDJ4zWfT4Oi7xI75zIijWNkzeQzCQXUQtTNtgYlM88k914&#13;
-DzPeMSb8uQ==</DigestValue></Reference></SignedInfo><SignatureValue>K+nSRkYdGYaBOhUgNR1ERxMCcO6lMVcGQod/cAkc8oN7bSa/WpCh6Kita5cBzaPUnHpfvpRzhatZ&#13;
-LPPm8NSnN3rvYxbHvrjPijIYiaqQlypCc9Z+P/EpkF4utJz0GSXyToqEq4+2c5pLSyGWAST8r0ip&#13;
-uKHuBncEY0Obcm/Sh8KiYPDpdxbY7sBwFgpdf/A0Xziq8I9gDAv/YrfGPsUTOxo6DlxH94UEnZGC&#13;
-WX732eg2OpkXN7pCAvf583ZEmhgzjHlw7qXXTIQmkb8niBFyX6xK8lln+qAY1abLQWuwBK31Tt5B&#13;
-YljxHjNqAz/XaAedDaqth5PBxTdJBQQpxwu+rw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_5ad38962-4f09-43d5-8e3e-f519886e219a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>rMHjFnqGFWSf4rfqUdrwOZBAxfATYDd0VkPITZ96LHdAxcgdAw43qgL8AnAVvwuBOpX+ncVBq8qO&#13;
+BacNVnSQ1g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3da8d68d-08c8-45ca-bd7e-9c87ca0c1c8a"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>o5aFjjwQMPC8kLPgPTdImiwKTw9hGlFnJ9bTl8ZsyFjrNHeJKAdlQ2CVz8m0GJ5zSKYQhFbU4kvL&#13;
+Tjsk3uzvHg==</DigestValue></Reference></SignedInfo><SignatureValue>N9YcoOy/0ucs2+PW3WZrAyURaspIorQlmeZSWFCEG9wVJzr/Sg3Y44E28/XBYIj3xOdEQ+JNc3WW&#13;
+A+Yym3VClbbndp1yAKEyQvH+3soRFBbgVd/U48/08YcEC9KkdPr6oRLlresEatAoVlqg+857m5t/&#13;
+9Ze60ucWdq3BlXBwUBHQstmU/KiRQ/meTAdzxx3AUUO0l0LT4IzxmMZz9+4+rklrYXxro2dAoN0T&#13;
+sPtWtm6THgGI4LegQ6yPOdwm2tcerIGM/cOSNO0L33SSjWvdOrAOFWF0jia9Z+YtoRQEIPmmihkp&#13;
+2XG3QQ84xd4uLYjnvYbIm3a3eLUbPK0pX5qZaw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1041,4 +1037,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_7f4d1216-c083-43d6-91da-90b710f51e19" Target="#_0f0ae7f2-c257-4b1e-ac11-67c2e6c82e75"><Timestamp>2024-02-14 07:06:11</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3da8d68d-08c8-45ca-bd7e-9c87ca0c1c8a" Target="#_5ad38962-4f09-43d5-8e3e-f519886e219a"><Timestamp>2024-02-14 07:09:13</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
