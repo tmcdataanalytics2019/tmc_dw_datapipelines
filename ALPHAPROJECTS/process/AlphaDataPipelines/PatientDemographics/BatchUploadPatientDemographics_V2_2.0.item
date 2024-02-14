@@ -9,7 +9,7 @@
   </context>
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="0"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
@@ -117,8 +117,6 @@
   </parameters>
   <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_9"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_0KQXkDDbEe6bSJC9TP3ygw"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="MONGODB_4_4_X"/>
@@ -144,10 +142,15 @@
     <elementParameter field="TEXT" name="KRB_REALM" show="false" value="&quot;EXAMPLE.COM&quot;"/>
     <elementParameter field="TEXT" name="KRB_KDC" show="false" value="&quot;kdc.example.com&quot;"/>
     <elementParameter field="TEXT" name="COLLECTION" value="&quot;patients&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="QUERY_TYPE" value="FIND_QUERY"/>
+    <elementParameter field="CLOSED_LIST" name="QUERY_TYPE" value="AGGREGATION_QUERY"/>
     <elementParameter field="LABEL" name="NOTE_ISOLATION" value="Note : Surround String values in your query with single quotes&#10;Note : If you are running on a Sharded Cluster, please make sure to include the shard key in the query."/>
-    <elementParameter field="MEMO" name="QUERY" value="&quot;{}&quot;"/>
-    <elementParameter field="TABLE" name="AGGREGATION_STAGES" show="false"/>
+    <elementParameter field="MEMO" name="QUERY" show="false" value="&quot;{}&quot;"/>
+    <elementParameter field="TABLE" name="AGGREGATION_STAGES">
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$set:{'fromdate':{$toDate:{ $subtract: [ new Date(), 86400000 ] }}}}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$set:{'todate':new Date() }}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{$expr:{$or:[{$and:[{$gte:['$registereddate','$fromdate']},{$lte:['$registereddate','$todate']}]},{$and:[{$gte:['$modifiedat','$fromdate']},{$lte:['$modifiedat','$todate']}]}]}}}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'mrn':'$mrn','firstname':'$firstname','middlename':'$middlename','thirdname':'$thirdname','lastname':'$lastname','titleuid':'$titleuid','genderuid':'$genderuid','isvip':'$isvip','isanonymous':'$isanonymous','dateofbirth':'$dateofbirth','registereddate':'$registereddate','nationalityuid':'$nationalityuid','religionuid':'$religionuid','raceuid':'$raceuid','occupationuid':'$occupationuid','patienttypeuid':'$patienttypeuid','maritalstatusuid':'$maritalstatusuid','notes':'$notes','ispatientmerged':'$ispatientmerged','mergedpatientuid':'$mergedpatientuid','isemployee':'$isemployee','residentstatusuid':'$residentstatusuid','isblacklisted':'$isblacklisted','blacklistreason':'$blacklistreason','issimilarnamepatient':'$issimilarnamepatient','createdat':'$createdat','createdby':'$createdby','modifiedat':'$modifiedat','modifiedby':'$modifiedby','orguid':'$orguid'}}&quot;"/>
+    </elementParameter>
     <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
     <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
     <elementParameter field="TABLE" name="MAPPING">
@@ -156,8 +159,6 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="mrn"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="notes"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="title_code"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="titleuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
@@ -175,10 +176,6 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="dateofbirth"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isdobestimated"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="internalmrn"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="occupationuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="maritalstatusuid"/>
@@ -192,12 +189,6 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="religionuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="raceuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="isinterpreterreqd"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="address"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="contact"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="isemployee"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
@@ -217,75 +208,27 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="orguid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="externaltablename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="__v"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_firstname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_lastname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_localfirstname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_locallastname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_localmiddlename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_localthirdname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_middlename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_thirdname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="allowedusersafteremrlocked"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="bloodgroupuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="careproviderteamuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="enterprisemrn"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="issimilarnamepatient"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="lastname"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localfirstname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="locallastname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localmiddlename"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localnametitleuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="localthirdname"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="nationalid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patientdemochanges"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="residentstatusuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="rhfactoruid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="tawafahofficeuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="tawafahofficeunumber"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="patienttypeuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="preflanguid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="ispatientmerged"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="mergedpatientuid"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
-    <elementParameter field="TABLE" name="SORT"/>
-    <elementParameter field="TEXT" name="LIMIT" value=""/>
-    <elementParameter field="TEXT" name="SKIP" value=""/>
-    <elementParameter field="TEXT" name="BATCHSIZE" value=""/>
+    <elementParameter field="TABLE" name="SORT" show="false"/>
+    <elementParameter field="TEXT" name="LIMIT" show="false" value=""/>
+    <elementParameter field="TEXT" name="SKIP" show="false" value=""/>
+    <elementParameter field="TEXT" name="BATCHSIZE" show="false" value=""/>
     <elementParameter field="CHECK" name="QUERYOPTION_NOTIMEOUT" show="false" value="false"/>
-    <elementParameter field="CHECK" name="EXTERNAL_SORT_AGGREGATION" show="false" value="false"/>
+    <elementParameter field="CHECK" name="EXTERNAL_SORT_AGGREGATION" value="false"/>
     <elementParameter field="CHECK" name="CONVERT_BSON_TO_STRING" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="patients"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -293,7 +236,6 @@
       <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="true" length="0" name="mrn" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="notes" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="title_code" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="titleuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="firstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="middlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -302,8 +244,6 @@
       <column comment="" key="false" length="0" name="registereddate" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="genderuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="dateofbirth" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isdobestimated" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="internalmrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="occupationuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="maritalstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationalityuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -311,9 +251,6 @@
       <column comment="" key="false" length="0" name="isvip" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="religionuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="raceuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="isinterpreterreqd" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="address" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="contact" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isemployee" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isblacklisted" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="blacklistreason" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -323,35 +260,11 @@
       <column comment="" key="false" length="0" name="modifiedat" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="statusflag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="orguid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="externaltablename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="__v" nullable="true" pattern="" precision="0" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_firstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_lastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localfirstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_locallastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localmiddlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_localthirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_middlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="_thirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="allowedusersafteremrlocked" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="bloodgroupuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="careproviderteamuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="enterprisemrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="issimilarnamepatient" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="lastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localfirstname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="locallastname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localmiddlename" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localnametitleuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="localthirdname" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationalid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patientdemochanges" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="residentstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="rhfactoruid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="tawafahofficeuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="tawafahofficeunumber" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="patienttypeuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="preflanguid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ispatientmerged" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="mergedpatientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -361,7 +274,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fIEFsINlEe6scrYgLaEiYg-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_NDYtIMrTEe6bIJecm5qPYw-tMap_1-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
     <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
@@ -382,7 +295,6 @@
       <column comment="" key="false" length="0" name="registereddate" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="gender" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="date_of_birth" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="internalmrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="occupationuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="maritalstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationalityuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -390,8 +302,6 @@
       <column comment="" key="false" length="0" name="isvip" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="religionuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="raceuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="address" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="contact" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isemployee" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isblacklisted" nullable="true" pattern="" precision="0" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="blacklistreason" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -402,7 +312,6 @@
       <column comment="" key="false" length="0" name="statusflag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="suffix" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationalid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patientdemochanges" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="residentstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="hospital_origin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="orguid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -430,7 +339,6 @@
         <mapperTableEntries expression="getMongoDBdata.registereddate " name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="getMongoDBdata.genderuid" name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.dateofbirth " name="date_of_birth" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="getMongoDBdata.internalmrn " name="internalmrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.occupationuid " name="occupationuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.maritalstatusuid " name="maritalstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.nationalityuid " name="nationalityuid" nullable="true" type="id_String"/>
@@ -438,8 +346,6 @@
         <mapperTableEntries expression="getMongoDBdata.isvip " name="isvip" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="getMongoDBdata.religionuid " name="religionuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.raceuid " name="raceuid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="getMongoDBdata.address " name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries expression="getMongoDBdata.contact " name="contact" nullable="true" type="id_Object"/>
         <mapperTableEntries expression="getMongoDBdata.isemployee " name="isemployee" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="getMongoDBdata.isblacklisted " name="isblacklisted" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="getMongoDBdata.blacklistreason " name="blacklistreason" nullable="true" type="id_String"/>
@@ -450,7 +356,6 @@
         <mapperTableEntries expression="getMongoDBdata.statusflag " name="statusflag" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.lastname " name="suffix" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.nationalid " name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="getMongoDBdata.patientdemochanges " name="patientdemochanges" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.residentstatusuid " name="residentstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="&quot;TMC_ORT&quot;" name="hospital_origin" nullable="true" type="id_String"/>
         <mapperTableEntries expression="getMongoDBdata.orguid" name="orguid" nullable="true" type="id_String"/>
@@ -464,7 +369,6 @@
         <mapperTableEntries name="_id" type="id_String"/>
         <mapperTableEntries name="mrn" type="id_String"/>
         <mapperTableEntries name="notes" nullable="true" type="id_String"/>
-        <mapperTableEntries name="title_code" nullable="true" type="id_String"/>
         <mapperTableEntries name="titleuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="firstname" nullable="true" type="id_String"/>
         <mapperTableEntries name="middlename" nullable="true" type="id_String"/>
@@ -473,8 +377,6 @@
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="genderuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="dateofbirth" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="isdobestimated" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="internalmrn" nullable="true" type="id_String"/>
         <mapperTableEntries name="occupationuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="maritalstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationalityuid" nullable="true" type="id_String"/>
@@ -482,9 +384,6 @@
         <mapperTableEntries name="isvip" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="religionuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="raceuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="isinterpreterreqd" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="contact" nullable="true" type="id_Object"/>
         <mapperTableEntries name="isemployee" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="isblacklisted" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="blacklistreason" nullable="true" type="id_String"/>
@@ -494,35 +393,11 @@
         <mapperTableEntries name="modifiedat" nullable="true" type="id_Date"/>
         <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="externaltablename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="__v" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="_firstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_localthirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_middlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="_thirdname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="allowedusersafteremrlocked" nullable="true" type="id_String"/>
-        <mapperTableEntries name="bloodgroupuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="careproviderteamuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="enterprisemrn" nullable="true" type="id_String"/>
         <mapperTableEntries name="issimilarnamepatient" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="lastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localfirstname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="locallastname" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localmiddlename" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localnametitleuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="localthirdname" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patientdemochanges" nullable="true" type="id_String"/>
         <mapperTableEntries name="residentstatusuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="rhfactoruid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="tawafahofficeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="tawafahofficeunumber" nullable="true" type="id_String"/>
         <mapperTableEntries name="patienttypeuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="preflanguid" nullable="true" type="id_String"/>
         <mapperTableEntries name="ispatientmerged" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="mergedpatientuid" nullable="true" type="id_String"/>
       </inputTables>
@@ -533,7 +408,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fIEFsINlEe6scrYgLaEiYg-tMap_7-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_NDYtIMrTEe6bIJecm5qPYw-tMap_7-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
     <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
@@ -553,7 +428,6 @@
       <column comment="" key="false" length="0" name="registereddate" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="gender" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="date_of_birth" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="internalmrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="occupation" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="marital_status" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationality" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -561,8 +435,6 @@
       <column comment="" key="false" length="0" name="isvip" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="religion" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="race" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="address" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="contact" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isemployee" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isblacklisted" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="blacklistreason" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -573,7 +445,6 @@
       <column comment="" key="false" length="0" name="statusflag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="suffix" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationalid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patientdemochanges" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="residentstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="hospital_origin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="orguid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -584,7 +455,7 @@
       <column comment="" key="false" length="-1" name="mergedpatientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out8" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.transaction_external_id" name="transaction_external_id" type="id_String"/>
@@ -597,7 +468,6 @@
         <mapperTableEntries expression="out1.registereddate" name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out1.gender" name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.date_of_birth" name="date_of_birth" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="out1.internalmrn" name="internalmrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.occupationuid" name="occupation" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.maritalstatusuid" name="marital_status" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.nationalityuid" name="nationality" nullable="true" type="id_String"/>
@@ -605,8 +475,6 @@
         <mapperTableEntries expression="String.valueOf(out1.isvip)" name="isvip" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.religionuid" name="religion" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.raceuid" name="race" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1.address" name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries expression="out1.contact" name="contact" nullable="true" type="id_Object"/>
         <mapperTableEntries expression="String.valueOf(out1.isemployee)" name="isemployee" nullable="true" type="id_String"/>
         <mapperTableEntries expression="String.valueOf(out1.isblacklisted)" name="isblacklisted" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.blacklistreason" name="blacklistreason" nullable="true" type="id_String"/>
@@ -617,7 +485,6 @@
         <mapperTableEntries expression="out1.statusflag" name="statusflag" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.suffix" name="suffix" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.nationalid" name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1.patientdemochanges" name="patientdemochanges" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.residentstatusuid" name="residentstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.hospital_origin" name="hospital_origin" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.orguid " name="orguid" nullable="true" type="id_String"/>
@@ -638,7 +505,6 @@
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries name="date_of_birth" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="internalmrn" nullable="true" type="id_String"/>
         <mapperTableEntries name="occupationuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="maritalstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationalityuid" nullable="true" type="id_String"/>
@@ -646,8 +512,6 @@
         <mapperTableEntries name="isvip" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="religionuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="raceuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="contact" nullable="true" type="id_Object"/>
         <mapperTableEntries name="isemployee" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="isblacklisted" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="blacklistreason" nullable="true" type="id_String"/>
@@ -658,7 +522,6 @@
         <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
         <mapperTableEntries name="suffix" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patientdemochanges" nullable="true" type="id_String"/>
         <mapperTableEntries name="residentstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="hospital_origin" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
@@ -1098,7 +961,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fIEFsINlEe6scrYgLaEiYg-tMap_9-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_NDYtIMrTEe6bIJecm5qPYw-tMap_9-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
     <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
@@ -1118,7 +981,6 @@
       <column comment="" key="false" length="0" name="registereddate" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="gender" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="date_of_birth" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="0" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="internalmrn" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="occupation" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="marital_status" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationality" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -1126,8 +988,6 @@
       <column comment="" key="false" length="0" name="isvip" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="religion" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="race" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="address" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="contact" nullable="true" pattern="" precision="0" type="id_Object" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isemployee" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="isblacklisted" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="blacklistreason" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
@@ -1138,7 +998,6 @@
       <column comment="" key="false" length="0" name="statusflag" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="suffix" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="nationalid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="0" name="patientdemochanges" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="0" name="residentstatusuid" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="hospital_origin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="orguid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1149,7 +1008,7 @@
       <column comment="" key="false" length="-1" name="mergedpatientuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out7" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out8.transaction_external_id " name="transaction_external_id" type="id_String"/>
@@ -1162,7 +1021,6 @@
         <mapperTableEntries expression="out8.registereddate " name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out8.gender " name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.date_of_birth " name="date_of_birth" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="out8.internalmrn " name="internalmrn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.occupation " name="occupation" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.marital_status " name="marital_status" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.nationality " name="nationality" nullable="true" type="id_String"/>
@@ -1170,8 +1028,6 @@
         <mapperTableEntries expression="out8.isvip " name="isvip" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.religion " name="religion" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.race " name="race" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out8.address " name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries expression="out8.contact " name="contact" nullable="true" type="id_Object"/>
         <mapperTableEntries expression="out8.isemployee " name="isemployee" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.isblacklisted " name="isblacklisted" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.blacklistreason " name="blacklistreason" nullable="true" type="id_String"/>
@@ -1182,7 +1038,6 @@
         <mapperTableEntries expression="out8.statusflag " name="statusflag" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.suffix " name="suffix" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.nationalid " name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out8.patientdemochanges " name="patientdemochanges" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.residentstatusuid " name="residentstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.hospital_origin " name="hospital_origin" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out8.orguid " name="orguid" nullable="true" type="id_String"/>
@@ -1203,7 +1058,6 @@
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries name="date_of_birth" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="internalmrn" nullable="true" type="id_String"/>
         <mapperTableEntries name="occupation" nullable="true" type="id_String"/>
         <mapperTableEntries name="marital_status" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationality" nullable="true" type="id_String"/>
@@ -1211,8 +1065,6 @@
         <mapperTableEntries name="isvip" nullable="true" type="id_String"/>
         <mapperTableEntries name="religion" nullable="true" type="id_String"/>
         <mapperTableEntries name="race" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="contact" nullable="true" type="id_Object"/>
         <mapperTableEntries name="isemployee" nullable="true" type="id_String"/>
         <mapperTableEntries name="isblacklisted" nullable="true" type="id_String"/>
         <mapperTableEntries name="blacklistreason" nullable="true" type="id_String"/>
@@ -1223,7 +1075,6 @@
         <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
         <mapperTableEntries name="suffix" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patientdemochanges" nullable="true" type="id_String"/>
         <mapperTableEntries name="residentstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="hospital_origin" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
@@ -1665,7 +1516,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fIEFsINlEe6scrYgLaEiYg-tMap_8-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_NDYtIMrTEe6bIJecm5qPYw-tMap_8-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
     <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
@@ -1721,7 +1572,7 @@
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="Numeric.sequence(&quot;s1&quot;,1,1) " name="var1" type="id_Integer"/>
         <mapperTableEntries expression="Var.var1&lt;10?&quot;0000000&quot;+String.valueOf(Var.var1):(Var.var1&lt;100?&quot;000000&quot;+String.valueOf(Var.var1):(Var.var1&lt;1000?&quot;00000&quot;+String.valueOf(Var.var1):(Var.var1&lt;10000?&quot;0000&quot;+String.valueOf(Var.var1):(Var.var1&lt;100000?&quot;000&quot;+String.valueOf(Var.var1):(Var.var1&lt;1000000?&quot;00&quot;+String.valueOf(Var.var1):(Var.var1&lt;10000000?&quot;0&quot;+String.valueOf(Var.var1):String.valueOf(Var.var1))))))) " name="var2" type="id_String"/>
@@ -1730,7 +1581,7 @@
         <mapperTableEntries expression="LookupAddressData.contact_mobilephone == null ? &quot;NODATA&quot; : LookupAddressData.contact_mobilephone " name="mobileconvert" type="id_String"/>
       </varTables>
       <outputTables name="outputFormatting" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="&quot;MPI&quot; + Var.var2" name="mpi_pin" type="id_String"/>
+        <mapperTableEntries expression="&quot;NOVALUE&quot;" name="mpi_pin" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(out7.patient_pin) " name="patient_pin" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(out7.hospital_origin)" name="hospital_origin" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(out7.first_name) " name="first_name" nullable="true" type="id_String"/>
@@ -1785,7 +1636,6 @@
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="gender" nullable="true" type="id_String"/>
         <mapperTableEntries name="date_of_birth" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="internalmrn" nullable="true" type="id_String"/>
         <mapperTableEntries name="occupation" nullable="true" type="id_String"/>
         <mapperTableEntries name="marital_status" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationality" nullable="true" type="id_String"/>
@@ -1793,8 +1643,6 @@
         <mapperTableEntries name="isvip" nullable="true" type="id_String"/>
         <mapperTableEntries name="religion" nullable="true" type="id_String"/>
         <mapperTableEntries name="race" nullable="true" type="id_String"/>
-        <mapperTableEntries name="address" nullable="true" type="id_Object"/>
-        <mapperTableEntries name="contact" nullable="true" type="id_Object"/>
         <mapperTableEntries name="isemployee" nullable="true" type="id_String"/>
         <mapperTableEntries name="isblacklisted" nullable="true" type="id_String"/>
         <mapperTableEntries name="blacklistreason" nullable="true" type="id_String"/>
@@ -1805,7 +1653,6 @@
         <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
         <mapperTableEntries name="suffix" nullable="true" type="id_String"/>
         <mapperTableEntries name="nationalid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patientdemochanges" nullable="true" type="id_String"/>
         <mapperTableEntries name="residentstatusuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="hospital_origin" nullable="true" type="id_String"/>
         <mapperTableEntries name="orguid" nullable="true" type="id_String"/>
@@ -1828,9 +1675,6 @@
         <mapperTableEntries expression="" name="contact_email" nullable="true" type="id_String"/>
         <mapperTableEntries name="contact_homephone" nullable="true" type="id_String"/>
         <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
-      </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="LookupMPIsequence" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="patient_internal_id" nullable="true" type="id_Integer"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1917,79 +1761,6 @@
       <column comment="" key="false" length="-1" name="contact_email" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="contact_homephone" nullable="true" originalDbColumnName="contact_phone" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="704">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_2"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
-    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
-    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:5xom7HRsaDHF/kTHOxldU+2h3aLT2sM6sz/zTLFibzKcFtsZrgCg4QI="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;mpi_sequence&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select patient_internal_id from mpi_sequence&quot;"/>
-    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
-    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
-    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
-    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
-    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
-    <elementParameter field="TEXT" name="LABEL" value="&lt;b&gt;Get MPI Counter&lt;/b&gt;"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tDBInput_2">
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tSortRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="384" posY="704">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tSortRow_2"/>
-    <elementParameter field="TABLE" name="CRITERIA">
-      <elementValue elementRef="COLNAME" value="patient_internal_id"/>
-      <elementValue elementRef="SORT" value="num"/>
-      <elementValue elementRef="ORDER" value="asc"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="EXTERNAL" value="false"/>
-    <elementParameter field="DIRECTORY" name="TEMPFILE" show="false" value="&quot;C:/Users/jsjavier/Desktop/workspace/temp&quot;"/>
-    <elementParameter field="CHECK" name="CREATEDIR" show="false" value="true"/>
-    <elementParameter field="TEXT" name="EXTERNAL_SORT_BUFFERSIZE" show="false" value="1000000"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tSortRow_2">
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="704">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_1"/>
-    <elementParameter field="TABLE" name="GROUPBYS"/>
-    <elementParameter field="TABLE" name="OPERATIONS">
-      <elementValue elementRef="OUTPUT_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="FUNCTION" value="max"/>
-      <elementValue elementRef="INPUT_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="IGNORE_NULL" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
-    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
-    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
-    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tAggregateRow_1">
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="608">
@@ -2399,7 +2170,7 @@
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tLogCatcher" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="1120">
+  <node componentName="tLogCatcher" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="160" posY="736">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogCatcher_1"/>
     <elementParameter field="CHECK" name="CATCH_JAVA_EXCEPTION" value="true"/>
     <elementParameter field="CHECK" name="CATCH_TDIE" value="true"/>
@@ -2421,12 +2192,12 @@
       <column defaultValue="" key="false" length="3" name="code" nullable="true" originalLength="-1" precision="0" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="416" posY="1120">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="736">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_10"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fIEFsINlEe6scrYgLaEiYg-tMap_10-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_NDYtIMrTEe6bIJecm5qPYw-tMap_10-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
     <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
@@ -2488,7 +2259,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="1120">
+  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="736">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -2646,326 +2417,9 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="0" posY="1120">
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="736">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tPostjob_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-  </node>
-  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="864">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_2"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_0KQXkDDbEe6bSJC9TP3ygw"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="MONGODB_4_4_X"/>
-    <elementParameter field="CHECK" name="USE_CONNECTION_STRING" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_STRING" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="USE_REPLICA_SET" value="false"/>
-    <elementParameter field="TABLE" name="REPLICA_SET" show="false"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.201&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="45431"/>
-    <elementParameter field="TEXT" name="DATABASE" value="&quot;arcusairdb&quot;"/>
-    <elementParameter field="CHECK" name="USE_SSL" value="false"/>
-    <elementParameter field="CHECK" name="SET_READ_PREFERENCE" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="READ_PREFERENCE" show="false" value="PRIMARY"/>
-    <elementParameter field="LABEL" name="READ_PREFERENCE_NOTE" show="false" value="Note : Use Connection component to set Read Preference"/>
-    <elementParameter field="CHECK" name="REQUIRED_AUTHENTICATION" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="AUTHENTICATION_MECHANISM" value="SCRAMSHA256_MEC"/>
-    <elementParameter field="CHECK" name="SET_AUTHENTICATION_DATABASE" value="false"/>
-    <elementParameter field="TEXT" name="AUTHENTICATION_DATABASE" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="SET_X509_USERNAME" show="false" value="false"/>
-    <elementParameter field="TEXT" name="USERNAME" value="&quot;incusdba&quot;"/>
-    <elementParameter field="PASSWORD" name="PASSWORD" value="enc:system.encryption.key.v1:dkpKSpaBp/rlYrRzGNXZ1j3tZLiAe8UgA4Ml/mMsVhSUn/5KEk6KBQ=="/>
-    <elementParameter field="TEXT" name="KRB_USER_PRINCIPAL" show="false" value="&quot;mongouser@EXAMPLE.COM&quot;"/>
-    <elementParameter field="TEXT" name="KRB_REALM" show="false" value="&quot;EXAMPLE.COM&quot;"/>
-    <elementParameter field="TEXT" name="KRB_KDC" show="false" value="&quot;kdc.example.com&quot;"/>
-    <elementParameter field="TEXT" name="COLLECTION" value="&quot;patients&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="QUERY_TYPE" value="FIND_QUERY"/>
-    <elementParameter field="LABEL" name="NOTE_ISOLATION" value="Note : Surround String values in your query with single quotes&#10;Note : If you are running on a Sharded Cluster, please make sure to include the shard key in the query."/>
-    <elementParameter field="MEMO" name="QUERY" value="&quot;{}&quot;"/>
-    <elementParameter field="TABLE" name="AGGREGATION_STAGES" show="false"/>
-    <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
-    <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
-    <elementParameter field="TABLE" name="MAPPING">
-      <elementValue elementRef="SCHEMA_COLUMN" value="_id"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="mrn"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="registereddate"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-    </elementParameter>
-    <elementParameter field="TABLE" name="SORT"/>
-    <elementParameter field="TEXT" name="LIMIT" value=""/>
-    <elementParameter field="TEXT" name="SKIP" value=""/>
-    <elementParameter field="TEXT" name="BATCHSIZE" value=""/>
-    <elementParameter field="CHECK" name="QUERYOPTION_NOTIMEOUT" show="false" value="false"/>
-    <elementParameter field="CHECK" name="EXTERNAL_SORT_AGGREGATION" show="false" value="false"/>
-    <elementParameter field="CHECK" name="CONVERT_BSON_TO_STRING" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="patients_get_mpi"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="patients" name="tMongoDBInput_2">
-      <column comment="" key="true" length="0" name="_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="0" name="mrn" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="864">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_2"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fIEFsINlEe6scrYgLaEiYg-tMap_2-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
-    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
-    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="tmap_get_mpi"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="out1A">
-      <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="0" name="patient_pin" nullable="true" pattern="" precision="0" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="registereddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-    </metadata>
-    <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
-      <varTables name="Var" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="StringHandling.LEFT(row6.mrn,3)" name="RemoveTempMRN_mpivar" type="id_String"/>
-        <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;))" name="getdate" type="id_Date"/>
-        <mapperTableEntries expression="TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 02:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 05:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 08:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 11:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 14:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 17:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 20:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 23:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)):&#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;) " name="todate" type="id_Date"/>
-      </varTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row6.registereddate ,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; -1 &amp;&amp;&#10;TalendDate.compareDate(row6.registereddate ,Var.todate,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt; 1 &amp;&amp;&#10;!Var.RemoveTempMRN_mpivar.equals(&quot;TMP&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b6645a6372a52f1cb6a1c0&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b66460dccc9f590274f7ca&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b663ca6c750372aff3d980&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b66758bad1b472b511ae9a&quot;) &amp;&amp;&#10;!row6._id.equals(&quot;62b666fdb493512ef909035a&quot;)" name="out1A" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row6._id " name="transaction_external_id" type="id_String"/>
-        <mapperTableEntries expression="row6.mrn " name="patient_pin" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row6.registereddate " name="registereddate" nullable="true" type="id_Date"/>
-      </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row6" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="_id" type="id_String"/>
-        <mapperTableEntries name="mrn" type="id_String"/>
-        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="864">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_3"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fIEFsINlEe6scrYgLaEiYg-tMap_3-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
-    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
-    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="formatting_mpi"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="StoreCounter" name="StoretoMPI">
-      <column comment="" key="true" length="-1" name="patient_oid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mpi_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="seq_prefix" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-    <metadata connector="FLOW" label="qweqwe" name="qweqwe">
-      <column comment="" key="false" length="-1" name="seq_prefix" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="true" length="-1" name="patient_oid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mpi_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-    <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables name="Var" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="Numeric.sequence(&quot;s2&quot;,row7.patient_internal_id +1,1) " name="var1_mpivar" type="id_Integer"/>
-        <mapperTableEntries expression="Var.var1_mpivar&lt;10?&quot;0000000&quot;+String.valueOf(Var.var1_mpivar):(Var.var1_mpivar&lt;100?&quot;000000&quot;+String.valueOf(Var.var1_mpivar):(Var.var1_mpivar&lt;1000?&quot;00000&quot;+String.valueOf(Var.var1_mpivar):(Var.var1_mpivar&lt;10000?&quot;0000&quot;+String.valueOf(Var.var1_mpivar):(Var.var1_mpivar&lt;100000?&quot;000&quot;+String.valueOf(Var.var1_mpivar):(Var.var1_mpivar&lt;1000000?&quot;00&quot;+String.valueOf(Var.var1_mpivar):(Var.var1_mpivar&lt;10000000?&quot;0&quot;+String.valueOf(Var.var1_mpivar):String.valueOf(Var.var1_mpivar))))))) " name="var2_mpivar" type="id_String"/>
-      </varTables>
-      <outputTables name="StoretoMPI" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="StringHandling.UPCASE(out1A.transaction_external_id) " name="patient_oid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(out1A.patient_pin) " name="patient_mrn" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="Var.var1_mpivar" name="patient_internal_id" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="&quot;MPI&quot; + Var.var2_mpivar" name="patient_mpi_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="&quot;MPI&quot;" name="seq_prefix" nullable="true" type="id_String"/>
-      </outputTables>
-      <outputTables name="qweqwe" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="&quot;MPI&quot;" name="seq_prefix" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(out1A.transaction_external_id) " name="patient_oid" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(out1A.patient_pin) " name="patient_mrn" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="Var.var1_mpivar" name="patient_internal_id" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="&quot;MPI&quot; + Var.var2_mpivar" name="patient_mpi_id" nullable="true" type="id_String"/>
-      </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1A" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="transaction_external_id" type="id_String"/>
-        <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
-        <mapperTableEntries name="registereddate" nullable="true" type="id_Date"/>
-      </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row7" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="patient_internal_id" nullable="true" type="id_Integer"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="992">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
-    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
-    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:sdIDRloydUn9B6vQsiLEngb7nOHy36S++3UozZYdw2ccyd8NFQJR9Fc="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;mpi_sequence&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select patient_internal_id from mpi_sequence&quot;"/>
-    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
-    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
-    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
-    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
-    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
-    <elementParameter field="TEXT" name="LABEL" value="&lt;b&gt;Get MPI Counter&lt;/b&gt;"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tDBInput_1">
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tSortRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="992">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tSortRow_1"/>
-    <elementParameter field="TABLE" name="CRITERIA">
-      <elementValue elementRef="COLNAME" value="patient_internal_id"/>
-      <elementValue elementRef="SORT" value="num"/>
-      <elementValue elementRef="ORDER" value="asc"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="EXTERNAL" value="false"/>
-    <elementParameter field="DIRECTORY" name="TEMPFILE" show="false" value="&quot;C:/Users/jsjavier/Desktop/workspace/temp&quot;"/>
-    <elementParameter field="CHECK" name="CREATEDIR" show="false" value="true"/>
-    <elementParameter field="TEXT" name="EXTERNAL_SORT_BUFFERSIZE" show="false" value="1000000"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tSortRow_1">
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="992">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_2"/>
-    <elementParameter field="TABLE" name="GROUPBYS"/>
-    <elementParameter field="TABLE" name="OPERATIONS">
-      <elementValue elementRef="OUTPUT_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="FUNCTION" value="max"/>
-      <elementValue elementRef="INPUT_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="IGNORE_NULL" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
-    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
-    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
-    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tAggregateRow_2">
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="928" posY="864">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_1"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
-    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
-    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:RLZCqOpkyBRc6ho9SWXOr3tdi3cGyPCIW3MKgAskebMQwiCjiWIf1Ec="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;mpi_sequence&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="CLEAR"/>
-    <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
-    <elementParameter field="LABEL" name="NOTE" show="false" value="NOTE: batch size must be less than or equal to total number of parameter markers divided by number of columns"/>
-    <elementParameter field="CHECK" name="SPECIFY_IDENTITY_FIELD" show="false" value="false"/>
-    <elementParameter field="COLUMN_LIST" name="IDENTITY_FIELD" show="false" value="patient_oid"/>
-    <elementParameter field="TEXT" name="START_VALUE" show="false" value="1"/>
-    <elementParameter field="TEXT" name="STEP" show="false" value="1"/>
-    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
-    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
-    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
-    <elementParameter field="CHECK" name="USE_ALTERNATE_SCHEMA" show="false" value="false"/>
-    <elementParameter field="TEXT" name="ALTERNATE_SCHEMA" show="false" value="&quot;&quot;"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TABLE" name="ADD_COLS"/>
-    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_oid"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_mrn"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_mpi_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="seq_prefix"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
-    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
-    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
-    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
-    <elementParameter field="TEXT" name="LABEL" value="&lt;b&gt;Store to &lt;br&gt;MPI Counter&lt;/b&gt;"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="StoreCounter" name="tDBOutput_1">
-      <column comment="" key="true" length="-1" name="patient_oid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mpi_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="seq_prefix" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-    </metadata>
-    <metadata connector="REJECT" label="StoreCounter" name="REJECT">
-      <column comment="" key="true" length="-1" name="patient_oid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mrn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_internal_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_mpi_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="seq_prefix" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-    </metadata>
   </node>
   <connection connectorName="FLOW" label="getMongoDBdata" lineStyle="0" metaname="tMongoDBInput_9" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_9" target="tMap_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -2978,9 +2432,6 @@
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="getMongoDBdata"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMongoDBInput_9" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_9" target="tMongoDBInput_2">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnSubjobOk2"/>
   </connection>
   <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tMap_7">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -3075,23 +2526,6 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="LookupAddressData"/>
   </connection>
-  <connection connectorName="FLOW" label="row8" lineStyle="0" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tSortRow_2">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row8"/>
-  </connection>
-  <connection connectorName="FLOW" label="row9" lineStyle="0" metaname="tSortRow_2" offsetLabelX="0" offsetLabelY="0" source="tSortRow_2" target="tAggregateRow_1">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row9"/>
-  </connection>
-  <connection connectorName="FLOW" label="LookupMPIsequence" lineStyle="8" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tMap_8">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="LookupMPIsequence"/>
-  </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tDBOutput_3" offsetLabelX="0" offsetLabelY="0" source="tDBOutput_3" target="tWarn_2">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk4"/>
   </connection>
@@ -3116,45 +2550,6 @@
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tLogCatcher_1">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk7"/>
-  </connection>
-  <connection connectorName="FLOW" label="row6" lineStyle="0" metaname="tMongoDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_2" target="tMap_2">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="registereddate"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row6"/>
-  </connection>
-  <connection connectorName="FLOW" label="out1A" lineStyle="0" metaname="out1A" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_3">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="registereddate"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1A"/>
-  </connection>
-  <connection connectorName="FLOW" label="StoretoMPI" lineStyle="0" metaname="StoretoMPI" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tDBOutput_1">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="StoretoMPI"/>
-  </connection>
-  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tSortRow_1">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="patient_internal_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
-  </connection>
-  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tSortRow_1" offsetLabelX="0" offsetLabelY="0" source="tSortRow_1" target="tAggregateRow_2">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
-  </connection>
-  <connection connectorName="FLOW" label="row7" lineStyle="8" metaname="tAggregateRow_2" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_2" target="tMap_3">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row7"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
@@ -3184,20 +2579,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
   </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_2"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Create MPI"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
-  </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_d08821f9-3a0a-48ed-a3d9-366f37a3600d"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>M5ZonNuRo3w7FXeg7pe6ALJIHejmPtzeGgJJe7sOLx6D1GEbugg2Yxdt6N7bBAhEhEURasVtzYJx&#13;
-d3Aj5tZ+dw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_9163f8c9-f284-4e18-84f0-798224fb943d"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Ec3tMAkyFGD6OFW5AJx9JYNWtcYIUCXnvrWE+1QqKPp0+N8u8NGxiM0eepXsbo95V2pFg6cSe4YE&#13;
-Wav4XD/MoQ==</DigestValue></Reference></SignedInfo><SignatureValue>MZFbwV/k+aHd93PwLbOL0AlSPqqlj9yDwUDKf7RHNhLaj8B4jPAmGwYOwkHgZwue6CVsyzjwUnkk&#13;
-buBOAkwXX6QDju+SAYkGJ/b044e7NYEYK9iLchbHPpS/yxP62aT2IrrMSi7wAwcXVd4/+LzO8oIz&#13;
-qgHJOlmx4wQl4i7PVLxxA2fYizKVYdI3MGfg9BWhBEqJ6bxE7jeF7JXPZ9fHgzYgnAvmFWIgDZA8&#13;
-JT6hp2qfAOcfgFUEBjU6w+aFFrTsFK074NQRK7LVvvaJVl3VGYl9zNXK9TxD/gI+258pWQcxK1rI&#13;
-9T/LFMs08nLa269r/4xclxgBTMtFOotlxUPSwA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_abb440ee-f7fa-4bbc-bf52-634b5ad8d790"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>hl/WLv3f4gAoe2NJQopSTjiBpX6qtoeMNOL8nhIDXrsy0+1fwVs0iEgVYHahk7AnrOqjYyuJ5Fh4&#13;
+8UzRyNKBng==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8dfe40ac-65cf-41cb-ad7e-6b1d27075b49"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Yj2jySX7lR4lyWvPiIB+xkQxwY6t+PC14rqtrbQ3nuNGYzSFUVRZPNhig3SLkiSg96JzDjPf5ddp&#13;
+Z92xoZjy0Q==</DigestValue></Reference></SignedInfo><SignatureValue>fU0Hx41JtrqScfDnwqaPzjK0qiTBYcIrf+i+od4ereqcv/5DwdjWlLrEbWkEppXo4glqD/ADpmgK&#13;
+ePV17pL168vHdxBdKQgMV0Lq9nQ68bFbQbZoTL/bz1s7ClKQ4j2Twyx8KeyiIVIcKvEmBaXTDzs8&#13;
+TNofLuMK1IMZ/bW9UkCyPQFahwmG2+ptqGhHoyaO96YApnScTYTsUIkRno67BDY7mdJTrojs2zpV&#13;
+nqxapVDudjpdgxZYJBaoTFZS+LFo9FHvB9ZCgIfdMRmUHByuxLd4HIq83SeYY206ch9NDtFfwLXg&#13;
+u9rWNcGDl/wa2nqZi9tx3wAG+2hzbiYV8jhNCw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -3219,4 +2607,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_9163f8c9-f284-4e18-84f0-798224fb943d" Target="#_d08821f9-3a0a-48ed-a3d9-366f37a3600d"><Timestamp>2024-02-14 00:22:30</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8dfe40ac-65cf-41cb-ad7e-6b1d27075b49" Target="#_abb440ee-f7fa-4bbc-bf52-634b5ad8d790"><Timestamp>2024-02-14 06:40:53</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
