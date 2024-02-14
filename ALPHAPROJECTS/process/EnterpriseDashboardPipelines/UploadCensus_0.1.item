@@ -138,7 +138,7 @@
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="visit_id"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="patient_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_pin"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="visit_type_id"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -159,7 +159,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_2">
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="patient_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
@@ -207,7 +207,7 @@
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="patient_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
         <mapperTableEntries name="visit_type_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="admission_date" nullable="true" type="id_Date"/>
@@ -216,7 +216,7 @@
         <mapperTableEntries name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row1.patient_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
+        <mapperTableEntries expression="row1.patient_pin " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
@@ -380,7 +380,7 @@
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tMap_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="patient_id"/>
+      <elementValue elementRef="TRACE_COLUMN" value="patient_pin"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="admission_date"/>
@@ -448,13 +448,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_355e55e8-c76f-4f4d-a603-d119689215ef"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kQX26peTcRTjsoNpYa1NwFx39q+KUy8/qD8Faa7aUQnjwNcjbtb1hlhapQCXcihtAcfMmJHKOLhk&#13;
-1kf+H+bDfw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_07db715b-cdc8-4d43-b2cc-b01a3019fa5b"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>AYPqVcxVtGr4nh8uIhRGSltTNO12Gl1EK5nYFRtwfd/pITxqUdqJcF98CFUpFDCleGhtRqWbvHuv&#13;
-IViXBFcbDg==</DigestValue></Reference></SignedInfo><SignatureValue>UGqIP+7/zTUvNxR40YJHmtZvJBea1LAJsm61x+RwjNDV6TlHCEC3TWw759sZhhnBOBiT8zHcbuex&#13;
-rM+nir/n4N7vzdoXkRbWHdXY0b18OYVXvRXQWsZ1LbvB1UvJBW8/IXNDL8hyCVkrAptSvPox+UaA&#13;
-Y2rSvhonWiUAnhfzCRAX+On9ayRpAgmD++MMriMmwCCl7D8fveKqncGJQOB1iMEDrFhQKicjxCsF&#13;
-+nmI5sLkiswI3LKs/IMTOKhMv7BhdNSMHlbKKPeezN6oL0MHqROWrtVgVGYNVdLT8xhBOt7gVP2E&#13;
-ZIQvMLC4l6XwCdtdOPR5f31L+b5GfZU9EuwXmw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_fe20e7f4-aea0-42cf-a11d-ea01b3d8d9d1"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>1UadRoywhHXcCE8Mv6bJdn+luvhOou0oODRL7c6jyU/2Tfixa1/TLWipMCPfAX6eFD9BpySgZzF8&#13;
+LEeJXLqqzw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_eabc84cd-72cf-43a8-8fc3-cee0ec73d8d5"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5/paugo2XuVBGz0jfp8WN2XNzSeuBEWHYw1lIl8n8OWV3pfACCz+ARkZmjkBnNBDToBuC/QwQ+2G&#13;
+WHlODZ3IRA==</DigestValue></Reference></SignedInfo><SignatureValue>ohaY3njwAu3GI9K61L9GafTR+L0NeLvRNUwLJn7bWOj1C3vN71yWgrzapfgnXdyfe0V8YSUrZAIC&#13;
+4HnT0vmD/9irzH/AVpgHENFymTGoc5RdE8DWRQM4t1GwhzgFLggmQH/FcCtV8EhqO+uH7cMolOIw&#13;
+zRRwGYIIxsgt2eMq/VS4zgXEKofjdPL2vBWBGFTR+pzhf1Z6Kv77ZIHlmFvDJ7dLC05h8dZ0Id1J&#13;
++bbagNX5yIfp87u5MkaXtbQ20z3boXMx7YLrok2boDO6Ljsz6+cizJc8zvXfkmKVaUNJHFR57bMd&#13;
+z+/y5W2V9H6Q9XqyDuAdX9myJIaoovPI5SY8UA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -476,4 +476,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_07db715b-cdc8-4d43-b2cc-b01a3019fa5b" Target="#_355e55e8-c76f-4f4d-a603-d119689215ef"><Timestamp>2024-02-14 06:16:07</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_eabc84cd-72cf-43a8-8fc3-cee0ec73d8d5" Target="#_fe20e7f4-aea0-42cf-a11d-ea01b3d8d9d1"><Timestamp>2024-02-14 06:18:34</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
