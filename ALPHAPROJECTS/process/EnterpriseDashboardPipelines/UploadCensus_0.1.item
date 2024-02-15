@@ -860,6 +860,7 @@
       <column comment="" key="false" length="-1" name="discharge_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="network_name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="&quot;MMMM&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -881,6 +882,7 @@
         <mapperTableEntries expression="out2.visit_type_id == null? null:out2.visit_type_id.equals(&quot;INPATIENT&quot;)?out2.IPD_patient_status_id:out2.OPD_discharge_status_id " name="discharge_status" nullable="true" type="id_String"/>
         <mapperTableEntries expression="&quot;TMC ORTIGAS&quot;" name="network_name" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out2.admission_date == null? &quot;N/A&quot;:StringHandling.UPCASE(TalendDate.formatDateLocale(&quot;MMMM&quot;,out2.admission_date,&quot;EN&quot;))" name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out2.admission_date == null? &quot;N/A&quot;:StringHandling.UPCASE(TalendDate.formatDateLocale(&quot;YYYY&quot;,out2.admission_date,&quot;EN&quot;)) " name="year" nullable="true" type="id_String"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;))" name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;))" name="timestamp" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -992,6 +994,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="year"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="batch_date"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -1028,6 +1035,7 @@
       <column comment="" key="false" length="-1" name="discharge_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="network_name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="&quot;MMMM&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -1044,6 +1052,7 @@
       <column comment="" key="false" length="-1" name="discharge_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="network_name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="&quot;MMMM&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -1176,6 +1185,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="transaction_external_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="year"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out6"/>
@@ -1185,13 +1197,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_22c2a1a2-4f01-4d4c-9fce-939876b1bf98"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>oOXPIs+P7FYnECXX3gOj5mlKeOtVa2OFOJDN0b9ru1lNA0vheGH2psy6/OkYzpHOCfr9X5WyoHnT&#13;
-oq4XMi8WLw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_1a1ee995-a3b8-4b5c-8f8f-1083234ac1a9"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>xUPvndfmcUo9DB1qpf0fwPFb4YIo0DomF/+XPZLJRbOQzMxW8hvJoXe0aDUAvMQj2ChYP09uhzb4&#13;
-+xyqNIO2Iw==</DigestValue></Reference></SignedInfo><SignatureValue>XMXRGDYCtjK5sAE4NXkxbulMRgPepT6iHB+g6cZ24lIElMgXc7x7Ns32U3D09Ilavy411guS59UZ&#13;
-Q0LZLcf06pq5Pkf7LPk113hpCa8kIURjV4wz5QQrmY1VVktSi5pUhLX01GtOXXKGpKdOLT6Eg/BV&#13;
-T5f6haaiapD0Q49bsAneQLEaB+4eGf3iFM5GPZ8C/4Xp4T3V8YIjM35NuAD38uId+3F+i1FyjUmc&#13;
-uSFXmU5VW02sUdkIeVtxC6jzll+ueauOP8+66ATszuGf1WGNvS/MSw/IS0sVI2prJQCDfSWAweAx&#13;
-d08jNHIYC2DY/Dl2rjaJWMXgDlCeZZsgqb6ZTA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_9481e5d6-998e-4fd2-8c2c-dd632e3b9436"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>sV3xkg346+hw/XpQ/BtFD4cLAaA6rE+gPm73Gw2Ce4667VbDUvA8ULx0q56tooS7dLs5sL6yaHfh&#13;
+DRzpa00G2A==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_6a34199d-aa18-49d5-946b-2a28e41ef066"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>CjPW/FRhdIMNvvd+XB3Th54psJeCk0eLJ6wEGQ/RZfZZCxXUdgY7QDQOwHTRgsYLzHO9w4ohIh5K&#13;
+FNdFbT1iiw==</DigestValue></Reference></SignedInfo><SignatureValue>QUMRrDYJMupQ8w0RKoQMeu2koD7JNHfyrWAqDEmXGsZNUU9B+CUGn30tvCU2bPOwj1yISTD3WQ7M&#13;
+d7J1XBXA49ac8BNm/qPxTlqI/Ly47/7Cek4BPhyFOY2Vk4FKxmLJkH37nkifuB7ANOpyZcazJi3I&#13;
+lHX1LaHCDGzvWNo9EGQl3JnP+lXyB1owdjHMdhBfan9OA1rFFXZSzKEEU8L23MZ3Ebk+crvLaFd6&#13;
+uPnCHeJP55RY4jviqHSazZ4I7nWMdAY4tpjpn7s4ZaZYEwCQhO1czA/fuLivgHxYEK34oK6oyyFX&#13;
+naow+8QRsUelAh8JN5cQy7iFY9Wc+zpM+9k5vQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1213,4 +1225,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_1a1ee995-a3b8-4b5c-8f8f-1083234ac1a9" Target="#_22c2a1a2-4f01-4d4c-9fce-939876b1bf98"><Timestamp>2024-02-15 03:46:49</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_6a34199d-aa18-49d5-946b-2a28e41ef066" Target="#_9481e5d6-998e-4fd2-8c2c-dd632e3b9436"><Timestamp>2024-02-15 03:50:04</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
