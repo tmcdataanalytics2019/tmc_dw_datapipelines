@@ -870,18 +870,18 @@
         <mapperTableEntries expression="out2.visit_type_id.equals(&quot;INPATIENT&quot;)?out2.IPD_discharge_type_id:out2.OPD_discharge_type_id " name="discharge_type" type="id_String"/>
       </varTables>
       <outputTables name="out6" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="out2.visit_id == null ? null:out2.visit_id " name="visit_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out2.patient_id == null ? null:out2.patient_id " name="patient_pin" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out2.visit_type_id == null ? null:out2.visit_type_id " name="visit_type" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out2.transaction_external_id == null ? null:out2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out2.admission_date == null ? null:out2.admission_date " name="admission_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="out2.discharge_date == null ? null:out2.discharge_date " name="financial_discharge_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="out2.is_converted_from_opd == null ? null:out2.medical_discharge_date " name="medical_discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out2.visit_id " name="visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out2.patient_id " name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out2.visit_type_id " name="visit_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out2.admission_date " name="admission_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out2.discharge_date " name="financial_discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out2.medical_discharge_date " name="medical_discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out2.is_converted_from_opd == null ? &quot;N/A&quot;:&#13;&#10;out2.is_converted_from_opd.equals(&quot;TRUE&quot;)?&quot;T&quot;:&quot;F&quot; " name="converted_to_ipd" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.discharge_type == null? &quot;N/A&quot;:&#13;&#10;Var.discharge_type.equals(&quot;CANCELLED PATIENT&quot;)?&quot;T&quot;:&quot;F&quot; " name="cancelled_patient" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.discharge_type == null? &quot;N/A&quot;:out2.visit_type_id.equals(&quot;INPATIENT&quot;)?out2.IPD_patient_status_id:out2.OPD_discharge_status_id " name="discharge_status" nullable="true" type="id_String"/>
         <mapperTableEntries expression="&quot;TMC ORTIGAS&quot;" name="network_name" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(TalendDate.formatDateLocale(&quot;MMMM&quot;,out2.admission_date,&quot;EN&quot;)) " name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="Var.admission_date == null? &quot;N/A&quot;:StringHandling.UPCASE(TalendDate.formatDateLocale(&quot;MMMM&quot;,out2.admission_date,&quot;EN&quot;)) " name="month" nullable="true" type="id_String"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;))" name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;))" name="timestamp" nullable="true" type="id_Date"/>
       </outputTables>
@@ -1180,13 +1180,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_b4d3290b-8a6b-4f43-a3e5-fcc8f0bbf8d8"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Bx8tPA1nBxccGPhFpMB/DZ8Q2GVgTGCxhRvM21lt6WxOwaVZYDfGc8c/yIVKh2gcZqxIle3slItz&#13;
-pGn8LGJJrA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_1fbf9499-e376-4073-a018-cb98c3c26cc2"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>gmFXCDiDvaQBXWa09H/yIClRa6PlMnDNwhZKpxn2vW16UMnot9oiricBSEfkSGr65LB/BWkSdbYy&#13;
-P1fq73lQjg==</DigestValue></Reference></SignedInfo><SignatureValue>E8CBv7Lra7AktotoAy9g8b+n9qep6LO3YcmBQeZh7BqqZerYDn2mKoKFIhsQ9Dl2myX90PPRj2J8&#13;
-HcThtF2VIO1xgSdwarNWCZch5jpaJAVi4gmW72pFmnnmU4Uvh4RXcQynBXKNOF25KkNT0ShpHvDJ&#13;
-Gn6Jzl8Q4bK/s8X42a4uonH4vBPre3S9IS9pZGZ5j2jbOdwgLgLCayIibkFnbXoK6U+CYzGyRziL&#13;
-ELWJI+V4ULRQDm8K31rjJP5kj1Lp6iVXaXqVSluiTBzIPn7eTO+5ZZJBmuxyVRSgktr37k/CWfrb&#13;
-njd2vtD/J2TlLWR/DiMXuZvNA8iMhOeMQQlwPw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_90d3d76a-06d2-4528-8ffe-249a02f22f40"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>dAzJmHtcHwzr8Da7FWb/ZT4nxma9o+Vn9+2VM446W7FQtvSSdQ2YIO9H+Xzk4n1EnbK0mJuoQDEy&#13;
+MpRgZi+TMQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f1095143-89e4-4336-8b96-85908986658f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>0MscDuKRVojgJk3Ps1pdQWw6OsExAG0eKEJp8PGqa/M+UAkN60LTwL8c05fdpJDqZWyJACVeJhqA&#13;
+iMDJH7G+Ug==</DigestValue></Reference></SignedInfo><SignatureValue>WJ0zIiywjfn8d3vZAL3DAmrvd9vnpq2o6YmZF/5OUutJ/ZXaSfy5n3043Yno3J7csBTAfIciK2F5&#13;
+SK+0NEaRfwASiUmBEIBSKCX2YhE0iKxyqPh/DWfpdSGBbiI2Aa29hhBrWjvQQZ2qzXpR9SRPZWNM&#13;
+sYoUQv029XUBYCsmumU20L3i8PuS9WNTdW0aR8KkLQHSuEneic3oUo8nWNnLEUGziUrB6/0kQl8x&#13;
+lPxTYGzV2czt8y/FECXDEI9bvoDqrLMw8IvlwVeEn5HvYxWMSnKnDZKwIV4OxahUMCCxLyyaLZOO&#13;
+m4RllIHtuhUVZxT4vHRI1edUJzwuQTC3zmqwrw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1208,4 +1208,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_1fbf9499-e376-4073-a018-cb98c3c26cc2" Target="#_b4d3290b-8a6b-4f43-a3e5-fcc8f0bbf8d8"><Timestamp>2024-02-15 02:24:38</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f1095143-89e4-4336-8b96-85908986658f" Target="#_90d3d76a-06d2-4528-8ffe-249a02f22f40"><Timestamp>2024-02-15 02:27:54</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
