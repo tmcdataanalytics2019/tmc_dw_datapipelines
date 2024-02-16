@@ -1597,6 +1597,8 @@
       <column comment="" key="false" length="-1" name="admission_request_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_included" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="arrival_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -1637,6 +1639,8 @@
         <mapperTableEntries expression="out6.admission_request_number " name="admission_request_number" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.final_trim" name="if_included" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.carryover " name="if_carry_over" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out6.ogstartdate " name="arrival_hour" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out6.enddate " name="discharge_hour" nullable="true" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out6" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" type="id_String"/>
@@ -1747,6 +1751,10 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="if_carry_over"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="arrival_hour"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="discharge_hour"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:ibYSTnFC7ecyA6GkaDd27SRnsgQe5tGQBxAfcZj0"/>
@@ -1796,6 +1804,8 @@
       <column comment="" key="false" length="-1" name="admission_request_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_included" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="arrival_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tMongoDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_2" target="tMap_2">
@@ -2038,6 +2048,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="if_carry_over"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="arrival_hour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="discharge_hour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out7"/>
@@ -2047,13 +2063,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_8ab2e2b8-1149-437b-aa78-5eabc31a6109"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>dzLY87G+wZTdUeMUWl9qEaij11qiXmWkXUK6ojan2JEW38XZS64dEMzWfIRgcMrLga0YHFbCtnaQ&#13;
-FbV1hgxdhA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_179df6e8-167f-4209-877c-7af3e310e28f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Rc/QZMkZVt26UnOVUQeQm9YIbDkQP4Q9UMoqGSEQLQ26fY9mVWCtl1Ghb6xQMUQMa0TtWIOji8WA&#13;
-mFTpqas2Cg==</DigestValue></Reference></SignedInfo><SignatureValue>Ks28P/RS4CBlyl+2jtCpIfo8oEk3SS80DS7/sGuZ2RAHXWVEGIAZelSnPw8p9gKWME7SXJULWUoQ&#13;
-lJDJeqBTgm07f79vVTabwPrJVIvunB/OszCQv4EJ9ZkGqJUCfT6JJkZY1gVm6EidNq0fBpdHCCIH&#13;
-Iv0Lrj+UQfftae5x80dGEt9s3N8SKg4cNWfxSYwv51cVT2FGuY9cpT2XZEExE6/3NRUAHx9HV78H&#13;
-MSbyawye/lak5YmtKuxKcHLH6aVO38Vo+yA4XqaN//Z6fFxXE0VSP+k0MDVaGl+hWg+NXwq6XU2Q&#13;
-+Zxiq97zhI94k5uM5sgKrZcNEH5xrdevRtrSdQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_08d709d3-b767-45c0-bca6-d625b9900ec7"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>7f7GGLD+UoT5tZpcO2CuBOu4WMxOkQvKCc7NnzpBhcO1yHuO/6EXC0z+T1LPrHyMe/jksvmp8Qdl&#13;
+P0YpgYcnBQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_1fb42469-687b-44f7-a205-c0656cd116e8"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>52np99ZQ1rE8LFDsdYxGf0jWu8+g3KfZxt3kYbly9vrAX1niV2zKfiZGAo+ZEV8KaBsD/zAqBeSO&#13;
+Dipoccvnzw==</DigestValue></Reference></SignedInfo><SignatureValue>TY468+QkLU0dczl7N+04BivzvnLMS3lIAh5LQdDMzk+Dueu4j2cb+mtQrCrwkH6LgrgFtTj+STdE&#13;
+8i3bWP+/czRH6wAiBkjqJYaEclPPp42mP+ILdgNRf9e4H70eAsYEcNh0aWQL39EHh/AjK/ReJojg&#13;
+mC15/vrSMXR29FWj8f4CvChZLlpNnNDWQtvH6mxWqF6BlvF+kif9gKycPJzJW61FCxquR6g0dTwW&#13;
+mvG8VGb8tHskJy+/OeqBT32EkEBXNtiBkhOcgC9tDE6I4heb/i/RSExgFdlG8K0lxnDZ64Pm2Hl2&#13;
+j4PAOUvqYZjFfG4YOGvqKWXP5sIQ+uC3RDXedA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2075,4 +2091,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_179df6e8-167f-4209-877c-7af3e310e28f" Target="#_8ab2e2b8-1149-437b-aa78-5eabc31a6109"><Timestamp>2024-02-16 03:30:11</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_1fb42469-687b-44f7-a205-c0656cd116e8" Target="#_08d709d3-b767-45c0-bca6-d625b9900ec7"><Timestamp>2024-02-16 03:35:58</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
