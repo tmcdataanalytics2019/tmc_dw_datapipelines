@@ -3,7 +3,7 @@
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="132"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="128"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" show="false" value=""/>
@@ -526,7 +526,7 @@
       <column comment="" key="false" length="-1" name="dischargestatusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row3._id) " name="_id" type="id_String"/>
@@ -1596,7 +1596,7 @@
       <column comment="" key="false" length="-1" name="is_admitted" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_request_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_included_in_census" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="arrival_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
@@ -1608,7 +1608,7 @@
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="getdatetoday" type="id_Date"/>
         <mapperTableEntries expression="out6.opstartdate == null? null:TalendDate.compareDate(TalendDate.parseDate(&quot;yyyy-MM-dd&quot;,TalendDate.formatDateLocale(&quot;yyyy-MM-dd&quot;,out6.opstartdate,&quot;EN&quot;)),Var.getdatetoday,&quot;yyyy-MM-dd&quot;) == 0? &quot;YES&quot;:&quot;NO&quot; " name="trim_ipd" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.trim_ipd == null? &quot;YES&quot; : Var.trim_ipd " name="final_trim" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="TalendDate.compareDate(out6.startdate,Var.getdatetoday,&quot;yyyy-MM-dd&quot;) == 0? &quot;NO&quot;:&quot;YES&quot; " name="carryover" type="id_String"/>
+        <mapperTableEntries expression="TalendDate.compareDate(out6.startdate,Var.getdatetoday,&quot;yyyy-MM-dd&quot;) == 0? false:true " name="carryover" type="id_Boolean"/>
         <mapperTableEntries expression="TalendDate.diffDate(out6.enddate,out6.ogstartdate,&quot;mm&quot;) " name="tat" type="id_Long"/>
       </varTables>
       <outputTables activateExpressionFilter="true" expressionFilter="Var.final_trim.equals(&quot;YES&quot;)" name="out7" sizeState="INTERMEDIATE">
@@ -1641,7 +1641,7 @@
         <mapperTableEntries expression="out6.is_admitted " name="is_admitted" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out6.admission_request_number " name="admission_request_number" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.final_trim" name="if_included_in_census" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="Var.carryover " name="if_carry_over" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="Var.carryover " name="if_carry_over" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out6.ogstartdate " name="arrival_hour" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out6.enddate " name="discharge_hour" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="Var.tat " name="tat_long_value" nullable="true" type="id_Long"/>
@@ -1812,7 +1812,7 @@
       <column comment="" key="false" length="-1" name="is_admitted" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_request_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_included_in_census" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="arrival_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
@@ -2134,13 +2134,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6b87abcc-ad59-4ce7-a77a-ce30e6e03b74"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>LnBWRRQDTkBHy2k1kJDUbRguD6169miL7yG2SRaDrERMi5LW98FFC9TaKIPRy0TDlKG3Q5+paVGB&#13;
-lYyyfFZlaA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_c0f5b962-2a22-4f85-8f57-cd54eb33e401"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UZzPevI/+Aw0662LZvdj5cUztTthbJsXSFSJzevwCI+5Fna21e0K+3wuJ/RUpdnJ4wWLGR0q1dK0&#13;
-tsgisY4V6w==</DigestValue></Reference></SignedInfo><SignatureValue>YhD4WzYi7V+lr9xDXc14Oh+RT+eqQtQ08eesJT5GOBtqJxzvIC8YDYphlN3Q3SAynhX8S+ZgY856&#13;
-Z/yHr3K6sKCQsN19ZYnwADF4I0D+q3R45ktVGnk/yk3n9z+5g6nFARP6H7/inTLBkLC6fuUbH89Z&#13;
-Ia5wcTnZlPKU1w9BEo7tRjhmYuq9Gz4zjtfDcpLSe+j1cxuBO5uV6Kuk8xhpYxhsXpp47m4uX/lH&#13;
-y6rEBcGHc0aBYHwE8c74GNul2VQZxbhmDwfleHVWd99QNeXosvezzRKmEqJoGdKzPyHEug2Ya6k8&#13;
-4SQZFFInt9Iso0NOt1flz7dq3kdoh3kIjC31mw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_8468f573-f1d1-41c4-8375-8141362e87b4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>GjFMka7odWOmvHaL1O41uJy/Xj6E6d3Q1JkbpByFScED8WQSo0LM0pSCEZtMLb09ZYrbG5SeKbRC&#13;
+Ddqq6ZZKjg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_674401d4-1161-427b-a848-7bac54a1747f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>MHYxRImUfETCoMbhaVRSWl/slV0+NON7SnaX5k5x4IVfMESf67mwOrxlW+Tgg6/JZ6VLNGp/RxE5&#13;
+NRG7ni1QOw==</DigestValue></Reference></SignedInfo><SignatureValue>QCG8PXeta6G9HBSbGLJM9hM0Ee05UsPRPJXXQkZSaxuypWUSEKmBMwdXUDc0EVH/KWLwWCefnfE+&#13;
+qA4nvuiQL5/4Pe46gwB8u7NeK7lNzHxHe2kUxrykQTs4Zd7ICp/rPFDOclsbvEDtwNqnhao/Jjph&#13;
+ynTMZMkImMF3RuSkjPl5dbNyL+JPXpv6QzzjZp07VY8gOMU2x33McwIYQXgRcN8xZrkV9ZeHo6wU&#13;
+ti9jUM7bP8RefFrDvYysMRzaHzd9a6FnSR8hbablQzK+9y43+AgLPudwjoJyfh7t27FTB1StR0/I&#13;
+I0hmhk743JTnWSUXQPR1s0gvqYVmudWmeVEUZg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2162,4 +2162,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_c0f5b962-2a22-4f85-8f57-cd54eb33e401" Target="#_6b87abcc-ad59-4ce7-a77a-ce30e6e03b74"><Timestamp>2024-02-20 06:56:19</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_674401d4-1161-427b-a848-7bac54a1747f" Target="#_8468f573-f1d1-41c4-8375-8141362e87b4"><Timestamp>2024-02-21 02:52:00</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
