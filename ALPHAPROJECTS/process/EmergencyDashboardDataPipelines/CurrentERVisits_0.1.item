@@ -1605,7 +1605,7 @@
       <column comment="" key="false" length="-1" name="if_included_in_census" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="arrival_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_within_4hrs" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -1652,7 +1652,7 @@
         <mapperTableEntries expression="Var.final_trim" name="if_included_in_census" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="Var.carryover " name="if_carry_over" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="TalendDate.formatDateLocale(&quot;hh aa&quot;,out6.ogstartdate ,&quot;en&quot;) " name="arrival_hour" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out6.enddate " name="discharge_hour" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="TalendDate.formatDateLocale(&quot;hh aa&quot;,out6.enddate,&quot;en&quot;) " name="discharge_hour" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.tat " name="tat_long_value" nullable="true" type="id_Long"/>
         <mapperTableEntries expression="Var.tat &lt;= 240 &amp;&amp; Var.tat &gt;= 0 ? true:false " name="if_within_4hrs" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
@@ -1947,7 +1947,7 @@
       <column comment="" key="false" length="-1" name="if_included_in_census" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="arrival_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_within_4hrs" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -1985,7 +1985,7 @@
       <column comment="" key="false" length="-1" name="if_included_in_census" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_carry_over" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="arrival_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_within_4hrs" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -2246,13 +2246,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_d28f25a0-da1a-45a8-97f7-a07f31d4fa43"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>O8YlDijTrTAW9U/xxS6dQ7YBpDS9WS3YghiGS3dZAa/C74ySL7XNVx0LlwgHDE/aBI6/OfYcnudV&#13;
-OY9JCQ7crw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a4114ad9-a0fc-409e-86a4-1485cf4bf30f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>CrHF9hitDkQW2NKmi7nabLYO3WMc3W+80xm9LGBQoA91Lb8AFjV3nAD0rzv+W/SUihCHIAGB8QI+&#13;
-MO0s2BDxig==</DigestValue></Reference></SignedInfo><SignatureValue>WCAUa4+pWcXzxiVu7vnsLJrAfMRDeTSLjgzXEckbK9SWJab5RLMHS24y3XwPPFsWsy35hvExptvf&#13;
-bnWBp0YrW+GyHRJ793fBgNcWxU6Sb4dBq6ymey76aKDAu6xwBfMHO58tXkg+3piY2+Kw+ZOM4NkG&#13;
-LSIDKk7ClvC0hyOlLzbzCmsEZi34G/kLoIobCmMdY+79h3lJ4+SuqMDSYcGbIifMUyY5qff7jiss&#13;
-g7dtJxOo/+bRHiFqJ0ZvsTplRu8Cbd7ro0fY3o4zPHFwH/uZN7239dbnDElPI8eX25zxzxZ6+3ru&#13;
-PiHJ4R5MXmMR+LeMfjQkHSz0m2vBxxUrKaNKig==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c6c6478f-cf5c-45c3-a1c6-24bb2f5e9612"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>wO1tgJb6OVilZAPJL6G1Y6L62obQdaHeb+jjGpj8qzSt3IJom800acd0tT7wxz4XfB8rI4xLJ0p4&#13;
+B7rkb/y3og==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_11207e36-b60c-4d0d-b3e8-c18818c5ec84"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>dr8UOghuc2bBr/+3gJerY48s4IYQmzt6FfpduJ4R111UfpZgy0uOQ2UjnMZ9j3bP5d5X+s0Xsh+t&#13;
+8NO4cKYGSg==</DigestValue></Reference></SignedInfo><SignatureValue>o4Q0EaK+piClx8jrTMDIwDQuBUpwZoSvkFvJbZDYRZVZm0BA1wvfK/bYMK4j6YUKOH6JMbHg2j56&#13;
+1yi5tVEiv8mkLLopzTu0pm0XBixz+jytoPkV+6QIrrqGLPBMlOB/355ozdU93tQ2CyqxRasL3sas&#13;
+cuJVGaGzk6jYlzvRDasYtoH2kCh2i6gY8VqdjwO5aMWDYmNgclY+xBOtJ175kiB7UXjsN0Y0cjjF&#13;
+BFXPmY8m1b6oqxIfa+IU+QDa5yg50uWwLwyBonhd3FM7L1TXlr/5KOb18cBOAHcbXVXFsyZLix+U&#13;
+HCeaAdUoYyLmht4TOYfbDqczycJ2dhZ1TEo7kA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2274,4 +2274,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a4114ad9-a0fc-409e-86a4-1485cf4bf30f" Target="#_d28f25a0-da1a-45a8-97f7-a07f31d4fa43"><Timestamp>2024-02-21 04:30:42</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_11207e36-b60c-4d0d-b3e8-c18818c5ec84" Target="#_c6c6478f-cf5c-45c3-a1c6-24bb2f5e9612"><Timestamp>2024-02-21 04:31:47</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
