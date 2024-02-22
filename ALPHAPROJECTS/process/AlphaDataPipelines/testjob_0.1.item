@@ -173,6 +173,7 @@
     <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="payorlookup"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="out1_1">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -357,6 +358,7 @@
     <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="distribute_condition"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="out1_2">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -522,6 +524,7 @@
     <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
     <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
     <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="aggregate_hmo"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="out1_2_agg" name="tAggregateRow_1">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -553,6 +556,7 @@
     <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
     <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
     <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="aggregate_swc"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="out1_3_agg" name="tAggregateRow_2">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -707,6 +711,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_3_agg"/>
   </connection>
   <connection connectorName="FLOW" label="row1_1" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tLogRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="transaction_external_id_1"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1_1"/>
   </connection>
@@ -719,13 +728,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_b385d13e-be96-4831-a422-cf07f0d475c1"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>p6t5xpD7oD2PaDPro+LxuCGjZ/0ROo+S/hKSkJzicstACDUGBv05Mlppfxge5ZPGASTcBu9gfyfb&#13;
-K/TNUHJKJw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8506e3c4-c608-4681-b8d9-aa6a5902c1ef"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>pQE8jXPKHlLO9ZcwZhAjtenczinNjaE1GpMlYe2AJfnKEuFPGNJoTjTmr+M42dWZl43ZQMv+TLeD&#13;
-ofSH4eUyrg==</DigestValue></Reference></SignedInfo><SignatureValue>ZWYX8X1l+sZ3YNz5UT9rVNqv2tLx37PKPfgWp39eDL6OhPdKQneXMx4C+gmJxjaaGc8MzDcsLdut&#13;
-ghcTLN8LC1cC9dxUr+MVv53T7jJMWDSBuMWN/5mCCipSKwoyEMceEAxka1AEH7uwAF5aZxpRfY1m&#13;
-KfT8PrHhChUAXV29w5lElsrRFtcRhiC9WsGNOXviEZ0IRf+hdYo/Rd58EpIb8NQGzZ28WUVdAnpq&#13;
-w54ZJ0EqPpKk/e0Wkl/fzzarjtHKIMraBntHrVOOTK0G1JB5YYh7/F8WmZFxExYOSszkLoEn4qZ2&#13;
-WbdXZqdjS5TFLPgtDarnPBBsh+HYt2p3ojNNeA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_18fdd77a-9322-4ac5-8553-a38834ab955f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>PngyxbO0F8KWbaB5vXu28cD0VLAg44XmgiGN2xZsi6J5ez0OtLm9a+K1TkIOVidf6lIPLHkBu/Ds&#13;
+qOAyvzI6Og==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_880a6355-1f23-418e-81db-98300ea5902e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>rzm5HwglwqbvnHg1Nz83REqYI6JrSdtUxgW+t2eHdGDfkRgpsgW2xsXx95543oh373SziE3zi5hr&#13;
+8HD5vF6Nqg==</DigestValue></Reference></SignedInfo><SignatureValue>TmZI+5IaKN6K1wbOAQTqaPiyTuNLRh49Z0+/VYAEVUGhQVHU7+VIpqtKa72y23mG0eVjbXmRo9ZD&#13;
+i6EHx12jAfNYR8pt9W8QBStBm/JWCZhB/xzU6hCYIVlyMljscNKBEzN1B6EC8Ap698/HdX4NzPwe&#13;
+XBDekuVAUPgeu03uKIjcpxroCvYqWjRoToTt1DERpszVP0VsY4rj5+fqB4U963VvCwzaqZjKsMDX&#13;
++Gregu3VxsurnmuBb4Aaq7hiprCMsfzgexwbzzvqIl0yUwkxq+y3dM61iWCdLPaegAIoCV+TJ//v&#13;
+LUt3//8qZeXXModqw2aWWWTd046GLcZapCbU3Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -747,4 +756,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8506e3c4-c608-4681-b8d9-aa6a5902c1ef" Target="#_b385d13e-be96-4831-a422-cf07f0d475c1"><Timestamp>2024-02-22 10:44:50</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_880a6355-1f23-418e-81db-98300ea5902e" Target="#_18fdd77a-9322-4ac5-8553-a38834ab955f"><Timestamp>2024-02-22 10:59:58</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
