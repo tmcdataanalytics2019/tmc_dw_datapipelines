@@ -376,6 +376,15 @@
       <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
+    <metadata connector="FLOW" name="out1_4">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
@@ -389,6 +398,15 @@
         <mapperTableEntries expression="out1_1.if_swc_pwd " name="if_swc_pwd" nullable="true" type="id_String"/>
       </outputTables>
       <outputTables activateExpressionFilter="true" expressionFilter="out1_1.if_swc_pwd.equals(&quot;YES&quot;)" name="out1_3" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out1_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_1.payor_agreement_id " name="payor_agreement_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_1.payor_type " name="payor_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_1.name " name="name" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_1.payoragreement " name="payoragreement" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_1.if_hmo " name="if_hmo" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_1.if_swc_pwd " name="if_swc_pwd" nullable="true" type="id_String"/>
+      </outputTables>
+      <outputTables activateExpressionFilter="true" expressionFilter="!out1_1.if_swc_pwd.equals(&quot;YES&quot;) &amp;&amp; !out1_1.if_hmo.equals(&quot;YES&quot;)" name="out1_4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1_1.payor_agreement_id " name="payor_agreement_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1_1.payor_type " name="payor_type" nullable="true" type="id_String"/>
@@ -492,6 +510,48 @@
       <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="896" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_3"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="payor_agreement_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="payor_type"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="payoragreement"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="if_hmo"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="if_swc_pwd"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tLogRow_3">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
   <connection connectorName="FLOW" label="visitpayor" lineStyle="0" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tMap_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="payor_id"/>
@@ -542,18 +602,22 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_3"/>
   </connection>
+  <connection connectorName="FLOW" label="out1_4" lineStyle="0" metaname="out1_4" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tMap_2" target="tLogRow_3">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_4"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_4088ff44-dd65-4a5f-9888-73ba71983c88"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kLtQaSaCsujwsGzu+HCHDLXS+qqwXNwgIodJo+ZPGKFMmYIP5sNKgmPVaHiFdnkVI5joOfu+EHgq&#13;
-xa7GGvaRJA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_5ed3b23a-7d93-496f-84bc-66cb7540d7ba"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>QB71pdoZbN3rPz5YsMPIOgdgR1nYXy+2j+k4yVRwde/pJiMfo6VYM7prq7rDXQ5sl314QncF+6GZ&#13;
-Y6/g0KndOw==</DigestValue></Reference></SignedInfo><SignatureValue>TDzEWXAF819MQpFe+U3nnTQyO/wRmVB2ZvJr6YpjL6TWDu/5pEVdc+hEebbgcZmlTsO0QHSkF91/&#13;
-k1Div3+fMFqMRYtt+3o89RNYKLUNicKFY+YGp2UIHEbnHyDTrS0+owOYz9cxjHC2Q7YmnrKAsTS4&#13;
-c+KAIlUhj7okz5LvtD8wSva3o0QeW6EhnDGkI7ypqdSUc2587mn/I1Qw6GgZe8ibKXLWIyTfTrHp&#13;
-t3495PwfAvAqQ1UDUxt1ZDzCxGMqs2B9QV0ALjdDvHDQPVmxrYvM//x6luVFW35WuQ/UwUVPA9Hf&#13;
-VYykrv7QgpD4/c+v+hqaIz1+JChXf1X0CMK77A==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_ece74852-f9eb-407e-8576-6994b23685be"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>jgXl5hOsGmDWVvijuQNCLLQjK67LPTZVpBpD2631N55iD2nPZSGqHY7Xg0ldiX6YCu+gPa3FPtA9&#13;
+T3xU6e8Rsg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_93a08083-2bb9-48b4-9cb7-78d6121620dd"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>NB6bBb23M3YA3Z1lXljRBUH6tSc6nnRZSKYVhgaxaUdSmq7miLrxWL8dbfgibrmtw5JuUn1rUWT6&#13;
+hTMhtIZprQ==</DigestValue></Reference></SignedInfo><SignatureValue>f/BieNiaFIx6NFb71n4dS5KELpfrrt4KIOTJ7IOz9ZxBmnOcT9GkRhySZzh3wDKVwC+yhWo91gcg&#13;
+hRMcHa+4jv2wJi3afNy2pOA7FZ6PrXAfwbU5iq7tmt9M0YSq+ZT8gTIuvlEIr3OLieX9LDrUPX9S&#13;
+EkzWsF/uGPTfVnPVrtTFLaU03SSwOfIG4OHYumNCa1XaEyXu/FqHr0axif0fAKftnMjqrasCEO3n&#13;
+tToGJdz/DdYferbjeYqnbwr8S8V7OdVh1HZ3UObTyh3pS9EfbdkDggJ0mwc3oCavZvL4X+gcBTpi&#13;
+Pf/9cRaQL1ILH8DGO6fo/3mgxLRU7+SSqEg0eQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -575,4 +639,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_5ed3b23a-7d93-496f-84bc-66cb7540d7ba" Target="#_4088ff44-dd65-4a5f-9888-73ba71983c88"><Timestamp>2024-02-22 10:28:17</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_93a08083-2bb9-48b4-9cb7-78d6121620dd" Target="#_ece74852-f9eb-407e-8576-6994b23685be"><Timestamp>2024-02-22 10:29:43</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
