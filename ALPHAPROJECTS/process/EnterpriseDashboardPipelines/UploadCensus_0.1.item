@@ -132,7 +132,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT transaction_external_id, visit_id, visit_type_id, patient_pin, admission_date,medical_discharge_date, discharge_date, is_converted_from_opd FROM ort_aa_patient_visits&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT transaction_external_id, visit_id, visit_type_id, patient_pin, admission_date,medical_discharge_date, discharge_date, is_converted_from_opd, visit_id_before_convert FROM ort_aa_patient_visits&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -159,6 +159,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="is_converted_from_opd"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -173,6 +175,7 @@
       <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="320">
@@ -198,9 +201,10 @@
       <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_converted_from_opd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -211,6 +215,7 @@
         <mapperTableEntries expression="row1.discharge_date " name="discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.medical_discharge_date " name="medical_discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.is_converted_from_opd " name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="row1.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -221,6 +226,7 @@
         <mapperTableEntries name="medical_discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.patient_pin " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
@@ -343,9 +349,10 @@
       <column comment="" key="false" length="-1" name="IPD_discharge_type_id" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="OPD_discharge_status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="OPD_discharge_type_id" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="row5" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -360,6 +367,7 @@
         <mapperTableEntries expression="row7.discharge_type_id " name="IPD_discharge_type_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row10.discharge_status_id " name="OPD_discharge_status_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row10.discharge_type_id " name="OPD_discharge_type_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
@@ -370,6 +378,7 @@
         <mapperTableEntries name="discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="medical_discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="is_converted_from_opd" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row7" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.transaction_external_id " name="patient_visit_id" nullable="true" operator="=" type="id_String"/>
@@ -616,9 +625,10 @@
       <column comment="" key="false" length="-1" name="IPD_discharge_type_id" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="OPD_discharge_status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="OPD_discharge_type_id" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row5.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -633,6 +643,7 @@
         <mapperTableEntries expression="ipdtype.value_description" name="IPD_discharge_type_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="opdstat.value_description" name="OPD_discharge_status_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="opdtype.value_description" name="OPD_discharge_type_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row5.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row5" sizeState="INTERMEDIATE">
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
@@ -647,6 +658,7 @@
         <mapperTableEntries name="IPD_discharge_type_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="OPD_discharge_status_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="OPD_discharge_type_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="opdstat" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row5.OPD_discharge_status_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
@@ -873,7 +885,7 @@
       <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out2.visit_type_id == null? &quot;N/A&quot; : out2.visit_type_id.equals(&quot;INPATIENT&quot;)?out2.IPD_discharge_type_id:out2.OPD_discharge_type_id" name="discharge_type" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.LEFT(out2.visit_id,2) " name="visit_prefix" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.LEFT(out2.visit_id_before_convert,2) " name="visit_prefix" type="id_String"/>
       </varTables>
       <outputTables activateExpressionFilter="true" name="out6" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out2.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -909,6 +921,7 @@
         <mapperTableEntries name="IPD_discharge_type_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="OPD_discharge_status_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="OPD_discharge_type_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1095,6 +1108,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="transaction_external_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
@@ -1116,6 +1132,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="is_converted_from_opd"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
@@ -1129,6 +1148,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
   </connection>
   <connection connectorName="FLOW" label="row5" lineStyle="0" metaname="row5" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_3">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row5"/>
   </connection>
@@ -1157,6 +1181,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row10"/>
   </connection>
   <connection connectorName="FLOW" label="out2" lineStyle="0" metaname="out2" offsetLabelX="4" offsetLabelY="1" source="tMap_3" target="tMap_4">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id_before_convert"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out2"/>
   </connection>
@@ -1206,13 +1235,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2985368f-504a-45c4-88c6-45335890a479"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>yg9GEkO49wTQ10hIn6HCRQdz8Ndp6lpMw+PhCmiEP3jsHNQp7w8Am1rMGyhNTFiXXw79+eKUDOUB&#13;
-x0Jy/lZzZQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_0040bfba-661e-4e6e-b19c-556763070d43"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UnX2R9iWB0Lso9h/5siqnnYF/OLD6KMRrKC2DhZe0I6LxMabxEH4Po4omNwrtP4GX6HCZ5WdJ9hk&#13;
-67rXmp/cTg==</DigestValue></Reference></SignedInfo><SignatureValue>Hs3VZLFExUYAkpyfBAEs0da5l0e/kt4Iigo4vC6XneJhE88ZIqwnu0vmzcvpEUkp9J5Yzweq5OR8&#13;
-3nUTjCubHgHlCFe03lmMVdSoRr1l1eKNVApE6cYkFqQ98Tc2wa/zLxw8daKoQNzJYiwIoDapXH0d&#13;
-mSgEsUKdL4uDtV3DjEOgw2xH+HZaKl6geO2NP4y4pJdXigtGZQ4IvGQtbqYYHD2ltsHYvh50feuT&#13;
-jvUZvQ6TMklN+KBLJnkFVw19kB+42Q8gWy/7kwYA3mKMJ6ClNZ3dOxzsNsS60MLXQ0SBOIV1ge+S&#13;
-jrYIDd+Gj/fFAoiTEUDuPYf9ztsIpHg3NitH3g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6e46d11d-4070-4ade-86fd-1cc6a84ff7f4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Gjxtwu+e6wcVB9Y2qBLZXORT44M4QP2FSKTJEUwgMQMKUSdGg2+t6I7VyE9M8EcxeM+o1lRym1IO&#13;
+Sh5QfwYcEA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_39a2d8f3-8ae7-4edf-8b40-5e41c814850e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>XIymFOfuN9BBr1fgt4lYx2T+E9jvtNPO53e/MMf/VQ+z81gmNQWrp5d9YbdqxLT4k+FNEbEQwcOg&#13;
+s8m7FOBbOA==</DigestValue></Reference></SignedInfo><SignatureValue>M6h+Kfn43KhqfAm5n4rwbeDvGP5vAr2xzWjNKoZzE8kjZUkmbF2m5izPnQDgf4GmkAudUADMM3WG&#13;
+BtWOCHQBmErs/IuBXhKuPNQy62TLTUh2PECXu18+VBXZ8hb0IYzDjnOhCR+lStuXk0WMzHkdbuu+&#13;
+iQx7FWrVZlPWgUhbMckYRDGgwCWKyAfyZLUVzYTb4h0k5bU1ZRjvqdF8Nw7rGXzycbGce/O0sWxW&#13;
+FCZhs4mu+ZHiyV+ev3IBc6F2CWl3m7QWqkR7/vShz6/PLwW2y64a5oNiD8hsmqwF5/re4p4lo5ro&#13;
+RgfyRdR0OCR/MAsQl43VWrg/TRLOqlayOaz5KQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1234,4 +1263,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_0040bfba-661e-4e6e-b19c-556763070d43" Target="#_2985368f-504a-45c4-88c6-45335890a479"><Timestamp>2024-02-22 05:54:56</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_39a2d8f3-8ae7-4edf-8b40-5e41c814850e" Target="#_6e46d11d-4070-4ade-86fd-1cc6a84ff7f4"><Timestamp>2024-02-22 05:59:36</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
