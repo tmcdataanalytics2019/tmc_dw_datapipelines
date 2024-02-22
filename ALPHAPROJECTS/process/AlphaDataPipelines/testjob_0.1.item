@@ -10,7 +10,7 @@
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="128"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="96"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" show="false" value=""/>
@@ -193,7 +193,7 @@
         <mapperTableEntries expression="payormdt.name " name="name" nullable="true" type="id_String"/>
         <mapperTableEntries expression="payagreemdt.name " name="payoragreement" nullable="true" type="id_String"/>
         <mapperTableEntries expression="paytype.value_description == null? &quot;NO&quot;:paytype.value_description.equals(&quot;HMO&quot;)?&quot;YES&quot;:&quot;NO&quot; " name="if_hmo" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="payagreemdt.name.equals(&quot;CONFIDENTIAL - SENIOR CITIZEN&quot;) || payagreemdt.name.equals(&quot;PHIC SENIOR CITIZEN&quot;) || payagreemdt.name.equals(&quot;SENIOR CITIZEN&quot;) ||payagreemdt.name.equals(&quot;SENIOR CITIZEN - PUB&quot;)?&quot;YES&quot;:&quot;NO&quot; " name="if_swc_pwd" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="payagreemdt.name.equals(&quot;CONFIDENTIAL - SENIOR CITIZEN&quot;) || payagreemdt.name.equals(&quot;PHIC SENIOR CITIZEN&quot;) || payagreemdt.name.equals(&quot;SENIOR CITIZEN&quot;) ||payagreemdt.name.equals(&quot;SENIOR CITIZEN - PUB&quot;)|| payagreemdt.name.equals(&quot;PHIC PERSON WITH DISABILITY (PWD)&quot;)|| payagreemdt.name.equals(&quot;PERSON WITH DISABILITY (PWD)&quot;)?&quot;YES&quot;:&quot;NO&quot; " name="if_swc_pwd" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="visitpayor" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -376,24 +376,6 @@
       <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" name="out1_4">
-      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-    <metadata connector="FLOW" name="out1_5">
-      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
@@ -415,24 +397,6 @@
         <mapperTableEntries expression="out1_1.if_hmo " name="if_hmo" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1_1.if_swc_pwd " name="if_swc_pwd" nullable="true" type="id_String"/>
       </outputTables>
-      <outputTables activateCondensedTool="true" activateExpressionFilter="true" expressionFilter="!out1_1.if_swc_pwd.equals(&quot;YES&quot;)" name="out1_4" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="out1_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.payor_agreement_id " name="payor_agreement_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.payor_type " name="payor_type" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.name " name="name" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.payoragreement " name="payoragreement" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.if_hmo " name="if_hmo" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.if_swc_pwd " name="if_swc_pwd" nullable="true" type="id_String"/>
-      </outputTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="!out1_1.if_hmo.equals(&quot;YES&quot;)" name="out1_5" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="out1_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.payor_agreement_id " name="payor_agreement_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.payor_type " name="payor_type" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.name " name="name" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.payoragreement " name="payoragreement" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.if_hmo " name="if_hmo" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="out1_1.if_swc_pwd " name="if_swc_pwd" nullable="true" type="id_String"/>
-      </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1_1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="payor_agreement_id" nullable="true" type="id_String"/>
@@ -444,7 +408,163 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="0">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="800" posY="-32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_3"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_26aZ0HRtEe6OwdqFUALVEg-tMap_3-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="HMO"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out1_2_agg" name="out1_2_agg">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="out1_2_agg" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out1_2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_2.payor_agreement_id " name="payor_agreement_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_2.payor_type " name="payor_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_2.name " name="name" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_2.payoragreement " name="payoragreement" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_2.if_hmo " name="if_hmo" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_2.if_swc_pwd " name="if_swc_pwd" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1_2" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="payor_agreement_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="payor_type" nullable="true" type="id_String"/>
+        <mapperTableEntries name="name" nullable="true" type="id_String"/>
+        <mapperTableEntries name="payoragreement" nullable="true" type="id_String"/>
+        <mapperTableEntries name="if_hmo" nullable="true" type="id_String"/>
+        <mapperTableEntries name="if_swc_pwd" nullable="true" type="id_String"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="800" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_4"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_26aZ0HRtEe6OwdqFUALVEg-tMap_4-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="SWC_PWD"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out1_3_agg" name="out1_3_agg">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="out1_3_agg" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out1_3.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_3.payor_agreement_id " name="payor_agreement_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_3.payor_type " name="payor_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_3.name " name="name" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_3.payoragreement " name="payoragreement" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_3.if_hmo " name="if_hmo" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out1_3.if_swc_pwd " name="if_swc_pwd" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1_3" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="payor_agreement_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="payor_type" nullable="true" type="id_String"/>
+        <mapperTableEntries name="name" nullable="true" type="id_String"/>
+        <mapperTableEntries name="payoragreement" nullable="true" type="id_String"/>
+        <mapperTableEntries name="if_hmo" nullable="true" type="id_String"/>
+        <mapperTableEntries name="if_swc_pwd" nullable="true" type="id_String"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="-32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_1"/>
+    <elementParameter field="TABLE" name="GROUPBYS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="INPUT_COLUMN" value="transaction_external_id"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="OPERATIONS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="if_hmo"/>
+      <elementValue elementRef="FUNCTION" value="first"/>
+      <elementValue elementRef="INPUT_COLUMN" value="if_hmo"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="payor_type"/>
+      <elementValue elementRef="FUNCTION" value="first"/>
+      <elementValue elementRef="INPUT_COLUMN" value="payor_type"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
+    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
+    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out1_2_agg" name="tAggregateRow_1">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_2"/>
+    <elementParameter field="TABLE" name="GROUPBYS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="INPUT_COLUMN" value="transaction_external_id"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="OPERATIONS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="if_swc_pwd"/>
+      <elementValue elementRef="FUNCTION" value="first"/>
+      <elementValue elementRef="INPUT_COLUMN" value="if_swc_pwd"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="payoragreement"/>
+      <elementValue elementRef="FUNCTION" value="first"/>
+      <elementValue elementRef="INPUT_COLUMN" value="payor_agreement_id"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
+    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
+    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out1_3_agg" name="tAggregateRow_2">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
     <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
     <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
@@ -476,7 +596,7 @@
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tLogRow_1">
+    <metadata connector="FLOW" label="out1_2_agg" name="tLogRow_1">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -486,49 +606,7 @@
       <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="160">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_2"/>
-    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
-    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
-    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
-    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
-    <elementParameter field="CHECK" name="PRINT_HEADER" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
-    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
-    <elementParameter field="TABLE" name="LENGTHS" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="payor_agreement_id"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="payor_type"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="payoragreement"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="if_hmo"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="if_swc_pwd"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
-    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tLogRow_2">
-      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="288">
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_3"/>
     <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
     <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
@@ -560,49 +638,7 @@
     <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tLogRow_3">
-      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="payoragreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_hmo" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_swc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-    </metadata>
-  </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="608" posY="-64">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_4"/>
-    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
-    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
-    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
-    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
-    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
-    <elementParameter field="CHECK" name="PRINT_HEADER" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
-    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
-    <elementParameter field="TABLE" name="LENGTHS" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="payor_agreement_id"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="payor_type"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="payoragreement"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="if_hmo"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="if_swc_pwd"/>
-      <elementValue elementRef="LENGTH" value="10"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
-    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tLogRow_4">
+    <metadata connector="FLOW" label="out1_3_agg" name="tLogRow_3">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_agreement_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -654,34 +690,42 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="payagreemdt"/>
   </connection>
-  <connection connectorName="FLOW" label="out1_2" lineStyle="0" metaname="out1_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_2" target="tLogRow_1">
+  <connection connectorName="FLOW" label="out1_2" lineStyle="0" metaname="out1_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_2" target="tMap_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_2"/>
   </connection>
-  <connection connectorName="FLOW" label="out1_3" lineStyle="0" metaname="out1_3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_2" target="tLogRow_2">
+  <connection connectorName="FLOW" label="out1_3" lineStyle="0" metaname="out1_3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_2" target="tMap_4">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_3"/>
   </connection>
-  <connection connectorName="FLOW" label="out1_4" lineStyle="0" metaname="out1_4" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tMap_2" target="tLogRow_3">
+  <connection connectorName="FLOW" label="out1_2_agg" lineStyle="0" metaname="out1_2_agg" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tAggregateRow_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_4"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_2_agg"/>
   </connection>
-  <connection connectorName="FLOW" label="out1_5" lineStyle="0" metaname="out1_5" offsetLabelX="0" offsetLabelY="0" outputId="4" source="tMap_2" target="tLogRow_4">
+  <connection connectorName="FLOW" label="out1_3_agg" lineStyle="0" metaname="out1_3_agg" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tAggregateRow_2">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_5"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1_3_agg"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tLogRow_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tAggregateRow_2" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_2" target="tLogRow_3">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_7ec00222-098d-4649-9df6-021a0609ed1c"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>iySi7NyXnYz0JDeT1Qg9ZTAfoedlmemdaD0RRiUOF9AMz6cQ1G6AdwuUCvTn3LU0qc6EtIKS8NoC&#13;
-PW0lD8J6/w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_ff9c6ca1-f780-4bbd-920f-be42e1c2e424"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Ya+JUvIaq0rTWXXxfiph98yolnu+4cPCWKftQwKr5H8eOIFP6Ga6BDzIsyKUrp3dHllard0ZzBRv&#13;
-cITSMS71cA==</DigestValue></Reference></SignedInfo><SignatureValue>WLnoT9fOlZYNoI8fFsXqouAh9PAXgPrdPsEf7LOhFbpenln9nMc0JpT3E04+4ZLvJgWvo5pfAins&#13;
-QejsHJDV07Gg4NmTw9g+ipvhIuPC6BjkahL0MGb1dwse9e4lQ8oCpBHDv4/kCVqgX2Zf/n3+cXmC&#13;
-qI3grstqCXgd/8Ta2jd9znlmYyFvduMRKMOhGUr76aCMZUDAZWTlUsNI1dgTRxOk7T8dhF+vgE6A&#13;
-9wNR+i4GKzmv9hG2BvEkrv1hktym7DVBMp2XaYWWPblv7TC35A726z166GT0VduWtWci6M+GUEjL&#13;
-XN9Neg4mf8LBa2GHLJB6b1nAsiYkc+1gO6WV3g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_d2538f35-3484-49d1-9a2a-89c2f414bc28"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Ydb6Pwo05FwlMekrfDoU1lqDeutZNnpPcrsHiAGB/DGtYdxrv2yIC7KnKqKT4YzUg/5pMn6r3Yi2&#13;
+OuIMa8Pccw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e9aa3611-5a98-4079-b171-7f71ff59ef9f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>W0kWB4+fflSY7QfFkyM8Knz1b5BQkZvrmPDq24O6qeLRqqeuzRSgRDzsR0kUgMHqfgKSRfGqC3Jv&#13;
+BtnQl9Pqyw==</DigestValue></Reference></SignedInfo><SignatureValue>JbbKw4M4Ry/8ajcX2KiR5iWpf1JIQd3xZLdBP+EdHWzWlwEowo6zm+WB721dzToF7dThJtfYFGAm&#13;
+mo1WdJkeZyGc5nlXhFyoiDVU5WAfd4CWqM1JlZhCsF67HleKAhVG9V8yP/R1SdYGcwcuurdVIpfh&#13;
+fCk7K5Wzl2lsdl3iwjIGQXuSkbQCzRe/F07su9FRXzxBznSZ/nKlLVzKnn2IYUTTlJLhrvvGTMH6&#13;
+oJW/NqVpuBPl+c4N8xyy4vADMBqUM7MC6u2t75tZqZhda+nD8p+KKzivswE6F/fyw0QpjkmzKn07&#13;
+PsPhQl4cFunsSKX6tNmmIqJdRi05Oq6v0Mc2YA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -703,4 +747,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_ff9c6ca1-f780-4bbd-920f-be42e1c2e424" Target="#_7ec00222-098d-4649-9df6-021a0609ed1c"><Timestamp>2024-02-22 10:34:28</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e9aa3611-5a98-4079-b171-7f71ff59ef9f" Target="#_d2538f35-3484-49d1-9a2a-89c2f414bc28"><Timestamp>2024-02-22 10:42:45</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
