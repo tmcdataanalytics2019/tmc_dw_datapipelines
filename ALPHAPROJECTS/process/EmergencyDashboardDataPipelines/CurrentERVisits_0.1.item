@@ -12,7 +12,7 @@
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="100"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="96"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" show="false" value=""/>
@@ -1610,7 +1610,8 @@
       <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_hour" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_within_4hrs" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_financial_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_medical_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="chief_complaint" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1623,6 +1624,7 @@
         <mapperTableEntries expression="Var.trim_ipd == null? true : Var.trim_ipd " name="final_trim" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="TalendDate.compareDate(out6.startdate,Var.getdatetoday,&quot;yyyy-MM-dd&quot;) == 0? false:true " name="carryover" type="id_Boolean"/>
         <mapperTableEntries expression="TalendDate.diffDate(out6.enddate,out6.ogstartdate,&quot;mm&quot;) " name="tat" type="id_Long"/>
+        <mapperTableEntries expression="TalendDate.diffDate(out6.medicaldischargedate,out6.ogstartdate,&quot;mm&quot;) " name="tat_medical_discharge" type="id_Long"/>
       </varTables>
       <outputTables activateExpressionFilter="true" expressionFilter="Var.final_trim == true" name="out7" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out6._id " name="transaction_external_id" type="id_String"/>
@@ -1659,7 +1661,8 @@
         <mapperTableEntries expression="out6.enddate == null ? null: TalendDate.formatDateLocale(&quot;hh aa&quot;,out6.enddate,&quot;en&quot;) " name="discharge_hour" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out6.medicaldischargedatebeforeconverttoipd == null ?out6.medicaldischargedate==null?null: TalendDate.formatDateLocale(&quot;hh aa&quot;,out6.medicaldischargedate,&quot;en&quot;): TalendDate.formatDateLocale(&quot;hh aa&quot;,out6.medicaldischargedatebeforeconverttoipd,&quot;en&quot;) " name="medical_discharge_hour" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Var.tat " name="tat_long_value" nullable="true" type="id_Long"/>
-        <mapperTableEntries expression="Var.tat &lt;= 240 &amp;&amp; Var.tat &gt;= 0 ? true:false " name="if_within_4hrs" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="Var.tat &lt;= 240 &amp;&amp; Var.tat &gt;= 0 ? true:false " name="if_within_4hrs_financial_discharge" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="Var.tat_medical_discharge &lt;= 240 &amp;&amp; Var.tat_medical_discharge &gt;= 0 ? true:false " name="if_within_4hrs_medical_discharge" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;)) " name="timestamp" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row13.cc_trim " name="chief_complaint" nullable="true" type="id_String"/>
@@ -1805,13 +1808,14 @@
       <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_hour" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_within_4hrs" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_financial_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_medical_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="chief_complaint" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out8" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out7.transaction_external_id " name="transaction_external_id" type="id_String"/>
@@ -1848,7 +1852,8 @@
         <mapperTableEntries expression="out7.discharge_hour " name="discharge_hour" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out7.medical_discharge_hour " name="medical_discharge_hour" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out7.tat_long_value " name="tat_long_value" nullable="true" type="id_Long"/>
-        <mapperTableEntries expression="out7.if_within_4hrs " name="if_within_4hrs" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out7.if_within_4hrs_financial_discharge " name="if_within_4hrs_financial_discharge" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="out7.if_within_4hrs_medical_discharge " name="if_within_4hrs_medical_discharge" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out7.batch_date " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out7.timestamp " name="timestamp" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out7.chief_complaint " name="chief_complaint" nullable="true" type="id_String"/>
@@ -1888,7 +1893,8 @@
         <mapperTableEntries name="discharge_hour" nullable="true" type="id_String"/>
         <mapperTableEntries name="medical_discharge_hour" nullable="true" type="id_String"/>
         <mapperTableEntries name="tat_long_value" nullable="true" type="id_Long"/>
-        <mapperTableEntries name="if_within_4hrs" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="if_within_4hrs_financial_discharge" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="if_within_4hrs_medical_discharge" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="timestamp" nullable="true" type="id_Date"/>
         <mapperTableEntries name="chief_complaint" nullable="true" type="id_String"/>
@@ -2101,7 +2107,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="if_within_4hrs"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="if_within_4hrs_financial_discharge"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="if_within_4hrs_medical_discharge"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -2166,7 +2177,8 @@
       <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_hour" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIGINT" type="id_Long" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_within_4hrs" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_financial_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_medical_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="chief_complaint" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -2206,7 +2218,8 @@
       <column comment="" key="false" length="-1" name="discharge_hour" nullable="true" originalLength="-1" pattern="&quot;hh a&quot;" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_hour" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="tat_long_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIGINT" type="id_Long" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="if_within_4hrs" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_financial_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_within_4hrs_medical_discharge" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="chief_complaint" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -3815,6 +3828,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="chief_complaint"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="if_within_4hrs_medical_discharge"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out7"/>
@@ -3828,6 +3844,14 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row13"/>
   </connection>
   <connection connectorName="FLOW" label="out8" lineStyle="0" metaname="out8" offsetLabelX="0" offsetLabelY="0" source="tMap_12" target="tDBOutput_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="if_within_4hrs_financial_discharge"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="if_within_4hrs_medical_discharge"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out8"/>
   </connection>
@@ -4038,13 +4062,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_9be427b4-e1e5-400c-aeee-e24d14ff4112"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>velHbBneXXqRHYc61cW/CIshlvGt7kSme/FBKfcNCXGfIhZcHh+9ToRFpB8Gw/lMeFeX9oZfm0zE&#13;
-BSlD6nL+/g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_948da67f-7ff4-4c11-bdd0-f9e8ed32b122"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>hXjeB28FGkB5DCz4w3/lK2d8+W4OSy5qFhyo6J6L3pnxhX7TciPofcanJ/uzaUVFWEVjC/l+pW8N&#13;
-TEFVOQ6Ing==</DigestValue></Reference></SignedInfo><SignatureValue>JiFKnjfEOlFHxY4f4YsGa6/ZwyRO83e6cSBu9RpiXUCIluviH1fRjIk4qavSEDBEbK+I4GIosTYm&#13;
-VpA4ae1N47j0CqzsIumFXXMLVze9jJLrgQRGIvz8VK2+FxluQwf3kgDEdXw5dQa4Vd9AhceSYZUu&#13;
-QQU7DXkxGanIWnwRScdhpDPma1xwuPF0Kdq91szi6FxnVzBVpDAfBs0Z8vX4oWIrqKvzA/6iW1Xf&#13;
-Qpom1d+G/ibEDXdwSNyG1ygHfOAOfvLi1pGDyurxtQQt6crHG0kYcVcTl3rL9wsNTsS1xld7L7B8&#13;
-o4VdhDE68A6XXqQj5UuRrupKQRQzfvCF/UP/+w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_b9095693-6107-4ed6-9621-c5bbc95041fc"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>dbO/8mr69eFauIKNA0qJ0z79oksbuvAJPJjzwLyKp7IoPHoXQQL5bcSDlGMax69Tzhfw7gyuhX+U&#13;
+w1Eiruhlfw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_605282f2-8f04-42eb-8826-580f54d64a07"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>QzaX05R206tO5y3ydTdlxIkVCaweJtk7idtbP5PzhyxaxwCwZ08tH+paheYoWFBVJfAjXZidRKlI&#13;
+bYIupaCqMg==</DigestValue></Reference></SignedInfo><SignatureValue>am3lpvDfBMyDeU+MUSm4Jvis7ADCb/+i5VkQwR0gmCwo7DOl4U1/lPALZsF5/hfPNIvcPueICQvW&#13;
+xj/c7HcwujNL7zijOjEHDwTF07lRxdvXna2vfAdxA+G/Osc6m9ftjt5T9nolIbqQH5YPrLq/UESA&#13;
+fsfN4YGO1fez3phq9rpieGocM/LHjldb61r95jSMt+5CKF+sRfcX1Q4eHwZE/eczd3ol3tQXR2nU&#13;
+BGGujUXvVvdKua0yEF4AfcYOzL0O2U9tdA75sf2oEl2pn9ZqYn4r6uofx1FERMq0nQx/evmpP7+k&#13;
+HWcWkyn/O6m5dxGu0yGbOAFigNJlhbz4PXGHlA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -4066,4 +4090,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_948da67f-7ff4-4c11-bdd0-f9e8ed32b122" Target="#_9be427b4-e1e5-400c-aeee-e24d14ff4112"><Timestamp>2024-02-26 07:52:26</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_605282f2-8f04-42eb-8826-580f54d64a07" Target="#_b9095693-6107-4ed6-9621-c5bbc95041fc"><Timestamp>2024-02-26 08:00:27</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
