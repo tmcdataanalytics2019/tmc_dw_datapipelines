@@ -3472,7 +3472,35 @@
       <column comment="" key="true" length="-1" name="patient_visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="2176">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="416" posY="2176">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_16"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_RaxBUMoIEe6bIJecm5qPYw-tMap_16-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="deleterecords">
+      <column comment="" key="true" length="-1" name="patient_visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="deleterecords" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row21.patient_visit_id " name="patient_visit_id" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row21" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="patient_visit_id" nullable="true" type="id_String"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="2176">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_6"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -3969,7 +3997,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row20"/>
   </connection>
-  <connection connectorName="FLOW" label="row21" lineStyle="0" metaname="tDBInput_20" offsetLabelX="0" offsetLabelY="0" source="tDBInput_20" target="tDBOutput_6">
+  <connection connectorName="FLOW" label="row21" lineStyle="0" metaname="tDBInput_20" offsetLabelX="0" offsetLabelY="0" source="tDBInput_20" target="tMap_16">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="patient_visit_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -3977,6 +4005,10 @@
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row21"/>
+  </connection>
+  <connection connectorName="FLOW" label="deleterecords" lineStyle="0" metaname="deleterecords" offsetLabelX="0" offsetLabelY="0" source="tMap_16" target="tDBOutput_6">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="deleterecords"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
@@ -4006,13 +4038,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_1e0ce28b-ab55-4246-bc13-695320098a2e"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KXE0j1UJt5HMHhyPRzDh2Qyzd9Mu0IA38R2dy61U6Xe1AXFqX2E6TyFvlJAy6wLLi4S42BIjAoIa&#13;
-vgq6iIx1lg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_31e79520-e51d-4664-9b0b-2f706be6b182"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>LFbOBUm9JYOVMQd8QjtDIvbi1YHW0aq3/kbFIbn6331K/XLEkg1BAutcYXVvykuHW2HsWlKPSV7Q&#13;
-IMH16EOESw==</DigestValue></Reference></SignedInfo><SignatureValue>VXuqReyKxzbyITEW7j2rnvaWkJRGsH9KsacRnC4U3dghMqqnJ/4jrtsVMfSVFzIhOMVcmqZLShZd&#13;
-xyUzmv6HQr51lZH1Txomprf2zNu+oaJlnZcmWrATszffKN9mHW9cWqCtVQUU9NjbUl9ccWU4VSkT&#13;
-6JhQM576FFrWNooxKE427eivvGhzeHa8eMBvGIiKz23+ZBHWqWRTgo5Of25PTEk8dkf7soq4C1HI&#13;
-yy21K8bSFtPbQMR+rGdpBEjHUq2Pha7p/6uTRO9dH+2vCjExlWyf/8NmeK30t9fCeNv5CGazTXRU&#13;
-AU1aEHLE7Hlef3qD3DycskimqAotzRbVLGiYIg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c513ddcd-f6e9-40d0-84ad-c842dbf506ef"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>aPHwwYhIcSUrCgEr1UyyPXxq1yobk/WI3+QZ7bxQaKQGcztL0rVMhCUi6l3iMPNloFNOaQv8fwnU&#13;
+ey3x8dBMuQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a193e39d-0c51-4e95-9d32-364b63eb7b7d"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>jlT9lpnp2uu7ankrOicmt/WRkuCgL/hceW9YkkWlRxEsqT1PuJCHiqP2npyok8yWcvIMZ7DTqZuZ&#13;
+Pw8lPLKCTw==</DigestValue></Reference></SignedInfo><SignatureValue>MGUAubhGPJkCk0uRyYy9dly60K1OzeqNCKsIErnO8jV6imGQXYGQ21J7EGmR6LNX3frlDDLjVnFi&#13;
+IGftaBRKEDv5frlqZNalFUjrT7Gu/qGQU1UADGQ2Zr3Um8e2kPBD/DYchAjUGo2ac7ThykFOxDeC&#13;
+LKSR/11hc5r4LaAYbYXEgDt7gh6V/UltMZyehvHgvZwYf+BtdOu3k3fwEZMOl0FIeE7m8L7ZqK9k&#13;
+pFnGbCV/norBYw8Aee4uDXNr0AnDvNYJtr+dFg07vAFoH2WGZBNaKXxUJoCsSCAnNK1nrHo1T+dc&#13;
+r5AnKvhJurBrKjRfqvUfLEEv8EVShOQLUBET6g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -4034,4 +4066,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_31e79520-e51d-4664-9b0b-2f706be6b182" Target="#_1e0ce28b-ab55-4246-bc13-695320098a2e"><Timestamp>2024-02-26 06:40:24</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a193e39d-0c51-4e95-9d32-364b63eb7b7d" Target="#_c513ddcd-f6e9-40d0-84ad-c842dbf506ef"><Timestamp>2024-02-26 06:48:53</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
