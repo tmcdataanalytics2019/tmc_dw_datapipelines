@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="Default" jobType="Standard" xmi:version="2.0">
-  <context confirmationNeeded="false" hide="false" name="Default"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="Testing" jobType="Standard" xmi:version="2.0">
+  <context confirmationNeeded="false" hide="false" name="Production">
+    <contextParameter comment="ForDatabase Name" internalId="_ZtGRINUPEe6WQ4u9pmiTEg" name="DatabaseName" prompt="DatabaseName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;TMC_DW_DB&quot;"/>
+    <contextParameter comment="ForTableName" internalId="_ZtGRIdUPEe6WQ4u9pmiTEg" name="TableName" prompt="TableName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;o&quot;"/>
+    <contextParameter comment="ForDataMart" internalId="_ZtGRItUPEe6WQ4u9pmiTEg" name="DataMartTableName" prompt="DataMartTableName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;d&quot;"/>
+  </context>
+  <context confirmationNeeded="false" hide="false" name="Testing">
+    <contextParameter comment="ForDatabase Name" internalId="_ZtGRI9UPEe6WQ4u9pmiTEg" name="DatabaseName" prompt="DatabaseName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;TMC_DW_DB_UAT&quot;"/>
+    <contextParameter comment="ForTableName" internalId="_ZtGRJNUPEe6WQ4u9pmiTEg" name="TableName" prompt="TableName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;uat_o&quot;"/>
+    <contextParameter comment="ForDataMart" internalId="_ZtGRJdUPEe6WQ4u9pmiTEg" name="DataMartTableName" prompt="DataMartTableName?" promptNeeded="true" repositoryContextId="_QJOlIHSOEe6GR-F5BeLWxg" type="id_String" value="&quot;uat_d&quot;"/>
+  </context>
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
@@ -299,7 +308,7 @@
       <column comment="" key="true" length="-1" name="_id" nullable="false" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;))" name="getdate" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 02:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 00:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 05:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 03:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 08:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 06:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 11:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 09:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 14:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 12:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 17:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 15:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 20:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 18:00:00&quot;)):&#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &gt; -1 &amp;&amp; &#13;&#10;TalendDate.compareDate(Var.getdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd 23:59:59&quot;)),&quot;yyyy-MM-dd HH:mm:ss&quot;&#13;&#10;) &lt; 1 ? &#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getDate(&quot;yyyy-MM-dd 21:00:00&quot;)):&#13;&#10;TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;) " name="todate" type="id_Date"/>
@@ -427,7 +436,7 @@
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(out1.filtercreated ,TalendDate.parseDate(&quot;yyyy-MM-dd&quot;,TalendDate.getDate(&quot;yyyy-MM-dd&quot;)),&quot;yyyy-MM-dd&quot;) == 0 ||&#10;TalendDate.compareDate(out1.filtermodified ,TalendDate.parseDate(&quot;yyyy-MM-dd&quot;,TalendDate.getDate(&quot;yyyy-MM-dd&quot;)),&quot;yyyy-MM-dd&quot;) == 0" name="store" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1._id " name="transaction_external_id" type="id_String"/>
@@ -805,7 +814,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_WCW5sINKEe6scrYgLaEiYg-tMap_2-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_kK2hUNR-Ee6EVJCyQEj9Ng-tMap_3-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
     <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
@@ -1308,13 +1317,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a2652923-395f-406e-883f-7417c7baafac"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>hlsZBg4epFtr0J/+8feCCPmDaLgXeYNYJfMr9OoUEEjLSuRDkTz/qiniK8v87geWjY7m3tfOhFxE&#13;
-hspIHTVz+w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_78a28e7e-685e-41cb-84d9-e0be68123509"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>twjanF35Se/cYNlzGDV+EQCVtgd5TkfPNozyQsYhnRvnclESq5oy7DTzxzZLvaFja8xsfYK03XLn&#13;
-KWB3gUiyBA==</DigestValue></Reference></SignedInfo><SignatureValue>gIkHMKhneccySs3p5p1Kf4Ottun8IWjICa2jmTl5l+vTkI0b2tDpYYGLUmdEsIVBxDFcwcboTlFr&#13;
-V/HTSjls/M2K23IVZsRKkFvmMJoZ9lm97/XbYiE4ROX/sNVuSUVZlR8SWjUwOHO5M9EB/65aC2L2&#13;
-qqaGS+w3Jht5Tk4+smiPpM3Q63UqqfAsYMdsFn/PjXzKUVjN6b7pdxpsaSMOS+qXYqhSWu4j0oDN&#13;
-PwJv/uaMngTD83PKK1Ii0LYsBM4/0Es2HCafPvpOxFnWiaoVT59IYp7P4cE+1KoS4fjYD/in0kgC&#13;
-mhGsWd76ubVfSeD8gff1tMob5z7xoip+A2Ms4Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_bbd6ea59-891d-44c6-822e-6d85dcbf268a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>A6F0YfpzAuKG5SVRtEPF+Vy+9NB7j0lMXcTIavXcV5Mc9nScZLzlBLySyfoZHW26vJT3cgyy+AAb&#13;
+pzcdAlHHgA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_707a3be2-554e-4f2e-affa-9fe405f023cb"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9sHQtk/SawkhwJx3MJadtcUIRezdbeurCDIBF9fgq4jfGlXbqR32Bz8DXT2dFT+kJejq7w+vdxJg&#13;
+IzTU5hKJPQ==</DigestValue></Reference></SignedInfo><SignatureValue>IcsRgZcDHxqirEfSj2yPd91XBr0o/3+FNbU5b34X9gcCPRaTjYXqJZu70nH69ioGHmmF3WHQz38f&#13;
+WMNN3RsU8GSVSPShPGbei6lMalXMRaSMo5IL287Q+XhCQLTw1J47NMmLflQPPTe9s9yx26YsSgS/&#13;
+/8cVTBBWKRp42jANmge/LO1W68KzIE0aNgPAcWwJ8etI2kI8Tu2+3lRxefH4bMFbOgzV+8zC3DhK&#13;
+q/B1udl6iK5iyclRgX10kN2RCAb++8puqvrEU/e5gPF+AOge/EhQft+rxKLjcJ0pVryd70Mw69Rk&#13;
+wJN2Mzl3TkSn/XH26hOeBPMaKlUix9sLmoyRrA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1336,4 +1345,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_78a28e7e-685e-41cb-84d9-e0be68123509" Target="#_a2652923-395f-406e-883f-7417c7baafac"><Timestamp>2024-02-26 08:07:11</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_707a3be2-554e-4f2e-affa-9fe405f023cb" Target="#_bbd6ea59-891d-44c6-822e-6d85dcbf268a"><Timestamp>2024-02-27 00:57:42</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
