@@ -1158,7 +1158,7 @@
       <column comment="" key="false" length="-1" name="last_created_timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;))" name="datetoday" type="id_Date"/>
       </varTables>
@@ -1458,7 +1458,7 @@
       <column comment="" key="false" length="-1" name="notes" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="insert" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="for_insert.mpi_pin " name="mpi_pin" type="id_String"/>
@@ -1618,7 +1618,7 @@
       <column comment="" key="true" length="0" name="patient_pin" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(for_update.modified_timestamp,for_update.last_modified_timestamp) &gt;= 0" name="update" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="for_update.mpi_pin " name="mpi_pin" type="id_String"/>
@@ -2501,9 +2501,10 @@
       <column comment="" key="false" length="-1" name="stored_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="reject_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="query_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="updated_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="Logrows" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row4.moment " name="moment" nullable="true" type="id_Date"/>
@@ -2521,6 +2522,7 @@
         <mapperTableEntries expression="((Integer)globalMap.get(&quot;tDBOutput_3_NB_LINE&quot;)) " name="stored_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="((Integer)globalMap.get(&quot;tDBOutput_3_NB_LINE_REJECTED&quot;)) " name="reject_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="((Integer)globalMap.get(&quot;tMongoDBInput_9_NB_LINE&quot;)) " name="query_count" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="((Integer)globalMap.get(&quot;tDBOutput_2_NB_LINE_UPDATED&quot;)) " name="updated_count" nullable="true" type="id_Integer"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row4" sizeState="INTERMEDIATE">
         <mapperTableEntries name="moment" nullable="true" type="id_Date"/>
@@ -2649,6 +2651,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="updated_count"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -2675,6 +2682,7 @@
       <column comment="" key="false" length="-1" name="stored_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="reject_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="query_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="updated_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column key="false" length="0" name="moment" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
@@ -2692,6 +2700,7 @@
       <column comment="" key="false" length="-1" name="stored_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="reject_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="query_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="updated_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -2866,6 +2875,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="reject_count"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="updated_count"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="Logrows"/>
@@ -2890,13 +2902,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6e79215f-427f-41a0-a9a2-9bedb115db3b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>N95VA1CKZHfNIV2Bl4D9hun+LfE0bJ39+qDyUiLhu+sCzE7OdxLy43QWOer0XC6jEIW07QsTo15p&#13;
-7x7QX2aJyw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_7cdbb2e9-8bb0-46c5-8e09-99c4835128e1"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>k0yl3z3oXVV9dysacECo8xCZPwjAd5spLTRZ7foE+UHuFZGpB1nAaHznv0DN+mVd52XyPfWTFpS0&#13;
-vPd5yZnmHQ==</DigestValue></Reference></SignedInfo><SignatureValue>bJZfkBjAxpW6nZDj7jj8yJOUs0fu+4qTj5fgfIiCi8Djxfln38mPK5QPfa6gzNUKVGqsrSygbvGZ&#13;
-nQByRchctLGwE5+lf9A9Sw/Hn299NVrkguNu98qILJ46t+9DvHX0tYVFggeCTuMSo8b5LgTKLJgE&#13;
-PygKMIThEjQ2IhSGfzUvBZGCBIfoV+hIgPeS4E2kxbAd+ozjmNHf8CY1HdQ0IqE2ySxbKyiyRcui&#13;
-odfaph+MPOHrPJPJVMbWpaOSWrXXPIMs9zolHyhnWicw4Hk8DKnQZwZm4ISt9fzDV9Dot6md0OfU&#13;
-QyGizJsFjb5422usCLE51Kk4hd0x2MCzJiGPJQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_116908a2-deda-4a2e-b246-2f3bf31802cf"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9lfuep08eIZSW5N4eahMEYB6ekiEquMpfpO9ZR2xEXRu1WrX4LB3TcSMKfZm2XJE9B+HWc64ZWEO&#13;
+F5a8luGTqg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_704e9da6-e0b5-4576-b521-d66ba2707516"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Vm5aXDx0OzUt+7PEwdLpj0C2Utn78LkmCQ+m2z9WIAIsz/GZCPQH30vnhNJ0HJ1UX/pOkgru2oh9&#13;
+4qfUXwrPQw==</DigestValue></Reference></SignedInfo><SignatureValue>KrQPSXNz+RbiJPXifJUW15flWIXtG4oVOsaKqlfnjyV0H78kcKXotqKrigc0f6rbvY4GrGr2aOgf&#13;
+0LqPFFKH6OCSCp1S9FWxQarND9OUCp6j14rukFKdRUNN/mMyI4m365PVmRoh8copSQH0PoRDyyO3&#13;
+7Vch3TTdZqEg9ApPxQBaUGIZzSU+6g58TMFq7j3zjmijhYn5pkn2b3jp4pmAVG5XlF4RK/ukCa5M&#13;
+fss9FG6HbIb0IjtBndr4g4Gj8WcNcl3NNAxs/Qr0+kfdJiMjloEj3lHSGPM5sSB3hLXcagvxMEVq&#13;
+iM84V4T7p6nQTdCMIBllVwyF7pMwFaEOC3ym0w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2918,4 +2930,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_7cdbb2e9-8bb0-46c5-8e09-99c4835128e1" Target="#_6e79215f-427f-41a0-a9a2-9bedb115db3b"><Timestamp>2024-02-28 02:19:26</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_704e9da6-e0b5-4576-b521-d66ba2707516" Target="#_116908a2-deda-4a2e-b246-2f3bf31802cf"><Timestamp>2024-02-29 01:21:13</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
