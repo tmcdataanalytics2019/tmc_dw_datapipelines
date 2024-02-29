@@ -1682,6 +1682,7 @@
       <column comment="" key="false" length="-1" name="stored_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="updated_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="reject_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="error_message" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -1703,6 +1704,7 @@
         <mapperTableEntries expression="((Integer)globalMap.get(&quot;tDBOutput_1_NB_LINE_INSERTED&quot;))" name="stored_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="((Integer)globalMap.get(&quot;tDBOutput_3_NB_LINE_UPDATED&quot;))" name="updated_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="((Integer)globalMap.get(&quot;tDBOutput_1_NB_LINE_REJECTED&quot;))" name="reject_count" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="((String)globalMap.get(&quot;tDBOutput_1_ERROR_MESSAGE&quot;))" name="error_message" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries name="moment" nullable="true" type="id_Date"/>
@@ -1836,6 +1838,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="error_message"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -1863,6 +1870,7 @@
       <column comment="" key="false" length="-1" name="stored_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="updated_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="reject_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="error_message" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" label="logs" name="REJECT">
       <column key="false" length="0" name="moment" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
@@ -1881,6 +1889,7 @@
       <column comment="" key="false" length="-1" name="stored_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="updated_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="reject_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="error_message" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -2156,6 +2165,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="unique_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="error_message"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="logs"/>
@@ -2187,13 +2199,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_42351468-54b2-480c-8b34-6e63e64b7178"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>DiJBh7iS5ROhR140S3xq+SWTq2ZsYi3Z35w+5Oaa4WlDVIjBB/68nqwnASeMv13ElKaJbZDmzz9s&#13;
-s+U4JA2myg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_7b87c39f-94eb-4a66-84e4-5125b8b67944"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>38ICM1Y44hRbxhQM8Y8IKUC2VuDK/jrlvgFjlWuRmS+DjBL2/nc386+ZEGASBgsz3t4quhOrZCqw&#13;
-a3Ql/+6A8g==</DigestValue></Reference></SignedInfo><SignatureValue>QDaPjSeIWamzS2JIrNtg1iZhjMojnbMeEhElGoHTpaDUI9cH5BO6/cffBEl6EGzF6EJt2pIWu5FM&#13;
-/S6H5ggjEU2vWsKGLmgqT4t+DoPmI8JC1YI0iRovY4KFIoOI5R54PXMC6SwW2bzV6kdjYSkQcAzb&#13;
-BHoWV8znVnxpXkBY7PrYCPEGbXm31GT/Q9Z9xKlBh0wRNHW8ObdQGvFH/F/8ud7cltLiLidhhEax&#13;
-FdhMkYP91/a+TLx+M96K3CJQ1yM9yH/HrEY8l0aUGmS4w+iaf9tikcnU7mmXHOTeVK2VXObQFtOJ&#13;
-K83OPACWIFnEoTC1gXctxJarDZZjH8GyOwc1gA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2655b8d5-d0a9-41e0-8106-dd244bbdfbda"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kwEJ/TR1/NnPZGCClmrWCTX7HUJX6OokzPUMeUmpqu7+7sZoUpYmQ8swRT/VhHu7lXIc81PHxskA&#13;
+x2gseV3ooQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_649d81aa-3d72-4992-b2ad-ad03cbebdd48"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>gUtFH35NsoJ0nAXHnsQJ5oFbwcz7pFRictBqzuLZfgs5SqHztW2JBW9IPDIxcHFIIYiCwDRWRLQJ&#13;
+JcZ/HLUHYw==</DigestValue></Reference></SignedInfo><SignatureValue>eWpSo4rjupaEWa5ymlNV4TRgf2rLcNcjeOwoDZUhL5C+ZKONqA+2DAAB3TKfJ5B61Y3/3COsdnrw&#13;
+SwQGB+fVtr3ArliOc4T1hRLNIV/OGkKsrSft7Msm6Oar1bg5/DcJzncqKgBbn4OmmUB9CvSMw6gi&#13;
+QdDA7n5mNs8dKU4nUUw3HqFRtMqUeYhet2aP27qTeRcpipujTNallkV5ZVYwdsAJp0v7JbRVJO/K&#13;
+BJHfaCfKfNm+yLS58tXGB/g8snpXWEvKj7b5bxAdxqj5Pf4lYYseVLY9N1zhLMz7uVqpdFBXE2RM&#13;
+trQ2A7B6QFEMOqanN3dVPYo2Hiea+OmX26f5PQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2215,4 +2227,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_7b87c39f-94eb-4a66-84e4-5125b8b67944" Target="#_42351468-54b2-480c-8b34-6e63e64b7178"><Timestamp>2024-02-29 01:16:14</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_649d81aa-3d72-4992-b2ad-ad03cbebdd48" Target="#_2655b8d5-d0a9-41e0-8106-dd244bbdfbda"><Timestamp>2024-02-29 02:34:05</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
