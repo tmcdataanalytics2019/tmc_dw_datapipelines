@@ -1618,7 +1618,7 @@
       <column comment="" key="false" length="-1" name="chief_complaint" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="getdatetoday" type="id_Date"/>
         <mapperTableEntries expression="out6.opstartdate == null? null:TalendDate.compareDate(TalendDate.parseDate(&quot;yyyy-MM-dd&quot;,TalendDate.formatDateLocale(&quot;yyyy-MM-dd&quot;,out6.opstartdate,&quot;EN&quot;)),Var.getdatetoday,&quot;yyyy-MM-dd&quot;) == 0? true:false " name="trim_ipd" nullable="true" type="id_Boolean"/>
@@ -1698,13 +1698,13 @@
         <mapperTableEntries name="is_admitted" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="admission_request_number" nullable="true" type="id_String"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row13" sizeState="INTERMEDIATE">
+      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row13" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out6._id " name="patient_visit_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="cc_trim" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="480">
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="480">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_9"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1749,7 +1749,7 @@
   <node componentName="tDenormalize" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="512" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDenormalize_1"/>
     <elementParameter field="TABLE" name="DENORMALIZE_COLUMNS">
-      <elementValue elementRef="INPUT_COLUMN" value="patient_visit_id"/>
+      <elementValue elementRef="INPUT_COLUMN" value="cc_trim"/>
       <elementValue elementRef="DELIMITER" value="&quot;;&quot;"/>
       <elementValue elementRef="MERGE" value="false"/>
     </elementParameter>
@@ -2298,7 +2298,7 @@
       <column comment="" key="false" length="-1" name="if_sc_pwd" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1_1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="visitpayor.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -4063,13 +4063,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_60cddd4a-4103-402c-92ee-529cd2aa1fcf"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>PETJJbSe8k+ra6u/1oYtQImKI8vpyL5vb5dA0HNqoiJp4fLGNsDfrVzuSLWL/dvaTrykDThMNMXG&#13;
-5QEoMFeShQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_c6d7631a-de06-4a5d-8f5b-754f544cc78d"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9NMmnn8ihTEJ6stQIWm53Xmn3EN+IPGQ08QstBRLL+CqP2ob/kNzGUtAAOWT1eMq7Jh7k/5bMYqc&#13;
-GmKi6MgDVQ==</DigestValue></Reference></SignedInfo><SignatureValue>ERHFYZrm/iuGL79zKD+YBe2WVZvQXkaIQ/wQJklZIjRLz7S4RrZEFnoEdntZBgWKe8e2GnPIAaxL&#13;
-BKb7+gkNwOyxS7SeOpGcbi4NrGuONNeWMfvEsK1bI7WPZUT6gUwxkrXznEYnMQh+j6rSztI9dTSn&#13;
-pnzdpu0Uw658HFLPhQN+jOA7F4y33Y31gOy1EpPoOt4HsvuMo9U0dYXEXvSCVlD6L4MZwuM96G1b&#13;
-dojtPOaRnhzi2/bJEZ2R5R5ckMBbLdo7nFR/xxGyO1ux/vcURlmD5oYk8c+zDOpaMlFHx79yG+1M&#13;
-I110CVwAsJ5LQJ8QzY4FXkUFhByfjUD9sbOogQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_59ba6b3e-340a-4cb3-83ad-95c6e2053da6"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+ifv04gyZBisI7yLohczYl1M+jm8iTM4jKC04XKUG8YXON9C0/mwiPJp0a9N8WficQv4wd+k2y9q&#13;
+AdvoChXuGA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_71abe8ab-4f52-4961-8cca-b4b14d108e8c"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Q6FXY7YtHKaM5YpSYRdUszabACxtLWPHF8pkkhViAnBxvDms5Zrq3QAO/qAryD9Y2ixMXaxYogck&#13;
+SdwqC5kjLA==</DigestValue></Reference></SignedInfo><SignatureValue>RjOlo9yeE/AYZZvMu8Byrfxd2BbJxIUJmmh5j27BSamQelIcgvGmbRR3C3d7uIkmzJpPhppBbnhi&#13;
+S9Nxd64H/y7IAtXHYNLTuazPH76KEO3DR/qj37L1E3vv7osw8SCErAsZcZtRtBE7VJsUBPoLkT8I&#13;
+84iEVNNpLTZzuKJypTL+dO7GNvrJD9jS9fXi42MaUECDb3ERK7w5IIZtIyIL2D6G8A2R0SRHY7nT&#13;
+rihw+OxMKrGWjn+eF6+qRYCXgaUUdIX1kWKREbeW9E4TPZaelgW7ibzGbRjrs0LrVdGapekFYsmO&#13;
+cit54o8l+asmZj+cLL0Y3wDsfi9fmyUEtqHFiA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -4091,4 +4091,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_c6d7631a-de06-4a5d-8f5b-754f544cc78d" Target="#_60cddd4a-4103-402c-92ee-529cd2aa1fcf"><Timestamp>2024-02-27 06:17:58</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_71abe8ab-4f52-4961-8cca-b4b14d108e8c" Target="#_59ba6b3e-340a-4cb3-83ad-95c6e2053da6"><Timestamp>2024-02-29 03:36:30</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
