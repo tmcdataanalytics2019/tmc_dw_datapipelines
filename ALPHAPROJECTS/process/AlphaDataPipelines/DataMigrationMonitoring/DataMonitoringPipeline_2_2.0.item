@@ -201,7 +201,7 @@
         <mapperTableEntries name="createdat" nullable="true" type="id_Date"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="yesterday_1" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="yesterday" nullable="true" type="id_String"/>
+        <mapperTableEntries name="yesterday" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -708,7 +708,7 @@
         <mapperTableEntries name="created_timestamp" nullable="true" type="id_Date"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="yesterday_2" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="yesterday" nullable="true" type="id_String"/>
+        <mapperTableEntries name="yesterday" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
   </node>
@@ -717,14 +717,14 @@
     <elementParameter field="TEXT" name="NB_ROWS" show="false" value="1"/>
     <elementParameter field="TABLE" name="VALUES" show="false">
       <elementValue elementRef="SCHEMA_COLUMN" value="yesterday"/>
-      <elementValue elementRef="ARRAY" value="TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot; )"/>
+      <elementValue elementRef="ARRAY" value="TalendDate.addDate(myDate ,addValue ,&quot;MM&quot; )"/>
     </elementParameter>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="TEXT" name="LABEL" value="Get_Yesterday_Date"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tRowGenerator_1">
-      <column comment="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true">
-        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;getDate&quot;,&quot;PARAMETERS&quot;:[{&quot;PARAMETER_NAME&quot;:&quot;pattern&quot;,&quot;PARAMETER_VALUE&quot;:&quot;\&quot;yyyy-MM-dd HH:mm:ss\&quot; &quot;}],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendDate&quot;}"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true">
+        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;addDate&quot;,&quot;PARAMETERS&quot;:[{&quot;PARAMETER_NAME&quot;:&quot;date&quot;,&quot;PARAMETER_VALUE&quot;:&quot;myDate &quot;},{&quot;PARAMETER_NAME&quot;:&quot;nb&quot;,&quot;PARAMETER_VALUE&quot;:&quot;addValue &quot;},{&quot;PARAMETER_NAME&quot;:&quot;dateType&quot;,&quot;PARAMETER_VALUE&quot;:&quot;\&quot;MM\&quot; &quot;}],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendDate&quot;}"/>
       </column>
     </metadata>
   </node>
@@ -733,14 +733,14 @@
     <elementParameter field="TEXT" name="NB_ROWS" show="false" value="1"/>
     <elementParameter field="TABLE" name="VALUES" show="false">
       <elementValue elementRef="SCHEMA_COLUMN" value="yesterday"/>
-      <elementValue elementRef="ARRAY" value="TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot; )"/>
+      <elementValue elementRef="ARRAY" value="TalendDate.addDate(myDate ,addValue ,&quot;MM&quot; )"/>
     </elementParameter>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="TEXT" name="LABEL" value="Get_Yesterday_Date"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tRowGenerator_2">
-      <column comment="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true">
-        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;getDate&quot;,&quot;PARAMETERS&quot;:[{&quot;PARAMETER_NAME&quot;:&quot;pattern&quot;,&quot;PARAMETER_VALUE&quot;:&quot;\&quot;yyyy-MM-dd HH:mm:ss\&quot; &quot;}],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendDate&quot;}"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true">
+        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;addDate&quot;,&quot;PARAMETERS&quot;:[{&quot;PARAMETER_NAME&quot;:&quot;date&quot;,&quot;PARAMETER_VALUE&quot;:&quot;myDate &quot;},{&quot;PARAMETER_NAME&quot;:&quot;nb&quot;,&quot;PARAMETER_VALUE&quot;:&quot;addValue &quot;},{&quot;PARAMETER_NAME&quot;:&quot;dateType&quot;,&quot;PARAMETER_VALUE&quot;:&quot;\&quot;MM\&quot; &quot;}],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendDate&quot;}"/>
       </column>
     </metadata>
   </node>
@@ -1135,13 +1135,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_97221631-abce-4a5c-bf5b-26b061518c8a"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9DwR2anEkDSgQ+TS3zrleOe50e2BYII6x7rmwxhGOxu8SJabUmrbI4e06AeUsL7OuWBgnwAxP8PG&#13;
-74v9bYbvPw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a8901589-a12f-4699-ad40-86c73ae4d073"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FqYle3Tz3ppM2jc0QQPZSENEWZmx9kcZPdwUU+6RH/wPSGdrLo1dC/ztNP5WKkFijLY1JJMGQXcu&#13;
-iZyGUaLx3Q==</DigestValue></Reference></SignedInfo><SignatureValue>E5n2lZ1FjtepzZMgSDBQuLZPTEQedfmHo3F6V9RJS6yG3JB4YgmNYM9CIXFvmfvM6S4soIcUxAd6&#13;
-9IifJipioaLAkAidtjqZ+ZJQTOuLdvvEWjGbETmvglqz94+yeVtKwuf+kz5ehmS6R7ssbAjJY7Ww&#13;
-gkGcZEBk0lwvGvJ7sN/4z5s53oZOcQoPdn+EmjWHAhYKxzQC7pf833NxwFKfaAFyxNEsoabrnoVa&#13;
-kxuxoWtK8/IjGKCMS3Naq56Q/VHGrEb5fyDbdzOb7cf9mN57J+kA6yvLLnkIQ/9jTc8IfptYXgou&#13;
-xwgi6OkzA4dWvTEge2RrRXHsp2PBvLvtwxel5g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_aa8802b8-0bc8-4c64-9a50-1c6e7c8b9c15"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>xBwxj/fimCidD3dgJev9DEkgxjZnq+f0cVfXG+D4+qnM/7wh6U5HEMrIXSV5rhGPeZN96mBktLEM&#13;
+mFdd+GvxFQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_6384591c-b6e8-4e5a-bbda-31b3f01f018b"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>J7qxl/fUtMqpMrZ1iVI6P5wh3cY4K6hPFybjKfcbRUvH02O4iqjn6AC+ZN+YQCv/nuzq9Fc4HMas&#13;
+/cM1Y0sefQ==</DigestValue></Reference></SignedInfo><SignatureValue>PJacCWBmCSvH4gQk3pJKBwvNdMM0100tG8N8N+2fF/hnBCa9QJtwuTH+nYz5TBYNT6BO3hMTZlgI&#13;
+3SbjzkwrpJGkHbQS6GMXOg45sdAIFMsWwGBHM0syydnOVtUXMA0dYEyxsgvN6Ih6iRmLAgZOHTFH&#13;
+s6XAJG4NBr7IeG+R3xzly0fJwyaGtfrKD1Td5VM3a4YN03YXcC0paH+2VaIXMnZM5drZRjLOxs6k&#13;
+F6LLODwW3QqlSIKdNFV4DulwqiH11P3Q9vnNpTRFVTZJc9CDi9sHvUaQCird58sUdGguL84oMr4w&#13;
+rs0Yv/ypVZo0TR4I2z84Xxy8sOKUJDwKUisuYA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1163,4 +1163,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a8901589-a12f-4699-ad40-86c73ae4d073" Target="#_97221631-abce-4a5c-bf5b-26b061518c8a"><Timestamp>2024-02-29 06:27:32</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_6384591c-b6e8-4e5a-bbda-31b3f01f018b" Target="#_aa8802b8-0bc8-4c64-9a50-1c6e7c8b9c15"><Timestamp>2024-02-29 06:29:27</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
