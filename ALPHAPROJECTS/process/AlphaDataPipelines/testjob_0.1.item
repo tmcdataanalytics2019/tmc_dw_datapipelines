@@ -387,7 +387,8 @@
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="sequence" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="prev" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="prev_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="prev_admission" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="next" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
@@ -399,7 +400,8 @@
         <mapperTableEntries expression="readmission_details.visit_id " name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="readmission_details.admission_date " name="admission_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="readmission_details.sequence " name="sequence" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="lookup_prev.visit_id " name="prev" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="lookup_prev.visit_id " name="prev_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="lookup_prev.admission_date " name="prev_admission" nullable="true" type="id_String"/>
         <mapperTableEntries expression="lookup_next.visit_id " name="next" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="readmission_details" sizeState="INTERMEDIATE">
@@ -548,7 +550,9 @@
       <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="sequence" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="prev" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="prev_admission" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="next" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="flag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -559,8 +563,10 @@
         <mapperTableEntries expression="lookup_details.visit_id " name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="lookup_details.admission_date " name="admission_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="lookup_details.sequence " name="sequence" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="lookup_details.prev " name="prev" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="lookup_details.prev_id" name="prev" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="lookup_details.prev_admission " name="prev_admission" nullable="true" type="id_String"/>
         <mapperTableEntries expression="lookup_details.next " name="next" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="lookup_details.visit_id.equals(lookup_details.prev_id)?&quot;Yes&quot;:&quot;No&quot; " name="flag" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="lookup_details" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -568,7 +574,8 @@
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="admission_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="sequence" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="prev" nullable="true" type="id_String"/>
+        <mapperTableEntries name="prev_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="prev_admission" nullable="true" type="id_String"/>
         <mapperTableEntries name="next" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
@@ -602,7 +609,11 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="prev"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="prev_admission"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="next"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="flag"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
@@ -629,7 +640,9 @@
       <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="sequence" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="prev" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="prev_admission" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="next" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="flag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="to_sort" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tSortRow_1">
@@ -666,7 +679,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="next"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="prev"/>
+      <elementValue elementRef="TRACE_COLUMN" value="prev_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="prev_admission"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -682,6 +698,14 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="lookup_next"/>
   </connection>
   <connection connectorName="FLOW" label="test" lineStyle="0" metaname="test" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="flag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="prev_admission"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="test"/>
   </connection>
@@ -697,13 +721,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_5d3ae52b-4719-428a-8720-47a545b2ff77"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Acq21IPWCmbq3dy6eLlHuLgB6sbWaGiPvWqs4UCbOJeZ+ajxrkwRfGwvvZ/nFnleTc/HPjyN5YLP&#13;
-4QlrCE7HXw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_7fe29933-c9bb-4da8-ab58-bcb564346115"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>OS/ff2sXSrAHl+bPBwJjgTArFRuMtJ/vQJyOysAGNT0SCwkCSR6aGQYH2THU41jt2NSw30T0MOSP&#13;
-TnIiG8TIhQ==</DigestValue></Reference></SignedInfo><SignatureValue>eevOWqSJ4OeyAH6+lN2fTt9LBFXaPD4NUEP10U04u3QgzAu9T3LTnzjRyzd0wpsr9Lqqsxgdp/Zn&#13;
-raG0DHWEf1Ho6bJcth4Wso5esRKm6KAitQ6H3SGitKmYnmp6Qa8wENbpoQ0f2Nhr8k7O+sw7JoYK&#13;
-Al2HGQWGqMvCAGINfwdMF6Cjls5adcZdhH/zYFqJ98LK8l0ZtzLKLOPOta48urdxMtpd4+X1Dthi&#13;
-funJu+lhj2rNhhdnYfCOHT4+GGCVKYwVHvXOx1uLSgiD6cG7EEca9P0/zu7RbUYJzd3Ia8aSgA20&#13;
-Mn/avYdD9yJYsBl/aLU4FRSWdwVsztLaXVcoOw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_dd0a5331-2382-47d2-8529-7160e2f01d6c"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>1Tpd9+9DeSXwfGQVM++Jg/+kZeylg+/Fhddz3JKjD/CHnokT2G9ZwiMKyqy1XQiP+JplZ0W0nmBC&#13;
+bGtfVrVvNA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_84811e1f-de98-4c92-a1d6-f11f87e1bf15"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>4E9Mo5PNnGcuDFEPe6eTJNaR3N9MOtSXV2lXRb15JCrCEeN9R8elSy+qhcwUHHt/aNleNaOyAnhZ&#13;
+cVMI4SKqSQ==</DigestValue></Reference></SignedInfo><SignatureValue>X3APat7e0yxxtPkycI1r5JWZD+/wJV3dZKJF0xzOD+eqeony93VRPYY7uSB6wcsK61OzGhDP3ByJ&#13;
+7z36tmGDCZj6QG/JvKy7xYdRIh/8psyT5G0nGcPkZ/4sJ2PZnc2e5/TId8vzET7gF2kqB7Tq8smf&#13;
++okIiR0ekJJhr0fIOWkrQggplIIcCYsNdREtoT36vb0TJsgck+s98uHAsiARyDpcJqPnjvyiFGGZ&#13;
+ecbyVq/lyS/09BZ/c4gTSDDauNmzrQ7elGIoM1naSGGPbpuGNePKxatrfrON0h+xgAr6dgoA+LMN&#13;
+k4Qln/fKtgqqBwutKbCZ3iJtW7kUBBVHhm9/cw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -725,4 +749,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_7fe29933-c9bb-4da8-ab58-bcb564346115" Target="#_5d3ae52b-4719-428a-8720-47a545b2ff77"><Timestamp>2024-03-05 02:47:01</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_84811e1f-de98-4c92-a1d6-f11f87e1bf15" Target="#_dd0a5331-2382-47d2-8529-7160e2f01d6c"><Timestamp>2024-03-05 02:51:51</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
