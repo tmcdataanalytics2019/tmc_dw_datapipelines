@@ -9,7 +9,7 @@
   </context>
   <parameters>
     <elementParameter field="CLOSED_LIST" name="LOG4J_RUN_LEVEL" show="false" value="Info"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="64"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="68"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="0"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
@@ -3265,6 +3265,636 @@
       </column>
     </metadata>
   </node>
+  <node componentName="tMongoDBInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="0" posY="2176">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_6"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="MONGODB_4_4_X"/>
+    <elementParameter field="CHECK" name="USE_CONNECTION_STRING" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_STRING" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="USE_REPLICA_SET" value="false"/>
+    <elementParameter field="TABLE" name="REPLICA_SET" show="false"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.201&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="45431"/>
+    <elementParameter field="TEXT" name="DATABASE" value="&quot;arcusairdb&quot;"/>
+    <elementParameter field="CHECK" name="USE_SSL" value="false"/>
+    <elementParameter field="CHECK" name="SET_READ_PREFERENCE" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="READ_PREFERENCE" show="false" value="PRIMARY"/>
+    <elementParameter field="LABEL" name="READ_PREFERENCE_NOTE" show="false" value="Note : Use Connection component to set Read Preference"/>
+    <elementParameter field="CHECK" name="REQUIRED_AUTHENTICATION" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="AUTHENTICATION_MECHANISM" value="SCRAMSHA256_MEC"/>
+    <elementParameter field="CHECK" name="SET_AUTHENTICATION_DATABASE" value="false"/>
+    <elementParameter field="TEXT" name="AUTHENTICATION_DATABASE" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="SET_X509_USERNAME" show="false" value="false"/>
+    <elementParameter field="TEXT" name="USERNAME" value="&quot;incusdba&quot;"/>
+    <elementParameter field="PASSWORD" name="PASSWORD" value="enc:system.encryption.key.v1:mPyHGNL562hOElBL0BB3j1pbouGLLgKZaelo9wrYbl8e0S/vp/uvaw=="/>
+    <elementParameter field="TEXT" name="KRB_USER_PRINCIPAL" show="false" value="&quot;mongouser@EXAMPLE.COM&quot;"/>
+    <elementParameter field="TEXT" name="KRB_REALM" show="false" value="&quot;EXAMPLE.COM&quot;"/>
+    <elementParameter field="TEXT" name="KRB_KDC" show="false" value="&quot;kdc.example.com&quot;"/>
+    <elementParameter field="TEXT" name="COLLECTION" value="&quot;patientbills&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="QUERY_TYPE" value="AGGREGATION_QUERY"/>
+    <elementParameter field="LABEL" name="NOTE_ISOLATION" value="Note : Surround String values in your query with single quotes&#10;Note : If you are running on a Sharded Cluster, please make sure to include the shard key in the query."/>
+    <elementParameter field="MEMO" name="QUERY" show="false" value="&quot;{}&quot;"/>
+    <elementParameter field="TABLE" name="AGGREGATION_STAGES">
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'billdate':{$gte : {$date:'2023-12-31T16:00:00.000Z'},$lte : {$date:'2024-03-04T15:59:59.999Z'}}}}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $unwind: { path: '$patientbilleditems', preserveNullAndEmptyArrays: true } }&quot;"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
+    <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
+    <elementParameter field="TABLE" name="MAPPING">
+      <elementValue elementRef="SCHEMA_COLUMN" value="_id"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;patientbilleditems&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="billdate"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="SORT" show="false"/>
+    <elementParameter field="TEXT" name="LIMIT" show="false" value=""/>
+    <elementParameter field="TEXT" name="SKIP" show="false" value=""/>
+    <elementParameter field="TEXT" name="BATCHSIZE" show="false" value=""/>
+    <elementParameter field="CHECK" name="QUERYOPTION_NOTIMEOUT" show="false" value="false"/>
+    <elementParameter field="CHECK" name="EXTERNAL_SORT_AGGREGATION" value="false"/>
+    <elementParameter field="CHECK" name="CONVERT_BSON_TO_STRING" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="AA - Patient Billed Items"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tMongoDBInput_6">
+      <column comment="" key="false" length="-1" name="_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="billdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tRowGenerator" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="2080">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tRowGenerator_11"/>
+    <elementParameter field="TEXT" name="NB_ROWS" show="false" value="1"/>
+    <elementParameter field="TABLE" name="VALUES" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="yesterday"/>
+      <elementValue elementRef="ARRAY" value="TalendDate.getCurrentDate()"/>
+    </elementParameter>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="TEXT" name="LABEL" value="Get_Yesterday_Date"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tRowGenerator_11">
+      <column comment="" defaultValue="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true">
+        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;getCurrentDate&quot;,&quot;PARAMETERS&quot;:[],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendDate&quot;}"/>
+      </column>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="2176">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_26"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_fjjsMNeWEe6QhL9wnwrVAg-tMap_11-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="FilterDate_1"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="upcase_PV_ID" name="copyOfcopyOfcopyOfupcase_id_pbi_0">
+      <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row25.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row25.billdate,row26.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfcopyOfupcase_id_pbi_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="StringHandling.UPCASE(row25._id) " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row25.billdate " name="bill_date" nullable="true" type="id_Date"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row25" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="billdate" nullable="true" type="id_Date"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row26" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="yesterday" nullable="true" type="id_Date"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="256" posY="2208">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_27"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_fjjsMNeWEe6QhL9wnwrVAg-tMap_6-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Main Lookup"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="copyOfcopyOfcopyOfto_detail_table_0">
+      <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="FLOW" label="out9" name="copyOfcopyOfcopyOfto_summary_table_0">
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dw_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dw_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="copyOfcopyOfcopyOfto_detail_table_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
+      </outputTables>
+      <outputTables name="copyOfcopyOfcopyOfto_summary_table_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfcopyOfupcase_id_pbi_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfcopyOfjoin_pbi_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
+        <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tFilterRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="2176">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFilterRow_90"/>
+    <elementParameter field="CLOSED_LIST" name="LOGICAL_OP" value="&amp;&amp;"/>
+    <elementParameter field="TABLE" name="CONDITIONS">
+      <elementValue elementRef="INPUT_COLUMN" value="if_not_exist"/>
+      <elementValue elementRef="FUNCTION" value=""/>
+      <elementValue elementRef="OPERATOR" value="=="/>
+      <elementValue elementRef="RVALUE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="USE_ADVANCED" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" show="false" value="// code sample : use input_row to define the condition.&#10;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#10;// replace the following expression by your own filter condition &#10;input_row.columnName1.equals(input_row.columnName2)&#10;&#9;&#9;&#9;"/>
+    <elementParameter field="TEXT" name="LABEL" value="Filter Only Exists"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFilterRow_90">
+      <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="FILTER" name="FILTER">
+      <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="0" posY="2240">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_6"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;TMC_DW_DB&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:fne6oaMwM53p6Mdchz2ZZ8wXyTi81r3Kk2irT5E/CdvAR+ugHV0mEq0="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;ort_aa_patient_billed_items&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select billed_items_transaction_external_id, bill_date from ort_aa_patient_billed_items where cast(bill_date as date) between '1-JAN-2024' and '4-MAR-2024'&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="billed_items_transaction_external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bill_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="DW - Patient Billed Items"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDBInput_6">
+      <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="2240">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_28"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_fjjsMNeWEe6QhL9wnwrVAg-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="FilterDate_2"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="join_vp" name="copyOfcopyOfcopyOfjoin_pbi_0">
+      <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row28.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row28.bill_date,row30.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfcopyOfjoin_pbi_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row28.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row28.bill_date " name="bill_date" nullable="true" type="id_Date"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row28" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row30" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="yesterday" nullable="true" type="id_Date"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="2240">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_6"/>
+    <elementParameter field="TABLE" name="GROUPBYS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="batch_date"/>
+      <elementValue elementRef="INPUT_COLUMN" value="batch_date"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="OPERATIONS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="aa_transaction_date"/>
+      <elementValue elementRef="FUNCTION" value="max"/>
+      <elementValue elementRef="INPUT_COLUMN" value="aa_transaction_date"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="dw_transaction_date"/>
+      <elementValue elementRef="FUNCTION" value="max"/>
+      <elementValue elementRef="INPUT_COLUMN" value="dw_transaction_date"/>
+      <elementValue elementRef="IGNORE_NULL" value="true"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="dw_transaction_external_id"/>
+      <elementValue elementRef="FUNCTION" value="count"/>
+      <elementValue elementRef="INPUT_COLUMN" value="dw_transaction_external_id"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="aa_transaction_external_id"/>
+      <elementValue elementRef="FUNCTION" value="count"/>
+      <elementValue elementRef="INPUT_COLUMN" value="aa_transaction_external_id"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
+    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
+    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="Aggregate Data"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="out9" name="tAggregateRow_6">
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dw_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dw_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="640" posY="2176">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_29"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_fjjsMNeWEe6QhL9wnwrVAg-tMap_8-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="DataPrep_1"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="copyOfcopyOfcopyOfstore_to_detail_0">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dataset" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="auto_generated_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="copyOfcopyOfcopyOfstore_to_detail_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row27.aa_transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row27.aa_transaction_date " name="transaction_date_time" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row27.batch_date " name="batch_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="&quot;patientbilleditems&quot;" name="dataset" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="TalendString.getAsciiRandomString(50) " name="auto_generated_id" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row27" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="if_not_exist" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="sql_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="sql_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="batch_date" nullable="true" type="id_Date"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="640" posY="2240">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_30"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_fjjsMNeWEe6QhL9wnwrVAg-tMap_7-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="DataPrep_2"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="copyOfcopyOfcopyOfstore_to_summary_0">
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="source_max_datetime" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="datawarehouse_max_datetime" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dataset" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="no_of_difference" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="auto_generated_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="copyOfcopyOfcopyOfstore_to_summary_0" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row29.batch_date " name="batch_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row29.aa_transaction_external_id " name="source_row_count" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row29.dw_transaction_external_id " name="datawarehouse_row_count" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row29.aa_transaction_date " name="source_max_datetime" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="row29.dw_transaction_date " name="datawarehouse_max_datetime" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="timestamp" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="&quot;patientbilleditems&quot;" name="dataset" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row29.aa_transaction_external_id  - row29.dw_transaction_external_id " name="no_of_difference" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="TalendString.getAsciiRandomString(50) " name="auto_generated_id" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row29" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="batch_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="aa_transaction_external_id" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="dw_transaction_external_id" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="dw_transaction_date" nullable="true" type="id_Date"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="2176">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_11"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:JOJ6Snuj+1OxF2QeP/Sb39+mBYFyAb7LthCwrJo3CEbunSX1Dxq973I="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;data_migration_monitoring_detail&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="LABEL" name="NOTE" show="false" value="NOTE: batch size must be less than or equal to total number of parameter markers divided by number of columns"/>
+    <elementParameter field="CHECK" name="SPECIFY_IDENTITY_FIELD" show="false" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="IDENTITY_FIELD" show="false" value="transaction_external_id"/>
+    <elementParameter field="TEXT" name="START_VALUE" show="false" value="1"/>
+    <elementParameter field="TEXT" name="STEP" show="false" value="1"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="CHECK" name="USE_ALTERNATE_SCHEMA" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ALTERNATE_SCHEMA" show="false" value="&quot;&quot;"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_date_time"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="batch_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dataset"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="auto_generated_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="&lt;b&gt;Store to &lt;br&gt; DataMigrationMonitoringDetail&lt;/b&gt;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDBOutput_11">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dataset" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="auto_generated_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dataset" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="auto_generated_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMSSqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="2240">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_12"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:zP0Ika9DnXrIRWwMJank7EERGXet734N18j15oRy5SB3cjA2C04nHyU="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;data_migration_monitoring&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="LABEL" name="NOTE" show="false" value="NOTE: batch size must be less than or equal to total number of parameter markers divided by number of columns"/>
+    <elementParameter field="CHECK" name="SPECIFY_IDENTITY_FIELD" show="false" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="IDENTITY_FIELD" show="false" value="batch_date"/>
+    <elementParameter field="TEXT" name="START_VALUE" show="false" value="1"/>
+    <elementParameter field="TEXT" name="STEP" show="false" value="1"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="CHECK" name="USE_ALTERNATE_SCHEMA" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ALTERNATE_SCHEMA" show="false" value="&quot;&quot;"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="batch_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="source_row_count"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="datawarehouse_row_count"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="source_max_datetime"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="datawarehouse_max_datetime"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dataset"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_of_difference"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="auto_generated_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="&lt;b&gt;Store to &lt;br&gt;DataMigrationMonitoring&lt;/b&gt;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDBOutput_12">
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="source_max_datetime" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="datawarehouse_max_datetime" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dataset" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="no_of_difference" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="auto_generated_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="source_max_datetime" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="datawarehouse_max_datetime" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="dataset" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="no_of_difference" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="auto_generated_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tRowGenerator" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="2336">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tRowGenerator_12"/>
+    <elementParameter field="TEXT" name="NB_ROWS" show="false" value="1"/>
+    <elementParameter field="TABLE" name="VALUES" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="yesterday"/>
+      <elementValue elementRef="ARRAY" value="TalendDate.getCurrentDate()"/>
+    </elementParameter>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="TEXT" name="LABEL" value="Get_Yesterday_Date"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tRowGenerator_12">
+      <column comment="" defaultValue="" key="false" length="-1" name="yesterday" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true">
+        <additionalField key="FUNCTION_INFO" value="{&quot;NAME&quot;:&quot;getCurrentDate&quot;,&quot;PARAMETERS&quot;:[],&quot;PARAMETER_CLASS_NAME&quot;:&quot;TalendDate&quot;}"/>
+      </column>
+    </metadata>
+  </node>
   <connection connectorName="FLOW" label="aa_pbi" lineStyle="0" metaname="tMongoDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_2" target="tMap_11">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="visitid"/>
@@ -3811,6 +4441,9 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row19"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMongoDBInput_5" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_5" target="tMongoDBInput_6">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnSubjobOk6"/>
+  </connection>
   <connection connectorName="FLOW" label="row20" lineStyle="8" metaname="tRowGenerator_9" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_9" target="tMap_21">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row20"/>
@@ -3922,6 +4555,135 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row24"/>
   </connection>
+  <connection connectorName="FLOW" label="row25" lineStyle="0" metaname="tMongoDBInput_6" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_6" target="tMap_26">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="visitid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="billdate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="createdat"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row25"/>
+  </connection>
+  <connection connectorName="FLOW" label="row26" lineStyle="8" metaname="tRowGenerator_11" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_11" target="tMap_26">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row26"/>
+  </connection>
+  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfupcase_id_pbi_0" lineStyle="0" metaname="copyOfcopyOfcopyOfupcase_id_pbi_0" offsetLabelX="0" offsetLabelY="0" source="tMap_26" target="tMap_27">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfupcase_id_pbi_0"/>
+  </connection>
+  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfto_detail_table_0" lineStyle="0" metaname="copyOfcopyOfcopyOfto_detail_table_0" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_27" target="tFilterRow_90">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="batch_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="if_new_transaction"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfto_detail_table_0"/>
+  </connection>
+  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfto_summary_table_0" lineStyle="0" metaname="copyOfcopyOfcopyOfto_summary_table_0" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_27" target="tAggregateRow_6">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="aa_transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="HASH_PARTITION" show="false" value="true"/>
+    <elementParameter field="TABLE" name="HASH_KEYS" show="false">
+      <elementValue elementRef="KEY_COLUMN" value="batch_date"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfto_summary_table_0"/>
+  </connection>
+  <connection connectorName="FILTER" label="row27" lineStyle="0" metaname="tFilterRow_90" offsetLabelX="0" offsetLabelY="0" source="tFilterRow_90" target="tMap_29">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row27"/>
+  </connection>
+  <connection connectorName="FLOW" label="row28" lineStyle="0" metaname="tDBInput_6" offsetLabelX="0" offsetLabelY="0" source="tDBInput_6" target="tMap_28">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="bill_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="billed_items_transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="visit_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row28"/>
+  </connection>
+  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfjoin_pbi_0" lineStyle="8" metaname="copyOfcopyOfcopyOfjoin_pbi_0" offsetLabelX="0" offsetLabelY="0" source="tMap_28" target="tMap_27">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="bill_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="billed_items_transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfjoin_pbi_0"/>
+  </connection>
+  <connection connectorName="FLOW" label="row29" lineStyle="0" metaname="tAggregateRow_6" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_6" target="tMap_30">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row29"/>
+  </connection>
+  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfstore_to_detail_0" lineStyle="0" metaname="copyOfcopyOfcopyOfstore_to_detail_0" offsetLabelX="0" offsetLabelY="0" source="tMap_29" target="tDBOutput_11">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="transaction_date_time"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dataset_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dataset"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="auto_generated_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfstore_to_detail_0"/>
+  </connection>
+  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfstore_to_summary_0" lineStyle="0" metaname="copyOfcopyOfcopyOfstore_to_summary_0" offsetLabelX="0" offsetLabelY="0" source="tMap_30" target="tDBOutput_12">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="no_of_new_transaction"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="no_of_old_transaction"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="datawarehouse_max_datetime"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="datawarehouse_row_count"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="auto_generated_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfstore_to_summary_0"/>
+  </connection>
+  <connection connectorName="FLOW" label="row30" lineStyle="8" metaname="tRowGenerator_12" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_12" target="tMap_28">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row30"/>
+  </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_2"/>
@@ -3957,13 +4719,20 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_7063d62f-de12-4467-8740-98b6fce4d912"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>UANM8h84RaefcLR4DTPUsLMFb22VHJlc8eZtT10+BekhAOqtOPiW/Pr9YCA3fk5zrSm3FfCsfiVc&#13;
-qm3RurnfRA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_0a544012-a6a9-4577-8b1c-e3d6b89cd094"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>tcgpbm+TauTFUhSOpViB2ksem6IAhZI0jYWEibsrwiuDPs/L3zBBwu2pNBaaizPvbucT4WzKQQ8A&#13;
-+NTAJIfnnw==</DigestValue></Reference></SignedInfo><SignatureValue>NGCWxKvGQSgtDZdiugyv74lxgiimuNahVl4tbPwafAbQRufpUaUiPCLq8bn43QIGyzlXhBi9y8VN&#13;
-CAIQwWoBPcD1QzYZLpyoOgAEpnw8miYfRR1c9o47fg/0gs1eKuKzmaBbUaA7I5+IpZk0rSYCIkjb&#13;
-5noO6eMZs4Cb0re1sgPHbo+TbQpng3HKmz5VhOABo3PwYM7uI1inwYOKLyUhf9RWVAM4xLmW2veS&#13;
-KjuV2DyT9ukdtWLyVeQqQulHeslMnuWM3jZLmYWxIM+u8B09hkYzqOHn5oYs3jSPARYCkPqYQqok&#13;
-AkO6bdQk/H15aqCu7BVcg1XBtaDRh5uT90UlqQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMongoDBInput_6"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Patient Bills Data Migration Checking - Jan2024 - Jun2024"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_ec76582a-b379-43e8-b8e0-2d6d186a541b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>zEWyNnl40oWs8mEVIYL+6uIxlO4083/1IhcddfS44sBroMcs/FH1EP+u6q8cDyPRGdT5BdZm8X8p&#13;
+HsFJM4bQzg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_d1ab6abb-5bac-4f06-901b-64c58b9ecbda"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KvEbdEU+bXB4bcZwKz55nHQhaxsAGx1VehDv2XnozLo/iCoorqqwUHm+3H+fMjNpWuzD0daAVW9t&#13;
+Db2yQISDKA==</DigestValue></Reference></SignedInfo><SignatureValue>X6AEjK9sxcOdXl0skylB+CtNv5bxk7bLIrXM6WcOj9lz/5iAq6t31x73jEsrC/OA2mVaNjxgkb8P&#13;
+Gaudni7oZiKFipDCLeE28KcgvhXfTAZYotHboRAqTmi+6T9evhjRULaMZALNgKyZ/VVPGdZYP7Vv&#13;
+R9X0CeOZLAICXwtuXRdk3aCaxLx9HNXo1kt7uKMGGozwfu7FNZQcuib/i+WzM78nc70tI4iWo/Kz&#13;
+SOOgjwCH5wENDrc8cdMW4FpqbPQxjIPbBYywc/iqspqmIJns4CzKvE/eGOJe960XL+xLf/Oy9nVK&#13;
+XtoNpV6rUX7i0M+tXvZBV/+4G2/HZHOVBDByDA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -3985,4 +4754,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_0a544012-a6a9-4577-8b1c-e3d6b89cd094" Target="#_7063d62f-de12-4467-8740-98b6fce4d912"><Timestamp>2024-03-05 07:29:52</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_d1ab6abb-5bac-4f06-901b-64c58b9ecbda" Target="#_ec76582a-b379-43e8-b8e0-2d6d186a541b"><Timestamp>2024-03-05 07:42:50</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
