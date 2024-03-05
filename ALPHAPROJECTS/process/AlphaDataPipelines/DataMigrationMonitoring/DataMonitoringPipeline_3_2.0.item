@@ -832,14 +832,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="upcase_PV_ID" name="copyOfupcase_id_pbi">
+    <metadata connector="FLOW" label="upcase_PV_ID" name="upcase_id_pbi2">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row1.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row1.billdate,row2.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfupcase_id_pbi" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row1.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row1.billdate,row2.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="upcase_id_pbi2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row1._id) " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.billdate " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -867,7 +867,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="Main Lookup"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfto_detail_table">
+    <metadata connector="FLOW" name="to_detail_table2">
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
@@ -875,7 +875,7 @@
       <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" label="out9" name="copyOfto_summary_table">
+    <metadata connector="FLOW" label="out9" name="to_summary_table2">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dw_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -885,27 +885,27 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfto_detail_table" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfupcase_id_pbi.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfupcase_id_pbi.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfjoin_pbi.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="copyOfjoin_pbi.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfjoin_pbi.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
+      <outputTables name="to_detail_table2" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi2.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi2.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi2.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="join_pbi2.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi2.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <outputTables name="copyOfto_summary_table" sizeState="INTERMEDIATE">
+      <outputTables name="to_summary_table2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfupcase_id_pbi.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfjoin_pbi.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfupcase_id_pbi.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfjoin_pbi.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="upcase_id_pbi2.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi2.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi2.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi2.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfupcase_id_pbi" sizeState="INTERMEDIATE">
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="upcase_id_pbi2" sizeState="INTERMEDIATE">
         <mapperTableEntries name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfjoin_pbi" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfupcase_id_pbi.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="join_pbi2" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi2.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
@@ -1006,14 +1006,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="join_vp" name="copyOfjoin_pbi">
+    <metadata connector="FLOW" label="join_vp" name="join_pbi2">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row4.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row4.bill_date,row6.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfjoin_pbi" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row4.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row4.bill_date,row6.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="join_pbi2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row4.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row4.bill_date " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -1079,7 +1079,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfstore_to_detail">
+    <metadata connector="FLOW" name="store_to_detail2">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -1089,7 +1089,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfstore_to_detail" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_detail2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row3.aa_transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row3.aa_transaction_date " name="transaction_date_time" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row3.batch_date " name="batch_date" nullable="true" type="id_Date"/>
@@ -1121,7 +1121,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfstore_to_summary">
+    <metadata connector="FLOW" name="store_to_summary2">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
@@ -1135,7 +1135,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfstore_to_summary" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_summary2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row5.batch_date " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row5.aa_transaction_external_id " name="source_row_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row5.dw_transaction_external_id " name="datawarehouse_row_count" nullable="true" type="id_Integer"/>
@@ -1462,14 +1462,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="upcase_PV_ID" name="copyOfcopyOfupcase_id_pbi">
+    <metadata connector="FLOW" label="upcase_PV_ID" name="upcase_id_pbi3">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row7.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row7.billdate,row8.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfupcase_id_pbi" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row7.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row7.billdate,row8.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="upcase_id_pbi3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row7._id) " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row7.billdate " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -1497,7 +1497,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="Main Lookup"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfto_detail_table">
+    <metadata connector="FLOW" name="to_detail_table3">
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
@@ -1505,7 +1505,7 @@
       <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" label="out9" name="copyOfcopyOfto_summary_table">
+    <metadata connector="FLOW" label="out9" name="to_summary_table3">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dw_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1515,27 +1515,27 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfto_detail_table" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
+      <outputTables name="to_detail_table3" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi3.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi3.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi3.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="join_pbi3.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi3.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <outputTables name="copyOfcopyOfto_summary_table" sizeState="INTERMEDIATE">
+      <outputTables name="to_summary_table3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="upcase_id_pbi3.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi3.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi3.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi3.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfupcase_id_pbi" sizeState="INTERMEDIATE">
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="upcase_id_pbi3" sizeState="INTERMEDIATE">
         <mapperTableEntries name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfjoin_pbi" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="join_pbi3" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi3.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
@@ -1636,14 +1636,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="join_vp" name="copyOfcopyOfjoin_pbi">
+    <metadata connector="FLOW" label="join_vp" name="join_pbi3">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row10.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row10.bill_date,row12.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfjoin_pbi" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row10.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row10.bill_date,row12.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="join_pbi3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row10.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row10.bill_date " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -1709,7 +1709,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfstore_to_detail">
+    <metadata connector="FLOW" name="store_to_detail3">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -1719,7 +1719,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfstore_to_detail" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_detail3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row9.aa_transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row9.aa_transaction_date " name="transaction_date_time" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row9.batch_date " name="batch_date" nullable="true" type="id_Date"/>
@@ -1751,7 +1751,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfstore_to_summary">
+    <metadata connector="FLOW" name="store_to_summary3">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
@@ -1765,7 +1765,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfstore_to_summary" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_summary3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row11.batch_date " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row11.aa_transaction_external_id " name="source_row_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row11.dw_transaction_external_id " name="datawarehouse_row_count" nullable="true" type="id_Integer"/>
@@ -2092,14 +2092,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="upcase_PV_ID" name="copyOfcopyOfupcase_id_pbi_0">
+    <metadata connector="FLOW" label="upcase_PV_ID" name="upcase_id_pbi4">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row13.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row13.billdate,row14.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfupcase_id_pbi_0" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row13.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row13.billdate,row14.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="upcase_id_pbi4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row13._id) " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row13.billdate " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -2127,7 +2127,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="Main Lookup"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfto_detail_table_0">
+    <metadata connector="FLOW" name="to_detail_table4">
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
@@ -2135,7 +2135,7 @@
       <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" label="out9" name="copyOfcopyOfto_summary_table_0">
+    <metadata connector="FLOW" label="out9" name="to_summary_table4">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dw_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -2145,27 +2145,27 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfto_detail_table_0" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi_0.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi_0.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
+      <outputTables name="to_detail_table4" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi4.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi4.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi4.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="join_pbi4.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi4.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <outputTables name="copyOfcopyOfto_summary_table_0" sizeState="INTERMEDIATE">
+      <outputTables name="to_summary_table4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi_0.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfjoin_pbi_0.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="upcase_id_pbi4.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi4.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi4.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi4.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfupcase_id_pbi_0" sizeState="INTERMEDIATE">
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="upcase_id_pbi4" sizeState="INTERMEDIATE">
         <mapperTableEntries name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfjoin_pbi_0" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="join_pbi4" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi4.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
@@ -2266,14 +2266,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="join_vp" name="copyOfcopyOfjoin_pbi_0">
+    <metadata connector="FLOW" label="join_vp" name="join_pbi4">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row16.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row16.bill_date,row18.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfjoin_pbi_0" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row16.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row16.bill_date,row18.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="join_pbi4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row16.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row16.bill_date " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -2339,7 +2339,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfstore_to_detail_0">
+    <metadata connector="FLOW" name="store_to_detail4">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -2349,7 +2349,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfstore_to_detail_0" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_detail4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row15.aa_transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row15.aa_transaction_date " name="transaction_date_time" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row15.batch_date " name="batch_date" nullable="true" type="id_Date"/>
@@ -2381,7 +2381,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfstore_to_summary_0">
+    <metadata connector="FLOW" name="store_to_summary4">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
@@ -2395,7 +2395,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfstore_to_summary_0" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_summary4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row17.batch_date " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row17.aa_transaction_external_id " name="source_row_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row17.dw_transaction_external_id " name="datawarehouse_row_count" nullable="true" type="id_Integer"/>
@@ -2722,14 +2722,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="upcase_PV_ID" name="copyOfcopyOfcopyOfupcase_id_pbi">
+    <metadata connector="FLOW" label="upcase_PV_ID" name="upcase_id_pbi5">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row19.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row19.billdate,row20.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfcopyOfupcase_id_pbi" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row19.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row19.billdate,row20.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="upcase_id_pbi5" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row19._id) " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row19.billdate " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -2757,7 +2757,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="Main Lookup"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfcopyOfto_detail_table">
+    <metadata connector="FLOW" name="to_detail_table5">
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
@@ -2765,7 +2765,7 @@
       <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" label="out9" name="copyOfcopyOfcopyOfto_summary_table">
+    <metadata connector="FLOW" label="out9" name="to_summary_table5">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dw_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -2775,27 +2775,27 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfcopyOfto_detail_table" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
+      <outputTables name="to_detail_table5" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi5.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi5.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi5.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="join_pbi5.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi5.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <outputTables name="copyOfcopyOfcopyOfto_summary_table" sizeState="INTERMEDIATE">
+      <outputTables name="to_summary_table5" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="upcase_id_pbi5.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi5.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi5.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi5.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfcopyOfupcase_id_pbi" sizeState="INTERMEDIATE">
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="upcase_id_pbi5" sizeState="INTERMEDIATE">
         <mapperTableEntries name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfcopyOfjoin_pbi" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="join_pbi5" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi5.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
@@ -2896,14 +2896,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="join_vp" name="copyOfcopyOfcopyOfjoin_pbi">
+    <metadata connector="FLOW" label="join_vp" name="join_pbi5">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row22.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row22.bill_date,row24.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfcopyOfjoin_pbi" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row22.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row22.bill_date,row24.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="join_pbi5" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row22.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row22.bill_date " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -2969,7 +2969,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfcopyOfstore_to_detail">
+    <metadata connector="FLOW" name="store_to_detail5">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -2979,7 +2979,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfcopyOfstore_to_detail" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_detail5" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row21.aa_transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row21.aa_transaction_date " name="transaction_date_time" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row21.batch_date " name="batch_date" nullable="true" type="id_Date"/>
@@ -3011,7 +3011,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfcopyOfstore_to_summary">
+    <metadata connector="FLOW" name="store_to_summary5">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
@@ -3025,7 +3025,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfcopyOfstore_to_summary" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_summary5" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row23.batch_date " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row23.aa_transaction_external_id " name="source_row_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row23.dw_transaction_external_id " name="datawarehouse_row_count" nullable="true" type="id_Integer"/>
@@ -3352,14 +3352,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="upcase_PV_ID" name="copyOfcopyOfcopyOfupcase_id_pbi_0">
+    <metadata connector="FLOW" label="upcase_PV_ID" name="upcase_id_pbi6">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row25.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row25.billdate,row26.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfcopyOfupcase_id_pbi_0" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row25.billdate,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row25.billdate,row26.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="upcase_id_pbi6" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="StringHandling.UPCASE(row25._id) " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row25.billdate " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -3387,7 +3387,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="Main Lookup"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfcopyOfto_detail_table_0">
+    <metadata connector="FLOW" name="to_detail_table6">
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_not_exist" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
@@ -3395,7 +3395,7 @@
       <column comment="" key="false" length="-1" name="sql_transaction_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" label="out9" name="copyOfcopyOfcopyOfto_summary_table_0">
+    <metadata connector="FLOW" label="out9" name="to_summary_table6">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="aa_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dw_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -3405,27 +3405,27 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfcopyOfto_detail_table_0" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
+      <outputTables name="to_detail_table6" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi6.billed_items_transaction_external_id" name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi6.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi6.billed_items_transaction_external_id == null " name="if_not_exist" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="join_pbi6.billed_items_transaction_external_id" name="sql_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi6.bill_date " name="sql_transaction_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <outputTables name="copyOfcopyOfcopyOfto_summary_table_0" sizeState="INTERMEDIATE">
+      <outputTables name="to_summary_table6" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="copyOfcopyOfcopyOfjoin_pbi_0.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="upcase_id_pbi6.billed_items_transaction_external_id " name="aa_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="join_pbi6.billed_items_transaction_external_id " name="dw_transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="upcase_id_pbi6.bill_date" name="aa_transaction_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="join_pbi6.bill_date " name="dw_transaction_date" nullable="true" type="id_Date"/>
       </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfcopyOfupcase_id_pbi_0" sizeState="INTERMEDIATE">
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="upcase_id_pbi6" sizeState="INTERMEDIATE">
         <mapperTableEntries name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="copyOfcopyOfcopyOfjoin_pbi_0" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="copyOfcopyOfcopyOfupcase_id_pbi_0.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="join_pbi6" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="upcase_id_pbi6.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="bill_date" nullable="true" type="id_Date"/>
       </inputTables>
     </nodeData>
@@ -3526,14 +3526,14 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="FilterDate_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="join_vp" name="copyOfcopyOfcopyOfjoin_pbi_0">
+    <metadata connector="FLOW" label="join_vp" name="join_pbi6">
       <column comment="" key="false" length="-1" name="billed_items_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row28.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row28.bill_date,row30.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="copyOfcopyOfcopyOfjoin_pbi_0" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="TalendDate.compareDate(row28.bill_date,TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;1900-01-01 00:00:00&quot;),&quot;yyyy-MM-dd HH:mm:ss&quot;) &gt; 0 &amp;&amp; TalendDate.compareDate(row28.bill_date,row30.yesterday,&quot;yyyy-MM-dd HH:mm:ss&quot;) &lt;= 0" name="join_pbi6" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row28.billed_items_transaction_external_id " name="billed_items_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row28.bill_date " name="bill_date" nullable="true" type="id_Date"/>
       </outputTables>
@@ -3599,7 +3599,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfcopyOfstore_to_detail_0">
+    <metadata connector="FLOW" name="store_to_detail6">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="transaction_date_time" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -3609,7 +3609,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfcopyOfstore_to_detail_0" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_detail6" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row27.aa_transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row27.aa_transaction_date " name="transaction_date_time" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row27.batch_date " name="batch_date" nullable="true" type="id_Date"/>
@@ -3641,7 +3641,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="DataPrep_2"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="copyOfcopyOfcopyOfstore_to_summary_0">
+    <metadata connector="FLOW" name="store_to_summary6">
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="source_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="datawarehouse_row_count" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
@@ -3655,7 +3655,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="copyOfcopyOfcopyOfstore_to_summary_0" sizeState="INTERMEDIATE">
+      <outputTables name="store_to_summary6" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row29.batch_date " name="batch_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row29.aa_transaction_external_id " name="source_row_count" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row29.dw_transaction_external_id " name="datawarehouse_row_count" nullable="true" type="id_Integer"/>
@@ -4052,11 +4052,11 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfupcase_id_pbi" lineStyle="0" metaname="copyOfupcase_id_pbi" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_3">
+  <connection connectorName="FLOW" label="upcase_id_pbi2" lineStyle="0" metaname="upcase_id_pbi2" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfupcase_id_pbi"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="upcase_id_pbi2"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfto_detail_table" lineStyle="0" metaname="copyOfto_detail_table" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_3" target="tFilterRow_13">
+  <connection connectorName="FLOW" label="to_detail_table2" lineStyle="0" metaname="to_detail_table2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_3" target="tFilterRow_13">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="batch_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4066,9 +4066,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfto_detail_table"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_detail_table2"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfto_summary_table" lineStyle="0" metaname="copyOfto_summary_table" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_3" target="tAggregateRow_1">
+  <connection connectorName="FLOW" label="to_summary_table2" lineStyle="0" metaname="to_summary_table2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_3" target="tAggregateRow_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="aa_transaction_external_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4079,7 +4079,7 @@
     <elementParameter field="TABLE" name="HASH_KEYS" show="false">
       <elementValue elementRef="KEY_COLUMN" value="batch_date"/>
     </elementParameter>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfto_summary_table"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_summary_table2"/>
   </connection>
   <connection connectorName="FILTER" label="row3" lineStyle="0" metaname="tFilterRow_13" offsetLabelX="0" offsetLabelY="0" source="tFilterRow_13" target="tMap_5">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4100,7 +4100,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfjoin_pbi" lineStyle="8" metaname="copyOfjoin_pbi" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tMap_3">
+  <connection connectorName="FLOW" label="join_pbi2" lineStyle="8" metaname="join_pbi2" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tMap_3">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="bill_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4110,13 +4110,13 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfjoin_pbi"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="join_pbi2"/>
   </connection>
   <connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tMap_9">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row5"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfstore_to_detail" lineStyle="0" metaname="copyOfstore_to_detail" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tDBOutput_1">
+  <connection connectorName="FLOW" label="store_to_detail2" lineStyle="0" metaname="store_to_detail2" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tDBOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="transaction_date_time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4132,9 +4132,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfstore_to_detail"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_detail2"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfstore_to_summary" lineStyle="0" metaname="copyOfstore_to_summary" offsetLabelX="0" offsetLabelY="0" source="tMap_9" target="tDBOutput_2">
+  <connection connectorName="FLOW" label="store_to_summary2" lineStyle="0" metaname="store_to_summary2" offsetLabelX="0" offsetLabelY="0" source="tMap_9" target="tDBOutput_2">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="no_of_new_transaction"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4153,7 +4153,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfstore_to_summary"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_summary2"/>
   </connection>
   <connection connectorName="FLOW" label="row6" lineStyle="8" metaname="tRowGenerator_4" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_4" target="tMap_4">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4184,11 +4184,11 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row8"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfupcase_id_pbi" lineStyle="0" metaname="copyOfcopyOfupcase_id_pbi" offsetLabelX="0" offsetLabelY="0" source="tMap_10" target="tMap_12">
+  <connection connectorName="FLOW" label="upcase_id_pbi3" lineStyle="0" metaname="upcase_id_pbi3" offsetLabelX="0" offsetLabelY="0" source="tMap_10" target="tMap_12">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfupcase_id_pbi"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="upcase_id_pbi3"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfto_detail_table" lineStyle="0" metaname="copyOfcopyOfto_detail_table" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_12" target="tFilterRow_26">
+  <connection connectorName="FLOW" label="to_detail_table3" lineStyle="0" metaname="to_detail_table3" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_12" target="tFilterRow_26">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="batch_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4198,9 +4198,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfto_detail_table"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_detail_table3"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfto_summary_table" lineStyle="0" metaname="copyOfcopyOfto_summary_table" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_12" target="tAggregateRow_3">
+  <connection connectorName="FLOW" label="to_summary_table3" lineStyle="0" metaname="to_summary_table3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_12" target="tAggregateRow_3">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="aa_transaction_external_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4211,7 +4211,7 @@
     <elementParameter field="TABLE" name="HASH_KEYS" show="false">
       <elementValue elementRef="KEY_COLUMN" value="batch_date"/>
     </elementParameter>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfto_summary_table"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_summary_table3"/>
   </connection>
   <connection connectorName="FILTER" label="row9" lineStyle="0" metaname="tFilterRow_26" offsetLabelX="0" offsetLabelY="0" source="tFilterRow_26" target="tMap_14">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4232,7 +4232,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row10"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfjoin_pbi" lineStyle="8" metaname="copyOfcopyOfjoin_pbi" offsetLabelX="0" offsetLabelY="0" source="tMap_13" target="tMap_12">
+  <connection connectorName="FLOW" label="join_pbi3" lineStyle="8" metaname="join_pbi3" offsetLabelX="0" offsetLabelY="0" source="tMap_13" target="tMap_12">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="bill_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4242,13 +4242,13 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfjoin_pbi"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="join_pbi3"/>
   </connection>
   <connection connectorName="FLOW" label="row11" lineStyle="0" metaname="tAggregateRow_3" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_3" target="tMap_15">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row11"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfstore_to_detail" lineStyle="0" metaname="copyOfcopyOfstore_to_detail" offsetLabelX="0" offsetLabelY="0" source="tMap_14" target="tDBOutput_3">
+  <connection connectorName="FLOW" label="store_to_detail3" lineStyle="0" metaname="store_to_detail3" offsetLabelX="0" offsetLabelY="0" source="tMap_14" target="tDBOutput_3">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="transaction_date_time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4264,9 +4264,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfstore_to_detail"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_detail3"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfstore_to_summary" lineStyle="0" metaname="copyOfcopyOfstore_to_summary" offsetLabelX="0" offsetLabelY="0" source="tMap_15" target="tDBOutput_6">
+  <connection connectorName="FLOW" label="store_to_summary3" lineStyle="0" metaname="store_to_summary3" offsetLabelX="0" offsetLabelY="0" source="tMap_15" target="tDBOutput_6">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="no_of_new_transaction"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4285,7 +4285,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfstore_to_summary"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_summary3"/>
   </connection>
   <connection connectorName="FLOW" label="row12" lineStyle="8" metaname="tRowGenerator_6" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_6" target="tMap_13">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4316,11 +4316,11 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row14"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfupcase_id_pbi_0" lineStyle="0" metaname="copyOfcopyOfupcase_id_pbi_0" offsetLabelX="0" offsetLabelY="0" source="tMap_16" target="tMap_17">
+  <connection connectorName="FLOW" label="upcase_id_pbi4" lineStyle="0" metaname="upcase_id_pbi4" offsetLabelX="0" offsetLabelY="0" source="tMap_16" target="tMap_17">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfupcase_id_pbi_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="upcase_id_pbi4"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfto_detail_table_0" lineStyle="0" metaname="copyOfcopyOfto_detail_table_0" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_17" target="tFilterRow_40">
+  <connection connectorName="FLOW" label="to_detail_table4" lineStyle="0" metaname="to_detail_table4" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_17" target="tFilterRow_40">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="batch_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4330,9 +4330,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfto_detail_table_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_detail_table4"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfto_summary_table_0" lineStyle="0" metaname="copyOfcopyOfto_summary_table_0" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_17" target="tAggregateRow_4">
+  <connection connectorName="FLOW" label="to_summary_table4" lineStyle="0" metaname="to_summary_table4" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_17" target="tAggregateRow_4">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="aa_transaction_external_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4343,7 +4343,7 @@
     <elementParameter field="TABLE" name="HASH_KEYS" show="false">
       <elementValue elementRef="KEY_COLUMN" value="batch_date"/>
     </elementParameter>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfto_summary_table_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_summary_table4"/>
   </connection>
   <connection connectorName="FILTER" label="row15" lineStyle="0" metaname="tFilterRow_40" offsetLabelX="0" offsetLabelY="0" source="tFilterRow_40" target="tMap_19">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4364,7 +4364,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row16"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfjoin_pbi_0" lineStyle="8" metaname="copyOfcopyOfjoin_pbi_0" offsetLabelX="0" offsetLabelY="0" source="tMap_18" target="tMap_17">
+  <connection connectorName="FLOW" label="join_pbi4" lineStyle="8" metaname="join_pbi4" offsetLabelX="0" offsetLabelY="0" source="tMap_18" target="tMap_17">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="bill_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4374,13 +4374,13 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfjoin_pbi_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="join_pbi4"/>
   </connection>
   <connection connectorName="FLOW" label="row17" lineStyle="0" metaname="tAggregateRow_4" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_4" target="tMap_20">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row17"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfstore_to_detail_0" lineStyle="0" metaname="copyOfcopyOfstore_to_detail_0" offsetLabelX="0" offsetLabelY="0" source="tMap_19" target="tDBOutput_7">
+  <connection connectorName="FLOW" label="store_to_detail4" lineStyle="0" metaname="store_to_detail4" offsetLabelX="0" offsetLabelY="0" source="tMap_19" target="tDBOutput_7">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="transaction_date_time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4396,9 +4396,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfstore_to_detail_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_detail4"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfstore_to_summary_0" lineStyle="0" metaname="copyOfcopyOfstore_to_summary_0" offsetLabelX="0" offsetLabelY="0" source="tMap_20" target="tDBOutput_8">
+  <connection connectorName="FLOW" label="store_to_summary4" lineStyle="0" metaname="store_to_summary4" offsetLabelX="0" offsetLabelY="0" source="tMap_20" target="tDBOutput_8">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="no_of_new_transaction"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4417,7 +4417,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfstore_to_summary_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_summary4"/>
   </connection>
   <connection connectorName="FLOW" label="row18" lineStyle="8" metaname="tRowGenerator_8" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_8" target="tMap_18">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4448,11 +4448,11 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row20"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfupcase_id_pbi" lineStyle="0" metaname="copyOfcopyOfcopyOfupcase_id_pbi" offsetLabelX="0" offsetLabelY="0" source="tMap_21" target="tMap_22">
+  <connection connectorName="FLOW" label="upcase_id_pbi5" lineStyle="0" metaname="upcase_id_pbi5" offsetLabelX="0" offsetLabelY="0" source="tMap_21" target="tMap_22">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfupcase_id_pbi"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="upcase_id_pbi5"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfto_detail_table" lineStyle="0" metaname="copyOfcopyOfcopyOfto_detail_table" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_22" target="tFilterRow_41">
+  <connection connectorName="FLOW" label="to_detail_table5" lineStyle="0" metaname="to_detail_table5" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_22" target="tFilterRow_41">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="batch_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4462,9 +4462,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfto_detail_table"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_detail_table5"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfto_summary_table" lineStyle="0" metaname="copyOfcopyOfcopyOfto_summary_table" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_22" target="tAggregateRow_5">
+  <connection connectorName="FLOW" label="to_summary_table5" lineStyle="0" metaname="to_summary_table5" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_22" target="tAggregateRow_5">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="aa_transaction_external_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4475,7 +4475,7 @@
     <elementParameter field="TABLE" name="HASH_KEYS" show="false">
       <elementValue elementRef="KEY_COLUMN" value="batch_date"/>
     </elementParameter>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfto_summary_table"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_summary_table5"/>
   </connection>
   <connection connectorName="FILTER" label="row21" lineStyle="0" metaname="tFilterRow_41" offsetLabelX="0" offsetLabelY="0" source="tFilterRow_41" target="tMap_24">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4496,7 +4496,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row22"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfjoin_pbi" lineStyle="8" metaname="copyOfcopyOfcopyOfjoin_pbi" offsetLabelX="0" offsetLabelY="0" source="tMap_23" target="tMap_22">
+  <connection connectorName="FLOW" label="join_pbi5" lineStyle="8" metaname="join_pbi5" offsetLabelX="0" offsetLabelY="0" source="tMap_23" target="tMap_22">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="bill_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4506,13 +4506,13 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfjoin_pbi"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="join_pbi5"/>
   </connection>
   <connection connectorName="FLOW" label="row23" lineStyle="0" metaname="tAggregateRow_5" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_5" target="tMap_25">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row23"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfstore_to_detail" lineStyle="0" metaname="copyOfcopyOfcopyOfstore_to_detail" offsetLabelX="0" offsetLabelY="0" source="tMap_24" target="tDBOutput_9">
+  <connection connectorName="FLOW" label="store_to_detail5" lineStyle="0" metaname="store_to_detail5" offsetLabelX="0" offsetLabelY="0" source="tMap_24" target="tDBOutput_9">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="transaction_date_time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4528,9 +4528,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfstore_to_detail"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_detail5"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfstore_to_summary" lineStyle="0" metaname="copyOfcopyOfcopyOfstore_to_summary" offsetLabelX="0" offsetLabelY="0" source="tMap_25" target="tDBOutput_10">
+  <connection connectorName="FLOW" label="store_to_summary5" lineStyle="0" metaname="store_to_summary5" offsetLabelX="0" offsetLabelY="0" source="tMap_25" target="tDBOutput_10">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="no_of_new_transaction"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4549,7 +4549,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfstore_to_summary"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_summary5"/>
   </connection>
   <connection connectorName="FLOW" label="row24" lineStyle="8" metaname="tRowGenerator_10" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_10" target="tMap_23">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4577,11 +4577,11 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row26"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfupcase_id_pbi_0" lineStyle="0" metaname="copyOfcopyOfcopyOfupcase_id_pbi_0" offsetLabelX="0" offsetLabelY="0" source="tMap_26" target="tMap_27">
+  <connection connectorName="FLOW" label="upcase_id_pbi6" lineStyle="0" metaname="upcase_id_pbi6" offsetLabelX="0" offsetLabelY="0" source="tMap_26" target="tMap_27">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfupcase_id_pbi_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="upcase_id_pbi6"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfto_detail_table_0" lineStyle="0" metaname="copyOfcopyOfcopyOfto_detail_table_0" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_27" target="tFilterRow_90">
+  <connection connectorName="FLOW" label="to_detail_table6" lineStyle="0" metaname="to_detail_table6" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_27" target="tFilterRow_90">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="batch_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4591,9 +4591,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfto_detail_table_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_detail_table6"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfto_summary_table_0" lineStyle="0" metaname="copyOfcopyOfcopyOfto_summary_table_0" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_27" target="tAggregateRow_6">
+  <connection connectorName="FLOW" label="to_summary_table6" lineStyle="0" metaname="to_summary_table6" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_27" target="tAggregateRow_6">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="aa_transaction_external_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4604,7 +4604,7 @@
     <elementParameter field="TABLE" name="HASH_KEYS" show="false">
       <elementValue elementRef="KEY_COLUMN" value="batch_date"/>
     </elementParameter>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfto_summary_table_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="to_summary_table6"/>
   </connection>
   <connection connectorName="FILTER" label="row27" lineStyle="0" metaname="tFilterRow_90" offsetLabelX="0" offsetLabelY="0" source="tFilterRow_90" target="tMap_29">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4625,7 +4625,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row28"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfjoin_pbi_0" lineStyle="8" metaname="copyOfcopyOfcopyOfjoin_pbi_0" offsetLabelX="0" offsetLabelY="0" source="tMap_28" target="tMap_27">
+  <connection connectorName="FLOW" label="join_pbi6" lineStyle="8" metaname="join_pbi6" offsetLabelX="0" offsetLabelY="0" source="tMap_28" target="tMap_27">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="bill_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4635,13 +4635,13 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfjoin_pbi_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="join_pbi6"/>
   </connection>
   <connection connectorName="FLOW" label="row29" lineStyle="0" metaname="tAggregateRow_6" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_6" target="tMap_30">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row29"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfstore_to_detail_0" lineStyle="0" metaname="copyOfcopyOfcopyOfstore_to_detail_0" offsetLabelX="0" offsetLabelY="0" source="tMap_29" target="tDBOutput_11">
+  <connection connectorName="FLOW" label="store_to_detail6" lineStyle="0" metaname="store_to_detail6" offsetLabelX="0" offsetLabelY="0" source="tMap_29" target="tDBOutput_11">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="transaction_date_time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4657,9 +4657,9 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfstore_to_detail_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_detail6"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfcopyOfcopyOfstore_to_summary_0" lineStyle="0" metaname="copyOfcopyOfcopyOfstore_to_summary_0" offsetLabelX="0" offsetLabelY="0" source="tMap_30" target="tDBOutput_12">
+  <connection connectorName="FLOW" label="store_to_summary6" lineStyle="0" metaname="store_to_summary6" offsetLabelX="0" offsetLabelY="0" source="tMap_30" target="tDBOutput_12">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="no_of_new_transaction"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4678,7 +4678,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="copyOfcopyOfcopyOfstore_to_summary_0"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store_to_summary6"/>
   </connection>
   <connection connectorName="FLOW" label="row30" lineStyle="8" metaname="tRowGenerator_12" offsetLabelX="0" offsetLabelY="0" source="tRowGenerator_12" target="tMap_28">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
@@ -4726,13 +4726,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_ec76582a-b379-43e8-b8e0-2d6d186a541b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>zEWyNnl40oWs8mEVIYL+6uIxlO4083/1IhcddfS44sBroMcs/FH1EP+u6q8cDyPRGdT5BdZm8X8p&#13;
-HsFJM4bQzg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_d1ab6abb-5bac-4f06-901b-64c58b9ecbda"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KvEbdEU+bXB4bcZwKz55nHQhaxsAGx1VehDv2XnozLo/iCoorqqwUHm+3H+fMjNpWuzD0daAVW9t&#13;
-Db2yQISDKA==</DigestValue></Reference></SignedInfo><SignatureValue>X6AEjK9sxcOdXl0skylB+CtNv5bxk7bLIrXM6WcOj9lz/5iAq6t31x73jEsrC/OA2mVaNjxgkb8P&#13;
-Gaudni7oZiKFipDCLeE28KcgvhXfTAZYotHboRAqTmi+6T9evhjRULaMZALNgKyZ/VVPGdZYP7Vv&#13;
-R9X0CeOZLAICXwtuXRdk3aCaxLx9HNXo1kt7uKMGGozwfu7FNZQcuib/i+WzM78nc70tI4iWo/Kz&#13;
-SOOgjwCH5wENDrc8cdMW4FpqbPQxjIPbBYywc/iqspqmIJns4CzKvE/eGOJe960XL+xLf/Oy9nVK&#13;
-XtoNpV6rUX7i0M+tXvZBV/+4G2/HZHOVBDByDA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_116af9ca-d596-44cc-9d4b-b02f4512752d"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>YoGRKGX8HjVwi6OA08LxiWigfclLXZXLcJ9TKF1bkMUVfXs61/e4J0tYmlpaZvnd89Jflq9FCIhH&#13;
+YZ9llk9lEw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_5673c8f3-dd3f-42f4-8f02-8ecec3926cf5"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>eR3UiC1XzSn9nbYFf8MCNUQ2XaJFTNMlK1YCR2QQcOCXvu1517AtNOelIkTftG80Pao5xRpLe+JL&#13;
+xbu8YZIjIg==</DigestValue></Reference></SignedInfo><SignatureValue>ejE2B3dMRoNpEq4xcL12s8fcvA9gvc4Ieb2JUkQkkJNTC7K2Gu0cCK0ayXPuhfAPVdOtFwr0J5f1&#13;
+hr+9g1EjdNqioq6r4Qo0a2WP/uwWsBOwpjNKUiK9mgeU1W4OnyRyuB4UpOK4PBnVM9u8nmL6fRZf&#13;
+Sflr4yQAnwwCEcfey8d/2Na2Xdzstx/3gQG/7Ad8xmD69iH9c5qf6mAhot/KMlP8lpaG+c4eyMK0&#13;
+TrjcuLl1NA96/GWxUQKp1oz2QVW5HjiZsvO6SBme3TrLtQrULw8UJ+laNvyYnCK210PFCFkGHWzm&#13;
+rdn8Bu0KitvDSLSYq7hh7YN9aPVouKgVW+untA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -4754,4 +4754,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_d1ab6abb-5bac-4f06-901b-64c58b9ecbda" Target="#_ec76582a-b379-43e8-b8e0-2d6d186a541b"><Timestamp>2024-03-05 07:42:50</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_5673c8f3-dd3f-42f4-8f02-8ecec3926cf5" Target="#_116af9ca-d596-44cc-9d4b-b02f4512752d"><Timestamp>2024-03-05 07:48:00</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
