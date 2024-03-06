@@ -141,7 +141,7 @@
     <elementParameter field="TABLE" name="AGGREGATION_STAGES">
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $unwind: { path: '$addlnidentifiers', preserveNullAndEmptyArrays: true } }&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'addlnidentifiers._id':{$ne:null}}}&quot;"/>
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'idtypeuid':'$addlnidentifiers.idtypeuid','iddetail':'$addlnidentifiers.iddetail','activefrom':'$addlnidentifiers.activefrom','activeto':'$addlnidentifiers.activeto','comments':'$addlnidentifiers.comments','externaluid':'$addlnidentifiers.externaluid','patientuid':'$patientuid','createdat':'$createdat','createdby':'$createdby','modifiedat':'$modifiedat','modifiedby':'$modifiedby','orguid':'$orguid','statusflag':'$statusflag'}}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$project:{'transaction_external_id':'$_id','additional_identifiers_id':'$addlnidentifiers._id','idtypeuid':'$addlnidentifiers.idtypeuid','iddetail':'$addlnidentifiers.iddetail','activefrom':'$addlnidentifiers.activefrom','activeto':'$addlnidentifiers.activeto','comments':'$addlnidentifiers.comments','externaluid':'$addlnidentifiers.externaluid','patientuid':'$patientuid','createdat':'$createdat','createdby':'$createdby','modifiedat':'$modifiedat','modifiedby':'$modifiedby','orguid':'$orguid','statusflag':'$statusflag'}}&quot;"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
     <elementParameter field="TABLE" name="FIELDS_TO_RETURN" show="false"/>
@@ -172,6 +172,10 @@
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="statusflag"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="additional_identifiers_id"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT" show="false"/>
     <elementParameter field="TEXT" name="LIMIT" show="false" value=""/>
@@ -196,6 +200,8 @@
       <column comment="" key="false" length="-1" name="modifiedat" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="modifiedby" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="statusflag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="additional_identifiers_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="192">
@@ -213,6 +219,8 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="store">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="additional_identifiers_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="id_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="id_detail" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="active_from" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -233,6 +241,8 @@
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="store" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.additional_identifiers_id) " name="additional_identifiers_transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.idtypeuid) " name="id_type_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.iddetail) " name="id_detail" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.activefrom " name="active_from" nullable="true" type="id_Date"/>
@@ -263,6 +273,8 @@
         <mapperTableEntries name="modifiedat" nullable="true" type="id_Date"/>
         <mapperTableEntries name="modifiedby" nullable="true" type="id_String"/>
         <mapperTableEntries name="statusflag" nullable="true" type="id_String"/>
+        <mapperTableEntries name="additional_identifiers_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -280,6 +292,10 @@
     <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
     <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
     <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="additional_identifiers_transaction_external_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="id_type_id"/>
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="id_detail"/>
@@ -315,6 +331,8 @@
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tLogRow_1">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="true" length="-1" name="additional_identifiers_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="id_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="id_detail" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="active_from" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
@@ -333,6 +351,14 @@
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tMongoDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tMongoDBInput_1" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="additional_identifiers_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
@@ -377,6 +403,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="modified_timestamp"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="additional_identifiers_transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="store"/>
@@ -386,13 +418,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_cacfb999-b436-4cde-8dfa-012fd5b0649d"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9DEam+G/2zebWxmtYieoCkqTiXMW+1WZtkeOGzE+k/Ay3jhagzm4RxWIWHQUWknOzlZhJX9c8LPA&#13;
-/UHBX+g7FA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_9ce635f2-aa35-4651-9918-9dc9e164ccbd"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2CEVsdry5DlCO5f1B6/hvmR9Mml7JyOlLkZ6ngwpySt6IETNyMlmmvv5aWzFDvzzI0TVMY/e7jod&#13;
-TA4X7uV9NA==</DigestValue></Reference></SignedInfo><SignatureValue>bqR1c6XJMwtMOHVYf3kRmUvD8Z08VNSh72P/WinnXDJTX5s7L5bhFiPv/OzcS0eOhM2WhW7+BAks&#13;
-Hx43/SbMfJ6Yie0UguTkPmMFDjGFw4aYmj5O73YBjoq15ZU38Yx8z+9iNWoP1EfWPAHknjBVdV4b&#13;
-vxuR/k9ofmpuQZMXt0dfWceDaFHUNOXjqB8KGiqtHIKBnaX+pqVScq5p2MfGlGaE+krwHp0txqOw&#13;
-d/fKsqL3YATJGQL3rWbSQCGRySXNNaQujUzolBwepvtoG1EOFr5JcmuOpFp1F+mM3FEn3QkQIyu4&#13;
-Mp1n5+RTyAeOEzXNyC59hY3vijirQ7kPg7S94g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_f03b4b1b-7495-44ab-b0ae-1115b4eafb79"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>BDVW3ph1/zhztMNXzwsQHunpr1P/U/tKqJYYBysp6ZakGfg06tcHwVxsdsgbCESQP9nvD6Ey52qt&#13;
+brcSfEk8ww==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_76efe1c0-c413-45a4-ab4b-1e1b09346e5a"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>8pDIOkd0bHaK8KhRBhxNKPtKfh1FBMNNAD00Xn+fkVBjf6slsghjFx1zb476+FntF3lZk7OwwWC8&#13;
+2gQFUd2ZoA==</DigestValue></Reference></SignedInfo><SignatureValue>fC8XKQwStPHT3sDdT7HKcm1/r/Vc6kozF9mHu7Icnx9z2wWrOIOIueEO8jTgAb4DMmc+14BIABBU&#13;
+s+nGbNRhUkjSZ/yUFMi6mtoAMn5Vb8cmQKjj2ENSie7pnJNE9qUKbna2RCLPRLhS26Nq0d0TTOUA&#13;
+QH8bn+4zj2EVuvKnR3F/Q+rw3mxADhaP4bgJDOW9sCILqN89Z7SIytc+abUFUv64G17kU4FwZg07&#13;
+qFnQht0ahFn4WouuQ+3itmXnwmfDjJ7HPCTBiI6s73wDTnRWIKFd2U64xivJa2oIz65UzoVfOJc0&#13;
+qN/KkDNJBcT5zXf1nHF/8mb+ucxflc5SBgsx4Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -414,4 +446,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_9ce635f2-aa35-4651-9918-9dc9e164ccbd" Target="#_cacfb999-b436-4cde-8dfa-012fd5b0649d"><Timestamp>2024-03-06 06:34:12</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_76efe1c0-c413-45a4-ab4b-1e1b09346e5a" Target="#_f03b4b1b-7495-44ab-b0ae-1115b4eafb79"><Timestamp>2024-03-06 06:38:59</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
