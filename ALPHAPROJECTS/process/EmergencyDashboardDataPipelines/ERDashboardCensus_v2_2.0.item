@@ -1819,6 +1819,8 @@
       <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="age" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="trauma_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="date_of_birth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -1870,6 +1872,8 @@
         <mapperTableEntries expression="out7.transaction_external_id " name="transaction_external_id" type="id_String"/>
         <mapperTableEntries expression="Var.age" name="age" nullable="true" type="id_Long"/>
         <mapperTableEntries expression="out7.trauma_type " name="trauma_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out7.start_date " name="start_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out7.date_of_birth " name="date_of_birth" nullable="true" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out7" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" type="id_String"/>
@@ -2263,6 +2267,10 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="trauma_type"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="start_date"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="date_of_birth"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:3cgTFJXVrx7BOWhgwyPCaxoFzxavLYEQsdomTDAg"/>
@@ -2285,6 +2293,8 @@
       <column comment="" key="true" length="0" name="transaction_external_id" nullable="false" pattern="" precision="0" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="age" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="trauma_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="start_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="date_of_birth" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="1216">
@@ -4203,6 +4213,14 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out8"/>
   </connection>
   <connection connectorName="FLOW" label="fortesting" lineStyle="0" metaname="fortesting" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_12" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="date_of_birth"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="fortesting"/>
   </connection>
@@ -4461,13 +4479,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_63fef87e-f1cf-4c40-9bdb-c945bbab2603"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>HHpmEwrYP62V5X/YWkR+RSuz3TuAmLohZxbtF/w7nncCmeooJCSUOg/rZqtQx0WsoEkvSvxmXd+o&#13;
-GBFqgeqGtg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e8b9c0cd-5c5e-465e-8bf5-6628f3ed8bd4"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>21H9d+iBoWyWIbMpPO6TBmDtoy1ESqPeTjRKJvdi2YeEQxU55VQhxnMxGmTnt/yVPeeh2UhEIUsS&#13;
-Z/M6lGonuQ==</DigestValue></Reference></SignedInfo><SignatureValue>EESnTxz2ee/vLl/dLNyms4I8cWD21rY7PNiS5tLVXMKpMzksXxhhUOA1Ij1R5bq5Q08nQPmAVV31&#13;
-MPSq6uH3V2uo28QRRq/RxzEtRYSaVC7im9Xgr7DRFnYg3hQ8DMfrST+X8CVuIbHAhWl/0hqu4RMq&#13;
-oGANq2e7+s21S71O0/WKqXjMkugjVkSiEQ5Yhwr343w91YjWWKTl7RwSdXXMu5X4yOswKjbJuTLq&#13;
-wB0TJ7UqgRijgvKbmXWEH2nItsbEDgFLKBVkYIp6USnn2tJC+xuN667HYoqJJRHXbHP//b2ChR9B&#13;
-w4ThupoXK4SPQV41Aojy/7JA8WiaiDawaVK+Zg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c41610fa-31cf-4c0d-a56e-e1e5adc30110"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Iiz0cKd8TU4P9bVmXSvKUJFnFJxHw48rwg72hRcvtvqfYg3GKF6CwldfP2vspmxhOL9Abz53s1aM&#13;
+I8W6zt2ZkA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_224a6ad4-7496-4593-bd1b-8ba0fc3d7ed3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>zAyO6fpD6F+k8AcAlU8laeLUBhF5z9HPVS7H1b1gvNDtDrVSwixO7tC0cE5Op3eDwz0SYDkmxxtL&#13;
+POIItomO8Q==</DigestValue></Reference></SignedInfo><SignatureValue>F3tUlJGIBuA0z+kU82mADIjE/Bmo/RURQ52uA3tVyTWn8VOs7PFVfeyIX4n5VJp5U35RO0W7PRw2&#13;
+6Y+sBx0SQ91WCri9ceH6LrWJn1iGkw9X2ycBWBC4HG+eH1q2Pk7NzLoIgexdKjBQ6b3AA1fc5xvr&#13;
+r6e+m3xFL4OZNBXqwaj/OzXWi953br0xL4Rwwe8i+ikpUe6XvtWIloixoz7cNSskR/9htW1KN4FS&#13;
+XVOrp4TFK1+R1WfaxTUnngf2XuYYO0tYnepD1hp5o+Ib0owzCleulVOQ8wDfx+CABRmHC631TQFO&#13;
+bEqr7SB4GlQgtXdehHyOMunL3xcm+dzfukUe6g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -4489,4 +4507,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e8b9c0cd-5c5e-465e-8bf5-6628f3ed8bd4" Target="#_63fef87e-f1cf-4c40-9bdb-c945bbab2603"><Timestamp>2024-03-07 06:04:50</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_224a6ad4-7496-4593-bd1b-8ba0fc3d7ed3" Target="#_c41610fa-31cf-4c0d-a56e-e1e5adc30110"><Timestamp>2024-03-07 06:07:03</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
