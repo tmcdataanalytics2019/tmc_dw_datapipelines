@@ -134,7 +134,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, ordering_department_id, order_to_department_id, billing_group_id, order_item_id, bill_date, net_amount, quantity, unit_price, payor_discount, special_discount  from &quot;+context.TableName+&quot;rt_aa_patient_billed_items&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, ordering_department_id, order_to_department_id, billing_group_id, order_item_id, bill_date, net_amount, quantity, unit_price, payor_discount, special_discount  from &quot;+context.TableName+&quot;rt_aa_patient_billed_items WHERE cast(bill_date as date) BETWEEN '1-JAN-2024' and '31-JAN-2024'&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -239,7 +239,7 @@
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.ordering_department_id " name="ordering_department_id" nullable="true" type="id_String"/>
@@ -328,7 +328,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, sequence_number, bill_date, is_cancelled, visit_id, visit_type, payor, payor_type, admission_date, discharge_date, patient_pin, last_name, first_name, middle_name, suffix, payor_agreement  from finance_aa_patient_bills_view&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, sequence_number, bill_date, is_cancelled, visit_id, visit_type, payor, payor_type, admission_date, discharge_date, patient_pin, last_name, first_name, middle_name, suffix, payor_agreement  from finance_aa_patient_bills_view WHERE cast(bill_date as date) BETWEEN '1-JAN-2024' and '31-JAN-2024'&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -429,7 +429,7 @@
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.is_cancelled == null?&quot;cancel&quot;:out1.is_cancelled == true?&quot;cancel&quot;:&quot;notcancel&quot; " name="cancel" type="id_String"/>
       </varTables>
@@ -637,13 +637,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a465b46e-4a87-48bc-8b76-b86fa72827ce"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>YJS4UUqID3N1c4EWDwovo/LdthWWCL0ln5HWTYj3tKyXWomdz8HdbQ8YnEXAE/c2kh7MY3zrqrLM&#13;
-tQZUCxYzJQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_33ceee48-2905-4969-868c-fa3c2edafaaf"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+Mj3BEWTl6JvWu1pJijR2F6dVADFzWJUVmq1/PyDjNy+s1+hQA+tzAU8WfRULVCFniVCToXGk0wd&#13;
-JSy69BsFBQ==</DigestValue></Reference></SignedInfo><SignatureValue>fPMHwoHLHA8zTqxKYGbe1jVqVToNv03UhivxN9WUT99SuExBkLZJUpBlMy7WvQeDZird59gv27Z8&#13;
-7jYQV4B1/swziJZFz9yyNMs5dM7dbhyNtEbW1o4lMh6l9ed2X45RyFrN7Hx8zKwLYSYcplD97s1t&#13;
-L4IW754taibT6HSqyru+RQG+XfHnFY5LsxfsRHNT5mpfKosUSkiGePQdl5ZkfGlIRmxe1vJOIwen&#13;
-FgSz+UarW7EmOi1qFe/GD9e7WY4Ch3tk3pdVV6IMzbkONQqsLH7sAmrDbIY+fgmepvN61OMHQHIZ&#13;
-TQYSIhuJyvS6YrKe8wySkXkkOFHHgYTJmRxZfQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_af9b419f-c603-4b69-96de-9b6df641fc2e"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>XD3riGubbQm6jFjOYTOHbRIRaTMpR9JAUXvq+EarsaCDRxn9ZUFG3v+OJ1Rr0uQT+p8RyOhyX4Zq&#13;
+Yy328S01CA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8c12ba35-0d96-482a-932e-7de9c579f106"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>z6h+6fOzVWWMkGJMkkmAyhjWHnG6LgY/MAT9Fdnm+wgEyfcL/PPkPYOCFSi91dsLYdHdrJemVMxH&#13;
+jA7aDMTVPA==</DigestValue></Reference></SignedInfo><SignatureValue>EadNDVXkVuum9O7bwjBhCxrGmz2b7ma/GRrnab9QEIYDIOA0FV711AIPK0VSsEWhkmdF5/0HzsVX&#13;
+zLJxYkdiw0jkU2wxgYt5Jc+d7GoTkTnPp50vNT1/qbPKYQ/0l3Cd8RmXKEDM7JsirNmnfqGtI5aH&#13;
+F8ANjNMyw4JQG6mUqmJdhTxjZ8FHrOJNepbfe4nd0hvIuPc7yNCybFQ0IySzPVBKeSAD8JNkYGad&#13;
+SN3YJIMzBT0o4y48Yb8JL3VfofyUfBDZ2ep42sKh4XYp9NU1W8n8XU1qBN6w7ifYkiSr3WCu4t+2&#13;
+WW3LTqTb6ifxRJ6GfErLxgqiwcrZlGcOtJYrIg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -665,4 +665,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_33ceee48-2905-4969-868c-fa3c2edafaaf" Target="#_a465b46e-4a87-48bc-8b76-b86fa72827ce"><Timestamp>2024-03-12 04:19:34</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8c12ba35-0d96-482a-932e-7de9c579f106" Target="#_af9b419f-c603-4b69-96de-9b6df641fc2e"><Timestamp>2024-03-12 04:38:20</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
