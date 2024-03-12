@@ -134,7 +134,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, ordering_department_id, order_to_department_id, billing_group_id, order_item_id, bill_date, net_amount, quantity, unit_price, payor_discount, special_discount  from &quot;+context.TableName+&quot;rt_aa_patient_billed_items WHERE cast(bill_date as date) BETWEEN '1-JAN-2024' and '2-JAN-2024'&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, ordering_department_id, order_to_department_id, billing_group_id, order_item_id, bill_date, net_amount, quantity, unit_price, payor_discount, special_discount, tariff_id  from &quot;+context.TableName+&quot;rt_aa_patient_billed_items WHERE cast(bill_date as date) BETWEEN '1-JAN-2024' and '2-JAN-2024'&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -167,6 +167,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="special_discount"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tariff_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -184,6 +186,7 @@
       <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="tariff_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="256">
@@ -212,6 +215,7 @@
       <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="tariff_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="sequence_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -228,7 +232,7 @@
       <column comment="" key="false" length="-1" name="payor_agreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.ordering_department_id " name="ordering_department_id" nullable="true" type="id_String"/>
@@ -241,6 +245,7 @@
         <mapperTableEntries expression="row1.unit_price " name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row1.payor_discount " name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row1.special_discount " name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row1.tariff_id " name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row2.sequence_number " name="sequence_number" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row2.is_cancelled " name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="row2.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -268,6 +273,7 @@
         <mapperTableEntries name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="tariff_id" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.transaction_external_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
@@ -399,6 +405,7 @@
       <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="tariff_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="sequence_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -415,7 +422,7 @@
       <column comment="" key="false" length="-1" name="payor_agreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.is_cancelled == null?&quot;cancel&quot;:out1.is_cancelled == true?&quot;cancel&quot;:&quot;notcancel&quot; " name="cancel" type="id_String"/>
       </varTables>
@@ -430,6 +437,7 @@
         <mapperTableEntries expression="out1.unit_price " name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out1.payor_discount " name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out1.special_discount " name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="out1.tariff_id " name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.sequence_number " name="sequence_number" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.is_cancelled " name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out1.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -456,6 +464,7 @@
         <mapperTableEntries name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="sequence_number" nullable="true" type="id_String"/>
         <mapperTableEntries name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
@@ -503,6 +512,7 @@
       <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="tariff_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="soa_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -520,7 +530,7 @@
       <column comment="" key="false" length="-1" name="order_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="requesting.name" name="requesting_department" nullable="true" type="id_String"/>
@@ -537,6 +547,7 @@
         <mapperTableEntries expression="out2.unit_price " name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out2.payor_discount " name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out2.special_discount " name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="out2.tariff_id " name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out2.sequence_number " name="soa_number" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out2.is_cancelled " name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out2.visit_id " name="visit_number" nullable="true" type="id_String"/>
@@ -564,6 +575,7 @@
         <mapperTableEntries name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="sequence_number" nullable="true" type="id_String"/>
         <mapperTableEntries name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
@@ -853,6 +865,7 @@
       <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="tariff_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="soa_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_number" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -869,7 +882,7 @@
       <column comment="" key="false" length="-1" name="payor_agreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out4" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out3.requesting_department " name="requesting_department" nullable="true" type="id_String"/>
@@ -886,6 +899,7 @@
         <mapperTableEntries expression="out3.unit_price " name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out3.payor_discount " name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out3.special_discount " name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="out3.tariff_id " name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.soa_number " name="soa_number" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.is_cancelled " name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="out3.visit_number " name="visit_number" nullable="true" type="id_String"/>
@@ -916,6 +930,7 @@
         <mapperTableEntries name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="soa_number" nullable="true" type="id_String"/>
         <mapperTableEntries name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="visit_number" nullable="true" type="id_String"/>
@@ -1003,6 +1018,7 @@
       <column comment="" key="false" length="-1" name="item_name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="soa_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="net_amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="pf" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="sc_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
@@ -1034,6 +1050,7 @@
         <mapperTableEntries expression="out4.billing_group_id.equals(&quot;PACKAGES&quot;)?out4.package_name:out4.orderitem_name " name="item_name" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out4.soa_date " name="soa_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="out4.net_amount " name="net_amount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="tariff.doctor_share" name="pf" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out4.quantity " name="quantity" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out4.unit_price " name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out4.payor_agreement.equals(&quot;PHIC SENIOR CITIZEN&quot;) || out4.payor_agreement.equals(&quot;RANK &amp; FILE - DEPENDENT (SC)&quot;) || out4.payor_agreement.equals(&quot;SENIOR CITIZEN&quot;)?out4.payor_discount : null " name="sc_discount" nullable="true" type="id_BigDecimal"/>
@@ -1069,6 +1086,7 @@
         <mapperTableEntries name="unit_price" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="tariff_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="soa_number" nullable="true" type="id_String"/>
         <mapperTableEntries name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="visit_number" nullable="true" type="id_String"/>
@@ -1083,6 +1101,10 @@
         <mapperTableEntries name="middle_name" nullable="true" type="id_String"/>
         <mapperTableEntries name="suffix" nullable="true" type="id_String"/>
         <mapperTableEntries name="payor_agreement" nullable="true" type="id_String"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tariff" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="out4.tariff_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
+        <mapperTableEntries name="doctor_share" nullable="true" type="id_BigDecimal"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1116,6 +1138,8 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="soa_date"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="net_amount"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="pf"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="quantity"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
@@ -1181,6 +1205,7 @@
       <column comment="" key="false" length="-1" name="item_name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="soa_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="net_amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="pf" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="sc_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
@@ -1200,6 +1225,48 @@
       <column comment="" key="false" length="-1" name="middle_name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="suffix" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_agreement" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="672">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_9"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DatabaseName"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:IjUvgbWd/+U7YrxR2avBiat+ZbqcGvDvh9lM+PTR88SER7mQQF3FmhI="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="context.TableName + &quot;rt_aa_mdt_tariffs&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, doctor_share from &quot;+context.TableName+&quot;rt_aa_mdt_tariffs&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="doctor_share"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="DW MDT Tariffs"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDBInput_9">
+      <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="doctor_share" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
@@ -1235,6 +1302,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="net_amount"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tariff_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1277,6 +1347,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="first_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tariff_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1329,10 +1402,20 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
   <connection connectorName="FLOW" label="out2" lineStyle="0" metaname="out2" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_3">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="tariff_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out2"/>
   </connection>
   <connection connectorName="FLOW" label="out3" lineStyle="0" metaname="out3" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="tariff_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
@@ -1357,6 +1440,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="pck"/>
   </connection>
   <connection connectorName="FLOW" label="out4" lineStyle="0" metaname="out4" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tMap_5">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="tariff_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out4"/>
   </connection>
@@ -1365,21 +1453,30 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
   </connection>
   <connection connectorName="FLOW" label="out5" lineStyle="0" metaname="out5" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="pf"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out5"/>
+  </connection>
+  <connection connectorName="FLOW" label="tariff" lineStyle="8" metaname="tDBInput_9" offsetLabelX="0" offsetLabelY="0" source="tDBInput_9" target="tMap_5">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tariff"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_3a8e13ba-3afe-4945-8f7d-4bdbafa2a8ef"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>d/w8qVfCduy9hclvLLsOlBUbwWH3L+McfKnYT27+C+THrAJdiwVvySmQH4PI3c6CkMqxXAlfkkQ9&#13;
-kPcm6ku6xw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_59394c67-3b0e-482e-8914-c40c73fde171"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>DHGd0r8GzFZA/agtZR4YZ79ZRrw0vRgmEVnI2Lg5IgnqlAL1r4+03fwXJ0fi1bKQIqE9OUAxgiZA&#13;
-kKzfvhEp9A==</DigestValue></Reference></SignedInfo><SignatureValue>eEvrpE2t+dANYbLBStCN5FtbvGN8oj2iNenk14jznzjal3YL2TgilBMFpvWioqZ9aGLWorkdkgyT&#13;
-9bZP4amPhMx7K0FK3rKQ1NoPNw0sPqCE7HqKpv8U1/y/Vftqz24Ece383yKDiqqQJq/nrpTfSbsG&#13;
-LAyfGGEqdwKhIsWq2EF7x/MGlMACujTQuKJH5k4aKsx7MQz3pBqOZ9U6i/z2HYpNVLhVo7Zvwv3G&#13;
-xQmzM56cFlwQDlX2D6BK0VpD2T0L6YFAxQar7A9miIvAqTNOKeFtfgxeuZ+fqzvPZn1agUb0J1lQ&#13;
-J6sbNeOBFNzVh538yVGdYXo4gjTSQR4j65cB7A==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_93c7a86a-cc69-4728-9930-0c5555c8a672"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>clbikx/j+w87JqBEmF0pUt1cSQrknY4oH5b2u1pDos1qUzc8zvbeIWGd8UUFPrUM6N61OL3hPuKc&#13;
+Q6XsPWSTAg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_13fc5828-7ad2-4610-906c-57d8ba9c8a5d"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>aF+uxZKeCFUTgpQg+NjLl5UlXrKEKCuOGzK0bJbXrJzrAkHbFMcp/jo3mTJUScyyAbaqR5T0lMlK&#13;
+9cF2w7J3lg==</DigestValue></Reference></SignedInfo><SignatureValue>K0R1FfWo8I/2S99mtIi7rWMCIfJ/79+XVQ9IX6DhVKqcst4/WQr+fSDJ96Sjgb5ZphT17QzQjYPQ&#13;
+8jMh4zfecG9xshqe9z5+DdII0teIQluO/+g17p12/2GuIt+bPPOBpYJi+6nesnA4/4LQsm/yavi6&#13;
+aR1lrnxK7iKj9e2wQzl/FdsCXZoyBd4BBQ1rkrdHK0TxLpGEnyzILkK0yudT6m1qRP0mFuu7xEdj&#13;
+F59JzcFWeZ94Sono9qk3WVKZKPrsGFzWjLPe3J/HLcqv/9m16kRBliO14mDGu4KbBNe4RLfaxCkG&#13;
+LdBmlx5xhnu3pmg9oUMl3WNNfqhTc9J3zKuGOg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1401,4 +1498,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_59394c67-3b0e-482e-8914-c40c73fde171" Target="#_3a8e13ba-3afe-4945-8f7d-4bdbafa2a8ef"><Timestamp>2024-03-12 06:46:34</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_13fc5828-7ad2-4610-906c-57d8ba9c8a5d" Target="#_93c7a86a-cc69-4728-9930-0c5555c8a672"><Timestamp>2024-03-12 06:54:59</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
