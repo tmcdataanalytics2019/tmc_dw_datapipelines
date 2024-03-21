@@ -831,7 +831,7 @@
         <mapperTableEntries expression="out1.servicing_department.equals(&quot;CLINICAL MICROSCOPY&quot;) || out1.servicing_department.equals(&quot;MOLECULAR DIAGNOSTIC&quot;) || out1.servicing_department.equals(&quot;IMMUNOLOGY&quot;) || out1.servicing_department.equals(&quot;HEMATOLOGY&quot;) || out1.servicing_department.equals(&quot;MICROBIOLOGY&quot;) || out1.servicing_department.equals(&quot;BLOOD BANK AND TRANSFUSION SERVICES&quot;) || out1.servicing_department.equals(&quot;CHEMISTRY&quot;) || out1.servicing_department.equals(&quot;HISTOPATHOLOGY&quot;) || out1.servicing_department.equals(&quot;SPECIAL CHEMISTRY&quot;) || out1.servicing_department.equals(&quot;CLINICAL CHEMISTRY&quot;) || out1.servicing_department.equals(&quot;LABORATORY&quot;) ? &quot;YES&quot;:&quot;NO&quot; " name="if_lab" type="id_String"/>
         <mapperTableEntries expression="out1.requesting_department.equals(&quot;INSTITUTE OF PERSONALIZED MOLECULAR MEDICINE&quot;)?&quot;YES&quot;:&quot;NO&quot; " name="if_ipmm" type="id_String"/>
       </varTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="Var.if_lab.equals(&quot;NO&quot;) &amp;&amp; Var.if_ipmm.equals(&quot;NO&quot;)" name="main" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="Var.if_lab.equals(&quot;YES&quot;) || Var.if_lab.equals(&quot;NO&quot;)|| Var.if_ipmm.equals(&quot;NO&quot;)" name="main" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.patient_bill_id " name="patient_bill_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.patient_id " name="patient_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.encounter_type_id " name="encounter_type_id" nullable="true" type="id_String"/>
@@ -849,7 +849,7 @@
         <mapperTableEntries expression="out1.careprovider_id " name="careprovider_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.department " name="department" nullable="true" type="id_String"/>
       </outputTables>
-      <outputTables activateExpressionFilter="true" name="ipmm" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="Var.if_lab.equals(&quot;YES&quot;) &amp;&amp; Var.if_ipmm.equals(&quot;YES&quot;)" name="ipmm" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.patient_bill_id " name="patient_bill_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.patient_id " name="patient_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.encounter_type_id " name="encounter_type_id" nullable="true" type="id_String"/>
@@ -958,8 +958,84 @@
       <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="512">
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_bill_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="encounter_type_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bill_date"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="requesting_department"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="servicing_department"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="billing_group_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="billing_sub_group_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="order_item_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="quantity"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="unit_price"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="amount"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="payor_discount"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="special_discount"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="careprovider_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="department"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="iflab"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ifipmm"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tLogRow_1">
+      <column comment="" key="true" length="-1" name="patient_bill_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="encounter_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bill_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="requesting_department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="servicing_department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="billing_group_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="billing_sub_group_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="order_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="unit_price" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="careprovider_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="iflab" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ifipmm" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="896" posY="480">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileOutputExcel_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="VERSION_2007" value="false"/>
     <elementParameter field="CHECK" name="USESTREAM" value="false"/>
     <elementParameter field="TEXT" name="STREAMNAME" show="false" value="outputStream"/>
@@ -1107,7 +1183,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="main"/>
   </connection>
-  <connection connectorName="FLOW" label="ipmm" lineStyle="0" metaname="ipmm" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_3" target="tFileOutputExcel_1">
+  <connection connectorName="FLOW" label="ipmm" lineStyle="0" metaname="ipmm" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_3" target="tLogRow_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="iflab"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -1124,13 +1200,18 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_5f24d93a-0e1f-4f92-93e9-bddbad455118"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ACkrnrcHxtg6P+v24kNvFtqKblalUX+B6nzylkjCmgfx/Li7x+CL7QIsKWwCAWxaMHkXgxQa51ir&#13;
-Wrr6rfY0Ng==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_89210fb5-66ad-45bc-ab5f-82b2d7def8f5"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>cHrcM4yk0R8+ewrs2pAxa11rS5/uW3SW5Q+lxvos0DtNfaemvYRZ29ZEtX0RXxxv3IZMQSl8tdz+&#13;
-ppcQAuYchg==</DigestValue></Reference></SignedInfo><SignatureValue>L02wWLVZOUXquBSTYbDGqYBffkBk7XnL7ctC9Y9xVc3KBueQbdFLUXU1bsv69f6vu/+azrZJQIJG&#13;
-i6nZ07Dne9C22bGawXKEb1dO/gUvUWifSB9YsB3P56ZJoQsWdI/THD7ju0Uqc3POrWIpMQlJo9gV&#13;
-GB270uz6PJyK6y9tvH2SZpSbe3cK1+uTtAtRgfNOYUeu1QHtFh8jy/F1HUxEC4EN9GywWA6N6KLM&#13;
-EnVFREp/nzXx3x8hcrqK9712W9xYTI5RvaNJgZifsryjyLaAyPxZFRZkUiiuIKANJfhxYL8Ejbhk&#13;
-dvmne/puuPywW4KeDIcAqpR/BFv6eQmevuBgkg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileOutputExcel_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_1cd69973-4b74-44c3-9b39-0fdcac287106"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>EauR6f3H3hY7ACOymn3S/8yoSccpxmgeZWCK8+UfZlNaIj6CqI7oEyNxROmp4BeqUb+MsVKSx2/M&#13;
+9nWMdmoLGg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f0aeb61e-0142-4db7-9f1a-83b1a0c77270"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>z3N2/iOtdrLFg/u8GZSyviG6hdFIugwIegASPezanpKCpSzgTIpmk2EHr2ijKx5EusPttzL2ty2R&#13;
+D5IKJGobMw==</DigestValue></Reference></SignedInfo><SignatureValue>hfSTOi4rdJuqfxqC1vxDit6lFx44RaLJJmWtG1dQCGXWg34g8zHZuIojzoAu4uVOFpSeR45Y70dr&#13;
+Sh5UPRhZhGGrYZH93O6iiEvY4O2wIGP3fa63TyzQNyCaZ6Y8LD3nqxDtmYYFkgF33tjtXqiBaxXl&#13;
+MwFBp8EctG9j0HqJLsx0XW3b8Ovj48/Cq2OHFyQwAFFZ4aitIdMXDOqRzjAdf4X8ztPw21OT6rDp&#13;
+pruB6pTLNg5US52ikug+or5svAzDbeGYgiF1BF77ExS9Ba+UNTrqfS0OeaEnVp18affWO/mkbJtB&#13;
+3GS4ikgEX33VCfr1cyerlvQyiiaKdqfbpGjBKQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1152,4 +1233,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_89210fb5-66ad-45bc-ab5f-82b2d7def8f5" Target="#_5f24d93a-0e1f-4f92-93e9-bddbad455118"><Timestamp>2024-03-21 01:33:05</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f0aeb61e-0142-4db7-9f1a-83b1a0c77270" Target="#_1cd69973-4b74-44c3-9b39-0fdcac287106"><Timestamp>2024-03-21 01:40:23</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
