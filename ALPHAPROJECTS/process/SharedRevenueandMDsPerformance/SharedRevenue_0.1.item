@@ -830,8 +830,9 @@
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.servicing_department.equals(&quot;CLINICAL MICROSCOPY&quot;) || out1.servicing_department.equals(&quot;MOLECULAR DIAGNOSTIC&quot;) || out1.servicing_department.equals(&quot;IMMUNOLOGY&quot;) || out1.servicing_department.equals(&quot;HEMATOLOGY&quot;) || out1.servicing_department.equals(&quot;MICROBIOLOGY&quot;) || out1.servicing_department.equals(&quot;BLOOD BANK AND TRANSFUSION SERVICES&quot;) || out1.servicing_department.equals(&quot;CHEMISTRY&quot;) || out1.servicing_department.equals(&quot;HISTOPATHOLOGY&quot;) || out1.servicing_department.equals(&quot;SPECIAL CHEMISTRY&quot;) || out1.servicing_department.equals(&quot;CLINICAL CHEMISTRY&quot;) || out1.servicing_department.equals(&quot;LABORATORY&quot;) ? &quot;YES&quot;:&quot;NO&quot; " name="if_lab" type="id_String"/>
         <mapperTableEntries expression="out1.requesting_department.equals(&quot;INSTITUTE OF PERSONALIZED MOLECULAR MEDICINE&quot;)?&quot;YES&quot;:&quot;NO&quot; " name="if_ipmm" type="id_String"/>
+        <mapperTableEntries expression="Var.if_lab.equals(&quot;YES&quot;) &amp;&amp; Var.if_ipmm.equals(&quot;YES&quot;) ? &quot;INCLUDE&quot;:&quot;EXCLUDE&quot; " name="final_ipmm_filter" type="id_String"/>
       </varTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="Var.if_ipmm.equals(&quot;NO&quot;)" name="main" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="Var.final_ipmm_filter.equals(&quot;EXCLUDE&quot;)" name="main" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.patient_bill_id " name="patient_bill_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.patient_id " name="patient_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.encounter_type_id " name="encounter_type_id" nullable="true" type="id_String"/>
@@ -849,7 +850,7 @@
         <mapperTableEntries expression="out1.careprovider_id " name="careprovider_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.department " name="department" nullable="true" type="id_String"/>
       </outputTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="Var.if_lab.equals(&quot;YES&quot;) &amp;&amp; Var.if_ipmm.equals(&quot;YES&quot;)" name="ipmm" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="Var.final_ipmm_filter.equals(&quot;INCLUDE&quot;)" name="ipmm" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.patient_bill_id " name="patient_bill_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.patient_id " name="patient_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.encounter_type_id " name="encounter_type_id" nullable="true" type="id_String"/>
@@ -1205,13 +1206,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_dcf3f210-7717-4022-8b49-494094d3931d"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Qv3Jyv8NBoKeqMT66cJW8+aiEF40aWoXkFKXAS1O623Ae9i8PIbwy4gtDwzl3e3dFgjurUeGJWj/&#13;
-/a8kMPQ+Qg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_cffaf688-c32b-4b5f-887f-ee047441e7a7"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5N3HDobahhVWhZvXnRTOAmvkUKnHQ/kccyGk/KBRICgb7O6y+wnIBHTPNwbNhy2tRRHa2IglTdes&#13;
-2KcWvocezg==</DigestValue></Reference></SignedInfo><SignatureValue>S2qKxWQ51DG+dO6NYpAalWdhl/fuy81Yri6HGjSK1nbtXmcgHikUBLIatJQP0pnSdj3gDZ9S/zSH&#13;
-Dz5ll0tKWj5r4C/IaLUDaB9HR+sG+SOxYO6u/x85JOqi2WESQaVfsglmE51N2onzqWgUq6b1TktR&#13;
-LnLAxaeYS9XoxahfF9yO/K57mH1q3QNyewBxq2BKKlmVFRYk3cYYIlZas8k1rYFKKCSlEf3m9qFu&#13;
-shGKnCvSQqbdtd/Gp+YMtHbYzKcbkcqoH/7ePlBHnB7POUgLXrAZP1Xf/IboGZaMuvZlx/YLbKFE&#13;
-D0RTtsQtfyi6KNyw3ffBwcOSCGgIxs+k1XMzKA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_f2f723dc-65b0-4b47-ac15-d3c58af8e3ca"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>17T7fnk+tF6YSGMOLhz7nB8xH6695Pn/j63wl8wgr8lVKgSeS7Aivtx+AUI+pPNFXjIoPafuMmXZ&#13;
+Nh9RPIkJ/g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_129baee7-8f53-487a-9982-8f1ef353bf0f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+C8NDz9V9hcUmOXnuEUSmD1zX9UyN8N8LsAzUUOvHy6db7muYsTP98TMNsd7Tk5sg/vc3M4GL+6H&#13;
+5/VpW3zEMg==</DigestValue></Reference></SignedInfo><SignatureValue>lONjGOnxWT6+4ppul9Tw/pZgdiXyv7GRh8ENdPLj9uuj0gsTWc3PXcWCZkALvIAzbxi+TUDH7z9f&#13;
+8GAJVlI4W/JUr2o0sztFabhF4qqOEHIbJ0orpedf8XITjEd3BEzamakQFcj6St7RSjFch9Aceb+z&#13;
+DQIa+sLaBtRWsyhJ/9eh+aAIuHRFhaTM3FpenKA/JiFq/HavaEi8a3Ag6vzHE+PVdH6tIYCrBOh8&#13;
+HeGE180Sn2uhDMVwqUkVLivawoSVRK9+8E92sMsOCDJIyvVuJBZ6lSepFbIKvV0Z5DznLqFM80sT&#13;
+9BzyRhkOSlUvewSmULjNbFSBU4LAdV6VpcVbUw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1233,4 +1234,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_cffaf688-c32b-4b5f-887f-ee047441e7a7" Target="#_dcf3f210-7717-4022-8b49-494094d3931d"><Timestamp>2024-03-21 01:45:29</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_129baee7-8f53-487a-9982-8f1ef353bf0f" Target="#_f2f723dc-65b0-4b47-ac15-d3c58af8e3ca"><Timestamp>2024-03-21 01:51:37</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
