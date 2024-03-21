@@ -1027,19 +1027,47 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="544">
+  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_1"/>
+    <elementParameter field="TABLE" name="GROUPBYS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="month"/>
+      <elementValue elementRef="INPUT_COLUMN" value="month"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="department"/>
+      <elementValue elementRef="INPUT_COLUMN" value="department"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="encounter_type_id"/>
+      <elementValue elementRef="INPUT_COLUMN" value="encounter_type_id"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="OPERATIONS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="amount"/>
+      <elementValue elementRef="FUNCTION" value="sum"/>
+      <elementValue elementRef="INPUT_COLUMN" value="amount"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
+    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
+    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tAggregateRow_1">
+      <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="encounter_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
-    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
-    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="false"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="true"/>
     <elementParameter field="RADIO" name="VERTICAL" value="false"/>
     <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
     <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
     <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
-    <elementParameter field="CHECK" name="PRINT_HEADER" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
-    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
-    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" show="false" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" show="false" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" show="false" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" show="false" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" show="false" value="false"/>
     <elementParameter field="TABLE" name="LENGTHS" show="false">
       <elementValue elementRef="SCHEMA_COLUMN" value="amount"/>
       <elementValue elementRef="LENGTH" value="10"/>
@@ -1129,22 +1157,26 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="ipmm"/>
   </connection>
-  <connection connectorName="FLOW" label="agg_ipmm" lineStyle="0" metaname="agg_ipmm" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tLogRow_1">
+  <connection connectorName="FLOW" label="agg_ipmm" lineStyle="0" metaname="agg_ipmm" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tAggregateRow_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="agg_ipmm"/>
+  </connection>
+  <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tLogRow_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_b73ebbd0-9d19-4243-b222-be4c72d938b3"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>y94Y937lQLLetu4FL3oFIAH9/cB1JpK0z2Tr77PYex9QEfQSPqFP6fjnfEoFZyET0HtgNPkcJtj0&#13;
-yjAmNE7iYw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_498545b7-e2fc-4a8e-82de-a8f036158a54"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>fK26Ifm334ItiN87ciIfLlqm6EGYSPD5VPaCB1VkKJ4MmMxyLMckwsMw63hhBNOEorjZzUjsiK4u&#13;
-agcJ9TU+ZA==</DigestValue></Reference></SignedInfo><SignatureValue>dGiTnRxDvB1lwCzt/B5Hlrv8wuxmL5UOJxsS85bW2UFPksJNZsd+nzs68vvN+giNC1sGEE8LPht9&#13;
-jsOf3ikf5poA9Hnld1gVq6FWJXW1quYMHvpY6wEoU3+eFcb+aFjjoyT4HqtCEdP2mRt0MYPnRgNy&#13;
-63qMiPv9DjnlKS7SpwBvl8gIPfnlF0oCokZc2QQ0R4V0xO1ZqVwWQ8xoWEs9FReDXhoggwfy13ra&#13;
-cY8DOLzEgAsLj2g4VL5qCFjkM/gztVCDjnz3zJEzHLLVpH6qNqeECXAtgfwuRbM80rEqEyaRzPnc&#13;
-StEOnutFiQTtY5QCHHPScLphPQCLTrkiVpL0KQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_9bf69db6-0694-4571-acd2-0c8fe34c471f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>SCwkmRnA3Dk/f2dA0bdwGDfmX+0m8mTj9fwW/Hg1TsgnpLm85ztnQYfuOfrtolhoQkzVmAQK413p&#13;
+kVCSahdkyA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a73069d9-c7ea-4d69-ba2b-04e6ba68178e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>C1ZnJkqyy90TNgAmhmymwWJPc9xAQvRYk4pJdlFf76qKoHkUMyXnv0+noxc1lRWi7UkbRmJWzCRB&#13;
+Bry4WesVyQ==</DigestValue></Reference></SignedInfo><SignatureValue>I83GE/6CORHKJBDe70TYG/CiwJua1cl+PuhDxl96MQ2HTlgKoRDvpgFHvR95eZuI46ft2q9JLoVH&#13;
+Lbc/3kAe+ItC2Ua0ETArUTYN3wqUfUQRzO0O+bensFnCskz37LVX8i4hBXXnNkVenEBE9NMrQ/lJ&#13;
+VxOayykpf3cSG2RUDY5TNfEZ0QqK8SAdmZ6p1wnA1efVPMqqDWkDXsYutM/JOXCX3wZuZWYnY0lu&#13;
+jxd4IRLFD4b5s8qDySY8qRM/gR1d3Kws9BVoRgnWWWt2wnIG2r8fzdi5lRnwOG5/ndEHw0JoqpCA&#13;
+5vtm6NLkGcc9j2r/3WZdvhMYexsPjFo1pmigCg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1166,4 +1198,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_498545b7-e2fc-4a8e-82de-a8f036158a54" Target="#_b73ebbd0-9d19-4243-b222-be4c72d938b3"><Timestamp>2024-03-21 02:20:41</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a73069d9-c7ea-4d69-ba2b-04e6ba68178e" Target="#_9bf69db6-0694-4571-acd2-0c8fe34c471f"><Timestamp>2024-03-21 02:23:18</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
