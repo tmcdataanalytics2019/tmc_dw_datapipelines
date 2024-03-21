@@ -822,6 +822,8 @@
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="careprovider_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="iflab" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ifipmm" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -847,7 +849,7 @@
         <mapperTableEntries expression="out1.careprovider_id " name="careprovider_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.department " name="department" nullable="true" type="id_String"/>
       </outputTables>
-      <outputTables activateExpressionFilter="true" expressionFilter="Var.if_lab.equals(&quot;YES&quot;) &amp;&amp; Var.if_ipmm.equals(&quot;YES&quot;)" name="ipmm" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" name="ipmm" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.patient_bill_id " name="patient_bill_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.patient_id " name="patient_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.encounter_type_id " name="encounter_type_id" nullable="true" type="id_String"/>
@@ -864,6 +866,8 @@
         <mapperTableEntries expression="out1.special_discount " name="special_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out1.careprovider_id " name="careprovider_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out1.department " name="department" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="Var.if_lab" name="iflab" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="Var.if_ipmm" name="ifipmm" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="patient_bill_id" nullable="true" type="id_String"/>
@@ -1003,6 +1007,10 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="department"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="iflab"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ifipmm"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:ZmnSJCUth1oV3kjqXJcRf4DMYCV8vDUbF525In29"/>
@@ -1038,6 +1046,8 @@
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="careprovider_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="iflab" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ifipmm" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="10" mergeOrder="1" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tUnite_1">
@@ -1098,6 +1108,14 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="main"/>
   </connection>
   <connection connectorName="FLOW" label="ipmm" lineStyle="0" metaname="ipmm" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_3" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="iflab"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ifipmm"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="ipmm"/>
   </connection>
@@ -1106,13 +1124,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a94d0257-a106-4a58-992e-d53e35906644"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>qZGBGrYpQ6OmorRdDcgUn+9h7NvNNPji4ebH6tlYJoYNhoDKPljh1x7wfa8Ih00AhPuWvTYUednD&#13;
-TTBogTIIZA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_863b059d-95f2-452c-86de-c7d8bfb61853"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ORTcNfNMrFcx7oVTFvCIcCAqF8V7DbahrImLD3TmHkR8ovDlQFlRxgjAyGCYPzAH4uWXSCerRT+p&#13;
-6nh/Du18Ug==</DigestValue></Reference></SignedInfo><SignatureValue>KQN3GehR54rzn+mmX/zrTEjv/HC2y6nAqCy54UoF4r+tjDh2obYnI3w6LXd2d046oOQzv3i/1xpX&#13;
-Tzt8NP5zitox5dQ9XL/A1P4p+L9rAFuYor7hcEXGMd/f62giv1plMulZiZPVM+9sIx4RKZqzmF16&#13;
-To75OlNi8SGTX4lIfoAbiuWB5TkbaqMi4cjv0/OLFPsXMlr2p+ZShiJcqUjMI2jWf7MGC9mS0xye&#13;
-AILQuBNTlNldyYlQjT9+Un3So7+qiB0JR3+enQdSYR6IINqTZFO+NB11vk6ZTQCUTWL482076vw+&#13;
-WylZlnROVTAiPAGkiTWk8j7GZ+hC4NQGWw1asg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_5f24d93a-0e1f-4f92-93e9-bddbad455118"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ACkrnrcHxtg6P+v24kNvFtqKblalUX+B6nzylkjCmgfx/Li7x+CL7QIsKWwCAWxaMHkXgxQa51ir&#13;
+Wrr6rfY0Ng==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_89210fb5-66ad-45bc-ab5f-82b2d7def8f5"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>cHrcM4yk0R8+ewrs2pAxa11rS5/uW3SW5Q+lxvos0DtNfaemvYRZ29ZEtX0RXxxv3IZMQSl8tdz+&#13;
+ppcQAuYchg==</DigestValue></Reference></SignedInfo><SignatureValue>L02wWLVZOUXquBSTYbDGqYBffkBk7XnL7ctC9Y9xVc3KBueQbdFLUXU1bsv69f6vu/+azrZJQIJG&#13;
+i6nZ07Dne9C22bGawXKEb1dO/gUvUWifSB9YsB3P56ZJoQsWdI/THD7ju0Uqc3POrWIpMQlJo9gV&#13;
+GB270uz6PJyK6y9tvH2SZpSbe3cK1+uTtAtRgfNOYUeu1QHtFh8jy/F1HUxEC4EN9GywWA6N6KLM&#13;
+EnVFREp/nzXx3x8hcrqK9712W9xYTI5RvaNJgZifsryjyLaAyPxZFRZkUiiuIKANJfhxYL8Ejbhk&#13;
+dvmne/puuPywW4KeDIcAqpR/BFv6eQmevuBgkg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1134,4 +1152,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_863b059d-95f2-452c-86de-c7d8bfb61853" Target="#_a94d0257-a106-4a58-992e-d53e35906644"><Timestamp>2024-03-21 01:30:17</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_89210fb5-66ad-45bc-ab5f-82b2d7def8f5" Target="#_5f24d93a-0e1f-4f92-93e9-bddbad455118"><Timestamp>2024-03-21 01:33:05</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
