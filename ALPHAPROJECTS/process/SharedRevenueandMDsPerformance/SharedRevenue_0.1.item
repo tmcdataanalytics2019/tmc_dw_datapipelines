@@ -1492,7 +1492,7 @@
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="final_output">
-      <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Double" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="true" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
@@ -1503,7 +1503,7 @@
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="final_output" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row12.amount " name="amount" nullable="true" type="id_Double"/>
+        <mapperTableEntries expression="row12.amount " name="amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row12.department " name="department" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row12.month " name="month" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row12.year " name="year" nullable="true" type="id_String"/>
@@ -1587,7 +1587,7 @@
       <column comment="" key="false" length="-1" name="inpatient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="total_amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="testing" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Double" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="testing" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -1600,10 +1600,10 @@
         <mapperTableEntries expression="final_output.inpatient " name="inpatient" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="final_output.outpatient " name="outpatient" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row16.amount" name="total_amount" nullable="true" type="id_BigDecimal"/>
-        <mapperTableEntries expression="Mathematical.DIV(final_output.amount,row16.amount) " name="testing" nullable="true" type="id_Double"/>
+        <mapperTableEntries expression="final_output.amount.divide(row16.amount) " name="testing" nullable="true" type="id_BigDecimal"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="final_output" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="amount" nullable="true" type="id_Double"/>
+        <mapperTableEntries name="amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="department" nullable="true" type="id_String"/>
         <mapperTableEntries name="month" nullable="true" type="id_String"/>
         <mapperTableEntries name="year" nullable="true" type="id_String"/>
@@ -1611,7 +1611,7 @@
         <mapperTableEntries name="outpatient" nullable="true" type="id_BigDecimal"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row16" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="amount" nullable="true" type="id_Double"/>
+        <mapperTableEntries name="amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="month" nullable="true" type="id_String"/>
         <mapperTableEntries name="year" nullable="true" type="id_String"/>
       </inputTables>
@@ -1626,7 +1626,7 @@
     <elementParameter field="TEXT" name="LABEL" value="Retrieve in Memory Total Amount"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tHashInput_7">
-      <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Double" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -1673,7 +1673,7 @@
       <column comment="" key="false" length="-1" name="inpatient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="total_amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="testing" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Double" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="testing" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="10" mergeOrder="1" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tUnite_1">
@@ -1964,13 +1964,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_491bb02c-dd77-44f6-8936-1ef264eecc03"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>jjqXO5vnqAuGjxfGRhIQctPKczYXcGBhvuh/RILmYmG+i//g3QABmHXuyNAafWRekLECItOhQ4xP&#13;
-IF8A+l3E1g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_77fdc283-8e81-426f-b25e-f991f22ec8e0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>D3VXUbg0kphfTBCmYTCaUIVpCldKewfYqKmd08H1mnD396My7hLG4UyEvcCW56302DnGCO8OEnVv&#13;
-3znT7YYvuw==</DigestValue></Reference></SignedInfo><SignatureValue>Ab7jaDWU6AQVDOovMzIKTCaTvISx/EyxF5gjl9Dz0VxPfQeNiGZrekmTA6DvH9LMqHTkrbvAnAvr&#13;
-HRY1FOX2MqzE0x/ke6/ayqP/lJgXhaGDYbsHYq4ZTU5Spkm+LJkKxI+ipBjHBbtYRBIMpJwGRjwd&#13;
-mRhwosFBW+o52X8auMt+O0xNK/F5u9q6epHP3itiiF/kVc0MeuF/1QpIBTec52bVtXqoZbROQCDh&#13;
-rGMy83u8/AIycbkXNS7Sbhv9LDELCBNOrR3lF3pSbekFI2Zn8JkKKv+F7TU0YvuvHUHeOFcotL4G&#13;
-xrh2kgQ5HNybmYD6XBjwMTCJvJXid515IlUUSQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_ff829b00-45d9-4516-bd21-9d06cd05c9e0"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>SiOzeKsiX8iRpAGv58UzYgBZLE1KMvaz770XFhlWYB/UPZ5U1GzmBsM8MceTGGUZ1whGRR5cbNVT&#13;
+o6Vys4++Mw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_2675b7d1-9afd-4b39-8b8c-b2241e6bb184"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>KczwNK3EgDqFiziomwKc2Lsf0qnGGjjqbw/4NsUomeeRG7b8wJbbcVdjSz9XKoDHqjmYWSuAsbtU&#13;
+LkqP4oPEWQ==</DigestValue></Reference></SignedInfo><SignatureValue>QNJQ/6vZaHLTRuTCINx1J8/a28o7ON1wvIZuc4nyPc5JH5GRYvqUS/UeY1COqMK5PHOKljk29nd9&#13;
+5JO0E7DTPraHunwDz+8imQRoddmFAOzp8ssXN/vi+NFJhRLNwNzlig7kKKYUKM6jFModGaRoxymX&#13;
++CftxPnpr9uJxch7hkth0tYS+jZd+gI1ofCI67bR2aN25vGS0MvJ6mtXTZ0ZOCNgld5qsxS+Es8G&#13;
+MCjIX+XHrpDc9iDBkwtVAXSmBCg77RFAdBWY3FGZm1WEM7V455AlJjzweLD6HIfOLTsrFL2wtXys&#13;
+wRk8TSmaBEJDMLKD+HlrAiNynHiaG+v8f6SZeA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1992,4 +1992,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_77fdc283-8e81-426f-b25e-f991f22ec8e0" Target="#_491bb02c-dd77-44f6-8936-1ef264eecc03"><Timestamp>2024-03-22 04:00:39</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_2675b7d1-9afd-4b39-8b8c-b2241e6bb184" Target="#_ff829b00-45d9-4516-bd21-9d06cd05c9e0"><Timestamp>2024-03-22 04:20:52</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
