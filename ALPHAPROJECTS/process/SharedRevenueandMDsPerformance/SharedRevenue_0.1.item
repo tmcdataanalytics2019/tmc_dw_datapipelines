@@ -1594,6 +1594,7 @@
       <column comment="" key="false" length="-1" name="floor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="half_even" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -1612,7 +1613,8 @@
         <mapperTableEntries expression="final_output.amount.divide(row16.amount, 4, java.math.RoundingMode.HALF_DOWN).multiply(BigDecimal.valueOf(100)) " name="halfdown" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="final_output.amount.divide(row16.amount, 4, java.math.RoundingMode.FLOOR).multiply(BigDecimal.valueOf(100)) " name="floor" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="final_output.amount.divide(row16.amount, 4, java.math.RoundingMode.HALF_EVEN).multiply(BigDecimal.valueOf(100)) " name="half_even" nullable="true" type="id_BigDecimal"/>
-        <mapperTableEntries expression="final_output.inpatient == null ? 0.00 : final_output.inpatient.divide(final_output.amount, 4, java.math.RoundingMode.HALF_EVEN).multiply(BigDecimal.valueOf(100)) " name="inpatient_percentage" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="final_output.inpatient == null ? BigDecimal.valueOf(0) : final_output.inpatient.divide(final_output.amount, 4, java.math.RoundingMode.HALF_EVEN).multiply(BigDecimal.valueOf(100)) " name="inpatient_percentage" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="final_output.outpatient == null ? BigDecimal.valueOf(0) : final_output.outpatient.divide(final_output.amount, 4, java.math.RoundingMode.HALF_EVEN).multiply(BigDecimal.valueOf(100)) " name="outpatient_percentage" nullable="true" type="id_BigDecimal"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="final_output" sizeState="INTERMEDIATE">
         <mapperTableEntries name="amount" nullable="true" type="id_BigDecimal"/>
@@ -1688,6 +1690,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="inpatient_percentage"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="outpatient_percentage"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:BmM8FnkCaKu/T336/BxjlHWhVXzB/uTjIq1OECu5"/>
@@ -1721,6 +1725,7 @@
       <column comment="" key="false" length="-1" name="floor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="half_even" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="outpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="10" mergeOrder="1" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tUnite_1">
@@ -2032,13 +2037,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_e685731d-4d45-4914-9f3b-32b6de252bae"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>rw7j7Fahc8XYQGCdEu2H0Ra4esPOVU3CVROcV2RbZOWVLIwCMd9TJ4TeNPRGHDbBNBD5xX7Jc3TR&#13;
-xlYMmuaivg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_384d1ae3-d8a1-417b-bf25-2bd23efeb33d"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>dkVLVHYqP6qjUs9Bp7nXzUwvJ3rz3WOitHoDK4+uuaC3wLLoZtkBOfZ6/Za/58WFMLlBpV5H+4mi&#13;
-Kd7T6drpiA==</DigestValue></Reference></SignedInfo><SignatureValue>RoKeQ3RhympjAHtWTU40T1BsT6zMUrujOeUadXP4oiFsTZDbU8RPaDb5S+PpkErBtsmIRGgIeNsG&#13;
-qAm4CRFVgnDA7ryp6YGODODQ2kdxUAdgmL7p/pDMntkj+1sbCpjg3H1lERJhMmsHGyPjjmcvtPES&#13;
-WWVFyFsVVW/QhYa/jUVIGIqhOiw7KIV6bU/vg/MZNKUEetZM8uIM6zpd5lH6Ugadp5brNL+x0gpE&#13;
-az9Fv/VZfwTUvS8VZmLRM0ATOA+hS7HC17LdnrvCR94px95SoqV7hfK2sT1hkMPD0RnZKoxwowJ5&#13;
-l+Xp8Vao1PPjJh80Rd5U1s4SQgOI+xqoTUeLWA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a92da3f9-6da9-4732-a7a5-be2f28aaf566"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>gpl4JUsfgvaKvjR77MuauKSlhEzmwyrB/hq1xIlrynPkM+dPJgQcm/VHAj40TsCduylESx2RDLBo&#13;
+0utXxSwTOg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_effe815f-2669-490f-ad9c-cba8be110304"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>XjDyAhg+6VzuuRhcJWh51TtBDzSuAYOmigliekAa0wrYa4vAHspxpjNlHYHBnYEHl0Tw1EqQMhze&#13;
+k8ASzqUrAw==</DigestValue></Reference></SignedInfo><SignatureValue>Z1UsVEa4IEXISQJ841l+2P5TmimrlDZKMZLJXTsqLYMATNd1HuC+HLwBOyXEiQGQMe8Ikxba2+pN&#13;
+D8HFdEkltQnLBq5qTHXyS41gzcCTgUZx/liDu+jhn1IZwTPaLubjCDNaYmLM8q143R3ydQMs8VvR&#13;
+V3O7LDLSKBIfCyr6qrBv0hei3bMQSf2MgWhPmECRxxjqUU99bpeOmk6uADqYhy7TQAonNEKeoqKo&#13;
+nD248lnosO9YvQOysnLcJFJuX6kE4L9L3PGiuycF5Vj8ZEclobbrbjTIy1fSrOOb4KjmETsMY87S&#13;
+/6S3aThxawygH7Ih7FSv1usC93BpjHDJwfU39w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2060,4 +2065,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_384d1ae3-d8a1-417b-bf25-2bd23efeb33d" Target="#_e685731d-4d45-4914-9f3b-32b6de252bae"><Timestamp>2024-03-26 06:29:25</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_effe815f-2669-490f-ad9c-cba8be110304" Target="#_a92da3f9-6da9-4732-a7a5-be2f28aaf566"><Timestamp>2024-03-26 06:30:19</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
