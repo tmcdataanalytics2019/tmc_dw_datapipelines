@@ -434,6 +434,8 @@
       <elementValue elementRef="INPUT_COLUMN" value="institute_department"/>
       <elementValue elementRef="OUTPUT_COLUMN" value="bill_month_int"/>
       <elementValue elementRef="INPUT_COLUMN" value="bill_month_int"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="doctor_code"/>
+      <elementValue elementRef="INPUT_COLUMN" value="doctor_code"/>
     </elementParameter>
     <elementParameter field="TABLE" name="OPERATIONS">
       <elementValue elementRef="OUTPUT_COLUMN" value="gross_amount"/>
@@ -457,6 +459,7 @@
       <column comment="" key="true" length="-1" name="bill_month_int" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="true" length="-1" name="bill_year_int" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="institute_department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="doctor_code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tSortRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="768" posY="224">
@@ -487,6 +490,7 @@
       <column comment="" key="true" length="-1" name="bill_month_int" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="true" length="-1" name="bill_year_int" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="institute_department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="doctor_code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="928" posY="224">
@@ -512,6 +516,7 @@
       <column comment="" key="false" length="-1" name="institute_department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="test" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dept_code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="doctor_code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -527,6 +532,7 @@
         <mapperTableEntries expression="row5.institute_department " name="institute_department" nullable="true" type="id_String"/>
         <mapperTableEntries expression="Numeric.sequence(Var.var1,1,1)" name="test" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="StringHandling.LEFT(row5.institute_department,3) + StringHandling.RIGHT(row5.institute_department,3) " name="dept_code" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row5.doctor_code " name="doctor_code" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row5" sizeState="INTERMEDIATE">
         <mapperTableEntries name="gross_amount" nullable="true" type="id_BigDecimal"/>
@@ -535,6 +541,7 @@
         <mapperTableEntries name="bill_month_int" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="bill_year_int" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="institute_department" nullable="true" type="id_String"/>
+        <mapperTableEntries name="doctor_code" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -571,6 +578,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="dept_code"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="doctor_code"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:hwF2804TAQATsNgvtsFTIohbSMSwR04YiUT4QsFd"/>
@@ -598,6 +607,7 @@
       <column comment="" key="false" length="-1" name="institute_department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="test" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="dept_code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="doctor_code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
@@ -640,6 +650,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
   </connection>
   <connection connectorName="FLOW" label="row6" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tSortRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="doctor_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row6"/>
   </connection>
@@ -648,6 +663,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row5"/>
   </connection>
   <connection connectorName="FLOW" label="out3" lineStyle="0" metaname="out3" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="doctor_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
@@ -656,13 +676,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c4476d9c-68d5-4c73-900d-96c8594fdf1e"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5IyHeTMSvykxiUqU+R9l46qErH3vVsmem6dxCwurKRaISp5Wcd72RaQHd7Ts7HyeLGX71vC7WodL&#13;
-6dvAFiC6qg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f0ca7f70-6cd5-4481-a809-bd5f7c16ddc9"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>fU3RKLu0Lu/xaFMSHcgImJiwaZim/ACXYZyV2Zt0C6wdshUlXNXqU8FlTNHsfX5T1zHsMdwmkZSz&#13;
-Ca3Q6e6esw==</DigestValue></Reference></SignedInfo><SignatureValue>phRHEhtw0mZo9kLZsvSUbfjA9GGrMz+29EP3SPLynKsG8HoMHoHlT89kqzS4tYvU+cfXNUH5Tbv/&#13;
-qpcMeLonp2jBd3fbDCWRuUt0zqWePxqLLkeufaOYawjDZ0hYJYrudu7GI9gLLXJ5VS39IiV2jt8+&#13;
-ulLbt7Xm9FJlMrim26RXTClzfXEFKU2jZtAiH1MjcOcAgG0+QwGvehcDSPs8pn80PH/qwWRdM9IY&#13;
-z7sX1+DPvdzEAWE+yRXQyFQ+EaFpQbETkPkvvCRz3xq8mtn3++iqxEVeCwwA/3iTm4CKgMkDYS+R&#13;
-M9MyAVPtgatqnx2zHDiuM77k/oIafVozhJxGAA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a70a0a8e-21be-45ca-9135-86bd7854c461"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>fzpuEIGpTMKbn42bEu2G5su98p47oRuzi6zOrpT4n6lTEkZPw6PlTeCSwt1YYxtYH6jRlidRYP1H&#13;
+v5iA06YRvQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f10e1f5b-33bf-4701-8e4d-59b19d2f4474"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>hMnzk8PKGSKoWH83vn8pt2gJF5O5C8VDTOqtC81JXBy9RhwFaOrK7b7mGksDBIdGIAc5obpyid61&#13;
+jTO/TuMcJw==</DigestValue></Reference></SignedInfo><SignatureValue>cKUuUpRi5iOgGFXLaI0Vh5SsvEIZ9b1LUmcjczqfKJF7N06/7N2a+AC5WBMVV2pCbZakMK6tVyxs&#13;
+0B3AB1M9xOrGOntHDI8LZwiMoW2GCDTtX+BfKqzZm1ty41w5oZft2FWUHU8hz1TeNbuS2zVgbb56&#13;
+2pi6ZSGD8Jrtysx8WtYIgL6JsQ0xHwTeckXATcxJH5sp5FVetfBuUhtz+yVVnnmGK/rW1+Ku7o4m&#13;
+Pgc3bsjzH3A4jnSsvPkOkUFNsnalNm34j2AFb7h79BzKqi/05Gpya17r+jZIfNk8TytLEWvnwbuV&#13;
+mp9BdAbr+zc8YkyObXkIFJ4ZSufARJu4Db6NSw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -684,4 +704,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f0ca7f70-6cd5-4481-a809-bd5f7c16ddc9" Target="#_c4476d9c-68d5-4c73-900d-96c8594fdf1e"><Timestamp>2024-04-02 05:46:44</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f10e1f5b-33bf-4701-8e4d-59b19d2f4474" Target="#_a70a0a8e-21be-45ca-9135-86bd7854c461"><Timestamp>2024-04-02 05:49:28</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
