@@ -1426,7 +1426,38 @@
       <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tHashOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="1024">
+  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="768" posY="1024">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tAggregateRow_6"/>
+    <elementParameter field="TABLE" name="GROUPBYS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="department"/>
+      <elementValue elementRef="INPUT_COLUMN" value="department"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="encounter_type_id"/>
+      <elementValue elementRef="INPUT_COLUMN" value="encounter_type_id"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="month"/>
+      <elementValue elementRef="INPUT_COLUMN" value="month"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="year"/>
+      <elementValue elementRef="INPUT_COLUMN" value="year"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="OPERATIONS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="amount"/>
+      <elementValue elementRef="FUNCTION" value="sum"/>
+      <elementValue elementRef="INPUT_COLUMN" value="amount"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
+    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
+    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="test" name="tAggregateRow_6">
+      <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="encounter_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tHashOutput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="1024">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tHashOutput_5"/>
     <elementParameter field="CHECK" name="LINK_WITH" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="LIST" show="false" value=""/>
@@ -1647,14 +1678,14 @@
         <mapperTableEntries name="amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row12.department " name="department" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="encounter_type_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row12.month " name="month" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="year" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row14" sizeState="INTERMEDIATE">
         <mapperTableEntries name="amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row12.department " name="department" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="encounter_type_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row12.month " name="month" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="year" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
@@ -2335,7 +2366,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row7"/>
   </connection>
-  <connection connectorName="FLOW" label="get_total_per_dept_vtype" lineStyle="0" metaname="get_total_per_dept_vtype" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_7" target="tHashOutput_5">
+  <connection connectorName="FLOW" label="get_total_per_dept_vtype" lineStyle="0" metaname="get_total_per_dept_vtype" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_7" target="tAggregateRow_6">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="year"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -2391,6 +2422,10 @@
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row10"/>
+  </connection>
+  <connection connectorName="FLOW" label="row19" lineStyle="0" metaname="tAggregateRow_6" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_6" target="tHashOutput_5">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row19"/>
   </connection>
   <connection connectorName="FLOW" label="row11" lineStyle="0" metaname="tHashInput_3" offsetLabelX="0" offsetLabelY="0" source="tHashInput_3" target="tMap_8">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -2604,13 +2639,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_76598080-191b-4a98-ad0c-3edcc7b3bedb"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>NAv6jG6AYEMrGwyrcjibgwi6T87zCq7SSYx3hyogiCpo1/aTAEBn9urD/7fCH9UUnzBq0xlJ7DoA&#13;
-VmiXgVJHqg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_d75a1158-aa6f-441a-99f1-2fa9d7e76e99"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>99PiJeGGRy6UX6C3smRL42YRuFWpU22VUNYrG2ogPIwBqBtoud9e+4xAamBWxOHBeOPWmBv/solT&#13;
-/tY/6r0Pdw==</DigestValue></Reference></SignedInfo><SignatureValue>XPTCq/CQvakVDo/HuXtbcafysUKnBHYF1IxUq1j8lHWMEH4M9ZUTGbzvPbw9h4gNi8v9W6kjIMIs&#13;
-5zIjU5d7SRj9xJY0g78CsUOeCtQCuTlR4CVx4c/o76teO0X3NnN8ZFGs7Cf2pnP/xZT0WnYzO/Uu&#13;
-H+MjFeyvFx2/tQTrl7gLKlF35CEj00D3zy3dQZ73a+XA8N4rSMGdT+nDFexAZn2iyHh4eYWf5nzU&#13;
-JtUxF56opNv5dvim5bq30Nll2o3iHtzOtdub+g4X9bFkvKhtaZmBn1cROhzB8EeexJkqhE/4ldzj&#13;
-hpoFeSzZzqxHLqyKvYSttugAnTw9RjwXoc+M6w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_2cc88dec-8937-4ef0-8b12-117808d6b33f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>33bVi/JKi1372EWr2ZcY7qwgKyu9/FndMgDkd8mDJ5zIHTx9mJ3NLUisEk+jOWmeb5Fa7vI4wIq/&#13;
+KiM7r7Dwlw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_de696d49-ffd8-4bc4-ac1b-1ca45f7ea1aa"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>O/Tldc6nixWq5CqhCy8wbrg7RjO9azg5r4MTNIMAcPAR43gUEw78bzshk+rNo5fm5PjotECErjuO&#13;
+00yhM1wJNg==</DigestValue></Reference></SignedInfo><SignatureValue>kBEhwqfps7IVgWuFsWNgybgLDvFiNh8TRIP2Jbj1F0KTj+61TJJvgQQK3w4Gdw5JERRuAQmyqs+B&#13;
+SDIhZm7q4j8n594cBoNOv/u4CYY6TtdWt2cSMWE8/DfUN03ndIcZ9UsPJtyNnQ78IP1Q4JosagLX&#13;
+tyw0TzhhvP/BsTro33pIl9nS4q7H1GmqQ/AKQey4qCu5rux4rPNFm7PCnneHbT+kvBeIeVNKawN4&#13;
+rwKjVVBk3OyKii4vSbosYLg3Je/ERUNGQyue0xj+zAw2PxJ0oWhLXM8/m28fxfIirDBejkxfeuE/&#13;
+CRGnYobZbn/nxJsm260+Q/Z+qDpGGMsIqedclw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2632,4 +2667,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_d75a1158-aa6f-441a-99f1-2fa9d7e76e99" Target="#_76598080-191b-4a98-ad0c-3edcc7b3bedb"><Timestamp>2024-04-01 23:47:20</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_de696d49-ffd8-4bc4-ac1b-1ca45f7ea1aa" Target="#_2cc88dec-8937-4ef0-8b12-117808d6b33f"><Timestamp>2024-04-02 00:03:22</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
