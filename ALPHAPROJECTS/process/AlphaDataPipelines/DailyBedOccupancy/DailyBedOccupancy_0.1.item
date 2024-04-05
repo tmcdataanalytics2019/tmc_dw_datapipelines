@@ -330,10 +330,10 @@
       <column comment="" key="false" length="-1" name="organization_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="!row1.ward_id.equals(&quot;5FF7040B92D0962AB4032143&quot;) &amp;&amp; !row1.ward_id.equals(&quot;5FF7040C92D0962AB4032163&quot;) &amp;&amp; !row1.ward_id.equals(&quot;5FF7040C92D0962AB4032165&quot;) &amp;&amp; !row1.ward_id.equals(&quot;5FF7040C92D0962AB4032167&quot;) &amp;&amp; !row1.ward_id.equals(&quot;5FF7040C92D0962AB403215F&quot;) &amp;&amp; !row1.ward_id.equals(&quot;5FF7040C92D0962AB4032161&quot;) &amp;&amp; !row1.transaction_external_id.equals(&quot;60F67A18EA69A849AA633C53&quot;) &amp;&amp;&#10;!row1.transaction_external_id.equals(&quot;6364B1f123e6050e9d1fea6b&quot;) &amp;&amp;&#10;!row1.transaction_external_id.equals(&quot;6364b665f7ec3b0e86dacff8&quot;) &amp;&amp;&#10;!row1.transaction_external_id.equals(&quot;6364b76821f4da1ac5cc204a&quot;) &amp;&amp;&#10;!row1.transaction_external_id.equals(&quot;6364bce24f0c151ae5fb866b&quot;) &amp;&amp;&#10;!row1.transaction_external_id.equals(&quot;6364bf414f0c151ae5fc0853&quot;) &amp;&amp;&#10;!row1.transaction_external_id.equals(&quot;&quot;)" name="asdasd" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row1.visit_id " name="visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.transaction_external_id" name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.room_start_date " name="room_start_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.room_end_date == null?TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,&quot;2200-01-01 00:00:00&quot;):row1.room_end_date " name="room_end_date" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="row1.ward_id " name="ward_id" nullable="true" type="id_String"/>
@@ -534,6 +534,7 @@
       <column comment="" key="false" length="-1" name="modified_by" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="FLOW" label="qweqwe" name="qweqwe">
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -547,7 +548,7 @@
       <column comment="" key="false" length="-1" name="organization_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="filter" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -566,6 +567,7 @@
         <mapperTableEntries expression="&quot;TALEND DATA PIPELINE&quot;" name="modified_by" nullable="true" type="id_String"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ss&quot;, TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;)) " name="timestamp" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, TalendDate.getDate(&quot;yyyy-MM-dd&quot;)) " name="batch_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="out1.bed_occupancy_transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
       </outputTables>
       <outputTables name="qweqwe" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="out1.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -604,7 +606,7 @@
     <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:Okcvs0LvoNyIHf9/6+1GNxuTp/EwoWbRffWc1icZPNVwAXM1urTVk2U="/>
     <elementParameter field="DBTABLE" name="TABLE" value="context.TableName + &quot;rt_aa_daily_bed_occupancies&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="CLEAR"/>
     <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="LABEL" name="NOTE" show="false" value="NOTE: batch size must be less than or equal to total number of parameter markers divided by number of columns"/>
@@ -633,6 +635,16 @@
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="room_start_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="room_end_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="filterdate"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -697,6 +709,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -709,6 +726,8 @@
     <metadata connector="FLOW" name="tDBOutput_1">
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="room_start_date" nullable="true" originalDbColumnName="room_in_startdate" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="room_end_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="filterdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ward_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bed_occupancy_transaction_external_id" nullable="true" originalDbColumnName="occupancy_transaction_external_id" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -721,10 +740,13 @@
       <column comment="" key="false" length="-1" name="modified_by" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="room_start_date" nullable="true" originalDbColumnName="room_in_startdate" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="room_end_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="filterdate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ward_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bed_occupancy_transaction_external_id" nullable="true" originalDbColumnName="occupancy_transaction_external_id" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -737,6 +759,7 @@
       <column comment="" key="false" length="-1" name="modified_by" nullable="true" originalLength="-1" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="batch_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -1384,6 +1407,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
   </connection>
   <connection connectorName="FLOW" label="filter" lineStyle="0" metaname="filter" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tDBOutput_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="filter"/>
   </connection>
@@ -1454,13 +1482,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_96d55143-b9b6-46cd-8e26-92cd6a63ddb4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>r2QplGDaZUSlvtj8B03RvzXfOYIW0zGh4wYocyAutSIZa1KbZevTCj7Fqw3tAMe+JjsJSGJ8WKlN&#13;
-0HwoJTzfTw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_04fcfbb1-b2e5-4875-aa6e-4ba9ca0ddaaf"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>xCsYJUVIzxuirhRsFc9iQz0JeWd7+6Uj67u0Ipm6e395EFCqdqtjc0MZYLhnn3TZ+xXrG1UoWAmX&#13;
-R6ge30XIcg==</DigestValue></Reference></SignedInfo><SignatureValue>VTZSLZ/ov4tBH5EdF/zjhsiciwABFkrYM6NzmjdY2jyOUS7dYwjnXYIaaud3ojHI2UdP7hVPJUtU&#13;
-cuwwNqTDRev4OiopPmGVnFzC+xslncwNIWbB0khG9WJ36TVU4uJYb7FdNFo+Rb8xXhW2EM5reeQK&#13;
-XeOeFzXMuLjrNXurMQI7zBFGLZpcTr8CnL9ORTxn3rNpzQNfIfO9dCAor3QBreQmV+bImwg9drmw&#13;
-/1srcmM0BGJV0wUj+Xo5BKFDqWssQ6NqBAhXRXJksU9+xlGPyQn/5+aHT3LvL9S1Umi9YHiO0wEE&#13;
-ojUhxCQpZMLzDBYr38bSLx1lfBk02zL0bk+RLQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_f5d074f1-1120-4e00-991e-3df1c76779b8"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>LnL60WC2mPmZygY/tAs2ZSipMqBgj744PRR1iAnHfFY/fTuLQt7+ssIGES+zQ4YHqwqfAmhGK3bG&#13;
+958nlCLA1w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a6e39f90-8dd6-4ab7-9e64-28d35c234413"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>a+daQuAELz0o82Fgrc6yqux+8ADCaRADcc/Sl7EjEQQGKrZCdFj6I6gOoXsSOcO5LLZEiuMk1P91&#13;
+ka5DmnOcqw==</DigestValue></Reference></SignedInfo><SignatureValue>SS6x3ycOggeQiyxUsYoMxZJY7LalKRXDWT7zdKE7HgWEwTPwKvXsB8gDzhND3Zmn9GaHKSatXI7G&#13;
+4E75wha0yh9eI+IE+45bcb5bRsP0XLaYOdFs3zLvD9t0MuK06P+LqzeH/piP8b6ZNzsS07+tqog/&#13;
+7RJ8ymHwbtC5TNM159glU09rItlLg8HL/WX9xvrCqwdxf6mZ5nRFZB8TMpqYTjOJGu7o+ghU52lW&#13;
+c4CXLta5R4Kd9thdjW7BoXHgRV5iV4v8yRdSMhH6rTmQmZ2bOqn5hwG6Bdv0C0Lz8QtMDTlEFUZJ&#13;
+AMXm5R6YaXh6Fhb49KjqmB41HzaOJy7WEx9cLQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1482,4 +1510,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_04fcfbb1-b2e5-4875-aa6e-4ba9ca0ddaaf" Target="#_96d55143-b9b6-46cd-8e26-92cd6a63ddb4"><Timestamp>2024-01-15 02:22:01</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a6e39f90-8dd6-4ab7-9e64-28d35c234413" Target="#_f5d074f1-1120-4e00-991e-3df1c76779b8"><Timestamp>2024-04-05 01:11:10</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
