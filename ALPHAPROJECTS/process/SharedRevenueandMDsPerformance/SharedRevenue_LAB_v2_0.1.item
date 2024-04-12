@@ -807,6 +807,7 @@
     <metadata connector="FLOW" label="qwe" name="qwe">
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="newColumn1" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn2" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -832,6 +833,7 @@
       <outputTables name="qwe" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row18.code" name="newColumn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row18.institute_department  == null? &quot;NO DEPT&quot;:row18.institute_department " name="newColumn1" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="getdept.careprovider_id " name="newColumn2" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="getdept" sizeState="INTERMEDIATE">
         <mapperTableEntries name="patient_bill_id" nullable="true" type="id_String"/>
@@ -1240,14 +1242,17 @@
     <metadata connector="FLOW" label="qwe" name="tFilterRow_87">
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="newColumn1" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn2" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="FILTER" label="qwe" name="FILTER">
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="newColumn1" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn2" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" label="qwe" name="REJECT">
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="newColumn1" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn2" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
@@ -1272,6 +1277,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="newColumn1"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="newColumn2"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:6OiY3fi0i5OEawoGCapAtCj5nJNmvVtBjJkDmuvk"/>
@@ -1293,6 +1300,7 @@
     <metadata connector="FLOW" label="qwe" name="tFileOutputExcel_1">
       <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="newColumn1" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn2" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tHashInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="768">
@@ -2320,6 +2328,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
   </connection>
   <connection connectorName="FLOW" label="qwe" lineStyle="0" metaname="qwe" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_12" target="tFilterRow_87">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="newColumn2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="qwe"/>
   </connection>
@@ -2725,13 +2738,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_1812dbf7-29a7-4f7e-8cb2-608c60ece561"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>rUGV9KfeYwE4ShASYc/rl7PJoVs6/AykZuM1Lex66aU5af32N0nxDvHzFIwv6SlVcXDoyLJ6jYgU&#13;
-XhjpB+qwgQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8968f861-0106-40e3-ae71-178b9743740b"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>0sB5h922DkiPdL2fW+rH3Ano1JDznsrjJk+b5HPbrtn9QJ2QhjbxfuCKg98pawrS1QwjqEYIeV9/&#13;
-vC4uA2L3qw==</DigestValue></Reference></SignedInfo><SignatureValue>OhzcAyAOBHwVX91mRNDaP/a1Hm+BEu9Mjr+18NjrJ2nMj67TBOOHxKUfLcWunE8GxWpNtcs9FPa/&#13;
-6dmp5FocN+2ABRZdy9gsepyp190hiwZMW+LKyorDH2+/C5E0pl3iXFjjwGM+PgQrwaNEF3rlGzXd&#13;
-8m1hqOLfdOC7W3SRBln5IDMhXgeniW4wPFwdaA7ax0zwPbceXGeVv5Q4YzmwLy1FQkCLJhK1a8hs&#13;
-3wV5jtD2Ntqa8jx9zJX5fLSOiON9EmnvAl2GpN3r64M22RRpqqKZw4BQgK7xQGYAOJhBz1uYuiMV&#13;
-zg0jgm5h9EseN0tKxsoHJKTrbZM9U6S8RQk5Iw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_76fd2157-ee89-418c-ae2d-14c52cd22e6f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>LMRaoFl8C6tRPoTKEn/gXFwNNaeSVr96KUtJvaSI4cGseBGObGueGNaqPoicq78mhnVIDpZvFoiN&#13;
+9NRcv3dCKQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e7660a04-1e09-4599-beb3-d7a117894bed"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>eqspefr6sxyfS/32WkoHzH/U0BKrRz40VO6Zi5cwcyHN+HgkK8QAI0MgGNbLdOPtLYLWVwg8L80L&#13;
+2JOBhjy15g==</DigestValue></Reference></SignedInfo><SignatureValue>Inly1mk+FEgAIvwwGUWihqW0a+wLKCMWshcYWg2YLriX06MxtkIuxrXMff2why7DtS3/tUOlaHBW&#13;
+0IG0taTn/fDP6Ed3jaK+tWJQTIUNIsPmLFXgvbtW1LkCsHC98ILXO8G5Srp4ClqoSw1A5M47zzKO&#13;
+nELLqa1MdhVBYQ0vAvBVqHB0MtKE+kYOeSG7/VziH4Rtkm6wEr4lxSdZNkmavj2qXWS5MyHSs7pP&#13;
+DjnOA++8A8atIwuU9o8uvVlFybr0HWB3x1tRHJNwurfAdPxuMd91UlF+F9SvdvGuegWmyCB9fZYk&#13;
+cmMeEeYYXDI73zEKRTFf/lHgoyHx/Rxu0Nubug==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2753,4 +2766,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8968f861-0106-40e3-ae71-178b9743740b" Target="#_1812dbf7-29a7-4f7e-8cb2-608c60ece561"><Timestamp>2024-04-12 02:11:05</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e7660a04-1e09-4599-beb3-d7a117894bed" Target="#_76fd2157-ee89-418c-ae2d-14c52cd22e6f"><Timestamp>2024-04-12 02:16:35</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
