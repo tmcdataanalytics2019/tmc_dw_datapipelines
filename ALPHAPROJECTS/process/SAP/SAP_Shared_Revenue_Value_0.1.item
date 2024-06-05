@@ -137,7 +137,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  VCODE, VYEAR, VMONTH, VDEPT, NETAMT FROM TMC_PRODDB.TMC_BI_REVENUE_SUMMARIZED_VW&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  VCODE, VYEAR, VMONTH, VDEPT, NETAMT, VIP, VOP FROM TMC_PRODDB.TMC_BI_REVENUE_SUMMARIZED_VW&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="saphana_id"/>
     <elementParameter field="TEXT" name="PROPERTIES" show="false" value="&quot;&quot;"/>
     <elementParameter field="LABEL" name="NOTE" show="false" value="*Note: Example for Additional JDBC Parameters: &quot;parameterName1=value1&amp;&amp;parameterName2=value2&quot;"/>
@@ -155,6 +155,10 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="NETAMT"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VIP"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VOP"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="LABEL" value="GetDataFromSAP"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -164,6 +168,8 @@
       <column comment="" key="false" length="-1" name="VMONTH" nullable="true" originalDbColumnName="month" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VDEPT" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="NETAMT" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VIP" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VOP" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <metadata connector="VALIDATION_REJECT" name="VALIDATION_REJECT">
       <column comment="" defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
@@ -190,6 +196,8 @@
       <column comment="" key="false" length="-1" name="VMONTH" nullable="true" originalDbColumnName="month" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VDEPT" nullable="true" originalDbColumnName="costcenter" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="NETAMT" nullable="true" originalDbColumnName="revenue" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VIP" nullable="true" originalDbColumnName="ip_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VOP" nullable="true" originalDbColumnName="op_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -200,6 +208,8 @@
         <mapperTableEntries expression="row1.VMONTH " name="VMONTH" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.VDEPT.equals(&quot;LAB&quot;)?&quot;LABORATORY&quot;:row1.VDEPT.equals(&quot;RAD&quot;)?&quot;RADIOLOGY&quot;:row1.VDEPT.equals(&quot;PHA&quot;)?&quot;PHARMACY&quot;:&#13;&#10;row1.VDEPT.equals(&quot;RBU&quot;)?&quot;ROOM AND BOARD&quot;:&quot;NONE&quot; " name="VDEPT" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.NETAMT " name="NETAMT" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row1.VIP " name="VIP" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row1.VOP " name="VOP" nullable="true" type="id_BigDecimal"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="VCODE" nullable="true" type="id_String"/>
@@ -207,6 +217,8 @@
         <mapperTableEntries name="VMONTH" nullable="true" type="id_String"/>
         <mapperTableEntries name="VDEPT" nullable="true" type="id_String"/>
         <mapperTableEntries name="NETAMT" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="VIP" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="VOP" nullable="true" type="id_BigDecimal"/>
       </inputTables>
     </nodeData>
   </node>
@@ -271,6 +283,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VIP"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VOP"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -287,6 +309,8 @@
       <column comment="" key="false" length="-1" name="VMONTH" nullable="true" originalDbColumnName="month" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VDEPT" nullable="true" originalDbColumnName="costcenter" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="NETAMT" nullable="true" originalDbColumnName="revenue" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VIP" nullable="true" originalDbColumnName="ip_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VOP" nullable="true" originalDbColumnName="op_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="-1" name="VCODE" nullable="true" originalDbColumnName="code" originalLength="-1" pattern="" precision="-1" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
@@ -294,6 +318,8 @@
       <column comment="" key="false" length="-1" name="VMONTH" nullable="true" originalDbColumnName="month" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VDEPT" nullable="true" originalDbColumnName="costcenter" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="NETAMT" nullable="true" originalDbColumnName="revenue" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VIP" nullable="true" originalDbColumnName="ip_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="VOP" nullable="true" originalDbColumnName="op_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -302,10 +328,26 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="OnComponentOk1"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="VOP"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VIP"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
   <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tDBOutput_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="VOP"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VIP"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
   </connection>
@@ -319,13 +361,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_09a43c90-a7a0-4cb3-9d5e-20750d4b6ee2"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>F4fzqwvxZS0cazz1PhSuAQK19LMWXv0B4kZdyuWkGPK5/9a4nx8os3qUUXLqVQHP6Ox19YS6aGcK&#13;
-sL/BGNZnPg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_76cb7e44-93d4-4dc8-bc5f-a69d788ee89a"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Dkm9ZuFlywY5u5JNT6lCu0zmFtudb8N2DC9tLdVn1YQeE1vQXKYxnI5lvSiAL2CdmbkOZ83BR1Oe&#13;
-JqQP4DvX6A==</DigestValue></Reference></SignedInfo><SignatureValue>BXQDSe3Xcijd/oIEXrFn0lImtPfFsn/n58u3baOaetGFjsL2x+/0iFG09uY0qOefe2YUJNFKJp5q&#13;
-VqhByBeLF1J8UEVZWCz0WhQzAm38G7z2nR7dP+JGkXNP/fSgcmJ1SVmlhI3pjLeG+uD6dIloH0B6&#13;
-Ap0T+o3xG2wc5wydpySnqoyua8qRqbJ2bGGYS377A1CXISlOmq6lrTaIk2A7dAbXTPQ1XNDGTvik&#13;
-yUfQZs6JCVkfk7ypnvs2RiUifcfsJs48OsyDapczY9UyJBz+IEDZYLXj7lCd69hIX6WRe7wJIY1e&#13;
-z8m3j4spm7DZ40T84z97Nw794rhvqNaMOTo3CQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_93ad72ce-1cd1-464e-993e-8fa16970dab4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2NI2Y8Thr/5bXAZIdU6FuT5rnarJSB6S9Z9Tn08KjN+0akMp/OfbxYT7nBs//h0cTG4uEbF29yGf&#13;
+6VzpJKoo7g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3ef614cd-9db4-4e11-9746-89d2c1890c0e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kTXDDKzk1s1XoMFyACKK4hITxTInUQNaZWaOo9tdXYv5CjRlcum4yc9gJlFgR+noDKFIosjZkl+H&#13;
+JA5vSEWdMg==</DigestValue></Reference></SignedInfo><SignatureValue>T2EA8eoq7J4u3lvoMv0B3wGFFwA6Vey5Kf5vV9zf1ct1uSmAMIA9I1Am6v+8dYA1bW3tqBqAp/Ll&#13;
+0kRwQ4BqpGXsG30HzYrqb096HPbIYqbgX92bHfhf8o1g7/iarzbtz2VIuk61atPiVnxca6cLCx5H&#13;
+D3clJduNsqskQTwWhVnfc9PcS1jM1extqjkPpi6QbtWrdTOVB2/7mUKAUKHEGCacE3ZmR/ts8IO8&#13;
+1+UE+YZGH9fXsKM8zcAGg7dnRYU8dZd5xqwiIuIOr6BYN3GsTl/CEBeRlGWrkuB6Adrzmfyka3zk&#13;
+1AHm+psTwt98ZBFr50741yaxT8gel1e+Y042lQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -347,4 +389,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_76cb7e44-93d4-4dc8-bc5f-a69d788ee89a" Target="#_09a43c90-a7a0-4cb3-9d5e-20750d4b6ee2"><Timestamp>2024-05-03 02:32:09</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3ef614cd-9db4-4e11-9746-89d2c1890c0e" Target="#_93ad72ce-1cd1-464e-993e-8fa16970dab4"><Timestamp>2024-06-05 01:27:35</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
