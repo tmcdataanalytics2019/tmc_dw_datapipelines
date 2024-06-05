@@ -2035,6 +2035,8 @@
       <column comment="" key="false" length="-1" name="outpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="true" length="-1" name="code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="finance_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_inpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_outpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="overall_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
@@ -2046,6 +2048,8 @@
       <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="final_percentage.overall_percentage_multiplier.multiply(row17.revenue) " name="final_value" type="id_BigDecimal"/>
+        <mapperTableEntries expression="final_percentage.inpatient_percentage_multiplier.multiply(row17.ip_value) " name="final_inpatient_value" type="id_BigDecimal"/>
+        <mapperTableEntries expression="final_percentage.outpatient_percentage_multiplier.multiply(row17.op_value) " name="final_outpatient_value" type="id_BigDecimal"/>
       </varTables>
       <outputTables name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="final_percentage.amount " name="amount" nullable="true" type="id_BigDecimal"/>
@@ -2060,9 +2064,11 @@
         <mapperTableEntries expression="final_percentage.outpatient_percentage " name="outpatient_percentage" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="final_percentage.code " name="code" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row17.revenue" name="finance_revenue" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row17.ip_value " name="finance_inpatient_revenue" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row17.op_value " name="finance_outpatient_revenue" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="Var.final_value" name="overall_value" nullable="true" type="id_BigDecimal"/>
-        <mapperTableEntries expression="Var.final_value.multiply(final_percentage.inpatient_percentage_multiplier) " name="inpatient_value" nullable="true" type="id_BigDecimal"/>
-        <mapperTableEntries expression="Var.final_value.multiply(final_percentage.outpatient_percentage_multiplier) " name="outpatient_value" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="Var.final_inpatient_value.multiply(final_percentage.inpatient_percentage_multiplier) " name="inpatient_value" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="Var.final_outpatient_value.multiply(final_percentage.outpatient_percentage_multiplier) " name="outpatient_value" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="final_percentage.servicing_department " name="servicing_department" nullable="true" type="id_String"/>
         <mapperTableEntries expression="final_percentage.month_inpatient_amount " name="month_inpatient_amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="final_percentage.month_outpatient_amount " name="month_outpatient_amount" nullable="true" type="id_BigDecimal"/>
@@ -2092,6 +2098,8 @@
         <mapperTableEntries name="year" nullable="true" type="id_String"/>
         <mapperTableEntries name="costcenter" nullable="true" type="id_String"/>
         <mapperTableEntries name="revenue" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="ip_value" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="op_value" nullable="true" type="id_BigDecimal"/>
       </inputTables>
     </nodeData>
   </node>
@@ -2133,6 +2141,10 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="revenue"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ip_value"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="op_value"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -2144,6 +2156,8 @@
       <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="costcenter" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ip_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="op_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="1344" posY="1536">
@@ -2173,6 +2187,8 @@
       <column comment="" key="false" length="-1" name="outpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="true" length="-1" name="code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="finance_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_inpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_outpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="overall_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
@@ -2213,6 +2229,8 @@
         <mapperTableEntries expression="out3.outpatient_percentage " name="outpatient_percentage" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out3.code " name="code" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.finance_revenue" name="finance_revenue" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="out3.finance_inpatient_revenue " name="finance_inpatient_revenue" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="out3.finance_outpatient_revenue " name="finance_outpatient_revenue" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out3.overall_value " name="overall_value" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out3.inpatient_value " name="inpatient_value" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="out3.outpatient_value " name="outpatient_value" nullable="true" type="id_BigDecimal"/>
@@ -2250,6 +2268,8 @@
         <mapperTableEntries name="outpatient_percentage" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="code" nullable="true" type="id_String"/>
         <mapperTableEntries name="finance_revenue" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="finance_inpatient_revenue" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="finance_outpatient_revenue" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="overall_value" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="inpatient_value" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="outpatient_value" nullable="true" type="id_BigDecimal"/>
@@ -2355,6 +2375,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="finance_inpatient_revenue"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="finance_outpatient_revenue"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="overall_value"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -2408,6 +2438,8 @@
       <column comment="" key="false" length="-1" name="outpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="true" length="-1" name="code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="finance_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_inpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_outpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="overall_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
@@ -2428,6 +2460,8 @@
       <column comment="" key="false" length="-1" name="outpatient_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="true" length="-1" name="code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="finance_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_inpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="finance_outpatient_revenue" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="overall_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="inpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="outpatient_value" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
@@ -3019,11 +3053,25 @@
       <elementValue elementRef="TRACE_COLUMN" value="month_outpatient_amount"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="finance_inpatient_revenue"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="finance_outpatient_revenue"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
   <connection connectorName="FLOW" label="row17" lineStyle="8" metaname="tDBInput_10" offsetLabelX="0" offsetLabelY="0" source="tDBInput_10" target="tMap_6">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="op_value"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ip_value"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row17"/>
   </connection>
@@ -3042,6 +3090,12 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="month_outpatient_amount"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="finance_inpatient_revenue"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="finance_outpatient_revenue"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -3125,13 +3179,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_9a267a38-69f3-41d0-bcbe-43030f963a46"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>C9sh/BnL5EJdNUhNI5EXTLxpb/6t9EDmR5PMZQy84xizgReVM87HH3bpr3WvWadeTKTya6cQTTtb&#13;
-QPHTF84KMg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3fa8d301-47fe-4ba6-bdc4-3698768b92f8"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>oWtnPqtOgB10dtP8m2augdCemmtvVGcC8jjeY5XAUoi5qYKqPUNnz2sdajgFXtuyRi1CkzaUrvMc&#13;
-xNodIHCNpQ==</DigestValue></Reference></SignedInfo><SignatureValue>V7PT6E1t8A95fexWYiAYc3QRbE68izMaAtCcFJqinusIBwuNDmtnk3DhGZivrLR2UiLyP8hRYr7K&#13;
-nN/UenSm79lX2A2YjOIw8MHeE+VvniJqSWlAJVf0CITIQkZrfPWYGUsMtRwFj7HwlvGYooijjoBb&#13;
-UM57P0uMFb9TNUhzIcoAoPvZk5+VrKveHZsfjW+uBk8gALM2fFKVQor7Rnp7qmoDO15cdmE3tguw&#13;
-51AGbfUo83YcAnFa6vgceYRUz7aIrXtepKMk97QeCe1ztlMafI9HZcwU9Q52Voa0Q9W9dKXO4wu8&#13;
-CxegsWGfjRB8mqG/Mm/fDwGFwTtXX+8UkCFnqw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a4fb75de-9e01-45b4-9f54-e76894f8860b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2lgHrFybSr2hdO94OrbRFTYYXcdfCSoPaHbxwx3WIkajEo85+1pSunfV46urK5eYKs4ANZw654pM&#13;
+iz6WcBBD8g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_d3494283-ae75-4ec6-9e73-ecc67e3f6fe7"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>mj0OnxG7STXkI49Twmy8D3bTIBjUzXj+awJU+AOvNtMdnWDOLWplSrSTJJD9PF12CIlq9vHu7nZr&#13;
+5nryZGTEIA==</DigestValue></Reference></SignedInfo><SignatureValue>d7GZ/PSoGwt6xj6Xjnjidc9QZrtrp+syFbkUaSDvYm58eh8Vcd5VI6b9ruyjIjrn2jgl0nPj5nnP&#13;
+p4bfRvQAk5gJcVGkbUmUGuqqr4zqaMwVZtbU+JrBZUj5iCkpdO/YDU+TqB3egfJM6Fkvj2ndd0Cx&#13;
+ohYmnErtsjPhtXI3Q97zZt9Mmo93B/1wCNBM65ixV8AffgygurVXw6QwnevDm1E3RcQ6KvC2qh0z&#13;
+GNSavRcVQR/1K9vcZI75b6515z5m8l2dLjmz7D2sOmczKHPoRnqtKiIhMM4vwg9QcJz1+SmJi22S&#13;
+UWEOreOtoDp3yIC85DeVWWr03+TTTU562+rZbA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -3153,4 +3207,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3fa8d301-47fe-4ba6-bdc4-3698768b92f8" Target="#_9a267a38-69f3-41d0-bcbe-43030f963a46"><Timestamp>2024-06-05 05:26:08</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_d3494283-ae75-4ec6-9e73-ecc67e3f6fe7" Target="#_a4fb75de-9e01-45b4-9f54-e76894f8860b"><Timestamp>2024-06-05 05:39:13</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
