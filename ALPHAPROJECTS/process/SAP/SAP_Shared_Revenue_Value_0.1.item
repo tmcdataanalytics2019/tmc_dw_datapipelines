@@ -198,6 +198,8 @@
       <column comment="" key="false" length="-1" name="NETAMT" nullable="true" originalDbColumnName="revenue" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VIP" nullable="true" originalDbColumnName="ip_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VOP" nullable="true" originalDbColumnName="op_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ip_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="op_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -210,6 +212,8 @@
         <mapperTableEntries expression="row1.NETAMT " name="NETAMT" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row1.VIP " name="VIP" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row1.VOP " name="VOP" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row1.VIP.divide(row1.NETAMT, 10, RoundingMode.HALF_EVEN) " name="ip_percentage" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row1.VOP.divide(row1.NETAMT, 10, RoundingMode.HALF_EVEN) " name="op_percentage" nullable="true" type="id_BigDecimal"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="VCODE" nullable="true" type="id_String"/>
@@ -293,6 +297,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ip_percentage"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="op_percentage"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -311,6 +325,8 @@
       <column comment="" key="false" length="-1" name="NETAMT" nullable="true" originalDbColumnName="revenue" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VIP" nullable="true" originalDbColumnName="ip_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VOP" nullable="true" originalDbColumnName="op_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ip_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="op_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="-1" name="VCODE" nullable="true" originalDbColumnName="code" originalLength="-1" pattern="" precision="-1" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
@@ -320,6 +336,8 @@
       <column comment="" key="false" length="-1" name="NETAMT" nullable="true" originalDbColumnName="revenue" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VIP" nullable="true" originalDbColumnName="ip_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="VOP" nullable="true" originalDbColumnName="op_value" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="ip_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="op_percentage" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -347,6 +365,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="VIP"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ip_percentage"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="op_percentage"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
@@ -361,13 +385,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_93ad72ce-1cd1-464e-993e-8fa16970dab4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>2NI2Y8Thr/5bXAZIdU6FuT5rnarJSB6S9Z9Tn08KjN+0akMp/OfbxYT7nBs//h0cTG4uEbF29yGf&#13;
-6VzpJKoo7g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3ef614cd-9db4-4e11-9746-89d2c1890c0e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kTXDDKzk1s1XoMFyACKK4hITxTInUQNaZWaOo9tdXYv5CjRlcum4yc9gJlFgR+noDKFIosjZkl+H&#13;
-JA5vSEWdMg==</DigestValue></Reference></SignedInfo><SignatureValue>T2EA8eoq7J4u3lvoMv0B3wGFFwA6Vey5Kf5vV9zf1ct1uSmAMIA9I1Am6v+8dYA1bW3tqBqAp/Ll&#13;
-0kRwQ4BqpGXsG30HzYrqb096HPbIYqbgX92bHfhf8o1g7/iarzbtz2VIuk61atPiVnxca6cLCx5H&#13;
-D3clJduNsqskQTwWhVnfc9PcS1jM1extqjkPpi6QbtWrdTOVB2/7mUKAUKHEGCacE3ZmR/ts8IO8&#13;
-1+UE+YZGH9fXsKM8zcAGg7dnRYU8dZd5xqwiIuIOr6BYN3GsTl/CEBeRlGWrkuB6Adrzmfyka3zk&#13;
-1AHm+psTwt98ZBFr50741yaxT8gel1e+Y042lQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_29d9305f-cd2b-404b-8587-db593b9f83e4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>mx4fu2JRub1vF6l5HfEiia8pApSMiJEmeFeABzGgmo1cZLDd5syCyweiwKk674OMo9z3wFePuasO&#13;
+WsOTgzpeUQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e3af16c2-e6c2-4823-9583-24f370dc7143"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+JaO2siliX20osZ5RxFxie8XxsFDXLCOjwLFK5wf2+Z46xsS3KamJS5Az13HF7Mk32AfvnJnrzks&#13;
+mqdFVzzXJg==</DigestValue></Reference></SignedInfo><SignatureValue>XRt0XnSPYcwB2RWU2j1ohXBxhhpjTv759s7TTc52rKD2jpM1VGVCbNN6g3oGM2SQiSOsg1uU1Qub&#13;
+bxIRWT3i2EbYv/LK8A7zSWyH/mp6FYW2n0WGpEGIMCoISwG0jF6GaNn7Gcj1O5OI1Xgtch19YYom&#13;
+EuULF7WOE0tiUTbr30XGPNPo5jJiac0RhYhCdHnn5gV8OCvW19xiM9e5Or4YWJoI7Zk6JalxeFhQ&#13;
+So+vupCPZ3liSS6HyxG9e9SQdW5mAl2Cb8PBc9JEdmy1cr27mpEMz0bfsNUkLsatbCRgVR5EMibF&#13;
+u9UBfgoMSPWERjewOW9HIvCip92AQtUCgBFWrQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -389,4 +413,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3ef614cd-9db4-4e11-9746-89d2c1890c0e" Target="#_93ad72ce-1cd1-464e-993e-8fa16970dab4"><Timestamp>2024-06-05 01:27:35</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e3af16c2-e6c2-4823-9583-24f370dc7143" Target="#_29d9305f-cd2b-404b-8587-db593b9f83e4"><Timestamp>2024-06-10 02:53:25</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
