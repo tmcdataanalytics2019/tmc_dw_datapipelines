@@ -124,7 +124,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select department,code from shared_revenue_target_budget where serv = 'RAD' and year = '2024'&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select department,code,month,year from shared_revenue_target_budget where serv = 'RAD' and year = '2024'&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -139,6 +139,10 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="code"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="month"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="year"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
@@ -147,6 +151,8 @@
     <metadata connector="FLOW" name="tDBInput_1">
       <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="288" posY="256">
@@ -167,6 +173,8 @@
     <metadata connector="FLOW" name="out3">
       <column comment="" key="false" length="-1" name="department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="code" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="year" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
@@ -174,10 +182,14 @@
       <outputTables activateExpressionFilter="true" expressionFilter="row1.code != null" name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="budget.department " name="department" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.code " name="code" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="budget.month " name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="budget.year " name="year" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="budget" sizeState="INTERMEDIATE">
         <mapperTableEntries name="department" nullable="true" type="id_String"/>
         <mapperTableEntries name="code" nullable="true" type="id_String"/>
+        <mapperTableEntries name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries name="year" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="budget.code " name="code" nullable="true" operator="=" type="id_String"/>
@@ -250,12 +262,14 @@
         <mapperTableEntries expression="shared_rev.code == null ? &quot;yes&quot; : &quot;no&quot; " name="newColumn" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.code " name="code" nullable="true" type="id_String"/>
         <mapperTableEntries expression="out3.department " name="department" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="shared_rev.month " name="month" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="shared_rev.year " name="year" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.month " name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="out3.year " name="year" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="out3" sizeState="INTERMEDIATE">
         <mapperTableEntries name="department" nullable="true" type="id_String"/>
         <mapperTableEntries name="code" nullable="true" type="id_String"/>
+        <mapperTableEntries name="month" nullable="true" type="id_String"/>
+        <mapperTableEntries name="year" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="shared_rev" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="budget.department " name="department" nullable="true" operator="=" type="id_String"/>
@@ -582,10 +596,26 @@
     </metadata>
   </node>
   <connection connectorName="FLOW" label="budget" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_3">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="month"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="year"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="budget"/>
   </connection>
   <connection connectorName="FLOW" label="out3" lineStyle="0" metaname="out3" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="month"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="year"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out3"/>
   </connection>
@@ -638,13 +668,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_76890734-26ac-43a0-ab78-65b041a3ed26"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>i7V95mAnTOG8Qmx6r/ZNadl8zvMpVsUHeayEh5knfjmI8KkjYI2vkrI104+IbqU3VwC1Wi8Khn3d&#13;
-owwlh86yzQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_97b9726c-abc6-46c4-bbd5-c6f3c6cd71bc"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>BZn5Yifvxnz6RbPsQgg51cUOwtp6YbOV3rEoqVA1UThC+SZ+2PxN+Ga+yT+Qbn0YQziiQzVIpc5X&#13;
-1+a6jOTeTg==</DigestValue></Reference></SignedInfo><SignatureValue>A9h0JUZ49MSdLzSAI9WSznccaD6LV6b95XsbQKvLaAdkJuYdVB43PAIBxXl/ji9WhEm+udyF1bN5&#13;
-wayO7F+W6vXwPnIvos7IpuUqfsViBwbYbFIpqx10n1A0QNxgL27qV+AaePOqNkJdmP7AJ+lbp2yD&#13;
-1LbqDYNTh72os8nmAbFnDkyMrn4OCA2kupajJA3DKBgQJOzOGxHI1uKs8tyg1oVyHfCziE1pQktn&#13;
-pAgtUFH0DCJVhn9IGs9b4P9FzA+/nbEfKgR85s4j9ImH93J0qPWzwFMfpAp4RYfLf+wBU0EMSOp8&#13;
-ZHFTR4OOc7QQaTVbFLn1pMZvqtfWqwkLTKwu9Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_110ef147-c4a5-4480-ac28-c6afcf643df2"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Pucuel9mFLyJRAtC7DV4eAylt2K6RixXJ8NjzOK8Eb35/6QOm4ykyHORs7DsS+kAt23MvUrUjB6x&#13;
+hmsVNnBmUw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_9b1f524e-8e81-4924-ab17-cc63a3ff6195"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>R4eHyQvKMGRPlMffJlpcHszIgAZbwr/sZTnXVIhKrR93nq4Lzy5KbmmufGJBCxX4wdn2k2JkjTLW&#13;
+gdnksSJrWg==</DigestValue></Reference></SignedInfo><SignatureValue>Q13y8dZDgNpvqDF+9s6tFESLB6akqDLAuVEMrMGHzfjVU5kRfMneUr3G/japs1pic9Rd2N/riXTq&#13;
+d5lcIB0DaYtB12tnCTKRSIy732YcIzyaebYFk4Qw3wC5hO8JvjA2zgbnh1dKley5/qVgNhWoOU5o&#13;
+JzKSmyaazuEw/6ZyjzfbpGFwd22uKI700xcbmBnAXmVcbVy6vGfZslsK0YG0HgRn/nOT6fMci0iJ&#13;
+f2jNK8ODbf4kdoRzFIGc2sugZaKuLcgCquMTs8JmXc3qvdO5Q78wOe276acAMDzr+N3mbEws1QWe&#13;
+oEcv9xTza6rkgL4F3iSElrNByfsnUGtXeFPAjQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -666,4 +696,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_97b9726c-abc6-46c4-bbd5-c6f3c6cd71bc" Target="#_76890734-26ac-43a0-ab78-65b041a3ed26"><Timestamp>2024-06-19 07:51:36</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_9b1f524e-8e81-4924-ab17-cc63a3ff6195" Target="#_110ef147-c4a5-4480-ac28-c6afcf643df2"><Timestamp>2024-06-19 07:58:08</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
