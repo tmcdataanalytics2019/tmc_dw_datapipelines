@@ -514,8 +514,8 @@
       </inputTables>
       <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="ALL_MATCHES" name="row2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient.transaction_external_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
-        <mapperTableEntries name="bed_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="ward_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="bed_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="is_active" nullable="true" type="id_Boolean"/>
       </inputTables>
     </nodeData>
@@ -550,9 +550,9 @@
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="bed_id"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="ward_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bed_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="is_active"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -563,8 +563,8 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_3">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="bed_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ward_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bed_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
     </metadata>
   </node>
@@ -627,7 +627,7 @@
         <mapperTableEntries expression="inpatient_1.admission_cancel_reason_id " name="admission_cancel_reason_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_1.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_1.ward_id" name="wards" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row4.name " name="bed" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="bed.name " name="bed" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="inpatient_1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -652,11 +652,11 @@
         <mapperTableEntries name="ward_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="is_active" nullable="true" type="id_Boolean"/>
       </inputTables>
-      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row3" sizeState="INTERMEDIATE">
+      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="ward" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_1.ward_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="name" nullable="true" type="id_String"/>
       </inputTables>
-      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row4" sizeState="INTERMEDIATE">
+      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="bed" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_1.bed_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="name" nullable="true" type="id_String"/>
       </inputTables>
@@ -932,26 +932,26 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="inpatient_2"/>
   </connection>
-  <connection connectorName="FLOW" label="row3" lineStyle="8" metaname="tDBInput_4" offsetLabelX="0" offsetLabelY="0" source="tDBInput_4" target="tMap_3">
+  <connection connectorName="FLOW" label="ward" lineStyle="8" metaname="tDBInput_4" offsetLabelX="0" offsetLabelY="0" source="tDBInput_4" target="tMap_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="ward"/>
   </connection>
-  <connection connectorName="FLOW" label="row4" lineStyle="8" metaname="tDBInput_5" offsetLabelX="0" offsetLabelY="0" source="tDBInput_5" target="tMap_3">
+  <connection connectorName="FLOW" label="bed" lineStyle="8" metaname="tDBInput_5" offsetLabelX="0" offsetLabelY="0" source="tDBInput_5" target="tMap_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row4"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="bed"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_60977146-ec3f-4a40-b4eb-b0eb2dd654d5"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>3Rclq9+nSP+wIBtJcDnRVj3mqaea2sdctrSpl6HdKW5yNe+28olidWlcK2fjAENTK8Aadx4TYlBM&#13;
-1LczslvyZA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_2dab3865-3332-44a9-b816-60d825d7c51c"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Q6dTZFKPykbqcoMB3ot7Tm4gQMZqU5tbtDlnQDq/xdJ+KEoDL1DB8+fikuBbZnU0Sx34jI1b1yjx&#13;
-IDK5SVrQmA==</DigestValue></Reference></SignedInfo><SignatureValue>j4aa6DjaJdCoMdydhsVfuwLswLiwt4/+huavkBSYmdXdLVVY5sh4sdJY04R/NHD8pADFxl4NRmXT&#13;
-UKSWVvgGis6fl5IjmBPm/hEUJ47835YIMfYpFQxZYQTAsl9y2JoruMLcIPBpXQHNIsnQLtuLoHR9&#13;
-QEP32DwFp3Guy16FMrzDzeYCcGez2t1ozKBHj4PGAMNQaVNYH1x0Mg1aLbfXxcjKnJOnKiaOJrCg&#13;
-FMxJEuszjH14feHU7hWLIH6LHpVFcKDURYbit6eJiznFHo+Hpbp1GU8zHcPn7frVSm3ALdL/DAbO&#13;
-+WDVut+NyMQ/XK77uGjpe1vtJff9DYsupretgg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_c8218581-f01e-4c3d-b4fe-7f837396231e"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Nix9eiIa0JlLGopA4Rb8Y5cK3mD8BhAcNy7GAxdUlqOIReAiLV5CfTQl4isHb604Lu48hDusbSqi&#13;
+qwUk9boquQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_85abb9f9-38d5-440f-9d48-fe50ccff4f02"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>W1qcepfP3PYFWYi0h8AIz0HfU9pZS2TckrbvpvmaPCgdTdii5jORQOonnKZm4TqoyZ0mbUetI+Xz&#13;
+Vaqu+vQ7hQ==</DigestValue></Reference></SignedInfo><SignatureValue>k7o4WdkZkZm76F50/EV8WynsP4zWRvp/WeH0M2/nBXtH0srsQw+BZYQXoqQjXx2CGjMv3gf6Q36j&#13;
+gs5ux8XE+dq2gVry5PQGvc/oqaBRLl4+Jj6UbghilfJ4FwBOJDGQRtiJMNZpA43LU35mtCxFZGo+&#13;
+T9Y0a3xqlrrv3jEHOfyjpOLwoiPWer+MM0kQmqTo2fltZbJdRCdQEBKGEpsHUEpsXL7J0JmX1dxk&#13;
+zYeszTeSQMFARV0NqswUoGCCcisofbiU+n0x+loNlOcNSl5ebEZkXnrpRsB2mPrqhfbiV4I169a4&#13;
+9+1QE5psmv3ZqKYgRVo8lVJwepMlNV922HkKqA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -973,4 +973,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_2dab3865-3332-44a9-b816-60d825d7c51c" Target="#_60977146-ec3f-4a40-b4eb-b0eb2dd654d5"><Timestamp>2024-07-26 03:09:19</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_85abb9f9-38d5-440f-9d48-fe50ccff4f02" Target="#_c8218581-f01e-4c3d-b4fe-7f837396231e"><Timestamp>2024-07-26 03:12:42</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
