@@ -264,7 +264,7 @@
       <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="vtype.value_description.equals(&quot;INPATIENT&quot;)" name="inpatient" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -306,7 +306,7 @@
         <mapperTableEntries expression="row1.admission_cancel_reason_id " name="admission_cancel_reason_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.visit_id_before_convert " name="visit_id_before_convert" nullable="true" type="id_String"/>
       </outputTables>
-      <outputTables name="emergency" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="vtype.value_description.equals(&quot;EMERGENCY&quot;)" name="emergency" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.visit_id " name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.patient_pin " name="patient_pin" nullable="true" type="id_String"/>
@@ -1305,7 +1305,7 @@
         <mapperTableEntries expression="nonSentIn.enddate_before_reopen " name="enddate_before_reopen" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="nonSentIn.visit_status_id " name="visit_status_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="nonSentIn.visit_status " name="visit_status" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="opd_discharge.discharge_type_id " name="discharge_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row3.value_description" name="discharge_type" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="nonSentIn" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -1325,6 +1325,10 @@
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="nonSentIn.transaction_external_id " name="patient_visit_id" nullable="true" operator="=" type="id_String"/>
         <mapperTableEntries name="discharge_type_id" nullable="true" type="id_String"/>
+      </inputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row3" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="opd_discharge.discharge_type_id " name="transaction_external_id" nullable="true" operator="=" type="id_String"/>
+        <mapperTableEntries name="value_description" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1380,7 +1384,7 @@
     <elementParameter field="TEXT" name="STREAMNAME" show="false" value="outputStream"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;C:/Users/jsjavier/Desktop/test.xls&quot;"/>
     <elementParameter field="TEXT" name="SHEETNAME" value="&quot;Sheet1&quot;"/>
-    <elementParameter field="CHECK" name="INCLUDEHEADER" value="false"/>
+    <elementParameter field="CHECK" name="INCLUDEHEADER" value="true"/>
     <elementParameter field="CHECK" name="APPEND_FILE" value="false"/>
     <elementParameter field="CHECK" name="APPEND_SHEET" show="false" value="false"/>
     <elementParameter field="CHECK" name="FIRST_CELL_Y_ABSOLUTE" value="false"/>
@@ -1448,6 +1452,48 @@
       <column comment="" key="false" length="-1" name="visit_status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="928" posY="800">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_10"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.10.103.86&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;TMC_DW_DB&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;talend&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:kRXGRIgK06yMXB5X6T+q+Xy+iDlOguvZL7+UkU48PW7tPZShponII7I="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;ort_aa_mdt_reference_values&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, value_description from ort_aa_mdt_reference_values where domain_code = 'ERDTYP'&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="id_MSSQL"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
+    <elementParameter field="CHECK" name="ACTIVE_DIR_AUTH" show="false" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="value_description"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="SET_QUERY_TIMEOUT" value="false"/>
+    <elementParameter field="TEXT" name="QUERY_TIMEOUT_IN_SECONDS" show="false" value="30"/>
+    <elementParameter field="TEXT" name="LABEL" value="DW ReferenceValues"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tDBInput_10">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="value_description" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
@@ -1603,18 +1649,22 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="opd_discharge"/>
   </connection>
+  <connection connectorName="FLOW" label="row3" lineStyle="8" metaname="tDBInput_10" offsetLabelX="0" offsetLabelY="0" source="tDBInput_10" target="tMap_6">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row3"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_e758f44b-4e3d-4595-860b-099ff8d71a68"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>hxjLTjoKNpd95p0oQET72182plj1ff4e1GFLSHSNTPQKDSB9G+yHT8nKb3kLESpuARcXg7bA02LT&#13;
-z28D6jJj8g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_feb3b4d5-788e-444a-b995-72b5646c4b40"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>18/9WZdtRY0PYWAddUvGZuAjxujK9xdZ6JyE/mo+mX7DuxrKx7gyRFL0VoxuKhX4vrfu+DMsNHLd&#13;
-cwqjg5iyAg==</DigestValue></Reference></SignedInfo><SignatureValue>TXBsAONu9tP3C7IyPRP/HhQJGW1meaqbLK5a/mpG4ttdeaGpj3qGNC2auJC9WURib5c4YP36UynJ&#13;
-dCWcbqAaHA0dvYWJW77fFLDhLIQWQX+jrmUfUmDFQ+wxgaaU4MOj7OZn7EU8b+sOxKuuppf74Gfw&#13;
-602kafYlurpiXL4NCkzK0QMUn1BxpfSmGhPO2Y8jF4VQlCoyEIYhpOWUY5eIifRahjHN9fG9Mzd9&#13;
-hiF6jjtq1dGKcfmCRj9nlpjzpMX0LoFDUXxr+og4yImlgFAX/rHH9IE3IQYMl+UTpGO5Qkd5nRq+&#13;
-aXegH75WBnLublNxIJGJwwzxGukpL9T5EagLYg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_368f6345-c579-41a0-add0-2fafc849e2cc"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>vu88pk6MaezYrR2q5tilCHGB9vcnqjEnS1uoPktukvS/+Rbpb38fKHapyvQAcWruWuxnd6b+lIPU&#13;
+33t37/ydtA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8d65126d-5d29-45d4-b501-ab85bb973779"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9b3ZfsOUwAzjNh4XEPypzmzpL/HzPp+DJ899c2ROL8KJndBHOLpL2t9pTMxMDDsS0RjH/2egDygM&#13;
+24KsR3PjIw==</DigestValue></Reference></SignedInfo><SignatureValue>Mu5wHJIKkxS62bGcqGOU1CA8/RgIU6TKgl43pfzxQOuAS5kXnxvL4SUMbjVJQL3fKUEGESTMOzdB&#13;
+ucKKHWo456yfx4y8Jq8phnIzF+9Kzu0hF/0QEmTv38JNU/B8600R4e/G7wVseXZ6TfR3rurhtBLF&#13;
++FvVv2SZ0/czA3UDZ+CPfvjv9vsKT/RI3jw/RdLzU5/YO8KIAo44akjhlWSkO928BOUP5lJ7yAVv&#13;
+NMDhXOIRYJ0L8ebvQn4KSH6KZu+8ETX16XMKqeU+8BOOBnRe0IAUo6Q4KscqC0gfmKL0Qin4nSqt&#13;
+zkcsu4aKEMQrC2NtJLAVgVahyJWNqd+Lv40KSA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1636,4 +1686,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_feb3b4d5-788e-444a-b995-72b5646c4b40" Target="#_e758f44b-4e3d-4595-860b-099ff8d71a68"><Timestamp>2024-07-30 01:29:55</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8d65126d-5d29-45d4-b501-ab85bb973779" Target="#_368f6345-c579-41a0-add0-2fafc849e2cc"><Timestamp>2024-07-30 01:31:56</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
