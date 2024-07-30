@@ -115,7 +115,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, visit_id, patient_pin, visit_type_id, visit_status_id, admission_date,is_readmission, status_flag, admitted_timestamp, admission_type_id, medical_discharge_date, discharge_date, is_discharge_cancelled, enddate_before_reopen, admission_cancelled_date, admission_cancel_reason_id, is_admission_cancelled, visit_id_before_convert from ort_aa_patient_visits WHERE CAST(admission_date as date) between '1-JUN-2024' and '30-JUN-2024' &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select transaction_external_id, visit_id, patient_pin, visit_type_id, visit_status_id, admission_date,is_readmission, status_flag, admitted_timestamp, admission_type_id, medical_discharge_date, discharge_date, enddate_before_reopen, admission_cancelled_date, admission_cancel_reason_id, is_admission_cancelled, visit_id_before_convert from ort_aa_patient_visits WHERE CAST(admission_date as date) between '1-JUN-2024' and '30-JUN-2024' &quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -150,8 +150,6 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="discharge_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="is_discharge_cancelled"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="enddate_before_reopen"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="admission_cancelled_date"/>
@@ -180,7 +178,6 @@
       <column comment="" key="false" length="-1" name="admission_type_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="is_discharge_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="enddate_before_reopen" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_cancelled_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="admission_cancel_reason_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -249,7 +246,7 @@
       <column comment="" key="false" length="-1" name="visit_id_before_convert" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="vtype.value_description.equals(&quot;INPATIENT&quot;)" name="inpatient" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -309,7 +306,6 @@
         <mapperTableEntries name="admission_type_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="medical_discharge_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="discharge_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="is_discharge_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="enddate_before_reopen" nullable="true" type="id_Date"/>
         <mapperTableEntries name="admission_cancelled_date" nullable="true" type="id_Date"/>
         <mapperTableEntries name="admission_cancel_reason_id" nullable="true" type="id_String"/>
@@ -402,7 +398,7 @@
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="inpatient_1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -540,7 +536,7 @@
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_1.visit_id_before_convert == null ? &quot;&quot; : inpatient_1.visit_id_before_convert.substring(0, 2) " name="var1" type="id_String"/>
         <mapperTableEntries expression="Var.var1.equals(&quot;ER&quot;)?&quot;FROM_ER&quot; : &quot;NOT_FROM_ER&quot; " name="if_er" type="id_String"/>
@@ -712,7 +708,7 @@
       <column comment="" key="false" length="-1" name="visit_status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="outpatient_1" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="outpatient.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -829,7 +825,7 @@
       <column comment="" key="false" length="-1" name="visit_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="vtypee.value_description.equals(&quot;SENT-IN SPECIMEN&quot;)" name="SentIN" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="outpatient_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -1066,7 +1062,7 @@
       <column comment="" key="false" length="-1" name="discharge_type" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row3.value_description == null ? &quot;NO STAT&quot; :row3.value_description " name="var1" type="id_String"/>
       </varTables>
@@ -1303,7 +1299,7 @@
       <column comment="" key="false" length="-1" name="discharge_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="row5.value_description == null ? &quot;NO STAT&quot; :row5.value_description " name="var2" type="id_String"/>
       </varTables>
@@ -1592,7 +1588,7 @@
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="inpatient_2.is_active == true &amp;&amp; !inpatient_2.wards.equals(&quot;MAIN-HOSTEL UNIT FLOOR 9BH&quot;) &amp;&amp; inpatient_2.admission_cancelled_date == null &amp;&amp; inpatient_2.if_from_er.equals(&quot;NOT_FROM_ER&quot;)" name="inpatient_3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -2173,13 +2169,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_f3c940a9-d5a7-40b0-b650-eace71bcfb86"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>pEc0vIJgxmAm9SDBcrr61UsSCjyl24qX0hScBhEDki5P+shSuKhiS8oPfAUkh45LEceRjam1huLo&#13;
-rVQp4rFdKg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_38993315-452a-4b4a-9beb-8d5f6da653e3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>i5+H5Dp/4EyQMnZiN/vxG1CrkBpuLVFa8/nZUVZTwFWrQ3sGu8rIfVdhK5gX3TT2AeAAKFCMU2cR&#13;
-2WcVUxgrHQ==</DigestValue></Reference></SignedInfo><SignatureValue>J+etcKh4qSsIPEWp5SS/29l27WjqScgN5A+tuYa43P1Fn8wBXbo4IgIl6qgabqjAbdjBmS1dG3pg&#13;
-jeCw7OFtcGnS9y7FljGkH9JgVwCdqdyiQOiZ4s5lbqhRLhUpQdjAA+e6yd0v0J79AYBGJClz6QPy&#13;
-j9aRvGqs/BN5WsTkyoA6uDQBYVU3Vk1TBPzHYC+ci2+JtbYq1KuH7CBE3ZTh6WWuoj14Bc4Y8ZJ3&#13;
-hBP3MnJGNb/cCCxY4jj+8KlFuwsD7gazgt4rUqZdtQ0rZ5FMhJ+38/8kMZ7eooA4Ws7YrNkfgevt&#13;
-Da0JnHnHcvM1lNTVOUYXTr659JBkKfqS1thSAA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_bb30df98-d3b0-4b17-8657-3e1332444431"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>OzjMKpcXHTFaaWFZqAMMCstiYkbXVBSLUglc6KzJDer7gi+med9wKgCQa1nOWJmeRMmrz/qj5m0F&#13;
+OGyPssVjAg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_ae4969ee-62d1-4175-a462-610bb2fad9fe"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>14DFZIOCoi886JjEaMhca6JACcJknMiON+GR4fWyQTs7zpknhXkfCf6czbjH/JXFv/sPx7/AXkiF&#13;
+CMc62qyS2Q==</DigestValue></Reference></SignedInfo><SignatureValue>U6k4QPb1gcUq4zXg7EtkTEqwG1d0iSol/ErXIH5EnR4Qz1dJ5kyfFDluWyeGp0VRQdrP8q0hCwb2&#13;
+B3qFMTMOaD9uiEJY8NIsvE92zlnatW1UCx0uXvMozwv2+ln0T+NFxUDDctBiUUUZ9p57DA6lut0j&#13;
+6QW2dmimkFN3KYKagXs2u/pmupEv+/S6AlrH2KQFOHdEBIL/bfjl18b1X/LyzNCWoyX7VC9ElNet&#13;
+WI1E6g11pNH7aGhxDo2G41s+UyFAhgEeOOt97sTa48nLq8oCIZnj1GEPZWEbBb+eUHP8fGQr0JNL&#13;
+h5krAIrAjfm0KlOD4OesKFHEANxtlTER1QYfpg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2201,4 +2197,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_38993315-452a-4b4a-9beb-8d5f6da653e3" Target="#_f3c940a9-d5a7-40b0-b650-eace71bcfb86"><Timestamp>2024-07-30 03:17:51</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_ae4969ee-62d1-4175-a462-610bb2fad9fe" Target="#_bb30df98-d3b0-4b17-8657-3e1332444431"><Timestamp>2024-07-30 03:19:01</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
