@@ -1016,8 +1016,23 @@
     <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Lookup ReferenceValues"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="SentIN">
+      <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_careprovider_vtype" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="admission_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="status_flag" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="medical_discharge_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="discharge_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="is_discharge_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="enddate_before_reopen" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="visit_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <metadata name="OPD">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="patient_pin" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -1034,7 +1049,21 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables name="SentIN" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" expressionFilter="vtypee.value_description.equals(&quot;SENT-IN SPECIMEN&quot;)" name="SentIN" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="outpatient_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="outpatient_1.visit_id " name="visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="outpatient_1.patient_pin " name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="vtypee.value_description" name="visit_careprovider_vtype" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="outpatient_1.admission_date " name="admission_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="outpatient_1.status_flag " name="status_flag" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="outpatient_1.medical_discharge_date " name="medical_discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="outpatient_1.discharge_date " name="discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="outpatient_1.is_discharge_cancelled " name="is_discharge_cancelled" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="outpatient_1.enddate_before_reopen " name="enddate_before_reopen" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="outpatient_1.visit_status_id " name="visit_status_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="vstat.value_description" name="visit_status" nullable="true" type="id_String"/>
+      </outputTables>
+      <outputTables name="OPD" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="outpatient_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="outpatient_1.visit_id " name="visit_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="outpatient_1.patient_pin " name="patient_pin" nullable="true" type="id_String"/>
@@ -1188,7 +1217,7 @@
       <column comment="" key="false" length="-1" name="visit_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="384">
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_8"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1371,13 +1400,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6b1cfa65-0ea4-4d28-bf08-c10a922e57c3"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ehNYDuD/EiqFp1FCYvlpKqgvvw3v/z/Ys8kIjK497iFquPRao2FkasCFxYkrrVJW8RNJrUAt8ju1&#13;
-vQPI/p6LLw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_11ab0096-2b0b-4272-ba65-706225788d88"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>aNoRrPWq5pspygUIIoO4Vu4Cf/4XF5Im0rVKal7UN3ZV8MxNvO62pohtP0xGFd+kBf2JVU5Pw82R&#13;
-ysgKFn/btw==</DigestValue></Reference></SignedInfo><SignatureValue>Yw4mLANXTPnPW2IXfGpPI4OTJxvTBjaXs4MlOXxVX9mFLDpNt8sgJQZRQ4ymSL0QypuCWNdQPO+H&#13;
-4x6wSPDmFg8HtVJbjU2agTjwkQHrFFAvGBnlk9upqjwDLXkaiOvHpnk+9RW130IAcGzRYrLJw4XL&#13;
-Hxn4/siONXSf8A6L7fuY/SzY7pPl03UaY88YPX6BYWGPzdliFvY+BSP9OSAjTTxSBfgw97BL0s3U&#13;
-GuC6dHMhcbnxZioRYmmyvzXoZn0kggD3FjoUnsxho4Wuh6ezMIto5sTyy3GIuwBgSnH4Da9uJuQP&#13;
-UpuekmW5ixwbu09f/ORDHB9VSEYYHaUYHLrQ4Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_85ad9af4-40bd-42fd-af59-8cea46176887"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>jK8g0JZ6zDCOKp2RqK3qSOpJ5/k8rabXZY5K0SV2yegGfC3wm9+ZYUBo/qsuywVlHblehBWx6wfz&#13;
+JpAqrsq5tw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_61560297-927d-4afd-84ee-da7fe74c7031"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>F+qH5AdFcINI8NlUdtuNzcEZ2PYUayBYV3O1AHh61ukqREak2/EAjNqBWozW353O8VJvgEzlFx75&#13;
+lgPUHeEO/w==</DigestValue></Reference></SignedInfo><SignatureValue>k30KxJ7J7QCc05dbsQv09FO102TIjSKvI66RbX0ofO3GAM63WGY+nUTPmB46s2vs1A/XrUh1hK5j&#13;
+6Qsic/WiSHHFEAHLXsZiClKw2et0ZDD47un++EP9K0fEx2v9vh9YolvIbu6xv68vDul3A90LK5Rq&#13;
+1RY6R1tKOjofPTIuJqh8TUumajdX7sgCwgUrz6usGJx+aHinZdYombQIH1rP3Vr1sHlq/oXVaQ+B&#13;
+fExxXl/xVgCM9tlrgxpBBc6JEHqJO2wdxWTeOZGNvcn+5oHJmVaeDce+vDjeDkUWHaCTu8w+3uVY&#13;
+tx6MhlNsGnsopzQr62LEqJekBGJvPejxaEiuFg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1399,4 +1428,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_11ab0096-2b0b-4272-ba65-706225788d88" Target="#_6b1cfa65-0ea4-4d28-bf08-c10a922e57c3"><Timestamp>2024-07-30 01:13:10</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_61560297-927d-4afd-84ee-da7fe74c7031" Target="#_85ad9af4-40bd-42fd-af59-8cea46176887"><Timestamp>2024-07-30 01:17:40</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
