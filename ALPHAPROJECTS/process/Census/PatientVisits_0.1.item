@@ -534,12 +534,14 @@
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="exclude_rooms" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_1.visit_id_before_convert == null ? &quot;&quot; : inpatient_1.visit_id_before_convert.substring(0, 2) " name="var1" type="id_String"/>
         <mapperTableEntries expression="Var.var1.equals(&quot;ER&quot;)?&quot;FROM_ER&quot; : &quot;NOT_FROM_ER&quot; " name="if_er" type="id_String"/>
+        <mapperTableEntries expression="bed.name.equals(&quot;R.N0762TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0763TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0764TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0765TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0766TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0770TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0771TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0772TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0773TWL&quot;) ||&#13;&#10;bed.name.equals(&quot;R.N0774TWL&quot;) ? &quot;EXCLUDE&quot; : &quot;NOT_EXCLUDE&quot; " name="exclude_rooms" type="id_String"/>
       </varTables>
       <outputTables name="inpatient_2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -563,6 +565,7 @@
         <mapperTableEntries expression="bed.name " name="bed" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_1.is_active " name="is_active" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="Var.if_er" name="if_from_er" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="Var.exclude_rooms" name="exclude_rooms" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="inpatient_1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -1535,6 +1538,7 @@
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="exclude_rooms" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="FLOW" name="inpatient_from_er">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -1558,6 +1562,7 @@
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="exclude_rooms" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <metadata connector="FLOW" name="test">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -1581,10 +1586,11 @@
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="exclude_rooms" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <uiProperties shellMaximized="true"/>
+      <varTables name="Var" sizeState="INTERMEDIATE"/>
       <outputTables activateExpressionFilter="true" expressionFilter="inpatient_2.is_active == true &amp;&amp; !inpatient_2.wards.equals(&quot;MAIN-HOSTEL UNIT FLOOR 9BH&quot;) &amp;&amp; inpatient_2.admission_cancelled_date == null &amp;&amp; inpatient_2.if_from_er.equals(&quot;NOT_FROM_ER&quot;)" name="inpatient_3" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_2.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -1607,6 +1613,7 @@
         <mapperTableEntries expression="inpatient_2.bed " name="bed" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_2.is_active " name="is_active" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="inpatient_2.if_from_er " name="if_from_er" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="inpatient_2.exclude_rooms " name="exclude_rooms" nullable="true" type="id_String"/>
       </outputTables>
       <outputTables activateExpressionFilter="true" expressionFilter="inpatient_2.is_active == true &amp;&amp; !inpatient_2.wards.equals(&quot;MAIN-HOSTEL UNIT FLOOR 9BH&quot;) &amp;&amp; inpatient_2.admission_cancelled_date == null &amp;&amp; inpatient_2.if_from_er.equals(&quot;FROM_ER&quot;)" name="inpatient_from_er" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -1630,6 +1637,7 @@
         <mapperTableEntries expression="inpatient_2.bed " name="bed" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_2.is_active " name="is_active" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="inpatient_2.if_from_er " name="if_from_er" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="inpatient_2.exclude_rooms " name="exclude_rooms" nullable="true" type="id_String"/>
       </outputTables>
       <outputTables name="test" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_2.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
@@ -1653,6 +1661,7 @@
         <mapperTableEntries expression="inpatient_2.bed " name="bed" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_2.is_active " name="is_active" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="inpatient_2.if_from_er " name="if_from_er" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="inpatient_2.exclude_rooms " name="exclude_rooms" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="inpatient_2" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -1676,10 +1685,11 @@
         <mapperTableEntries name="bed" nullable="true" type="id_String"/>
         <mapperTableEntries name="is_active" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="if_from_er" nullable="true" type="id_String"/>
+        <mapperTableEntries name="exclude_rooms" nullable="true" type="id_String"/>
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1280" posY="32">
+  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1312" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileOutputExcel_1"/>
     <elementParameter field="CHECK" name="VERSION_2007" value="false"/>
     <elementParameter field="CHECK" name="USESTREAM" value="false"/>
@@ -1738,6 +1748,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="if_from_er"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="exclude_rooms"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:4mIDsQDfIlypCN5mNzBoedLmHi+PH13u57Vds571"/>
@@ -1779,6 +1791,7 @@
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="exclude_rooms" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1280" posY="256">
@@ -1840,6 +1853,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="if_from_er"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="exclude_rooms"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:S2mWOD4qlXRN2p0GjHEZgYVV5QE+4+SS+fdVkP7p"/>
@@ -1881,6 +1896,7 @@
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="exclude_rooms" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="-32">
@@ -1942,6 +1958,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="if_from_er"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="exclude_rooms"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:8Fpo7SJQNRebIOTCV6vyc10kMoRlkawYJ+T9XBdX"/>
@@ -1982,6 +2000,7 @@
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="if_from_er" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="exclude_rooms" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
@@ -2065,6 +2084,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
   <connection connectorName="FLOW" label="inpatient_2" lineStyle="0" metaname="inpatient_2" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_8">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="exclude_rooms"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="inpatient_2"/>
   </connection>
@@ -2148,14 +2172,29 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row5"/>
   </connection>
   <connection connectorName="FLOW" label="inpatient_3" lineStyle="0" metaname="inpatient_3" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_8" target="tFileOutputExcel_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="exclude_rooms"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="inpatient_3"/>
   </connection>
   <connection connectorName="FLOW" label="inpatient_from_er" lineStyle="0" metaname="inpatient_from_er" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_8" target="tFileOutputExcel_5">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="exclude_rooms"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="inpatient_from_er"/>
   </connection>
   <connection connectorName="FLOW" label="test" lineStyle="0" metaname="test" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tMap_8" target="tFileOutputExcel_6">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="exclude_rooms"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="test"/>
   </connection>
@@ -2164,13 +2203,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_7110742c-2416-499e-8947-8eb59e972971"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>eqm/91WgLk5TGrdqncszlAhJ8CAoLpA5FfD8QIDwdX3bpUKNgIeVPnnj0zAelm91BJsBCQt1GR5u&#13;
-z1OfpUZJgQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8122ae64-d58f-498e-9325-46a3ccfbfa45"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>xAXHl/eUxrSt4AvIT4fPA8CTFXuoEIIrPfijtNdDPYk1SAUu0msgRfatl9M3FuUStNXo4Dqy9Ph1&#13;
-ccc7wVLWVw==</DigestValue></Reference></SignedInfo><SignatureValue>VyoI5JWOW7sWbB20Yt0jknDWWmwAO2v5nRtRvBAOK4tKQA/TmKWkVBLzgADI5OUj+YVxSMonK9br&#13;
-6NovTXm0AzYzgDwTPD7f41lXx4BAES5sHrGPVvrh23AXn9wam4ocjLws1NKyHcP7TtBqxYX5YVO2&#13;
-xupvOblw7mm6g542beZVln1nN33cE9Pd4ySiB7uRh7wdn/bHhL7WafpTwiI9teP1NWCf5tCEWo4a&#13;
-YgwYlN13cxySWf43n3vaQeyJ21AFtROh2dahH7AFpEw+fJAnCHWIQIB49mkueK6G5pvaxXiEKgar&#13;
-zNdXPxX6c43ulzAurIqfCmM5RxxNXrNwojdDDg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_a69a061f-72f2-4192-ad39-670abaad3fe3"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9outAIj/yMsG6lh3TGO+rmWLIUSn+djr4rdxa2r6V2As7Kvtegnu6gtDfEIjLh0JdB97pmWHddi7&#13;
+3p0o2BxPhw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_6cb44c5c-981c-45da-8cba-208314a70e3f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>6ZyU4yBCnGIs6JM0HRz3rXt16IqhB1bRiX/BGq9g75fLWXcbjXgIm+2jsDwtNIx2kjgmkQ6FO0V8&#13;
+TrjxbWurNg==</DigestValue></Reference></SignedInfo><SignatureValue>jKNTHW7RxsGoIFrz/AO98NeADefjTvQnPtrer6sFgWCsNxgU8yph9VvWN+iUf0WcXf3DecVgjB41&#13;
+mvccNUm+G5CzneC46DRUWZzColP+/w8Jrp6bEWXJIriso3RCTlCuqvYdDhtPrPXQngbCp1aeAix+&#13;
+gLwYROWbryhvM70EMup/peH+ZopXBJFX70FGwhidjCKHPTxhO0ggjh1UNZZeNnKCbxBTch7wVIVd&#13;
+yeTSbvo1YkhpV+Ze73fXHH69xRVBPdKK8HUo9utIKCObqRvQAKtAMnA+N5iGJGUEBooEHGbdyUmp&#13;
+BjJv65uKiBI74VleBQzphqViND913R9B/PNL9w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2192,4 +2231,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8122ae64-d58f-498e-9325-46a3ccfbfa45" Target="#_7110742c-2416-499e-8947-8eb59e972971"><Timestamp>2024-07-30 03:25:10</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_6cb44c5c-981c-45da-8cba-208314a70e3f" Target="#_a69a061f-72f2-4192-ad39-670abaad3fe3"><Timestamp>2024-07-30 03:36:59</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
