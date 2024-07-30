@@ -571,10 +571,13 @@
       <column comment="" key="false" length="-1" name="wards" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <uiProperties shellMaximized="true"/>
+      <varTables name="Var" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="inpatient_1.visit_id_before_convert.substring(0, 1) " name="var1" type="id_String"/>
+      </varTables>
       <outputTables activateExpressionFilter="true" expressionFilter="inpatient_1.is_active == true &amp;&amp; !ward.name.equals(&quot;MAIN-HOSTEL UNIT FLOOR 9BH&quot;) &amp;&amp; inpatient_1.admission_cancelled_date == null" name="inpatient_2" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="inpatient_1.transaction_external_id " name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_1.visit_id " name="visit_id" nullable="true" type="id_String"/>
@@ -597,6 +600,7 @@
         <mapperTableEntries expression="ward.name" name="wards" nullable="true" type="id_String"/>
         <mapperTableEntries expression="bed.name " name="bed" nullable="true" type="id_String"/>
         <mapperTableEntries expression="inpatient_1.is_active " name="is_active" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries expression="Var.var1" name="newColumn" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="inpatient_1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
@@ -732,6 +736,8 @@
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="is_active"/>
       <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="newColumn"/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROTECT_FILE" show="false" value="false"/>
     <elementParameter field="PASSWORD" name="PASSWORD" show="false" value="enc:system.encryption.key.v1:TD/vbP1PUvOxa6gNoJhH04zT5rJ/x5KA6WJw1WAF"/>
@@ -749,6 +755,7 @@
     <elementParameter field="CHECK" name="STREAMING_APPEND" show="false" value="false"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
     <elementParameter field="CHECK" name="USE_SHARED_STRINGS_TABLE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="Inpatient"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tFileOutputExcel_1">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -772,6 +779,7 @@
       <column comment="" key="false" length="-1" name="wards" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="bed" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_active" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="newColumn" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="320">
@@ -1588,6 +1596,7 @@
     <elementParameter field="CHECK" name="STREAMING_APPEND" show="false" value="false"/>
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
     <elementParameter field="CHECK" name="USE_SHARED_STRINGS_TABLE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="Emergency"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tFileOutputExcel_4">
       <column comment="" key="false" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -1789,6 +1798,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="is_active"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="newColumn"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="inpatient_2"/>
@@ -1877,13 +1889,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_24a65c30-ad5f-4547-8c6d-c38bdb7f7de4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ZWSLCOSVtZP+lKWuWrIeyCxrWIle4EjpyPZGtuJNvt4zlYqn9QjN7UQ4Dfr5IkHlZ8hYXFhLBtat&#13;
-wBRa6f7Czg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_e94b3851-ec99-4c1f-9965-7fff9f8a4e0f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9aI7aTEz8N07Qyhtlbm9ou+JyGLVMdWTHvVHoVkaulaVYDpgptSKLGvgPL+sZ9na79eZC1guiYve&#13;
-Kx9qyUQ+bQ==</DigestValue></Reference></SignedInfo><SignatureValue>c8f6QbOhy0G6kGdMM08v/0KRAacFda1GGIPk7M+fGtAx5ZNlHvZwfQkf49ce3am7TUXTZJAig3mR&#13;
-VNkRzVzmmhs/GlyT8M5PmCUv6jFcPGyKCFxArB5/nmUsQcl/1K6NuFf7+j906GTYsFrzq8wE6RhP&#13;
-/8bScKNoh4AW34LQ3qgr+ipS0whf558cfH7XtZhdCo5/xIMMCORqLbs8mUNHm2v1e+fAs1XZTmLd&#13;
-3z/fA6sGZNZTM8aB5Rwflz0VOyPLyo1VJwoWTZ5e8W1udk4aGHqbg7hqXVv7bqN4MtQQt/RjCUZt&#13;
-wHlXLXV/Zg79ISFj+EpyauoXkUwF6Pb/0CiKUA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_0eaa1d58-d68e-42ec-92ac-5594526dfd02"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>c8lYO/kimIFWTaVdS114KiDnVN4dzH7UnbQgJ9I+KmY+qiE0320QhefZ4Kz2tDrCZaEAbZ1xjwkq&#13;
+0RuXm+sqHw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_fde59477-e1b2-4aba-84c9-39831c5afd73"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>3h0l1mEKXU/ZbMrQgqGB4LgjVDJXqrX8aoKYoMX/dZ6Wdub/0pl4K7ILAODq54yvRvtLucZ8X7Xx&#13;
+orBU9/YgMw==</DigestValue></Reference></SignedInfo><SignatureValue>L//KTpkxMtk9ulzYODySWEjj5x8oWCT8hbOAdFEGv56q+0KYkUD9PmhQpPfWg8XipEBdRJ3k19zB&#13;
+iSDpPEQFcsVFeUUF7Q3yjcIDmv9ejngIGJqR1/tb0nMjNCUEKcaIFznl7vX3rIqfsL4SNMkjRToy&#13;
+oMWzlIn+vGkd4I2GIC2a36H6onCZPQjm1fIgGnm8S5x27xI34nyix0BN/7pi5tyyLRAXVB08SV4K&#13;
+XILGq6qf0+5CC2vBFxypKKHsOVTUBRpB2qsL0Yafo2AFkrq+RP5nXMgBkHkzcvNTBf26xAqSz1Zh&#13;
+C/FhAVQoOXx4J/vzt08NNJF/O4Bm1RXfm/kH4g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1905,4 +1917,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_e94b3851-ec99-4c1f-9965-7fff9f8a4e0f" Target="#_24a65c30-ad5f-4547-8c6d-c38bdb7f7de4"><Timestamp>2024-07-30 02:04:20</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_fde59477-e1b2-4aba-84c9-39831c5afd73" Target="#_0eaa1d58-d68e-42ec-92ac-5594526dfd02"><Timestamp>2024-07-30 02:15:37</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
