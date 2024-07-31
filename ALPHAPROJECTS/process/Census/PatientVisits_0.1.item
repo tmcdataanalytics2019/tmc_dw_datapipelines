@@ -2262,6 +2262,84 @@
       <column comment="" key="false" length="-1" name="visit_status" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="1472" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_10"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_lAh-IEpIEe-wg9_CmBz-1g-tMap_10-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
+    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="out1">
+      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
+      <outputTables name="out1" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="row6.visit_id " name="visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="TalendDate.getPartOfDate(&quot;MONTH&quot;,TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, row6.admission_date)) " name="month" nullable="true" type="id_String"/>
+      </outputTables>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row6" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="visit_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="patient_pin" nullable="true" type="id_String"/>
+        <mapperTableEntries name="visit_type_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="visit_status_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="admission_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="is_readmission" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="status_flag" nullable="true" type="id_String"/>
+        <mapperTableEntries name="admitted_timestamp" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="admission_type_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="medical_discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="discharge_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="enddate_before_reopen" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="is_admission_cancelled" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="admission_cancelled_date" nullable="true" type="id_Date"/>
+        <mapperTableEntries name="admission_cancel_reason_id" nullable="true" type="id_String"/>
+        <mapperTableEntries name="visit_id_before_convert" nullable="true" type="id_String"/>
+        <mapperTableEntries name="wards" nullable="true" type="id_String"/>
+        <mapperTableEntries name="bed" nullable="true" type="id_String"/>
+        <mapperTableEntries name="is_active" nullable="true" type="id_Boolean"/>
+        <mapperTableEntries name="if_from_er" nullable="true" type="id_String"/>
+        <mapperTableEntries name="exclude_rooms" nullable="true" type="id_String"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1568" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tLogRow_1"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" show="false" value="true"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" show="false" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" show="false" value="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="visit_id"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="month"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tLogRow_1">
+      <column comment="" key="false" length="-1" name="visit_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="month" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="is_readmission"/>
@@ -2465,9 +2543,17 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="test"/>
   </connection>
+  <connection connectorName="FLOW" label="row6" lineStyle="0" metaname="tFileOutputExcel_1" offsetLabelX="0" offsetLabelY="0" source="tFileOutputExcel_1" target="tMap_10">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row6"/>
+  </connection>
   <connection connectorName="FLOW" label="SentIN_1" lineStyle="0" metaname="SentIN_1" offsetLabelX="0" offsetLabelY="0" source="tMap_9" target="tFileOutputExcel_2">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="SentIN_1"/>
+  </connection>
+  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_10" target="tLogRow_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
   </connection>
   <note opaque="true" posX="256" posY="611" sizeHeight="129" sizeWidth="161" text="discrepancy in status_flag of of outpatient discharges&#13;&#10;"/>
   <subjob>
@@ -2475,13 +2561,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_22a5d7ab-f193-4b4e-bcae-9f00c2416c05"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>7TukZvEGPEz44GY9w+Qx2HTpiMO7JI32E+uxq7qeOQHlI4jspZMciexUYg7fgNjm8jgtudfHMf3f&#13;
-qg8QVix73g==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_24b995a5-18cf-443e-9564-67f99c7ba50e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>MnXdpe74SD/339aeIGhjDpGkdV6L/mc4Pm6fRJTthEKkaNzZTOypoQig6O1FFGBiSvp1xQGZng4s&#13;
-xpTFMEWyBA==</DigestValue></Reference></SignedInfo><SignatureValue>TcWHhFunB7FTiXq9mTMWdielCCMWYndvO2a0gvZwSTuO/aVjyUTCb7rV79vvIylNZkYFu7pPkpbX&#13;
-yVcuhirKMIfuXLqFZq4jANLwGMnT5ZgUzSyzxrmqSCN9JnQbSsis3CynhBJ7r8RfCByX7IbrRrQp&#13;
-bbYlkXTspbGaT7TZ8jABX4rRTF8+xNP1PW0WiT8/vbBOOu6LaYvISCVoAwwP5eUM6PmH3+Ad1AAU&#13;
-QAlMwNnDi5KY3485yhdqyaOJr/Jbeae5WXYIb+l+ejXL2IAKksZnyehQli3+95qXXXJK2QcPtw26&#13;
-47DZtgASd4spGaqSw/4fKk/tIGzmcgWwAxVnXA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_ecdf321d-1272-4ab5-a5a7-a0c91d6486a9"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>YfKAW8Uvct1AdTxoy+YyYlKyzaOE9ZlZJeMzjfdcv54p0P96vxV/FR+YpH0h4K+PR16lkj0nvPpT&#13;
+WxDfKSKImg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f68267e5-fc49-4bcf-8626-c961794f6b99"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>J44hn5Y2WZ2e0kMKg0FjvjtgDCp40pcU536luVDL6v0kgLwdETVqkbfawHSqM0YZoJfaImQrqBji&#13;
+Onl2WJcP3w==</DigestValue></Reference></SignedInfo><SignatureValue>IluIiXthfRTHCtF0fGyVd7MofHU4QYZpciqXJFh0AENUecjbIIDiagg0l0+0LCzJ7Zg9skWWjDWx&#13;
+S9Kxb5S2tYp4pIHI7o8clwYQ1RWb5cxGNDjGp/XeaFhfQT9i+hEqI50/iBzk6UtR2b2ZtgLDYGXZ&#13;
+xDK5fAtGFlQ0QvDciJg+SV1Hk/sD1rlgJWMqbPqv8IyprRCJDfdrEuTq06haco5zkymiXUFeMzXO&#13;
+qzozbzZvlivX6+7qAI1rQG/8m4ojWvfLg+bgvN+4fhCeHW72SWzqBBvZ6lLgedKul/3vPZ9zZAKa&#13;
+U3s+Rzp60QHCCCJvjZejekf2F6lG+8ljEWNBfA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -2503,4 +2589,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_24b995a5-18cf-443e-9564-67f99c7ba50e" Target="#_22a5d7ab-f193-4b4e-bcae-9f00c2416c05"><Timestamp>2024-07-31 02:51:58</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f68267e5-fc49-4bcf-8626-c961794f6b99" Target="#_ecdf321d-1272-4ab5-a5a7-a0c91d6486a9"><Timestamp>2024-07-31 03:01:00</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
