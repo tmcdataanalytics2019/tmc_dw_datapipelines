@@ -249,24 +249,24 @@
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row1._id " name="transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.approvecomments " name="approve_comments" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.closecomments " name="close_comments" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.comments " name="comments" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1._id) " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.approvecomments) " name="approve_comments" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.closecomments) " name="close_comments" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.comments) " name="comments" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.createdat " name="created_timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row1.createdby " name="created_by" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.fromdeptuid " name="from_department_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.fromstoreuid " name="from_store_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.createdby) " name="created_by" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.fromdeptuid) " name="from_department_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.fromstoreuid) " name="from_store_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.lastapproverlevel " name="last_approver_level" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row1.modifiedat " name="modified_timestamp" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row1.modifiedby " name="modified_by" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.orguid " name="organization_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.modifiedby) " name="modified_by" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.orguid) " name="organization_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.requestdate " name="request_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="row1.requestedby " name="requested_by" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.statusflag " name="status_flag" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.stockreqnumber " name="stock_request_number" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.stockrequesttype " name="stock_request_type" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.tostoreuid " name="to_store_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.requestedby) " name="requested_by" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.statusflag) " name="status_flag" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.stockreqnumber) " name="stock_request_number" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.stockrequesttype) " name="stock_request_type" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.tostoreuid) " name="to_store_id" nullable="true" type="id_String"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="_id" nullable="true" type="id_String"/>
@@ -1089,6 +1089,21 @@
       <elementValue elementRef="TRACE_COLUMN" value="parent_store_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="status_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="inventory_orderset_quantity"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="inventory_orderset_item_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="quantity_uom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="inventory_orderset_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
@@ -1098,13 +1113,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_719d28fc-6ff3-4ba0-9148-9cb65ad2d26b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>6TZVg1vSgTGBp5H6wAcDQkgnkv/K88j2Oi7rpDKo7vTMH6yeSDRNiEX2q0GI+yZWQGwb/jq0QBh6&#13;
-w1nl0Wf13w==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_040d5f6c-c320-40c2-bba0-28b29cbd7db0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>7qQDdcGlog4vmlAILL515oDEth7DSiP8YaND5uHu7odMqWXdqIJu05/WilG9OZD+9PpH+xxAIw71&#13;
-P1q+s6GzVg==</DigestValue></Reference></SignedInfo><SignatureValue>KSu6FliShRVDx/F/SYte8XA9HfmNOqt6g6ZztuEtnUHuxlWlIDq8QptonWVjNT1bbwtZ2ru6pcoP&#13;
-erpSw77j1Hh9P+hGPvfulcPJifhCAfc8+Qn8Ue1d1B7WLKnzuNCLL9bIpKJbEUJ6RfglAO3hLLuv&#13;
-lEO/REQnqieyt6XFdfm2g1pMdbs5rqBC1KeP8+ZW95vNGBXC/p29uNJedh3TkazcyhsH/IqPt/sr&#13;
-1yE7WcYmNdWP0acz+/CwF9gt+YrMfYqz32Aq4n+QT698jfuoxdwD/H9lmo4lJpxu9h220PmuQYfE&#13;
-p8jtBJcd61jkc7VdVPy9k6wScFjpY16i8nhaPw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_d155b831-af6f-45cf-8f57-77586bb37ad4"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>5U/39BgWW1sCBRlcUFqmbTWP1BQOZtgxyZnCElDkijDZIKp0B90hTZJz7uiFSGerpiC3Q/F4zmUT&#13;
+bpu3GB35HQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f2f84f4e-837c-4869-aa67-08d701864a65"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>q1qhWsx/agWyhFPVFO27CLCZx2xJTBx1/2qWA8GT92MOx8wDUAnjkL03aqJmfFgqMlfeDlVInJQb&#13;
+Ogc/TPG3cw==</DigestValue></Reference></SignedInfo><SignatureValue>P97bS7URQozvfo7NVtedaLKDP4Npwbnxn1IhCvUF1ixFRlMfSsSbm6156cYEOeMskOcX2OBohTc6&#13;
+nu9aFGdHPyEhWO63rch8tJhQIEX1CLoG37uiLeNe933wyYdzz0gz13ZC6WQwsdPi6s6rtVXgjIze&#13;
+Dl6kxa5gscy8MA5dKJVrTW8dLeH2Nhm+dJIKZAHMjvH6PKYv3f66NKTDV7kBuYezqVGTMR0JBpXn&#13;
+u0LKqmUq8cgW7BTdEX6zjKMdHg7wFX/aVPlwr8IFA4rtzZKnMiQDOC0xDebsKwcqRltf3Ma6JpfL&#13;
+psEztvEVDvq87jLJnCfYg0IRZ3ReIjwO4t8FnQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1126,4 +1141,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_040d5f6c-c320-40c2-bba0-28b29cbd7db0" Target="#_719d28fc-6ff3-4ba0-9148-9cb65ad2d26b"><Timestamp>2024-08-12 07:41:54</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f2f84f4e-837c-4869-aa67-08d701864a65" Target="#_d155b831-af6f-45cf-8f57-77586bb37ad4"><Timestamp>2024-08-12 23:41:57</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
