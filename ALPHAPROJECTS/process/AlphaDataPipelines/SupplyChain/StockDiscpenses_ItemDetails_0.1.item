@@ -138,7 +138,7 @@
     <elementParameter field="LABEL" name="NOTE_ISOLATION" value="Note : Surround String values in your query with single quotes&#10;Note : If you are running on a Sharded Cluster, please make sure to include the shard key in the query."/>
     <elementParameter field="MEMO" name="QUERY" show="false" value="&quot;{}&quot;"/>
     <elementParameter field="TABLE" name="AGGREGATION_STAGES">
-      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'dispensedate': {  $gte: {$date:'2024-06-01T16:00:00.000Z'},$lte: {$date:'2024-08-31T15:59:59.999Z'}}}}&quot;"/>
+      <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{$match:{'dispensedate': {  $gte: {$date:'2023-12-01T16:00:00.000Z'},$lte: {$date:'2024-08-31T15:59:59.999Z'}}}}&quot;"/>
       <elementValue elementRef="AGGREGATION_STAGE" value="&quot;{ $unwind: { path: '$itemdetails', preserveNullAndEmptyArrays: true } }&quot;"/>
     </elementParameter>
     <elementParameter field="CHECK" name="SPECIFY_FIELDS" value="false"/>
@@ -147,31 +147,33 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="transaction_external_id"/>
       <elementValue elementRef="PARENT_NODE_PATH" value=""/>
       <elementValue elementRef="SCHEMA_COLUMN" value="item_details_transaction_external_id"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="approvaldate"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="approvedby"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="closedby"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="closeddate"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="inventoryordersetitemuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="inventoryordersetqty"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="inventoryordersetuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="batchid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="binuid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="comments"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="internalbatchid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="iscancelled"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="itemmasteruid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patientorderitemuid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patientorderuid"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="quantity"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="quantityuom"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="statusuid"/>
-      <elementValue elementRef="PARENT_NODE_PATH" value=""/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="uomconversionfactor"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="wac"/>
+      <elementValue elementRef="PARENT_NODE_PATH" value="&quot;itemdetails&quot;"/>
     </elementParameter>
     <elementParameter field="TABLE" name="SORT" show="false"/>
     <elementParameter field="TEXT" name="LIMIT" show="false" value=""/>
@@ -185,18 +187,19 @@
     <metadata connector="FLOW" name="tMongoDBInput_1">
       <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalDbColumnName="_id" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="item_details_transaction_external_id" nullable="true" originalDbColumnName="_id" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approvaldate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approvedby" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closedby" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closeddate" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventoryordersetitemuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventoryordersetqty" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventoryordersetuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batchid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="binuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="internalbatchid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="iscancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="itemmasteruid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patientorderitemuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patientorderuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantityuom" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="statusuid" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="uomconversionfactor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="wac" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="192">
@@ -217,53 +220,56 @@
     <metadata name="out1">
       <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="item_details_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approval_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approved_by" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closed_by" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closed_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bin_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="internal_batch_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="item_master_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_order_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_order_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity_uom" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="uom_conversion_factor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="wac" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="out1" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.transaction_external_id) " name="transaction_external_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.transaction_external_id)" name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.item_details_transaction_external_id) " name="item_details_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.approvaldate " name="approval_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.approvedby) " name="approved_by" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.closedby) " name="closed_by" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.closeddate " name="closed_date" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.inventoryordersetitemuid) " name="inventory_orderset_item_id" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.inventoryordersetqty " name="inventory_orderset_quantity" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="StringHandling.UPCASE(row1.inventoryordersetuid) " name="inventory_orderset_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.batchid) " name="batch_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.binuid) " name="bin_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.comments) " name="comments" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.internalbatchid " name="internal_batch_id" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="row1.iscancelled " name="is_cancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.itemmasteruid) " name="item_master_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.patientorderitemuid) " name="patient_order_item_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="StringHandling.UPCASE(row1.patientorderuid) " name="patient_order_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row1.quantity " name="quantity" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.quantityuom) " name="quantity_uom" nullable="true" type="id_String"/>
         <mapperTableEntries expression="StringHandling.UPCASE(row1.statusuid) " name="status_id" nullable="true" type="id_String"/>
+        <mapperTableEntries expression="row1.uomconversionfactor " name="uom_conversion_factor" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="row1.wac " name="wac" nullable="true" type="id_BigDecimal"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
         <mapperTableEntries name="transaction_external_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="item_details_transaction_external_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="approvaldate" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="approvedby" nullable="true" type="id_String"/>
-        <mapperTableEntries name="closedby" nullable="true" type="id_String"/>
-        <mapperTableEntries name="closeddate" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="inventoryordersetitemuid" nullable="true" type="id_String"/>
-        <mapperTableEntries name="inventoryordersetqty" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="inventoryordersetuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="batchid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="binuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="comments" nullable="true" type="id_String"/>
+        <mapperTableEntries name="internalbatchid" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="iscancelled" nullable="true" type="id_Boolean"/>
         <mapperTableEntries name="itemmasteruid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="patientorderitemuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="patientorderuid" nullable="true" type="id_String"/>
         <mapperTableEntries name="quantity" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="quantityuom" nullable="true" type="id_String"/>
         <mapperTableEntries name="statusuid" nullable="true" type="id_String"/>
+        <mapperTableEntries name="uomconversionfactor" nullable="true" type="id_Integer"/>
+        <mapperTableEntries name="wac" nullable="true" type="id_BigDecimal"/>
       </inputTables>
     </nodeData>
   </node>
@@ -313,37 +319,22 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="approval_date"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="batch_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="approved_by"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="bin_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="closed_by"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="comments"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="closed_date"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="inventory_orderset_item_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="inventory_orderset_quantity"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="inventory_orderset_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="internal_batch_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -354,6 +345,16 @@
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="item_master_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_order_item_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="patient_order_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -373,6 +374,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="uom_conversion_factor"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="wac"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
@@ -386,34 +397,36 @@
     <metadata connector="FLOW" name="tDBOutput_1">
       <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="item_details_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approval_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approved_by" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closed_by" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closed_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bin_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="internal_batch_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="item_master_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_order_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_order_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity_uom" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="uom_conversion_factor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="wac" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="-1" name="transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="item_details_transaction_external_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approval_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="approved_by" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closed_by" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="closed_date" nullable="true" originalLength="-1" pattern="&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;" precision="-1" sourceType="" type="id_Date" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="inventory_orderset_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="batch_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="bin_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="comments" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="internal_batch_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="is_cancelled" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Boolean" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="item_master_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_order_item_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="patient_order_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="quantity_uom" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="status_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="uom_conversion_factor" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="wac" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_BigDecimal" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -637,6 +650,36 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="parentstoreuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="stockdispensenumber"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dispensedate"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="handovertouseruid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patientorderuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patientvisituid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dispensedby"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patientuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patientorderitemuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="uomconversionfactor"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="binuid"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1053,6 +1096,45 @@
       <elementValue elementRef="TRACE_COLUMN" value="inventory_orderset_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dispensed_by"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patient_visit_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="hand_over_to_user_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dispense_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patient_order_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="stock_dispense_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="internal_batch_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="comments"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="uom_conversion_factor"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="batch_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="bin_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="patient_order_item_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="wac"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
@@ -1062,13 +1144,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_29cea27d-f251-4a4a-8a27-64065e0a08c0"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>a2FKQHZx+/kVVQaHkkDA2oH/Aj1WMq6f+Rew509IcwOtSIXROScgQZ7U7pr6Ogcv4AVMua4M/8M1&#13;
-rKFFDIxVeQ==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_1650604a-296f-4849-9552-78842aa88d4f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>uo8xenHKezmzKzTdwQGEJTB3Ud3yms7CPj26zvs3oor6aWrt887E8e1gbGj3rH7tuyRmz47DJb2G&#13;
-s8P5EoM2nA==</DigestValue></Reference></SignedInfo><SignatureValue>dlG+/PcCZt2xrXZJKYE+44K9gNBXELxOnS6PO5KIjjRtE0f1Vc7flsmrBSjo4pw+Pue/7RdwjiTI&#13;
-kJNBN2cbG4XRodzq3oWtm6Z3227ZBdP+UEMP6ZQ81Jsl/wuZiyj5JWpFqfswJAIsBWf+KhzjUfgu&#13;
-1pSpJGPAPwtwSoPt+jgr53F4l3m2Bb9akOZMupmi51+jq5EVIGFi85HFlrsGm1ZWFsBDt34v9ZO8&#13;
-A/bb79Bc8jfWLUvZ2mXdJqv1OelfYDiG3zJIRJ/BpKKr8snfJoQC0RqjdKg3nIVdFuhZkDep7Tj8&#13;
-Wn2I4qrnKKQyJZpDCyDflxU4z8YxTrL5nLHM0g==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_46496c53-edfc-462d-93d0-5772560b445c"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>CvwjpIZGBb1Bwv6lD6I74SMz3odKcdOLPNCXtjWLEx9dzgWXIV+11GfFgUlM7YE4qlcdTYDhW6l3&#13;
+GGspXaevIA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_3c4cc266-1708-4d46-86c4-c66ee5015f1f"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>+r5LYVHHfsEG1q+yYwbDd+/bERI7n3DZJDmeE9Ffulbu7gx4b83uBg/dU89/2A08JcOJCJr+ehq3&#13;
+g4v1UDTCkg==</DigestValue></Reference></SignedInfo><SignatureValue>ceDStEU43neV38/jEtsWLscJr5tvwdbUl3YwtrP3m13KzGg87vuwB9RntO5VEl1RNG+6XPE8mn0q&#13;
+wnxutOXDqti9Htiu7hVqNOnQ+8F741t9j07way2fC67QmhntSBJog6Mbv1RBbMk+j8niKen0EsdO&#13;
+vw1SfC9vRgg4wq2aq1YKWI4x51aH5IQ6uEUaHfbcn+XKE0btMcBfKl4BD14BzjzAoB5J8PFzKvNb&#13;
+XU8s/TWi5pxOJc6HA3eCk8z3L6Vd81yNtcwCDYCrJXXWTa1nluERdayXOfZOk830NOq0V7TIhZ/V&#13;
++FJczTeqVE8+ZoEiN89rmwHLrGlhLmmrYNKBzw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -1090,4 +1172,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_1650604a-296f-4849-9552-78842aa88d4f" Target="#_29cea27d-f251-4a4a-8a27-64065e0a08c0"><Timestamp>2024-08-12 07:56:22</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_3c4cc266-1708-4d46-86c4-c66ee5015f1f" Target="#_46496c53-edfc-462d-93d0-5772560b445c"><Timestamp>2024-08-13 01:45:54</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
