@@ -163,6 +163,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="special_discount"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gross_amount"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="careprovider_id"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
@@ -185,6 +187,7 @@
       <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gross_amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="careprovider_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
@@ -206,6 +209,7 @@
       <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gross_amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="careprovider_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
@@ -265,6 +269,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="special_discount"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gross_amount"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="careprovider_id"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
@@ -287,6 +293,7 @@
       <column comment="" key="false" length="-1" name="amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="payor_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="special_discount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="gross_amount" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="careprovider_id" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
@@ -336,7 +343,7 @@
         <mapperTableEntries expression="row3.order_item_id " name="order_item_id" nullable="true" type="id_String"/>
         <mapperTableEntries expression="row3.quantity " name="quantity" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row3.unit_price " name="unit_price" nullable="true" type="id_BigDecimal"/>
-        <mapperTableEntries expression="row3.amount.add(row3.payor_discount) " name="amount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries expression="row3.gross_amount" name="amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row3.payor_discount " name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row3.special_discount " name="special_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries expression="row3.careprovider_id " name="careprovider_id" nullable="true" type="id_String"/>
@@ -356,6 +363,7 @@
         <mapperTableEntries name="amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="payor_discount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="special_discount" nullable="true" type="id_BigDecimal"/>
+        <mapperTableEntries name="gross_amount" nullable="true" type="id_BigDecimal"/>
         <mapperTableEntries name="careprovider_id" nullable="true" type="id_String"/>
       </inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="req_dept" sizeState="INTERMEDIATE">
@@ -2592,6 +2600,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="group_code"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="gross_amount"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
@@ -2606,6 +2617,9 @@
   <connection connectorName="FLOW" label="row2" lineStyle="10" mergeOrder="2" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tUnite_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
       <elementValue elementRef="TRACE_COLUMN" value="group_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="gross_amount"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -3273,13 +3287,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_33a69616-3563-4e4d-a277-c030d9c08555"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>WmvI9YrScJKpvZmwaUlvtvtJwta7mCNznNG3SO2DOGVXka4iBjkEFkWibgov94V2/pgdoO0u+CSH&#13;
-jp8jmW3lnw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_cb5b3929-a7aa-4acc-b548-3de2bab9a453"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Ou0tFXvsC1RuwHbdkyEoVVCWgSgiE0c0E1KlsgsZ6U51V990aa57gtavQBA7jSqQ8f3RgtyW+sLg&#13;
-J0RM0ADC0g==</DigestValue></Reference></SignedInfo><SignatureValue>Y0kaJq4r2ZH3Yzjj+stctyRI13pHp81VaqXAFkwWtYHqtcIRv1A8hT/CGUud/LxJcAJ93AzF4OYR&#13;
-uUKYt7ZJWY9uexTcp/nTQWNIIhRyihe0wx9Zfq1VY7Ysg9xHik4o81j63ERVnWB7HkLkBF2+UF0L&#13;
-v+VZHza8LdF/42jB6Ha+V4WF6EL2YlYmnV7JRIopc5HZ2Ze/y3o0l6BEJLKgfwwY8V5hPc3SA1Qu&#13;
-ji659dYdh7Y+XGdv1oCJuV0MawTxTOYI5pTkMOM56TsnKXvEH7CLspUZNAK0dfgRENbDQACXzCpR&#13;
-akF/ih5NetOqsCHDDXDX/LEaG3I/A+HNs1gsPA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_d94f8bbb-692a-4500-b3e2-95f84acbde45"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>80sijCH2Sob7HnWQAysktwxxd9RqvOsqELSTpuGwZVOaUeY8woEuCcnF+0HvQUbi+qy5GQnrJIy6&#13;
+PrREdaWTRw==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_74362646-8cad-4528-9ca8-ecdd8aba7e01"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>glhnhB3lKAqkHwnK0b5DhBXK7J5ZtSsXpYfVgAklZNI56WmDGHCJ/G1sMkvjW8EcScmIl6QZyt/l&#13;
+DfPMXSms+A==</DigestValue></Reference></SignedInfo><SignatureValue>bfi2HQSDzxTzqAcxwRRhtV51PmjMiIgNBQPZtSYOE9LwQV64uynrha46BO+1EZsNpQhBmCBl8ryn&#13;
+SI36IEUIX49DBKWAxDopk+CUFQOcrLXZC2YfwzQK28zkb7WFWjePNOJRgaUfkB9h70dWmAnnL4nb&#13;
+X9ouyic7a6V6n7bLLiif3K2o4akOMxoXK3R3tTZ3qM0e6dm+4FVn/ME0GFibkv0jDJHVrfr30Gl1&#13;
+K9f/vugsbvwDy+45cfDutZLf4Vso3jZwgvLpDNhNQ6rgiFWsV5Sl3i8Bum1xwViiv+n4GpmehG0p&#13;
+R03dvbKw1cfVPRgDwRrUHdm36rCOkUjXB/w6jQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w&#13;
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD&#13;
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5&#13;
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U&#13;
@@ -3301,4 +3315,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/&#13
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW&#13;
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+&#13;
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg&#13;
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_cb5b3929-a7aa-4acc-b548-3de2bab9a453" Target="#_33a69616-3563-4e4d-a277-c030d9c08555"><Timestamp>2024-09-18 04:08:15</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_74362646-8cad-4528-9ca8-ecdd8aba7e01" Target="#_d94f8bbb-692a-4500-b3e2-95f84acbde45"><Timestamp>2024-09-18 04:17:57</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
